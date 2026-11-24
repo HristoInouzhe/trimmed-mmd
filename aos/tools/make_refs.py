@@ -2,10 +2,10 @@
 """AoS version: write refs_main.tex (default) or refs_supp.tex (--supp), natbib author-year thebibliography, from the source's numbered list ../refs_all.tex.
 
 Entries keep their text; each \\bibitem{key} gains the natbib label [Short(Year)Long], and entries are sorted by
-first-author surname and year. Only keys cited in the JMLR sources are kept. Run from jmlr/.
+first-author surname and year. Only keys cited in the AoS sources are kept (aos/build.sh runs it).
 
-jmlr/refs_extra.tex (same format as ../refs_all.tex, optional) is read after ../refs_all.tex: an entry there with a
-key already in ../refs_all.tex replaces it (corrections for the JMLR version only), other keys are added.
+aos/refs_extra.tex (same format as ../refs_all.tex) is read after ../refs_all.tex: an entry there with a key already
+in ../refs_all.tex replaces it (corrections), other keys are added.
 ../refs_all.tex itself is never modified, since it also serves the original manuscript.
 
   python3 -I tools/make_refs.py            write refs.tex
@@ -26,11 +26,10 @@ def parse(path):
 
 entries = dict(parse(HERE.parent / "refs_all.tex"))  # aos -> repository root
 base_keys = set(entries)
-extra_path = HERE.parent / "jmlr" / "refs_extra.tex"  # shared with the JMLR versions; aos/refs_extra.tex adds AoS-only entries
-extra = parse(extra_path) if extra_path.exists() else []
-aos_extra = HERE / "refs_extra.tex"  # AoS-only entries (Crossref-checked), read last; they may correct jmlr entries
+extra = []
+aos_extra = HERE / "refs_extra.tex"  # the entries beyond ../refs_all.tex (corrections and additions), read last
 aos_list = parse(aos_extra) if aos_extra.exists() else []
-for name, lst in (("jmlr/refs_extra.tex", extra), ("aos/refs_extra.tex", aos_list)):
+for name, lst in (("aos/refs_extra.tex", aos_list),):
     dup = sorted({k for k, _ in lst if [e for e, _ in lst].count(k) > 1})
     if dup:
         sys.exit(f"duplicate keys in {name}: " + ", ".join(dup))
