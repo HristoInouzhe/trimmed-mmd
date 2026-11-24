@@ -1,0 +1,17 @@
+{
+  "scenario": "disjoint_d2_a20",
+  "n": 5958,
+  "reps": 50,
+  "delta": 0.05,
+  "c0": 1.49,
+  "gamma": 1.03,
+  "alpha_star": 0.2,
+  "tau_at_alpha_star": 0.22543682249611285,
+  "omega_alpha_star": 0.2839534593296706,
+  "precondition_2tau_le_omega_holds": false,
+  "epsilon_nm": NaN,
+  "predicted_lower_bound": NaN,
+  "coverage": NaN,
+  "nominal": 0.95,
+  "consistent_with_theorem": null
+}

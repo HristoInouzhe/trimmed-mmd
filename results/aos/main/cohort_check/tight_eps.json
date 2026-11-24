@@ -1,0 +1,82 @@
+{
+ "dir": "results/aos/main/cohort_check/tight",
+ "labels": {
+  "batch0_seed1000": {
+   "eps": [
+    1e-14,
+    1e-15
+   ],
+   "gap": [
+    1.4067189668776439e-16,
+    2.3245294578089215e-16
+   ],
+   "gap_float64_minus_extended": [
+    2.3035960973087155e-17,
+    6.202578750770906e-17
+   ],
+   "smo_steps": [
+    6559,
+    6982
+   ],
+   "viol_end": [
+    [
+     9.836749470526485e-15,
+     9.821895900763433e-15
+    ],
+    [
+     9.744809126299714e-16,
+     9.857566152238206e-16
+    ]
+   ],
+   "D_hat": [
+    0.022351271469656653,
+    0.02235127146965629
+   ],
+   "counts_exact": [
+    true,
+    true
+   ],
+   "max_weight_diff_over_cap": 1.9148860397181535e-11,
+   "differing_summaries": {}
+  },
+  "pooled": {
+   "eps": [
+    1e-14,
+    1e-15
+   ],
+   "gap": [
+    3.9855271860567143e-16,
+    2.2605615296322767e-16
+   ],
+   "gap_float64_minus_extended": [
+    2.7950128495701386e-17,
+    5.564900584342346e-17
+   ],
+   "smo_steps": [
+    6801,
+    7241
+   ],
+   "viol_end": [
+    [
+     9.816366469683757e-15,
+     9.758253233238534e-15
+    ],
+    [
+     9.75781955236954e-16,
+     9.62988369601625e-16
+    ]
+   ],
+   "D_hat": [
+    0.022463733757993928,
+    0.022463733757993706
+   ],
+   "counts_exact": [
+    true,
+    true
+   ],
+   "max_weight_diff_over_cap": 1.9323292253452765e-11,
+   "differing_summaries": {}
+  }
+ },
+ "text": "Tighter tolerance (KKT violation 1e-15, the same solver otherwise; outputs in a scratch directory, not used for the tables): batch0_seed1000: gap 1.4e-16 -> 2.3e-16 (float64 vs extended evaluations differ by 6.2e-17), SMO steps 6,559 -> 6,982, largest weight change 1.9e-11 caps, counts and every tabulated summary (3 decimals) unchanged; pooled: gap 4.0e-16 -> 2.3e-16 (float64 vs extended evaluations differ by 5.6e-17), SMO steps 6,801 -> 7,241, largest weight change 1.9e-11 caps, counts and every tabulated summary (3 decimals) unchanged."
+}

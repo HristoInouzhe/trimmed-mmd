@@ -1,0 +1,117 @@
+{
+ "script": "scripts/exp_rhc_balancing.py",
+ "command": "PYTHONPATH=src python3 -I scripts/exp_rhc_balancing.py --threads 4 --alpha certified --threshold plugin --outdir results/v2",
+ "data": {
+  "source": "Connors et al. (1996), via the Vanderbilt Biostatistics dataset repository (hbiostat.org/data/repo/rhc.csv)",
+  "n_rows_raw": 5735,
+  "n_rows_complete": 5735,
+  "d": 33,
+  "n_treated": 2184,
+  "n_control": 3551,
+  "excluded": "outcome and date fields; adld3p (75% missing); urin1 (53% missing)",
+  "caveat": "wtkilo1 records 515 zero weights, the dataset's known missing-as-zero coding; kept as in the published analyses",
+  "standardized": true
+ },
+ "n_treated": 2184,
+ "n_control": 3551,
+ "d": 33,
+ "alpha_trimming": 0.3,
+ "delta": 0.05,
+ "tau": 0.147898344180658,
+ "sigma": 7.7430837036331965,
+ "seed": 0,
+ "smd_definition": "realdata_run.standardized_differences: weighted mean difference / sqrt((weighted var_x + weighted var_y)/2); *_fixed_sd columns use the unweighted pooled SD instead",
+ "overlap_definition": "realdata_run._overlap, 40 bins on [0,1], logistic propensity of realdata_run._logistic_fit",
+ "energy_balancing": "Huling & Mak (2024), J. Causal Inference 12: per arm, argmin over the simplex of 2 sum_i w_i mean_j|X_i - Z_j| - sum_ik w_i w_k |X_i - X_k| - mean_jl |Z_j - Z_l| (Z pooled); 'improved' adds the energy distance between the two weighted arms and is solved jointly",
+ "kernel_balancing": "per arm, argmin over the simplex of the squared MMD to the pooled sample, Gaussian kernel at the trimming's bandwidth",
+ "solver": "FISTA with projection onto the simplex, stopped when the Frank-Wolfe gap <= 1e-09 or after 100000 iterations",
+ "solver_info": {
+  "energy": {
+   "treated": {
+    "n_iter": 2425,
+    "fw_gap": 7.755718567370451e-10,
+    "lipschitz": 1800.8937344129884,
+    "objective": 0.0020719559226147766
+   },
+   "control": {
+    "n_iter": 2875,
+    "fw_gap": 8.047205263261858e-10,
+    "lipschitz": 2692.555403407954,
+    "objective": 0.0004983216971448101
+   }
+  },
+  "energy_improved": {
+   "n_iter": 3075,
+   "fw_gap": 9.302868371474649e-10,
+   "lipschitz": 6459.545382043789,
+   "objective": 0.005812806729649012
+  },
+  "kernel": {
+   "treated": {
+    "n_iter": 5600,
+    "fw_gap": 8.60669659890137e-10,
+    "lipschitz": 134.97130138732874,
+    "objective": 1.2916662102901988e-05
+   },
+   "control": {
+    "n_iter": 23625,
+    "fw_gap": 9.953588582696515e-10,
+    "lipschitz": 201.01320992186945,
+    "objective": 2.106079735386679e-06
+   }
+  }
+ },
+ "trimming_reproduces_r10": {
+  "max_abs_smd": [
+   0.04068790753387243,
+   0.0406879537732655
+  ],
+  "mean_abs_smd": [
+   0.010707408381227355,
+   0.0107074173385928
+  ],
+  "ess_x": [
+   1540.7511162955452,
+   1540.750437627231
+  ],
+  "ess_y": [
+   2494.0316035572982,
+   2494.0343550482494
+  ],
+  "prop_overlap": [
+   0.8262230509976227,
+   0.8262229268853307
+  ],
+  "prop_overlap_before": [
+   0.6212360342182927,
+   0.6212360342182927
+  ],
+  "kept": [
+   [
+    1565,
+    2520
+   ],
+   [
+    1565,
+    2520
+   ]
+  ],
+  "max_relative_difference": 1.1364393827490623e-06,
+  "reproduces_r10": true
+ },
+ "timing_seconds": {
+  "trimming": 1083.8,
+  "energy": 54.6,
+  "energy_improved": 73.0,
+  "kernel": 444.6
+ },
+ "seconds_total": 1660.9,
+ "numpy": "2.4.4",
+ "python": "3.12.13",
+ "threads": 4,
+ "v2": {
+  "threshold": "plugin",
+  "alpha": 0.3,
+  "outdir": "results/v2"
+ }
+}

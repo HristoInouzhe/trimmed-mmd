@@ -1,0 +1,9 @@
+{
+  "propensity_min": 0.003899740303252367,
+  "propensity_max": 0.9600341693561528,
+  "frac_outside_0.1_0.9": 0.08857890148212728,
+  "crump_alpha_cutoff": 0.1062885771543086,
+  "frac_discarded_crump": 0.0978204010462075,
+  "n": 5735,
+  "d": 33
+}

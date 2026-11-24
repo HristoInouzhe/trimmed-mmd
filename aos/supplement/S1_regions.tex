@@ -1,0 +1,240 @@
+\section{Proofs for Section~\ref{sec:regions}}
+\label{app:regions}
+
+The notation is that of the main text, and symbols are recalled where they reappear far from their definition. We
+write $B_\Hh$ for the closed unit ball of $\Hh$ and $\mathcal G_\alpha(P)=\{g:0\le g\le\beta,\ \E_P[g]=1\}$ for the set
+of densities of the $\alpha$-trimmings of $P$ with respect to $P$, so that
+$\mathcal C_\alpha(P)=\{\E_P[g\phi]:g\in\mathcal G_\alpha(P)\}$, and for independent Rademacher signs $\varepsilon_i$
+we put $e_k=\E|\varepsilon_1+\dots+\varepsilon_k|/k\le k^{-1/2}$. Several proofs use the separation
+$\mathrm{sep}(f;A,B)=\inf_{a\in A}\langle f,a\rangle_\Hh-\sup_{b\in B}\langle f,b\rangle_\Hh$ of
+Section~\ref{sec:ramp} through the elementary fact, proved in Lemma~\ref{lem:separation}, that
+$\dist(A,B)=\max_{f\in B_\Hh}\mathrm{sep}(f;A,B)$ for convex weakly compact $A$ and $B$, which is \eqref{eq:distmax}.
+Proposition~\ref{prop:bangbang} and the uniform bound \eqref{eq:hausdorff} of Section~\ref{sec:regions} are proved
+later, in Section~\ref{app:trimming}, next to the tools they need.
+
+Two technical points are settled once and for all. By (A1) and (A2) of Assumption~\ref{ass:regularity}, $\phi$ is
+weakly measurable with $\|\phi\|_\Hh\le\kappa$, hence Bochner integrable by Pettis' theorem, so $\E_P[g\phi]$ is well
+defined for bounded measurable $g$. And the suprema over directions and cuts that appear below are measurable. Indeed,
+$|f(x)-f'(x)|\le\kappa\|f-f'\|_\Hh$ and $|(u-t)_+-(u-t')_+|\le|t-t'|$ make $(f,t)\mapsto(f(x)-t)_+$ jointly
+continuous, and dominated convergence makes $f\mapsto\E_P[(f-t)_+]$ continuous, so every such supremum may be taken over
+a countable dense subset without changing its value.
+
+\subsection{The results of Section~\ref{sec:regions}}
+
+We first prove \eqref{eq:tvintersect}. A law $R$ is a common $\alpha$-trimming exactly when $(1-\alpha)R$ lies below
+both $P$ and $Q$, so the question is one of mass. Let $P\wedge Q$ be the largest measure below both $P$ and $Q$; it has
+density $\min(p,q)$ with respect to any measure dominating both, and mass $1-\TV(P,Q)$. If $\TV(P,Q)\le\alpha<1$, the
+law $R=(P\wedge Q)/(1-\TV(P,Q))$ has densities at most $1/(1-\TV(P,Q))\le\beta$ with respect to $P$ and to $Q$, so it
+lies in $R_\alpha(P)\cap R_\alpha(Q)$. Conversely, if $R$ lies in both sets, then $(1-\alpha)R\le P$ and
+$(1-\alpha)R\le Q$, hence $(1-\alpha)R\le P\wedge Q$ by maximality of $P\wedge Q$, and comparing the masses of the two
+sides gives $1-\alpha\le1-\TV(P,Q)$.
+
+The same comparison of masses shows that laws which lose different fractions $\alpha_1$ and $\alpha_2$ and agree on what
+remains must have $\alpha_1\vee\alpha_2\ge\alpha^\star$. Their common remainder is a probability measure with density
+at most $\min\{p/(1-\alpha_1),q/(1-\alpha_2)\}\le\min(p,q)/(1-\alpha_1\vee\alpha_2)$, whose integral is
+$(1-\alpha^\star)/(1-\alpha_1\vee\alpha_2)$; as it must be at least one, $\alpha_1\vee\alpha_2\ge\alpha^\star$.
+
+\begin{proof}[Proof of Proposition~\ref{prop:georep}]
+The map $g\mapsto g\cdot P$ is a bijection from $\mathcal G_\alpha(P)$ onto $R_\alpha(P)$, and Bochner
+integrability gives $\mu_{g\cdot P}=\E_P[g\phi]$, so $P'\mapsto\mu_{P'}$ maps $R_\alpha(P)$ onto
+$\mathcal C_\alpha(P)$. The infimum in \eqref{eq:trimMMDpop} is therefore the infimum of $\|u-v\|_\Hh$ over
+$u\in\mathcal C_\alpha(P)$ and $v\in\mathcal C_\alpha(Q)$, which is \eqref{eq:setdist}.
+
+For $P=P_n$ the only care needed is with sample points that no measurable set separates, so we group the sample points
+into such classes. A density with respect to $P_n$ is measurable, hence constant on each class, and so defines a capped
+weight vector $w_i=g(X_i)/n$ with the same embedding. Conversely, averaging a capped weight vector within each class
+preserves the cap, the normalization and $\sum_iw_i\phi(X_i)$, because $k(\cdot,x')$ is measurable for every $x'$ by
+(A1), so that $\phi$ is constant on a class; the averaged vector is a density. The set is a polytope, as the
+image of the capped simplex, itself a polytope, under the linear map $w\mapsto\sum_iw_i\phi(X_i)$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:attainment}]
+Everything except norm-compactness follows from the weak compactness of the regions.
+
+Convexity and the bound are immediate: $\mathcal G_\alpha(P)$ is convex and $g\mapsto\E_P[g\phi]$ is linear, and
+$\|\E_P[g\phi]\|_\Hh\le\E_P[g\|\phi\|_\Hh]\le\kappa$. For compactness, regard $\mathcal G_\alpha(P)$ as a subset of
+$L^\infty(P)=(L^1(P))^*$. It is bounded, and it is weak$^*$-closed, since each constraint has the form
+$\int gh\,dP\ \{\ge,\le,=\}\ c$ for a fixed $h\in L^1(P)$, with $h=\mathbf 1_A$ for the pointwise bounds and $h\equiv1$
+for the normalization; so it is weak$^*$-compact by the Banach--Alaoglu theorem. The map $T:g\mapsto\E_P[g\phi]$ is
+weak$^*$-to-weak continuous, because $\langle Tg,e\rangle_\Hh=\int ge\,dP$ for $e\in\Hh$, and $e$ is a bounded
+function, $|e(x)|\le\kappa\|e\|_\Hh$. So $\mathcal C_\alpha(P)$ is weakly compact, hence weakly
+closed and norm-closed. It is even norm-compact, because the embedding is a Hilbert--Schmidt operator. The adjoint of
+$T:L^2(P)\to\Hh$, $Tg=\E_P[g\phi]$, sends $h\in\Hh$ to the function $h$ in $L^2(P)$. For an orthonormal basis $(h_j)$
+of $\Hh$, Parseval's identity gives $\sum_j\|T^*h_j\|^2_{L^2(P)}=\E_P\sum_jh_j(X)^2=\E_P\|\phi(X)\|_\Hh^2\le\kappa^2$,
+so $T^*$, and hence $T$, is Hilbert--Schmidt and therefore compact. The set $\mathcal G_\alpha(P)$ is bounded in
+$L^2(P)$, so $\mathcal C_\alpha(P)=T(\mathcal G_\alpha(P))$ is relatively compact, and it is norm-closed.
+
+The norm is weakly lower semicontinuous on the weakly compact product of the two regions, so the distance is attained,
+at points $\mu_{P^\star},\mu_{Q^\star}$ for trimmings $P^\star,Q^\star$ by Proposition~\ref{prop:georep}. If
+$D_\alpha(P,Q)=0$, the two points coincide, so the intersection is nonempty, and every element of it is
+$\mu_{P^\star}=\mu_{Q^\star}$ for some trimmings $P^\star,Q^\star$, which are equal by (A3).
+\end{proof}
+
+The equivalence \eqref{eq:zeroeq} follows. If $\TV(P,Q)\le\alpha$, \eqref{eq:tvintersect} gives a common trimming,
+whose embedding lies in both regions, so $D_\alpha(P,Q)=0$; this direction uses neither attainment nor (A3).
+Conversely, if $D_\alpha(P,Q)=0$, Lemma~\ref{lem:attainment} gives a common trimming, and \eqref{eq:tvintersect} gives
+$\TV(P,Q)\le\alpha$.
+
+\begin{proof}[Proof of Lemma~\ref{lem:cvar}]
+The first equality holds because $\langle\E_P[g\phi],f\rangle_\Hh=\E_P[gf]$. The second is a bathtub problem, in
+which every cut gives an upper bound and the bound at one cut is attained. For any $t$ and $g\in\mathcal G_\alpha(P)$, since
+$0\le g\le\beta$ and $\E_Pg=1$,
+\[
+\E_P[gf]=t+\E_P[g(f-t)]\le t+\beta\,\E_P[(f-t)_+] ,
+\]
+so the supremum is at most the infimum. For the converse we fill the values of $f$ above a quantile with the largest
+weight allowed. Let $t^\star$ be an $\alpha$-quantile of $f(X)$, so that
+$\Pp_P(f>t^\star)\le1-\alpha\le\Pp_P(f\ge t^\star)$, and put $g^\star=\beta\mathbf 1\{f>t^\star\}+c\mathbf
+1\{f=t^\star\}$ with $c=(1-\beta\Pp_P(f>t^\star))/\Pp_P(f=t^\star)$ when $\Pp_P(f=t^\star)>0$, and $c=0$ otherwise. Multiplied by $\beta$, the quantile inequalities read
+$\beta\Pp_P(f>t^\star)\le1\le\beta\Pp_P(f\ge t^\star)$, hence $c\in[0,\beta]$ and $\E_P[g^\star]=1$ (when
+$\Pp_P(f=t^\star)=0$ they force $\beta\Pp_P(f>t^\star)=1$). Since $(f-t^\star)_+=(f-t^\star)\mathbf 1\{f>t^\star\}$,
+we get $\E_P[g^\star f]=t^\star+\beta\E_P[(f-t^\star)_+]$, so $g^\star$ attains the supremum and $t^\star$ the
+infimum. Only boundedness and measurability of $f$ were used.
+\end{proof}
+
+\subsection{The cut, continuity in the level and a hinge class}
+
+The cut $t$ in \eqref{eq:cvar}, the threshold of the next lemma, can be confined to $[-\kappa,\kappa]$.
+
+\begin{lemma}[Compact range of the threshold]
+\label{lem:tcompact}
+Let Assumption~\ref{ass:regularity} hold, $\alpha\in[0,1)$, and $R$ any probability measure. For every $f\in B_\Hh$
+the infimum in \eqref{eq:cvar}, with $R$ in place of $P$, is attained at some $t^\star\in[-\kappa,\kappa]$.
+\end{lemma}
+
+\begin{proof}
+The function $A(t)=t+\beta\E_R[(f(X)-t)_+]$ is convex, with right derivative $1-\beta\Pp_R(f(X)>t)$ by dominated
+convergence. Since $|f|\le\kappa$, $A(t)=t$ for $t>\kappa$, while for $t<-\kappa$ the right derivative is
+$1-\beta=-\alpha\beta\le0$. A continuous convex function that is nonincreasing on $(-\infty,-\kappa]$ and increasing
+on $[\kappa,\infty)$ attains its infimum in $[-\kappa,\kappa]$.
+\end{proof}
+
+\begin{lemma}[Local Lipschitz continuity in $\alpha$]
+\label{lem:continuity}
+Under Assumption~\ref{ass:regularity}, for every $\bar\alpha\in[0,1)$ and $\alpha,\alpha'\in[0,\bar\alpha]$,
+\[
+\left|D_\alpha(P,Q)-D_{\alpha'}(P,Q)\right|\le\frac{4\kappa}{(1-\bar\alpha)^2}\,|\alpha-\alpha'| .
+\]
+In particular $\alpha\mapsto D_\alpha(P,Q)$ is continuous on $[0,1)$.
+\end{lemma}
+
+\begin{proof}
+The level enters the support functions only through $\beta$, as an infimum of functions affine in $\beta$, so it
+suffices to bound their slopes. Write $\beta'=(1-\alpha')^{-1}$. For $f\in B_\Hh$, Lemmas~\ref{lem:cvar} and~\ref{lem:tcompact} give
+\[
+h_{\mathcal C_\alpha(P)}(f)=\inf_{t\in[-\kappa,\kappa]}\big\{t+\beta\,\E_P[(f-t)_+]\big\},
+\]
+an infimum of affine functions of $\beta$ with slopes $\E_P[(f-t)_+]\in[0,2\kappa]$. An infimum of functions that are
+$2\kappa$-Lipschitz is $2\kappa$-Lipschitz, so $|h_{\mathcal C_\alpha(P)}(f)-h_{\mathcal C_{\alpha'}(P)}(f)|\le
+2\kappa|\beta-\beta'|$ uniformly in $f$, and likewise for $Q$. By \eqref{eq:distmax} in Section~\ref{app:split},
+\[
+D_\alpha(P,Q)=\max_{f\in B_\Hh}\big\{-h_{\mathcal C_\alpha(P)}(-f)-h_{\mathcal C_\alpha(Q)}(f)\big\},
+\]
+and a difference of two maxima is at most the largest difference of the maximized functions, so
+$|D_\alpha(P,Q)-D_{\alpha'}(P,Q)|\le4\kappa|\beta-\beta'|$. Finally
+$\tfrac{d}{d\alpha}(1-\alpha)^{-1}\le(1-\bar\alpha)^{-2}$ on $[0,\bar\alpha]$, which gives the claim. Only (A1) and (A2)
+were used, for arbitrary probability measures, so the lemma applies to $P_n$ and $Q_m$.
+\end{proof}
+
+The deviation bounds of Theorem~\ref{thm:twosided}, Corollary~\ref{cor:uniform} and Lemma~\ref{lem:localmod} are
+instances of one lemma, in which $n_\star=nm/(n+m)$, as in Section~\ref{sec:analytic}.
+
+\begin{lemma}[A two-sample hinge class]
+\label{lem:hinge}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, let $X_1,\dots,X_n$ be i.i.d.\ $P$ and $Y_1,\dots,Y_m$
+i.i.d.\ $Q$, the two samples independent, and let $r,\rho_1,\rho_2\ge0$. For each $x\in\mathcal X$ let
+$\varphi^1_x,\varphi^2_x:\R\to\R$ be $1$-Lipschitz, with $(x,z)\mapsto\varphi^i_x(z)$ measurable and $\sup_x|\varphi^i_x(0)|<\infty$.
+For $(v,a,b)$ in $\mathcal S=\{(v,a,b)\in\Hh\times\R^2:\|v\|_\Hh\le r,\ |a|\le\rho_1,\ |b|\le\rho_2\}$ put
+$h^1_{v,a}(x)=\varphi^1_x(a-v(x))$ and $h^2_{v,b}(y)=\varphi^2_y(v(y)-b)$, and let
+\[
+\Gamma=\sup_{\mathcal S}\big[(P-P_n)h^1_{v,a}+(Q-Q_m)h^2_{v,b}\big],
+\qquad
+\Gamma^-=\sup_{\mathcal S}\big[(P_n-P)h^1_{v,a}+(Q_m-Q)h^2_{v,b}\big].
+\]
+Then $\Gamma$ and $\Gamma^-$ are measurable and their means are at most $2[r\kappa/\sqrt{n_\star}+\rho_1e_n+\rho_2e_m]$. If moreover
+$|h^1_{v,a}(x)-h^1_{v,a}(x')|\le\Delta_1$ and $|h^2_{v,b}(y)-h^2_{v,b}(y')|\le\Delta_2$ for all points and all
+$(v,a,b)\in\mathcal S$, then for every $\chi>0$ each of $\Gamma$ and $\Gamma^-$ exceeds its mean by more than
+$\sqrt{\chi(\Delta_1^2/n+\Delta_2^2/m)/2}$ with probability at most $e^{-\chi}$. For one sample the same holds with the
+terms of the second sample removed: $n_\star=n$, and no $\rho_2e_m$ and no $\Delta_2^2/m$.
+\end{lemma}
+
+\begin{proof}
+The mean is bounded by symmetrization, contraction and a bound on the norm of a Rademacher sum in $\Hh$, and the
+deviation by McDiarmid's inequality. Measurability is settled first: for fixed samples the bracket is continuous in
+$(v,a,b)$, and the population terms are continuous by dominated convergence with the envelope
+$\sup_x|\varphi^i_x(0)|+\rho_i+\kappa r$; as $\Hh\times\R^2$ is separable, $\Gamma$ and $\Gamma^-$ are measurable.
+
+For the mean, $\Gamma$ is a supremum of sums of $n+m$ independent centered terms, and symmetrization holds in the signed
+form, with no absolute value inside the supremum. We introduce an independent copy of the samples, apply Jensen's
+inequality, multiply the differences by independent signs $\varepsilon_i,\varepsilon'_j$, and split the supremum, to get
+\[
+\E \Gamma\le2\,\E\sup_{\mathcal S}\Big[\frac1n\sum_i\varepsilon_i\varphi^1_{X_i}\big(a-v(X_i)\big)+\frac1m\sum_j\varepsilon'_j
+\varphi^2_{Y_j}\big(v(Y_j)-b\big)\Big].
+\]
+Conditionally on the samples, we remove the maps $\varphi^i$ by the contraction principle for signed Rademacher
+averages with a different $1$-Lipschitz map in each coordinate \citep[Lemma~26.9]{shalevshwartzbendavid2014}, applied
+to the coordinates $(a-v(X_i))/n$ and $(v(Y_j)-b)/m$ and the maps $z\mapsto\varphi^1_{X_i}(nz)/n$ and
+$z\mapsto\varphi^2_{Y_j}(mz)/m$. Its constant is $1$, not the $2$ of the version with absolute values
+\citep[Theorem~4.12]{ledouxtalagrand1991}, and it needs no normalization $\varphi(0)=0$. It replaces the bracket by the
+linear expression
+\[
+\langle v,S_\varepsilon\rangle_\Hh+\frac an\sum_i\varepsilon_i-\frac bm\sum_j\varepsilon'_j,
+\qquad
+S_\varepsilon=\frac1m\sum_j\varepsilon'_j\phi(Y_j)-\frac1n\sum_i\varepsilon_i\phi(X_i),
+\]
+whose supremum over $\mathcal S$ is $r\|S_\varepsilon\|_\Hh+\rho_1|n^{-1}\sum_i\varepsilon_i|+\rho_2|m^{-1}\sum_j\varepsilon'_j|$.
+The means of the two sign averages are $e_n$ and $e_m$ by definition, and
+\[
+\E\|S_\varepsilon\|_\Hh\le(\E\|S_\varepsilon\|_\Hh^2)^{1/2}\le\kappa/\sqrt{n_\star}
+\]
+by Jensen's inequality, then independence of the signs and $k(x,x)\le\kappa^2$, since $1/n+1/m=1/n_\star$. This gives the
+bound on the mean. The argument for $\Gamma^-$ is the same, with the sample and its copy exchanged.
+
+For the deviation, replacing one $X_i$ moves $\Gamma$ and $\Gamma^-$ by at most $\Delta_1/n$, and one $Y_j$ by at most
+$\Delta_2/m$, so McDiarmid's inequality \citep{mcdiarmid1989} gives the tail bound (if $\Delta_1=\Delta_2=0$ every $h$ is
+constant and $\Gamma=\Gamma^-=0$).
+\end{proof}
+
+\subsection{No informative upper bound}
+\label{sec:upperimposs}
+
+The triviality of distribution-free upper bounds on $\TV$ persists on the much
+smaller class of pairs whose densities are bounded by $2$, which contains every $\tfrac12$-trimming of the uniform law
+and in which no atom can be planted: a procedure valid over the whole class must return the trivial bound, with
+probability at least $1-\delta$, even when the two laws are identical.
+
+\begin{proof}[Proof of Theorem~\ref{thm:impossible}]
+We hide a pair of laws at total variation one in a fine random partition. Fix an even integer $M\ge2(n+m)$, cut $[0,1]$ into $M$ cells of equal length, and let $S$ be a uniformly random set of
+$M/2$ cells. Let $P_S$ and $Q_S$ be the uniform laws on the union of the cells in $S$ and in its complement, with
+densities $2\cdot\mathbf 1_S$ and $2\cdot\mathbf 1_{S^c}$. Then $(P_S,Q_S)\in\mathcal P_2$ and $\TV(P_S,Q_S)=1$, so the
+coverage requirement gives $\Pp_{P_S,Q_S}(\widehat U\ge1)\ge1-\delta$ for each $S$, and hence under the mixture $\mu_M$
+of the laws of the data over the random $S$.
+
+Data drawn from $\mu_M$ are nearly indistinguishable from two uniform samples, because they rarely put two
+observations in one cell. Let $E$ be the event that the $n+m$ observations fall in $n+m$ distinct cells. Given $E$, $\mu_M$ and the product
+$P_{\mathrm u}^{\otimes(n+m)}$ of uniform laws coincide. Under $\mu_M$, an ordered tuple of distinct cells receives
+$X_1,\dots,X_n,Y_1,\dots,Y_m$ with probability $(2/M)^{n+m}$ times the probability that its first $n$ cells lie in $S$
+and its last $m$ in $S^c$, which depends only on $n$ and $m$, so under both laws the tuple is uniform given $E$, with
+independent uniform positions within the cells. Laws that agree given an event differ in total variation by at most
+the sum of the masses of its complement. Under $\mu_M$ an $X$ and a $Y$ never share a cell, and two $X$'s, or two
+$Y$'s, do so with probability at most $2/M$; under the product law two observations do so with probability $1/M$. Hence
+$\TV(\mu_M,P_{\mathrm u}^{\otimes(n+m)})\le\{n(n-1)+m(m-1)\}/M+(n+m)(n+m-1)/(2M)\le2(n+m)^2/M$, also with an independent
+randomizer. Finally,
+$\Pp_{P_{\mathrm u},P_{\mathrm u}}(\widehat U\ge1)\ge1-\delta-2(n+m)^2/M$ for every even $M\ge2(n+m)$, and letting
+$M\to\infty$ gives the claim.
+\end{proof}
+
+Lower bounds escape Theorem~\ref{thm:impossible}, but their rates do not. If $\tilde\alpha$ were a lower confidence
+bound valid at level $\delta$ for every pair in $\mathcal P_2$ and also had
+$\Pp_{P,Q}(\TV(P,Q)-\tilde\alpha>r)\le\delta'$ for every pair in $\mathcal P_2$, with $r<1$ and $\delta+\delta'<1$,
+then $\tilde\alpha+r$ would be an upper bound valid at level $\delta'$, so by Theorem~\ref{thm:impossible} it would
+reach $1$ at the uniform pair with probability at least $1-\delta'$, and there $\tilde\alpha\ge1-r>0=\TV$ with
+probability larger than $\delta$, against its validity.
+
+For a kernel the obstruction holds even without sampling. For any kernel satisfying (A1) and (A2), let $Q_\nu$ have
+density $1+\varsigma(\nu\,\cdot)$ on $[0,1]$, for a measurable $1$-periodic mean-zero $\varsigma$ with $|\varsigma|=1$ and
+an integer $\nu\ge1$. Then $\TV(P_{\mathrm u},Q_\nu)=\tfrac12$ for every $\nu$, while $\mu_{Q_\nu}-\mu_{P_{\mathrm u}}=\int_0^1\phi(x)\,
+\varsigma(\nu x)\,dx\to0$ in $\Hh$ by the Riemann--Lebesgue lemma for Bochner integrals, since the bounded, strongly
+measurable $\phi$ lies in $L^1([0,1];\Hh)$, where step functions are dense, and $\int_a^b\varsigma(\nu x)\,dx\to0$. As
+$\mu_P\in\mathcal C_\alpha(P)$ and $\mu_Q\in\mathcal C_\alpha(Q)$, $D_\alpha(P,Q)\le\MMD(P,Q)$ for every $\alpha$, so the
+trimmed path is uniformly small while the total variation stays at $\tfrac12$.

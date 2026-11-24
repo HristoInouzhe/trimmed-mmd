@@ -1,0 +1,15 @@
+{
+ "files": [
+  "results/aos/tables/aos_s6_table1.tex",
+  "results/aos/tables/aos_s6_recovery.tex",
+  "results/aos/tables/aos_s6_half.tex",
+  "results/aos/tables/aos_s6_univ.tex",
+  "results/aos/tables/aos_s6_n80.tex",
+  "results/aos/tables/aos_s6_split_tests.tex",
+  "results/aos/tables/aos_s6_validity.tex"
+ ],
+ "validity_rows": [
+  24,
+  21
+ ]
+}

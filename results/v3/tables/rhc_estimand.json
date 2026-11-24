@@ -1,0 +1,46 @@
+{
+ "script": "scripts/v3_rhc_estimand.py",
+ "command": "PYTHONPATH=src python3 -I scripts/v3_rhc_estimand.py --threads 3",
+ "alpha": 0.3,
+ "tau": 0.147898344180658,
+ "sigma": 7.7430837036331965,
+ "pi_treated": 0.380819529206626,
+ "bootstrap_B": 2000,
+ "bootstrap_seed": 20261117,
+ "bootstrap": "stratified by arm, weights held fixed",
+ "outcome": "dth30 == 'Yes'",
+ "n_treated": 2184,
+ "n_control": 3551,
+ "crude_mortality_treated": 0.38003663003663,
+ "crude_mortality_control": 0.3063925654745142,
+ "trimming_check": {
+  "max_abs_smd": [
+   0.04068785993897959,
+   0.0406879075338724
+  ],
+  "mean_abs_smd": [
+   0.01070739901994641,
+   0.0107074083812273
+  ],
+  "ess_frac_x": [
+   0.7054716903714839,
+   0.7054721228459456
+  ],
+  "ess_frac_y": [
+   0.7023465434264415,
+   0.7023462696584901
+  ],
+  "prop_overlap": [
+   0.8262225482980309,
+   0.8262230509976227
+  ],
+  "max_relative_difference": 1.1697552343290122e-06,
+  "reproduces_v2": true
+ },
+ "timing_seconds": {
+  "trimming": 1852.9,
+  "energy": 113.1,
+  "kernel": 1854.9
+ },
+ "seconds_total": 3834.3
+}

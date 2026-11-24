@@ -1,0 +1,16 @@
+*.aux
+*.log
+*.out
+*.buildlog
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+submission/*.aux
+submission/*.log
+submission/*.out
+submission/*.buildlog
+writing_style_references/*.pdf
+writing_style_references/txt/
+submission/

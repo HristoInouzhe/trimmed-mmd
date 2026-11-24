@@ -1,0 +1,13 @@
+{
+  "title": "trimmedmmd: code and data for \"Certifying total-variation contamination by betting on trimmed kernel witnesses\"",
+  "upload_type": "software",
+  "description": "The Python package trimmedmmd and the scripts behind every table and figure of the paper \"Certifying total-variation contamination by betting on trimmed kernel witnesses\" (submitted to the Annals of Statistics). The Lean 4 formalization of the paper's numbered results is at https://github.com/HristoInouzhe/trimmed-mmd-lean.",
+  "creators": [
+    {"name": "Inouzhe, Hristo", "affiliation": "Universidad Autónoma de Madrid"}
+  ],
+  "license": "MIT",
+  "keywords": ["total variation", "contamination", "trimming", "kernel mean embedding", "testing by betting", "finite-sample inference"],
+  "related_identifiers": [
+    {"identifier": "https://github.com/HristoInouzhe/trimmed-mmd-lean", "relation": "isSupplementedBy", "resource_type": "software"}
+  ]
+}

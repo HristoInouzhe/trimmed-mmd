@@ -1,0 +1,94 @@
+{
+ "dataset": "adult",
+ "source": "UCI Adult (Becker & Kohavi 1996), train + test",
+ "group": "sex (0 = male, 1 = female)",
+ "outcome": "income > 50K",
+ "n0": 30527,
+ "n1": 14695,
+ "d": 12,
+ "features": [
+  "age",
+  "education_num",
+  "hours",
+  "log_capital_gain",
+  "log_capital_loss",
+  "married",
+  "never_married",
+  "private",
+  "self_employed",
+  "government",
+  "white",
+  "us_born"
+ ],
+ "sigma": 4.765919997036571,
+ "n_freq": 2048,
+ "delta": 0.05,
+ "alpha_hat": 0.175,
+ "last_rejected": 0.15,
+ "max_rows": null,
+ "seed": 0,
+ "bw_scale": 1.0,
+ "path": [
+  {
+   "alpha": 0.0,
+   "d_hat": 0.19067896764766115,
+   "d_lower": 0.19067896764766115,
+   "tau": 0.09725588367075078,
+   "rejects": true,
+   "converged": true,
+   "n_iter": 20,
+   "fw_gap": 0.0
+  },
+  {
+   "alpha": 0.15,
+   "d_hat": 0.12507328372001592,
+   "d_lower": 0.12507327830227086,
+   "tau": 0.11441868667147151,
+   "rejects": true,
+   "converged": true,
+   "n_iter": 2180,
+   "fw_gap": 1.355230296040677e-09
+  },
+  {
+   "alpha": 0.175,
+   "d_hat": 0.11635430104881345,
+   "d_lower": 0.11635427859005056,
+   "tau": 0.11788591960091005,
+   "rejects": false,
+   "converged": true,
+   "n_iter": 1700,
+   "fw_gap": 5.226346813658189e-09
+  },
+  {
+   "alpha": 0.45,
+   "d_hat": 0.0038247992429685713,
+   "d_lower": 0.003789645606095933,
+   "tau": 0.17682887940136505,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 2.676754292107466e-07
+  },
+  {
+   "alpha": 0.5,
+   "d_hat": 0.00012817770205447664,
+   "d_lower": 0.0,
+   "tau": 0.19451176734150155,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 2.590369395063013e-07
+  },
+  {
+   "alpha": 0.6,
+   "d_hat": 8.467029577354224e-05,
+   "d_lower": 0.0,
+   "tau": 0.24313970917687697,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 8.550611323437805e-08
+  }
+ ],
+ "seconds": 2352.6258041858673
+}

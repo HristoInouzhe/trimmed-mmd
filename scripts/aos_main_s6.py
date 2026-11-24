@@ -1,0 +1,189 @@
+r"""AoS restructure: compact versions of the S6 baseline tables, with the analytic test under tau = min{tau^P, tau^A}.
+No Monte Carlo work; the defaults of scripts/aos_baselines_tables.py and scripts/aos_extra_tests_table.py are untouched
+(their outputs are not rewritten).
+
+1. scripts/aos_baselines_tables.py is run as a module with two changes, its outputs redirected to results/aos/main/s6/:
+   every stored record's analytic decision an_new (tau_new, with the sharper tau^{P'}) is replaced by the stored an_newcf
+   (the closed form tau^P). On every (n, m, alpha) cell of the study tau^A > tau^P, so min{tau^P, tau^A} = tau^P and
+   an_newcf IS the analytic test with the new threshold (scripts/aos_main_verify.py; scripts/aos_main_analytic.py
+   recomputes the same decisions from the stored certified bounds). The tables with an analytic column are copied to
+   results/aos/tables/aos_s6_{table1,recovery,half,univ,n80}.tex.
+2. aos_s6_split_tests.tex: one table for the single-split empirical-Bernstein and betting columns of aos_baselines_eb.tex
+   and the further tests of aos_extra_tests.tex (split DKW, bootstrap, kNN + betting), plus the sequential ramp. All
+   columns are read from ONE run, the stored replicates of the study (explore/harder_sims/out, 200 per design at
+   n = m = 800, mixed n = 400): aos_baselines_eb.tex read them directly, aos_extra_tests.tex through
+   results/harder/summary_long.csv (scripts/harder_collect.py, the same replicates and counts); the small differences
+   between the two printed tables were rounding (0.155 printed 0.16 half up there, 0.15 here by float formatting).
+   Here every rate is rounded half up on its decimal value. The RHC-shaped design, absent from summary_long.csv, is
+   included.
+3. aos_s6_validity.tex: aos_baselines_validity.tex with duplicate rows merged (rows whose every cell is equal, e.g. the
+   permutation MMD at the pilot and at the median bandwidth).
+
+Every header uses the AoS notation (aos/restructure_plan.md, amendment 3): the split-sample bound (the sequential ramp,
+"ramp" / "betting, ramp" / "betting, seq." in the generators above) is $\widehat\alpha$, the analytic estimator
+("analytic") $\widehat\alpha_{\mathrm{an}}$; only the column headers of the copies are rewritten (aos2_headers).
+
+    python -B scripts/aos_main_s6.py
+"""
+from __future__ import annotations
+
+import json
+import shutil
+import sys
+from decimal import ROUND_HALF_UP, Decimal
+from pathlib import Path
+
+sys.dont_write_bytecode = True
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import aos_baselines_tables as T  # noqa: E402
+
+S6 = ROOT / "results" / "aos" / "main" / "s6"
+TAB = ROOT / "results" / "aos" / "tables"
+STORED = ROOT / "explore" / "harder_sims" / "out"
+A_SPLIT = r"$\widehat\alpha$"
+A_AN = r"$\widehat\alpha_{\mathrm{an}}$"
+# (header line 1, header line 2) of a column -> the same in the AoS notation; None: a one-line header
+AOS2 = {("analytic", ""): (A_AN, ""), ("ramp", ""): (A_SPLIT, ""), ("betting,", "ramp"): (A_SPLIT, ""),
+        ("analytic", None): (A_AN, None), ("betting, seq.", None): (A_SPLIT, None)}
+
+
+def patched_jsonl(path, _orig=T.jsonl):
+    recs = _orig(path)
+    for r in recs:
+        for f in ("dec", "jlo", "dec0"):
+            d = r.get(f)
+            if isinstance(d, dict) and "an_newcf" in d and "an_new" in d:
+                d["an_new"] = d["an_newcf"]
+    return recs
+
+
+def rate(k, R, q="0.01"):
+    return str((Decimal(k) / Decimal(R)).quantize(Decimal(q), rounding=ROUND_HALF_UP))
+
+
+def r2(x):
+    return str(Decimal(repr(float(x))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+
+
+def aos2_headers(txt):
+    """Rewrite the column headers (the rows between toprule and midrule without a multicolumn) in the AoS notation."""
+    i0 = txt.index(r"\toprule")
+    i1 = txt.index(r"\midrule")
+    idx = [i for i in range(i0 + 1, i1) if "&" in txt[i] and r"\multicolumn" not in txt[i]
+           and not txt[i].lstrip().startswith(r"\cmidrule")]
+    assert 1 <= len(idx) <= 2, idx
+    rows = [[c.strip() for c in txt[i].rstrip().removesuffix("\\\\").split("&")] for i in idx]
+    assert len({len(r) for r in rows}) == 1, rows
+    n_changed = 0
+    for c in range(len(rows[0])):
+        key = (rows[0][c], rows[1][c] if len(rows) == 2 else None)
+        if key in AOS2:
+            new = AOS2[key]
+            rows[0][c] = new[0]
+            if len(rows) == 2:
+                rows[1][c] = new[1]
+            n_changed += 1
+    for i, r in zip(idx, rows):
+        txt[i] = " & ".join(r) + r" \\"
+    return txt, n_changed
+
+
+def run_baselines():
+    S6.mkdir(parents=True, exist_ok=True)
+    T.jsonl = patched_jsonl
+    T.TAB, T.OUTD = S6, S6
+    T.main()
+    out = []
+    for name in ("table1", "recovery", "half", "univ", "n80"):
+        src = S6 / f"aos_baselines_{name}.tex"
+        txt = src.read_text().splitlines()
+        txt[0] = (txt[0].replace("Generated by scripts/aos_baselines_tables.py",
+                                 "Generated by scripts/aos_main_s6.py (scripts/aos_baselines_tables.py with the "
+                                 "analytic test under tau = min{tau^P, tau^A}, = stored an_newcf; headers in the AoS "
+                                 "notation)"))
+        txt, nc = aos2_headers(txt)
+        assert nc == 2, (name, nc)          # every one of these tables has one analytic and one ramp column
+        dst = TAB / f"aos_s6_{name}.tex"
+        dst.write_text("\n".join(txt) + "\n")
+        out.append(dst)
+        print("wrote", dst)
+    return out
+
+
+def split_tests():
+    cols = [("ramp_b2s", "split, EB", True), ("ramp_bet", "split, bet", True), ("seq_bet", A_SPLIT, False),
+            ("prop17", "split, DKW", True), ("boot", "bootstrap", True), ("knn_bet", r"$k$NN, bet", True)]
+    head = " & & " + " & ".join(rf"\multicolumn{{{3 if b else 2}}}{{c}}{{{lab}}}" for _, lab, b in cols) + r" \\"
+    sub = r"design & $\alpha^\star$ & " + " & ".join(("pow. & rec. & bd." if b else "pow. & rec.") for _, _, b in cols) \
+        + r" \\"
+    ncol = 2 + sum(3 if b else 2 for *_, b in cols)
+    lines = ["% Generated by scripts/aos_main_s6.py -- do not edit. One run: the stored replicates of the synthetic "
+             "study (explore/harder_sims/out), n = m = 800 (mixed n = 400, m = 5n), 200 per design. pow.: power against "
+             "H_{0,0}; rec.: mean certified level / alpha*; bd.: rejection rate at alpha = alpha*. Merges "
+             "aos_baselines_eb.tex and aos_extra_tests.tex; the sequential ramp (Gaussian kernel) is alpha-hat.",
+             r"\begin{tabular}{l" + "c" * (ncol - 1) + "}", r"\toprule", head, sub, r"\midrule"]
+    for key, label, ast in T.DESIGNS:
+        recs = [json.loads(x) for x in (STORED / f"{key}.jsonl").read_text().splitlines() if x.strip()]
+        ns = {r["n"] for r in recs}
+        n = 800 if 800 in ns else max(ns)
+        recs = [r for r in recs if r["n"] == n]
+        R = len(recs)
+        cells = [label, f"${ast}$"]
+        for m, _, bd in cols:
+            k0 = sum(r["dec"][m][0] for r in recs)
+            rec = sum(0.0 if r["jlo"][m] < 0 else r["levels"][r["jlo"][m]] / r["alpha_star"] for r in recs) / R
+            cells += [f"${rate(k0, R)}$", f"${r2(rec)}$"]
+            if bd:
+                cells.append(f"${rate(sum(r['dec'][m][3] for r in recs), R, '0.001')}$")
+        lines.append(" & ".join(cells) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    dst = TAB / "aos_s6_split_tests.tex"
+    dst.write_text("\n".join(lines) + "\n")
+    print("wrote", dst)
+    return dst
+
+
+def validity():
+    src = (S6 / "aos_baselines_validity.tex").read_text().splitlines()
+    i0 = next(i for i, x in enumerate(src) if x.strip() == r"\midrule") + 1
+    i1 = next(i for i, x in enumerate(src) if x.strip() == r"\bottomrule")
+    body, seen, order = src[i0:i1], {}, []
+    for line in body:
+        lab, rest = line.split(" & ", 1)
+        if rest in seen:
+            seen[rest].append(lab)
+        else:
+            seen[rest] = [lab]
+            order.append(rest)
+    merged = []
+    for rest in order:
+        labs = seen[rest]
+        if len(labs) == 2 and labs[1].startswith(labs[0]):
+            lab = labs[0] + " (also " + labs[1][len(labs[0]):].lstrip(", ") + ")"
+        else:
+            lab = "; ".join(labs)
+        merged.append(f"{lab} & {rest}")
+    head = src[0].replace("Generated by scripts/aos_baselines_tables.py",
+                          "Generated by scripts/aos_main_s6.py (aos_baselines_validity.tex, identical rows merged: "
+                          + "; ".join(" = ".join(seen[r]) for r in order if len(seen[r]) > 1) + ")")
+    out = [head] + src[1:i0] + merged + src[i1:]
+    dst = TAB / "aos_s6_validity.tex"
+    dst.write_text("\n".join(out) + "\n")
+    print("wrote", dst, f"({len(body)} rows -> {len(merged)})")
+    return dst, len(body), len(merged)
+
+
+def main():
+    files = run_baselines()
+    files.append(split_tests())
+    v, nb, nm = validity()
+    files.append(v)
+    (S6 / "files.json").write_text(json.dumps({"files": [str(f.relative_to(ROOT)) for f in files],
+                                               "validity_rows": [nb, nm]}, indent=1))
+    shutil.copy(S6 / "aos_baselines_macros.tex", S6 / "aos_baselines_macros_s6.tex")
+
+
+if __name__ == "__main__":
+    main()

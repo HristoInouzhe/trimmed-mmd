@@ -1,0 +1,1547 @@
+\section{Proofs for Section~\ref{sec:rates}}
+\label{app:rates}
+
+This section proves the results of Section~\ref{sec:rates}: the margin condition and its examples, the rate of the
+split-sample bound under a margin, the margins of touching contaminations, the excess of the population ramp, the
+parametric rate, up to logarithmic factors, with the Laplace kernel, and the two-point lower bound and the minimax
+corollary. It also states and proves the converse for the analytic baseline.
+
+\subsection{Proof of Example~\ref{ex:separated}}
+\label{sec:exproof}
+
+\begin{proof}
+Every $\alpha$-trimming keeps enough mass where $f=\pm1$ for $f$ to separate the trimmed means. Since
+$P-Q=\alpha^\star(P_0-Q_0)$ and $P_0$, $Q_0$ are concentrated on the disjoint sets $S_P$, $S_Q$,
+$\TV(P,Q)=\alpha^\star\TV(P_0,Q_0)=\alpha^\star$. Fix $\alpha\in[0,\alpha^\star]$ and an $\alpha$-trimming $P'=gP$, with
+$0\le g\le\beta$. The law $P$ is concentrated on $S_R\cup S_P$ and gives $S_R$ the mass $1-\alpha^\star$, and $f$ is $0$
+on $S_R$ and $1$ on $S_P$, so
+\[
+\E_{P'}f=\int_{S_P}g\,dP=1-\int_{S_R}g\,dP\ge1-\beta(1-\alpha^\star)=\frac{\alpha^\star-\alpha}{1-\alpha}.
+\]
+In the same way $\E_{Q'}f\le-(\alpha^\star-\alpha)/(1-\alpha)$ for every $Q'\in R_\alpha(Q)$. The function $f$ is not $0$,
+since it equals $1$ on $S_P$, and by the reproducing property and the Cauchy--Schwarz inequality
+\[
+\MMD(P',Q')=\|\mu_{P'}-\mu_{Q'}\|_\Hh\ge\frac{\langle\mu_{P'}-\mu_{Q'},f\rangle_\Hh}{\|f\|_\Hh}
+=\frac{\E_{P'}f-\E_{Q'}f}{\|f\|_\Hh}\ge\frac{2(\alpha^\star-\alpha)}{(1-\alpha)\|f\|_\Hh}.
+\]
+The infimum over the two trimmings gives the first inequality of the example, and $1-\alpha\le1$ the second. At
+$\alpha=\alpha^\star-\epsilon$ it reads $D_{\alpha^\star-\epsilon}(P,Q)\ge2\epsilon/\|f\|_\Hh$, which is
+Assumption~\ref{ass:margin} with $c_0=2/\|f\|_\Hh$ and $\gamma=1$.
+\end{proof}
+
+For finite sets and a strictly positive definite kernel the Gram matrix of their points is invertible, so a combination
+$\sum_ic_ik(\cdot,z_i)$ takes any prescribed values on them. For a Mat\'ern kernel on $\R^d$ the RKHS is a Sobolev space
+with an equivalent norm \citep[Chapter~10]{wendland2005scattered}, which contains a smooth compactly supported function equal to
+$1$ on the $\varepsilon/3$-neighborhood of $S_P$, to $-1$ on that of $S_Q$ and to $0$ outside their
+$2\varepsilon/3$-neighborhoods, when $S_P$ and $S_Q$ are bounded and $\varepsilon>0$ is the smallest distance between
+two of the three sets.
+
+\subsection{A general margin and the convexity of the path}
+\label{sec:generalmargin}
+
+Assumption~\ref{ass:margin} asks for a polynomial lower bound on the population path below $\alpha^\star$. A lower
+bound with no speed always exists, and Proposition~\ref{prop:newrates}(i), applied to $(1-\alpha^\star)\omega$, gives
+the split-sample bound a rate for it.
+
+\begin{lemma}[A margin always exists]
+\label{lem:marginexists}
+Let Assumption~\ref{ass:regularity} hold, let $0<\alpha^\star<1$, and for $\epsilon\in[0,\alpha^\star]$ put
+\[
+m(\epsilon)\coloneqq\min_{\epsilon'\in[\epsilon,\alpha^\star]}D_{\alpha^\star-\epsilon'}(P,Q),
+\qquad
+\omega(\epsilon)\coloneqq\frac{\epsilon}{\alpha^\star}\,m(\epsilon).
+\]
+Then $\omega$ is continuous and strictly increasing on $[0,\alpha^\star]$, $\omega(0)=0$, and
+$D_{\alpha^\star-\epsilon}(P,Q)\ge\omega(\epsilon)$ for every $\epsilon\in[0,\alpha^\star]$.
+\end{lemma}
+
+\begin{proof}
+The map $\epsilon'\mapsto D_{\alpha^\star-\epsilon'}$ is continuous on $[0,\alpha^\star]$ by Lemma~\ref{lem:continuity},
+zero at $\epsilon'=0$ and positive elsewhere by \eqref{eq:zeroeq}. Its running minimum $m$ is therefore attained,
+continuous and nondecreasing, with $m(0)=0$ and $m(\epsilon)>0$ for $\epsilon>0$. Hence $\omega$ is continuous with
+$\omega(0)=0$, and for $0<\epsilon_1<\epsilon_2$, $\omega(\epsilon_2)\ge(\epsilon_2/\alpha^\star)m(\epsilon_1)>\omega(\epsilon_1)>0$.
+Finally $\omega(\epsilon)\le m(\epsilon)\le D_{\alpha^\star-\epsilon}$, as $\epsilon\le\alpha^\star$.
+\end{proof}
+
+The next lemma, stated in words in Section~\ref{sec:rate}, shows which margins are possible at all, through the
+convexity of the rescaled path. For $\alpha\in[0,1)$ let
+\[
+\bar{\mathcal C}_\alpha(P)\coloneqq(1-\alpha)\,\mathcal C_\alpha(P)=\big\{\E_P[h(X)\phi(X)]:\ 0\le h\le1,\ \E_P[h]=1-\alpha\big\},
+\]
+the embeddings of the parts $P'\le P$ of mass $1-\alpha$, that is, of the $\alpha$-trimmings before they are
+renormalized, with $h=(1-\alpha)g$ for $g$ as in \eqref{eq:region}, and likewise $\bar{\mathcal C}_\alpha(Q)$. By
+Proposition~\ref{prop:georep}, which holds for any probability measures and so for $P_n$ and $Q_m$, the rescaled path
+is $\bar D_\alpha=(1-\alpha)D_\alpha(P,Q)=\dist(\bar{\mathcal C}_\alpha(P),\bar{\mathcal C}_\alpha(Q))$.
+
+\begin{lemma}[Convexity of the path]
+\label{lem:pathconvex}
+Let Assumption~\ref{ass:regularity} hold, let $P,Q$ be any probability measures on $\mathcal X$, empirical measures
+included, and put $\bar D_{\alpha}\coloneqq(1-\alpha)D_\alpha(P,Q)$ for $\alpha\in[0,1)$. Then $\bar D$ is convex and
+nonincreasing. If moreover $0<\alpha^\star<1$, then:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item $\bar D$ is strictly decreasing on $[0,\alpha^\star]$, and for all $0\le\alpha_1<\alpha_2<\alpha^\star$,
+\[
+\alpha^\star\ \ge\ \alpha_2+\frac{(\alpha_2-\alpha_1)\,\bar D_{\alpha_2}}{\bar D_{\alpha_1}-\bar D_{\alpha_2}} ;
+\]
+\item $\epsilon\mapsto \bar D_{\alpha^\star-\epsilon}/\epsilon$ is nondecreasing on $(0,\alpha^\star]$, so it has a limit
+$\mathfrak s\ge0$ as $\epsilon\downarrow0$, and $D_{\alpha^\star-\epsilon}(P,Q)\le D_0(P,Q)\,\epsilon/\{\alpha^\star(1-\alpha^\star)\}$
+for all $\epsilon\in[0,\alpha^\star]$. Assumption~\ref{ass:margin} holds with $\gamma=1$ if and only if $\mathfrak s>0$, and then
+it holds with $c_0=\mathfrak s$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem:pathconvex}]
+A mixture of two trimmings at two levels is a trimming at the level in between, and the norm is convex; everything
+else follows from convexity and the location of the zeros of the path.
+
+We show first that $\bar D$ is convex. Let $\alpha_0,\alpha_1\in[0,1)$, $\lambda\in[0,1]$ and $\alpha_\lambda=(1-\lambda)\alpha_0+\lambda\alpha_1$.
+If $h_0$ and $h_1$ are admissible weights at the levels $\alpha_0$ and $\alpha_1$, then $(1-\lambda)h_0+\lambda h_1$
+lies between $0$ and $1$ and has mean $1-\alpha_\lambda$ under $P$, so
+$(1-\lambda)\bar{\mathcal C}_{\alpha_0}(P)+\lambda \bar{\mathcal C}_{\alpha_1}(P)\subset \bar{\mathcal C}_{\alpha_\lambda}(P)$, and likewise for $Q$. For
+$a_i\in \bar{\mathcal C}_{\alpha_i}(P)$ and $b_i\in \bar{\mathcal C}_{\alpha_i}(Q)$, the points $(1-\lambda)a_0+\lambda a_1$ and
+$(1-\lambda)b_0+\lambda b_1$ therefore lie in the sets at level $\alpha_\lambda$, and the triangle inequality gives
+\[
+\bar D_{\alpha_\lambda}\le\big\|(1-\lambda)(a_0-b_0)+\lambda(a_1-b_1)\big\|_\Hh\le(1-\lambda)\|a_0-b_0\|_\Hh+\lambda\|a_1-b_1\|_\Hh .
+\]
+Taking the infimum over $a_0,a_1,b_0,b_1$ gives $\bar D_{\alpha_\lambda}\le(1-\lambda)\bar D_{\alpha_0}+\lambda \bar D_{\alpha_1}$. The path
+$D_\alpha$ is nonnegative and nonincreasing, and so is $1-\alpha$, so their product $\bar D$ is nonincreasing.
+
+From here on $0<\alpha^\star<1$, so that $\bar D_{\alpha^\star}=0$ and $\bar D>0$ on $[0,\alpha^\star)$ by
+\eqref{eq:zeroeq}. The path is strictly
+decreasing on $[0,\alpha^\star]$: for $\alpha_1<\alpha_2\le\alpha^\star$ write
+$\alpha_2=(1-\lambda)\alpha_1+\lambda\alpha^\star$ with $\lambda=(\alpha_2-\alpha_1)/(\alpha^\star-\alpha_1)\in(0,1]$;
+convexity gives $\bar D_{\alpha_2}\le(1-\lambda)\bar D_{\alpha_1}<\bar D_{\alpha_1}$, since $\bar D_{\alpha_1}>0$.
+
+For the secant bound of (i), let $\alpha_1<\alpha_2<\alpha^\star$, so that $\bar D_{\alpha_1}>\bar D_{\alpha_2}>0$, and let
+$\alpha\in(\alpha_2,1)$. Since $\alpha_2$ lies between $\alpha_1$ and $\alpha$, convexity gives
+$(\alpha-\alpha_1)\bar D_{\alpha_2}\le(\alpha-\alpha_2)\bar D_{\alpha_1}+(\alpha_2-\alpha_1)\bar D_{\alpha}$, that is,
+\[
+\bar D_{\alpha}\ \ge\ \bar D_{\alpha_2}-(\alpha-\alpha_2)\,\frac{\bar D_{\alpha_1}-\bar D_{\alpha_2}}{\alpha_2-\alpha_1} .
+\]
+The right side, the secant through the two points, is positive for $\alpha<\alpha_s=\alpha_2+(\alpha_2-\alpha_1)\bar D_{\alpha_2}
+/\{\bar D_{\alpha_1}-\bar D_{\alpha_2}\}$. So $\bar D>0$ on $[\alpha_2,\alpha_s)\cap[0,1)$, and since $\bar D_{\alpha^\star}=0$ with
+$\alpha^\star<1$, this forces $\alpha^\star\ge\alpha_s$.
+
+The slope at $\alpha^\star$ in (ii) comes from the same mixture argument with one endpoint at $\alpha^\star$. Put $r(\epsilon)=\bar D_{\alpha^\star-\epsilon}/\epsilon$ for
+$\epsilon\in(0,\alpha^\star]$. For $0<\epsilon_1<\epsilon_2\le\alpha^\star$ the level $\alpha^\star-\epsilon_1$ is the
+mixture of $\alpha^\star-\epsilon_2$ and $\alpha^\star$ with weights $\epsilon_1/\epsilon_2$ and $1-\epsilon_1/\epsilon_2$,
+so convexity and $\bar D_{\alpha^\star}=0$ give $\bar D_{\alpha^\star-\epsilon_1}\le(\epsilon_1/\epsilon_2)\,\bar D_{\alpha^\star-\epsilon_2}$,
+that is, $r(\epsilon_1)\le r(\epsilon_2)$. Hence $r$ is nondecreasing and nonnegative, its limit $\mathfrak s\ge0$ at $0$ exists, and
+$\mathfrak s\le r(\epsilon)\le r(\alpha^\star)=D_0(P,Q)/\alpha^\star$ for every $\epsilon$. The upper bound gives
+$D_{\alpha^\star-\epsilon}=\bar D_{\alpha^\star-\epsilon}/(1-\alpha^\star+\epsilon)\le D_0\,\epsilon/\{\alpha^\star(1-\alpha^\star)\}$
+for $\epsilon\in(0,\alpha^\star]$, and at $\epsilon=0$ both sides vanish.
+
+For the equivalence in (ii), if $\mathfrak s>0$, then $\bar D_{\alpha^\star-\epsilon}\ge \mathfrak s\epsilon$, and since $1-\alpha^\star+\epsilon\le1$,
+$D_{\alpha^\star-\epsilon}\ge \bar D_{\alpha^\star-\epsilon}\ge \mathfrak s\epsilon$ for $\epsilon\in(0,\alpha^\star]$; at $\epsilon=0$ the
+bound is $0\ge0$. So Assumption~\ref{ass:margin} holds with $\gamma=1$ and $c_0=\mathfrak s$. Conversely, if it holds with
+$\gamma=1$ and some $c_0>0$, then $r(\epsilon)=(1-\alpha^\star+\epsilon)D_{\alpha^\star-\epsilon}/\epsilon\ge(1-\alpha^\star)c_0$
+for every $\epsilon$, so $\mathfrak s\ge(1-\alpha^\star)c_0>0$. The bound $c_0\epsilon^\gamma\le D_0\,\epsilon/\{\alpha^\star(1-\alpha^\star)\}$
+for all small $\epsilon>0$ rules out every exponent $\gamma<1$, which is why Assumption~\ref{ass:margin} takes
+$\gamma\ge1$.
+\end{proof}
+
+The convexity and the monotonicity of $\bar D$, and $\bar D_{\alpha^\star}=0$, need only (A1) and (A2), since a
+common trimming has one embedding; so does part (ii), which uses nothing else, while part (i) also needs
+$\bar D>0$ below $\alpha^\star$, that is (A3).
+
+\subsection{The rate of the lower bound}
+\label{sec:lorate}
+
+\begin{theorem}[Rate of the lower bound under the margin condition]
+\label{thm:lorate}
+Let Assumptions~\ref{ass:regularity} and~\ref{ass:margin} hold, let $\alpha^\star<1$, and compute
+$\widehat\alpha$ as in Proposition~\ref{prop:loconsistency}: on a grid $\alpha_1<\dots<\alpha_J$ fixed in
+advance, with a witness fitted at each level by a minimizer of \eqref{eq:qp} on the batches before the one bet on, cut
+points satisfying \eqref{eq:cutrank}, and the fractions \eqref{eq:fractions} with $\lambda_{\max}=\tfrac12$,
+$v_0^2\le4$ and the running variance floored at a constant $v^2_{\min}\in(0,4]$. Let $B$ be the number of
+batches bet on, $N$ the number of pairs and $r_1=1/n_{<1}+1/m_{<1}$, where $n_{<1},m_{<1}$ are the sizes of batch $0$,
+and suppose $r_1\le1$. Put $\beta_\star=(1-\alpha^\star)^{-1}$, $L_\delta=\log(1/\delta)$ and, for $\eta\in(0,1)$ and
+$J'\ge1$,
+\begin{gather}
+T_{\mathrm{fit}}(\eta)=8\Big[2(1+\sqrt2)\kappa+\Delta_\phi\sqrt{\tfrac12\log(4B/\eta)}\,\Big]\sqrt{r_1},\notag\\
+T_{\mathrm{bet}}(\eta,J')=2\Delta_\phi\sqrt{\frac2N}\,\Big[\Big(1+\frac{16}{v^2_{\min}}\Big)\sqrt{L_\delta}
++\frac2{v_{\min}}\sqrt{\log(2J'/\eta)}\,\Big].
+\label{eq:loconst}
+\end{gather}
+For $\epsilon\in(0,\alpha^\star]$ let $a_\epsilon=\max(\{0\}\cup\{\alpha_j:\alpha_j\le\alpha^\star-\epsilon\})$, let
+$\Delta_{\min}$ be the smallest gap between consecutive grid levels ($\Delta_{\min}=\infty$ if $J=1$), and let
+$J_\epsilon=\min\{J,2(1+\epsilon/\Delta_{\min})\}$.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item If $c_0\epsilon^\gamma\ge\beta_\star\max\{T_{\mathrm{fit}}(\eta),T_{\mathrm{bet}}(\eta,J_\epsilon)\}$, then
+$\Pp(\widehat\alpha<a_\epsilon)\le\eta$.
+\item Let $t_{n,m}=\beta_\star\max\{T_{\mathrm{fit}}(\eta),T_{\mathrm{bet}}(\eta,J)\}$ and let
+$\Delta_{\mathcal G}=\sup_{a\in[0,\alpha^\star]}\big(a-\max\{g\in\{0,\alpha_1,\dots,\alpha_J\}:g\le a\}\big)$ be the mesh of the grid
+below $\alpha^\star$. Then, with probability at least $1-\delta-\eta$,
+\[
+\alpha^\star-\Delta_{\mathcal G}-\Big(\frac{t_{n,m}}{c_0}\Big)^{1/\gamma}\ \le\ \widehat\alpha\ \le\ \alpha^\star .
+\]
+\item With the batches of Section~\ref{sec:betting}, their boundaries rounded to the nearest integers, and
+$n\wedge m\ge10$, one has $r_1\le\min\{1,12/(n\wedge m)\}$ and $N\ge(n\wedge m)/2$, so that, with an absolute
+constant in the $O$,
+\[
+\Big(\frac{t_{n,m}}{c_0}\Big)^{1/\gamma}
+=O\bigg(\bigg(\frac{\kappa}{c_0(1-\alpha^\star)v^2_{\min}}
+\sqrt{\frac{1+\log(1/\delta)+\log(J/\eta)}{n\wedge m}}\bigg)^{1/\gamma}\bigg).
+\]
+\end{enumerate}
+\end{theorem}
+
+The error is of order $(n\wedge m)^{-1/(2\gamma)}$, plus the mesh, with the factor $1/v^2_{\min}$ of the betting
+constants and a factor $\log J$, which part (i) removes when the grid is not finer than the rate: if $\Delta_{\min}\ge\epsilon'_{n,m}=(\beta_\star\max\{T_{\mathrm{fit}}(\eta),T_{\mathrm{bet}}(\eta,4)\}/c_0)^{1/\gamma}$,
+then $J_{\epsilon'_{n,m}}\le4$, and with probability at least $1-\delta-\eta$,
+$\alpha^\star-\Delta_{\mathcal G}-\epsilon'_{n,m}\le\widehat\alpha\le\alpha^\star$, with no $\log J$. The proof needs no
+density of the witness at the cut points, unlike Theorem~\ref{cor:trimrate}, which uses \eqref{eq:qdens}, and it does
+not use (A3), whose role the margin takes over.
+
+\begin{proof}[Proof of Theorem~\ref{thm:lorate}]
+We run the lower side of the proof of Proposition~\ref{prop:loconsistency} at the level $\alpha^\star-\epsilon$, with the
+margin in place of a fixed positive distance, and keep the constants. One event, which does not depend on the level,
+makes every fitted ramp good, and only the bets need a union over the levels.
+
+Fix $\epsilon$ as in (i), and put $D_*=c_0\epsilon^\gamma$, $\tau_*=D_*/(8\beta_\star)$ and
+$\varrho_*=D_*/(2\beta_\star\Delta_\phi)$: $D_*$ is the margin at distance $\epsilon$ from $\alpha^\star$, $\tau_*$ the
+fluctuation allowed to each fitting batch, and $\varrho_*$ the excess that the bets will see. The two thresholds of
+(i) are these choices solved for $D_*$: $T_{\mathrm{fit}}$ makes the fitting suprema smaller than $\tau_*$, and
+$T_{\mathrm{bet}}$ makes an excess $\varrho_*$ win the bets, each with probability $\eta/2$ to spare. Every grid level $\alpha_j\le\alpha^\star-\epsilon$ has
+$\beta_j=(1-\alpha_j)^{-1}\le\beta_\star$, and with $x_j=(\alpha^\star-\alpha_j)/\epsilon\ge1$,
+Assumption~\ref{ass:margin} at $\epsilon x_j\in[\epsilon,\alpha^\star]$ gives
+$D_{\alpha_j}\ge c_0\epsilon^\gamma x_j^\gamma=D_*x_j^\gamma\ge D_*$. Moreover $D_*\le D_{\alpha^\star-\epsilon}\le
+D_0=\MMD(P,Q)=\|\E[\phi(X)-\phi(Y)]\|_\Hh\le\Delta_\phi$, as the path is nonincreasing, so $\Delta_\phi>0$. By
+\eqref{eq:downclosed}, if $H_{0,\alpha_j}$ is rejected at every grid level $\alpha_j\le\alpha^\star-\epsilon$, then
+$\widehat\alpha\ge a_\epsilon$, which also holds trivially when no grid level is that small. Hence
+\[
+\{\widehat\alpha<a_\epsilon\}\subseteq\bigcup_{j:\,\alpha_j\le\alpha^\star-\epsilon}
+\{H_{0,\alpha_j}\text{ is not rejected}\}.
+\]
+
+The fits are controlled by the suprema $\Gamma_b,\Gamma_b^-$ of the proof of Proposition~\ref{prop:loconsistency},
+those of the proof of Theorem~\ref{thm:twosided} computed on batches $0,\dots,b-1$, which do not depend on $\alpha$. Let
+$\mathcal E_{\mathrm{fit}}=\bigcap_{b=1}^B\{\Gamma_b\le\tau_*,\ \Gamma_b^-\le\tau_*\}$. We show that on
+$\mathcal E_{\mathrm{fit}}$ every batch has a ramp at every level $\alpha_j\le\alpha^\star-\epsilon$, with a large
+excess. Fix such a level $\alpha=\alpha_j$ and a batch $b$, and write $\beta=\beta_j$. The hypothesis of (i) gives
+$D_*\ge\beta_\star T_{\mathrm{fit}}(\eta)\ge16(1+\sqrt2)\beta_\star\kappa\sqrt{r_1}$, and since $\Delta_\phi\le2\kappa$
+and $r_b\le r_1\le1$,
+\[
+\beta\Delta_\phi r_b\le2\beta_\star\kappa\sqrt{r_1}\le\frac{D_*}8,
+\qquad
+\beta^2\kappa^2r_b\le\beta_\star^2\kappa^2r_1\le\frac{D_*^2}{256(1+\sqrt2)^2}\le\frac{7D_*^2}{64};
+\]
+on $\mathcal E_{\mathrm{fit}}$ moreover $\beta(\Gamma_b+\Gamma_b^-)\le2\beta_\star\tau_*=D_*/4$ and
+$D_\alpha-\beta\Gamma_b^-\ge D_*-D_*/8=7D_*/8>0$. The last inequality is the hypothesis
+$\beta\Gamma_b^-<D_\alpha$ under which the proof of Proposition~\ref{prop:loconsistency} establishes
+\eqref{eq:fittedramp}, with no condition on the law of the witness near the cut points:
+\[
+\Delta_\phi\ge\widehat t_b-\widehat u_b\ge\theta(\widehat f;\widehat t_b,\widehat u_b)\ge\Theta_b
+=D_\alpha-\beta(\Gamma_b+\Gamma_b^-)-\beta\Delta_\phi r_b-\frac{\beta^2\kappa^2r_b}{D_\alpha-\beta\Gamma_b^-},
+\]
+and the four bounds above give $\Theta_b\ge D_\alpha-\frac{D_*}4-\frac{D_*}8-\frac{7D_*^2/64}{7D_*/8}=D_\alpha-\frac{D_*}2
+\ge\frac{D_\alpha}2>0$. So $\widehat t_b>\widehat u_b$, batch $b$ has a ramp $\rp_b$, and Lemma~\ref{lem:ramp}(ii),
+applied under $P$ and $Q$ given batches $0,\dots,b-1$ to the direction $\widehat f$ and the cut points $\widehat
+t_b,\widehat u_b$, gives $\beta(\widehat t_b-\widehat u_b)(\E_P\rp_b-\E_Q\rp_b-\alpha)\ge\theta(\widehat f;\widehat
+t_b,\widehat u_b)\ge\Theta_b$, hence
+\begin{equation}
+\E_P\rp_b-\E_Q\rp_b-\alpha_j\ \ge\ \frac{\Theta_b}{\beta\Delta_\phi}\ \ge\ \frac{D_{\alpha_j}}{2\beta_\star\Delta_\phi}
+\ \eqqcolon\ \varrho_j\ \ge\ \varrho_*x_j^\gamma .
+\label{eq:excessj}
+\end{equation}
+The fitting event is likely. By Lemma~\ref{lem:hinge} with $\varphi^1_x=\varphi^2_y=(\cdot)_+$, $r=1$ and
+$\rho_1=\rho_2=\kappa$, as in the proof of Theorem~\ref{thm:twosided}, $\E\Gamma_b$ and $\E\Gamma_b^-$ are at most
+$2\kappa\sqrt{r_b}+2\kappa(e_{n_{<b}}+e_{m_{<b}})\le2(1+\sqrt2)\kappa\sqrt{r_b}\le\mu_1=2(1+\sqrt2)\kappa\sqrt{r_1}$, by
+$e_k\le k^{-1/2}$ and $n^{-1/2}+m^{-1/2}\le\{2(1/n+1/m)\}^{1/2}$, and, the bounded differences being $\Delta_\phi$, each
+exceeds its mean by more than $y$ with probability at most $e^{-2y^2/(\Delta_\phi^2r_b)}\le e^{-2y^2/(\Delta_\phi^2r_1)}$.
+Divided by $8\beta_\star$, the hypothesis $D_*\ge\beta_\star T_{\mathrm{fit}}(\eta)$ reads
+$\tau_*-\mu_1\ge\Delta_\phi\{r_1\log(4B/\eta)/2\}^{1/2}$, so each of the $2B$ suprema exceeds $\tau_*$ with probability at
+most $\eta/(4B)$, and $\Pp(\mathcal E_{\mathrm{fit}}^c)\le\eta/2$.
+
+We turn to the bets, where only a union over the levels is needed. Fix a grid level $\alpha_j\le\alpha^\star-\epsilon$. On $\mathcal E_{\mathrm{fit}}$ every batch has a
+ramp, and by \eqref{eq:excessj} every pair has conditional mean $\Delta_k\ge\alpha_j+\varrho_j$ in the notation of the
+proof of Theorem~\ref{thm:betting}. The sample is large enough for \eqref{eq:betbounds}: as $v^2_{\min}\le4$,
+$\Delta_\phi\ge D_*\ge\beta_\star T_{\mathrm{bet}}(\eta,J_\epsilon)\ge10\Delta_\phi(2L_\delta/N)^{1/2}$, so $N\ge200L_\delta\ge
+2L_\delta/\lambda_{\max}^2$. The first bound of \eqref{eq:betbounds}, with $\mathcal E=\mathcal E_{\mathrm{fit}}$ and
+$\varrho=\varrho_j$, gives
+\[
+\Pp\big(\mathcal E_{\mathrm{fit}}\cap\{H_{0,\alpha_j}\text{ is not rejected}\}\big)\le\varepsilon_N(\varrho_j)
+=\exp\Big\{-\frac{v^2_{\min}}{4L_\delta}\big(\varrho_jS-C\big)_+^2\Big\},
+\]
+with $S=(NL_\delta/2)^{1/2}$ and $C=L_\delta(1+16/v^2_{\min})$. The hypothesis $D_*\ge\beta_\star T_{\mathrm{bet}}(\eta,J_\epsilon)$, divided by $2\beta_\star\Delta_\phi$ and multiplied
+by $S$, reads $\varrho_*S\ge C+2v_{\min}^{-1}\{L_\delta\log(2J_\epsilon/\eta)\}^{1/2}$, so
+$a=\varrho_*S-C\ge2v_{\min}^{-1}\{L_\delta\log(2J_\epsilon/\eta)\}^{1/2}>0$. Since $x_j\ge1$, $\gamma\ge1$ and
+$\varrho_*S\ge a$, \eqref{eq:excessj} gives $\varrho_jS-C\ge\varrho_*x_jS-C=a+\varrho_*S(x_j-1)\ge ax_j$, hence
+$\varepsilon_N(\varrho_j)\le e^{-Ax_j^2}$ with $A=v^2_{\min}a^2/(4L_\delta)\ge\log(2J_\epsilon/\eta)>\log2$.
+
+It remains to add over the levels, and the polynomial growth of the excess away from $\alpha^\star$ keeps the sum
+within a factor $J_\epsilon$ of $e^{-A}$. If $J_\epsilon=J$, the at most $J$ terms $e^{-Ax_j^2}\le e^{-A}$ add up to at most
+$Je^{-A}\le\eta/2$. Otherwise $J_\epsilon=2(1+\epsilon/\Delta_{\min})$; the $x_j$ are at least $\Delta_{\min}/\epsilon$ apart, so at most
+$1+\epsilon/\Delta_{\min}$ of them lie in each interval $[1+k,2+k)$, $k=0,1,\dots$, and as $(1+k)^2\ge1+3k$ and
+$e^{-3A}\le\tfrac12$,
+\[
+\sum_{j:\,\alpha_j\le\alpha^\star-\epsilon}e^{-Ax_j^2}\le\Big(1+\frac\epsilon{\Delta_{\min}}\Big)\sum_{k\ge0}e^{-A(1+3k)}
+\le2\Big(1+\frac\epsilon{\Delta_{\min}}\Big)e^{-A}=J_\epsilon e^{-A}\le\frac\eta2 .
+\]
+With the inclusion above, $\Pp(\widehat\alpha<a_\epsilon)\le\Pp(\mathcal E_{\mathrm{fit}}^c)
++\sum_j\Pp(\mathcal E_{\mathrm{fit}}\cap\{H_{0,\alpha_j}\text{ is not rejected}\})\le\eta$, which is (i).
+
+For (ii), put $\epsilon_{n,m}=(t_{n,m}/c_0)^{1/\gamma}$. If $\epsilon_{n,m}>\alpha^\star$ the lower inequality holds
+because $\widehat\alpha\ge0$. Otherwise $\epsilon=\epsilon_{n,m}$ satisfies the hypothesis of (i), because
+$J_\epsilon\le J$ and $T_{\mathrm{bet}}$ increases in $J'$, so with probability at least $1-\eta$,
+$\widehat\alpha\ge a_{\epsilon_{n,m}}\ge\alpha^\star-\epsilon_{n,m}-\Delta_{\mathcal G}$, the last step by the definition of
+$\Delta_{\mathcal G}$. Corollary~\ref{cor:lower} gives $\widehat\alpha\le\alpha^\star$ with probability at least $1-\delta$,
+and a union bound gives (ii).
+
+For (iii), boundaries at the nearest integers to $n/4$ and $n/2$ give batch $0$ at least $(n-2)/4$ observations $X$,
+batch $1$ at least $n/4-1$ and batch $2$ at least $n/2-\tfrac12$, and likewise for $Y$. Hence $r_1\le8/(n\wedge m-2)$,
+which is at most $1$ for $n\wedge m\ge10$ and at most $12/(n\wedge m)$ for $n\wedge m\ge6$, and
+$N\ge\tfrac34(n\wedge m)-\tfrac32\ge(n\wedge m)/2$ for $n\wedge m\ge6$. Inserting these bounds, $B=2$,
+$\Delta_\phi\le2\kappa$, and $1+16/v^2_{\min}\le20/v^2_{\min}$ and $2/v_{\min}\le4/v^2_{\min}$, which
+hold as $v^2_{\min}\le4$, into \eqref{eq:loconst} bounds $t_{n,m}$ by an absolute constant times
+$\beta_\star\kappa v_{\min}^{-2}\{(1+L_\delta+\log(J/\eta))/(n\wedge m)\}^{1/2}$.
+\end{proof}
+
+\subsection{Touching contaminations}
+\label{sec:newproofs}
+
+This subsection and the six that follow prove Propositions~\ref{prop:newslope}--\ref{prop:newgauss} of the main
+text, in a more general form, state and prove the rates under a general margin (Proposition~\ref{prop:newrates}), and
+state and prove the converse Proposition~\ref{prop:newconverse}. Throughout, $P\wedge Q$ has mass $1-\alpha^\star$,
+$P_0=(P-P\wedge Q)/\alpha^\star$ and $Q_0=(Q-P\wedge Q)/\alpha^\star$, so that $P=P\wedge Q+\alpha^\star P_0$,
+$Q=P\wedge Q+\alpha^\star Q_0$, $P_0$ is concentrated on $A=\{p>q\}$, $Q_0$ on its complement, and
+$|P-Q|=\alpha^\star(P_0+Q_0)$. The rescaled path $\bar D$ and the sets $\bar{\mathcal C}_\alpha$ are those of
+Section~\ref{sec:generalmargin}, and for $\alpha\le\alpha^\star$, $\bar D_{\alpha}\le D_\alpha(P,Q)\le
+\bar D_{\alpha}/(1-\alpha^\star)$.
+
+On $\R^d$ we use translation-invariant kernels $k(x,y)=k_0(x-y)$ with $k_0$ continuous, integrable and positive
+definite, and the Fourier transform $\widehat g(\xi)=\int g(x)e^{-i\xi\cdot x}\,dx$. Then $\widehat{k_0}\ge0$ is
+integrable, $k_0(z)=(2\pi)^{-d}\int\widehat{k_0}(\xi)e^{i\xi\cdot z}\,d\xi$, and by
+\citet[Theorem~10.12]{wendland2005scattered} the RKHS consists of the continuous $f\in L^2(\R^d)$ with
+$\int|\widehat f|^2/\widehat{k_0}<\infty$, with
+\begin{equation}
+\|f\|_\Hh^2=(2\pi)^{-d}\int\frac{|\widehat f(\xi)|^2}{\widehat{k_0}(\xi)}\,d\xi .
+\label{eq:newnative}
+\end{equation}
+For a finite signed measure $\nu$ with Fourier transform $\widehat\nu(\xi)=\int e^{-i\xi\cdot x}\,d\nu(x)$, Fubini's
+theorem and the inversion formula give
+\begin{equation}
+\Big\|\int\phi\,d\nu\Big\|_\Hh^2=\iint k_0(x-y)\,d\nu(x)\,d\nu(y)=(2\pi)^{-d}\int|\widehat\nu(\xi)|^2\,\widehat{k_0}(\xi)\,d\xi .
+\label{eq:newbochner}
+\end{equation}
+
+The first result needs no topology on $\mathcal X$. By (A1), (A2) and Pettis' theorem, $\phi$ is Borel measurable
+into the separable space $\Hh$, so its image laws $\phi_\#P_0$ and $\phi_\#Q_0$ are Borel probability measures on a
+separable metric space, whose supports are closed, nonempty and of full mass.
+
+\begin{proposition}[Slope bound]
+\label{prop:newslopegeneral}
+Let (A1) and (A2) hold and let $0<\alpha^\star<1$. Then
+$\lim_{\epsilon\downarrow0}\bar D_{\alpha^\star-\epsilon}/\epsilon\le\dist\big(\supp\phi_\#P_0,\supp\phi_\#Q_0\big)$.
+\end{proposition}
+
+\begin{proof}
+We trim at the level $\alpha^\star-\epsilon$ by adding to the common part a little of each contamination near two
+chosen feature vectors. Fix $z\in\supp\phi_\#P_0$, $z'\in\supp\phi_\#Q_0$ and $\varrho>0$, and let
+$U=\phi^{-1}(B(z,\varrho))$ and $V=\phi^{-1}(B(z',\varrho))$, so that $m_U=P_0(U)>0$ and $m_V=Q_0(V)>0$. Write
+$P_0^U=P_0(\cdot\cap U)/m_U$ and $Q_0^V=Q_0(\cdot\cap V)/m_V$. For $0<\epsilon\le\alpha^\star\min(m_U,m_V)$ the measure
+$P_\epsilon=P\wedge Q+\epsilon P_0^U$ satisfies $P_\epsilon\le P\wedge Q+\alpha^\star P_0=P$, because $\epsilon/m_U\le\alpha^\star$, and has
+mass $1-(\alpha^\star-\epsilon)$, so $\int\phi\,dP_\epsilon\in \bar{\mathcal C}_{\alpha^\star-\epsilon}(P)$. Likewise,
+$Q_\epsilon=P\wedge Q+\epsilon Q_0^V$ gives a point of $\bar{\mathcal C}_{\alpha^\star-\epsilon}(Q)$. The common part cancels, and
+\begin{align*}
+\bar D_{\alpha^\star-\epsilon}&\le\Big\|\int\phi\,dP_\epsilon-\int\phi\,dQ_\epsilon\Big\|_\Hh
+=\epsilon\,\Big\|\iint\{\phi(x)-\phi(y)\}\,dP_0^U(x)\,dQ_0^V(y)\Big\|_\Hh\\
+&\le\epsilon\,(\|z-z'\|_\Hh+2\varrho),
+\end{align*}
+since $\|\phi(x)-z\|_\Hh<\varrho$ on $U$ and $\|\phi(y)-z'\|_\Hh<\varrho$ on $V$. Dividing by $\epsilon$ and letting
+$\epsilon\downarrow0$, and then $\varrho\downarrow0$, bounds the limit, which exists by Lemma~\ref{lem:pathconvex}(ii) (that part
+of its proof uses only the convexity of $\bar D$ and $\bar D_{\alpha^\star}=0$, which hold under (A1) and (A2)), by $\|z-z'\|_\Hh$, and the infimum over $z$ and $z'$ gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newslope}]
+The quantity bounded in the proposition is $\lim \bar D_{\alpha^\star-\epsilon}/\epsilon$. If $\phi$ is continuous and
+$x\in\supp P_0$, then for every $\varrho>0$ the set $\phi^{-1}(B(\phi(x),\varrho))$ is an open neighborhood of $x$ and has
+positive $P_0$-mass, so $\phi(x)\in\supp\phi_\#P_0$. Likewise $\phi(y)\in\supp\phi_\#Q_0$ for $y\in\supp Q_0$, and
+Proposition~\ref{prop:newslopegeneral} gives the bound. If the supports meet, take $y=x$: the limit is $0$, and by
+Lemma~\ref{lem:pathconvex}(ii) Assumption~\ref{ass:margin} does not hold with $\gamma=1$.
+
+For the last claim let $\mathcal X$ be an open connected subset of $\R^d$ and let $p,q$ be continuous. The density
+$(p-q)_+/\alpha^\star$ of $P_0$ is continuous, so $\supp P_0$ is the closure $F_P$ in $\mathcal X$ of the open set
+$\{p>q\}$: a neighborhood of a point of $F_P$ meets $\{p>q\}$ in a nonempty open set, which has positive Lebesgue
+measure and on which the density is positive, while a point outside $F_P$ has a neighborhood of $P_0$-mass $0$.
+Likewise $\supp Q_0$ is the closure $F_Q$ of $\{q>p\}$. Both sets are nonempty, as $\int(p-q)_+=\int(q-p)_+=\alpha^\star>0$.
+If $F_P\cap F_Q$ were empty, the open set $\mathcal X\setminus(F_P\cup F_Q)$ would lie in $\{p=q\}$, because
+$\{p\neq q\}\subseteq F_P\cup F_Q$, and so would be empty. Then $\mathcal X$ would be the union of the disjoint nonempty
+sets $F_P$ and $F_Q$, closed in $\mathcal X$, against its connectedness. For two distinct finite Gaussian mixtures,
+$p-q$ is real-analytic on $\R^d$ and not identically zero, so its zero set has empty interior, and $\alpha^\star<1$
+because both densities are positive.
+\end{proof}
+
+When $\operatorname{supp}P_0$ is compact, the bound is an equivalence for continuous kernels whose RKHS contains the
+smooth functions with compact support.
+
+\begin{proposition}[Disjoint contaminations give a linear margin]
+\label{prop:newgammaone}
+Let $\mathcal X=\R^d$ and $k(x,y)=k_0(x-y)$ with $\widehat{k_0}(\xi)\ge c(1+|\xi|^2)^{-s}$ for some $s>d/2$ and $c>0$,
+as for the Mat\'ern kernels, let $0<\alpha^\star<1$ and let $\supp P_0$ be compact. If $\supp P_0\cap\supp Q_0=\varnothing$,
+there is $f\in\Hh$ with $0\le f\le1$, $f=1$ on $\supp P_0$ and $f=0$ on $\supp Q_0$, and every such $f$ gives
+$D_{\alpha^\star-\epsilon}(P,Q)\ge \bar D_{\alpha^\star-\epsilon}\ge\epsilon/\|f\|_\Hh$ for $\epsilon\in[0,\alpha^\star]$, that is,
+Assumption~\ref{ass:margin} with $\gamma=1$ and $c_0=1/\|f\|_\Hh$. Together with Proposition~\ref{prop:newslope}, the
+rescaled path then has a positive slope at $\alpha^\star$ if and only if $\supp P_0\cap\supp Q_0=\varnothing$.
+\end{proposition}
+
+\begin{proof}
+A compact set and a disjoint closed set are at a positive distance $d_0$. Let $U$ be the open
+$d_0/2$-neighborhood of $\supp P_0$, which is bounded, and $f=\mathbf 1_U*b_{d_0/3}$ with $b\in C_c^\infty$ a
+probability density supported in the closed unit ball and $b_w=w^{-d}b(\cdot/w)$. Then $f$ is smooth with compact
+support and $0\le f\le1$. Moreover $f=1$ on $\supp P_0$, since the closed ball of radius $d_0/3$ about such a point lies in $U$,
+and $f=0$ on $\supp Q_0$, since the closed ball of radius $d_0/3$ about such a point stays at distance at least
+$2d_0/3$ from $\supp P_0$ and so misses $U$. By \eqref{eq:newnative},
+$\|f\|_\Hh^2\le c^{-1}(2\pi)^{-d}\int|\widehat f|^2(1+|\xi|^2)^s<\infty$, so $f\in\Hh$. For any such $f$,
+$\E_Pf-\E_Qf=\alpha^\star(\E_{P_0}f-\E_{Q_0}f)=\alpha^\star$, so $\mathrm{err}(f)=0$, and Proposition~\ref{prop:newapproxgen}(ii)
+below gives the bound. The equivalence follows from Lemma~\ref{lem:pathconvex}(ii) and
+Proposition~\ref{prop:newslope}, as $\phi$ is continuous.
+\end{proof}
+
+This sharpens Example~\ref{ex:separated}, which also separates the core.
+
+\subsection{Margins from approximate witnesses}
+
+\begin{lemma}[Trimmed means of a bounded function]
+\label{lem:newtrimmean}
+Let $\alpha\in[0,1)$, let $P$ be a probability measure and $f$ a bounded measurable function. Every
+$P'\in R_\alpha(P)$ satisfies
+\[
+\frac{\E_Pf-\alpha\sup f}{1-\alpha}\ \le\ \E_{P'}f\ \le\ \frac{\E_Pf-\alpha\inf f}{1-\alpha} .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $P'=gP$ with $0\le g\le\beta$ and $\E_Pg=1$. Then $\E_{P'}f=\beta\E_Pf-\E_P[(\beta-g)f]$, where $\beta-g\ge0$ and
+$\E_P(\beta-g)=\beta-1=\alpha\beta$, so $\alpha\beta\inf f\le\E_P[(\beta-g)f]\le\alpha\beta\sup f$.
+\end{proof}
+
+These are the crude forms of Lemma~\ref{lem:cvar}: a trimming can at worst remove the mass $\alpha$ at the largest, or
+the smallest, value of $f$. We write $\operatorname{osc}(f)=\sup f-\inf f$, $\mathcal F=\{f\in\Hh:0\le f\le1\}$, and, for
+$\epsilon\in[0,\alpha^\star]$,
+\[
+\omega_\Hh(\epsilon)=\sup\Big\{\frac{(\epsilon-\mathrm{err}(f))_+}{\|f\|_\Hh}:\ f\in\mathcal F,\ f\neq0\Big\},
+\qquad
+\mathcal K(\lambda)=\inf_{f\in\mathcal F}\big\{\mathrm{err}(f)+\lambda\|f\|_\Hh\big\} ,
+\]
+with $\sup\varnothing=0$.
+
+\begin{proposition}[Approximation margin]
+\label{prop:newapproxgen}
+Let (A1) and (A2) hold.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item For every $f\in\Hh$, $f\neq0$, and $\alpha\in[0,1)$,
+$(1-\alpha)\|f\|_\Hh D_\alpha(P,Q)\ge\E_Pf-\E_Qf-\alpha\operatorname{osc}(f)$.
+\item Let $0<\alpha^\star<1$. For every $f\in\mathcal F$, $\E_Pf-\E_Qf=\alpha^\star-\mathrm{err}(f)$, and if $f\neq0$, then
+$\bar D_{\alpha^\star-\epsilon}\ge\{\epsilon-\mathrm{err}(f)\}/\|f\|_\Hh$ for every $\epsilon\in[0,\alpha^\star]$.
+\item $\omega_\Hh$ is nondecreasing, $D_{\alpha^\star-\epsilon}(P,Q)\ge \bar D_{\alpha^\star-\epsilon}\ge\omega_\Hh(\epsilon)\ge
+\epsilon/\{2\mathcal W(\epsilon/2)\}$, read as $0$ when $\mathcal W(\epsilon/2)=\infty$, and for $\lambda\ge0$ and
+$\epsilon\in(0,\alpha^\star]$, $\omega_\Hh(\epsilon)>\lambda$ if and only if $\mathcal K(\lambda)<\epsilon$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part (i) bounds each trimmed mean by Lemma~\ref{lem:newtrimmean}, and part (ii) evaluates the bound for
+$[0,1]$-valued $f$. For (i), $f$ is bounded, by $\kappa\|f\|_\Hh$. For $P'\in R_\alpha(P)$ and $Q'\in R_\alpha(Q)$,
+Lemma~\ref{lem:newtrimmean} gives $\E_{P'}f-\E_{Q'}f\ge\{\E_Pf-\E_Qf-\alpha\operatorname{osc}(f)\}/(1-\alpha)$, and by the
+reproducing property and the Cauchy--Schwarz inequality $\MMD(P',Q')\ge(\E_{P'}f-\E_{Q'}f)/\|f\|_\Hh$, and the infimum over
+$P'$ and $Q'$ gives (i).
+
+For (ii), $\int\mathbf 1_A\,d(P-Q)=\int(p-q)_+=\alpha^\star$, so $\E_Pf-\E_Qf=\alpha^\star-\int(\mathbf 1_A-f)(p-q)\,d(P+Q)$. On $A$
+both $1-f$ and $p-q$ are nonnegative, and off $A$ both $-f$ and $p-q$ are nonpositive, so the integrand is
+$|\mathbf 1_A-f|\,|p-q|$ and the integral is $\mathrm{err}(f)$. As $\operatorname{osc}(f)\le1$, part (i) at
+$\alpha=\alpha^\star-\epsilon$ gives $\|f\|_\Hh \bar D_{\alpha^\star-\epsilon}\ge\alpha^\star-\mathrm{err}(f)-(\alpha^\star-\epsilon)$.
+
+For (iii), each map $\epsilon\mapsto(\epsilon-\mathrm{err}(f))_+/\|f\|_\Hh$ is nondecreasing, and so is their supremum,
+which is at most $\bar D_{\alpha^\star-\epsilon}$ by (ii), and $\bar D_{\alpha}\le D_\alpha$. If $\mathcal W(\epsilon/2)<\infty$, every
+$f\in\mathcal F$ with $\mathrm{err}(f)\le\epsilon/2$ is nonzero, because $\mathrm{err}(0)=\alpha^\star>\epsilon/2$, and has
+$(\epsilon-\mathrm{err}(f))/\|f\|_\Hh\ge\epsilon/(2\|f\|_\Hh)$. The supremum over these $f$ is
+$\epsilon/\{2\mathcal W(\epsilon/2)\}$. If $\mathcal K(\lambda)<\epsilon$, some $f\in\mathcal F$ has
+$\mathrm{err}(f)+\lambda\|f\|_\Hh<\epsilon$, and it is nonzero because $\mathrm{err}(0)=\alpha^\star\ge\epsilon$, so
+$\omega_\Hh(\epsilon)\ge(\epsilon-\mathrm{err}(f))/\|f\|_\Hh>\lambda$. Conversely, $\omega_\Hh(\epsilon)>\lambda$ gives a
+nonzero $f\in\mathcal F$ with $\epsilon-\mathrm{err}(f)>\lambda\|f\|_\Hh$, that is, $\mathcal K(\lambda)<\epsilon$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newapprox}]
+This is Proposition~\ref{prop:newapproxgen}(ii) and (iii), with $\bar D_{\alpha^\star-\epsilon}=(1-\alpha^\star+\epsilon)D_{\alpha^\star-\epsilon}$.
+\end{proof}
+
+\subsection{Rates under a general margin}
+
+The rate of Theorem~\ref{thm:loratemain} extends to any margin, polynomial or not. For a nondecreasing $\omega$ we
+write $\omega^{\leftarrow}(t)=\sup\{\epsilon\in[0,\alpha^\star]:\omega(\epsilon)\le t\}$.
+
+\begin{proposition}[Rates under a general margin]
+\label{prop:newrates}
+Let Assumption~\ref{ass:regularity} hold, let $\alpha^\star<1$, compute $\widehat\alpha$ as in
+Theorem~\ref{thm:loratemain}, and let $\omega:[0,\alpha^\star]\to[0,\infty)$ be nondecreasing with
+$(1-\alpha^\star+\epsilon)\,D_{\alpha^\star-\epsilon}(P,Q)\ge\omega(\epsilon)$ for every $\epsilon\in[0,\alpha^\star]$.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item Parts (i) and (ii) of Theorem~\ref{thm:lorate} hold with $c_0\epsilon^\gamma$ replaced by
+$\omega(\epsilon)$ and $(t_{n,m}/c_0)^{1/\gamma}$ by $\omega^{\leftarrow}(t_{n,m})$.
+\item If moreover $\omega(\epsilon)\ge\exp(-c'/\epsilon)$ for $0<\epsilon\le\epsilon_0$, for some $c'>0$ and
+$\epsilon_0\in(0,\alpha^\star]$, and the grid has at most $(n\wedge m)^b$ levels for a fixed $b>0$, then for every
+$\eta\in(0,1)$ and every $c>2c'$ there is $n_0$, depending on $c,c',\epsilon_0,b,\eta,\delta,\kappa,\alpha^\star$ and
+$v^2_{\min}$, such that
+$\Pp\{\alpha^\star-\Delta_{\mathcal G}-c/\log(n\wedge m)\le\widehat\alpha\le\alpha^\star\}\ge1-\delta-\eta$
+whenever $n\wedge m\ge n_0$.
+\item Under the hypotheses of Proposition~\ref{prop:newgauss}, with a grid as in (ii) and no $\omega$ assumed, the
+conclusion of (ii) holds for every $c>\pi^2\sigma^2\ell_0/4$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newrates}(i)]
+In the proof of Theorem~\ref{thm:lorate}, the margin enters only through $D_*=c_0\epsilon^\gamma$ and two facts: $D_*\le
+D_{\alpha^\star-\epsilon}$, and $D_{\alpha_j}\ge D_*x_j$ for the grid levels $\alpha_j\le\alpha^\star-\epsilon$, with
+$x_j=(\alpha^\star-\alpha_j)/\epsilon\ge1$. That proof writes $D_{\alpha_j}\ge D_*x_j^\gamma$ and then uses only
+$x_j^\gamma\ge x_j$, in the step $\varrho_jS-C\ge\varrho_*x_jS-C$. Put $D_*=\omega(\epsilon)$. Then
+$D_*\le \bar D_{\alpha^\star-\epsilon}\le D_{\alpha^\star-\epsilon}$. By Lemma~\ref{lem:pathconvex}(ii), $\epsilon'\mapsto
+\bar D_{\alpha^\star-\epsilon'}/\epsilon'$ is nondecreasing on $(0,\alpha^\star]$, and $\epsilon x_j=\alpha^\star-\alpha_j\in[\epsilon,\alpha^\star]$,
+so
+\[
+D_{\alpha_j}\ \ge\ \bar D_{\alpha_j}\ =\ \bar D_{\alpha^\star-\epsilon x_j}\ \ge\ x_j\,\bar D_{\alpha^\star-\epsilon}\ \ge\ x_jD_* .
+\]
+The rest of the proof of part (i) of Theorem~\ref{thm:lorate} uses $D_*\le\Delta_\phi$, which holds since
+$D_{\alpha^\star-\epsilon}\le D_0\le\Delta_\phi$, and the hypothesis on $D_*$, and is unchanged. For part (ii), every
+$\epsilon\in(\omega^{\leftarrow}(t_{n,m}),\alpha^\star]$ has $\omega(\epsilon)>t_{n,m}$ and $J_\epsilon\le J$, so part (i) gives
+$\Pp(\widehat\alpha<\alpha^\star-\epsilon-\Delta_{\mathcal G})\le\Pp(\widehat\alpha<a_\epsilon)\le\eta$. Along a sequence
+$\epsilon_k\downarrow\omega^{\leftarrow}(t_{n,m})$ these events increase to
+$\{\widehat\alpha<\alpha^\star-\omega^{\leftarrow}(t_{n,m})-\Delta_{\mathcal G}\}$, whose probability is therefore at most $\eta$, and
+Corollary~\ref{cor:lower} and a union bound finish the proof as in Theorem~\ref{thm:lorate}.
+\end{proof}
+
+Applied to a polynomial margin of $D$, part (i) loses a factor $(1-\alpha^\star)^{1/\gamma}$ against
+Theorem~\ref{thm:lorate}, since a margin of $D$ gives one of $\bar D$ only after multiplication by $1-\alpha^\star$. Its use is
+for margins that are not polynomial, such as the exponential margins of part (ii). Part (iii) is proved after
+Theorem~\ref{thm:newgauss}.
+
+\begin{proof}[Proof of Proposition~\ref{prop:newrates}(ii)]
+Write $\underline n=n\wedge m$ and let $\underline n\ge10$. By Theorem~\ref{thm:lorate}(iii), the quantity $t_{n,m}$
+of its part (ii) is at most an absolute constant times
+$\beta_\star\kappa v_{\min}^{-2}\{(1+L_\delta+\log(J/\eta))/\underline n\}^{1/2}$, and with $J\le\underline n^b$
+this is at most $C_t(\log\underline n/\underline n)^{1/2}$, with $C_t$ depending only on $\kappa$, $\alpha^\star$,
+$v_{\min}$, $\delta$, $\eta$ and $b$. Let $0<t<\min\{1,\omega(\epsilon_0)\}$. As $\omega$ is nondecreasing, every
+$\epsilon\in[0,\alpha^\star]$ with $\omega(\epsilon)\le t$ has $\epsilon<\epsilon_0$, and then, if $\epsilon>0$,
+$\exp(-c'/\epsilon)\le t$, that is, $\epsilon\le c'/\log(1/t)$; so $\omega^{\leftarrow}(t)\le c'/\log(1/t)$. For
+$t=t_{n,m}$, $\log(1/t_{n,m})\ge\frac12\log\underline n-\frac12\log\log\underline n-\log C_t$, which exceeds
+$(c'/c)\log\underline n$ for all large $\underline n$, because $c'/c<\frac12$; then also $t_{n,m}<\min\{1,\omega(\epsilon_0)\}$,
+and $\omega^{\leftarrow}(t_{n,m})\le c/\log\underline n$. Part (i), in the form of part (ii) of
+Theorem~\ref{thm:lorate}, gives the claim.
+\end{proof}
+
+\subsection{Sobolev kernels}
+
+Let $\|f\|_{H^s}^2=(2\pi)^{-d}\int|\widehat f(\xi)|^2(1+|\xi|^2)^s\,d\xi$. If
+$\widehat{k_0}(\xi)\ge c(1+|\xi|^2)^{-s}$, then by \eqref{eq:newnative} every continuous $f\in L^2$ with
+$\|f\|_{H^s}<\infty$ lies in $\Hh$, with $\|f\|_\Hh^2\le\|f\|_{H^s}^2/c$. Such a kernel is characteristic, as
+$\widehat{k_0}>0$ \citep{sriperumbudur2010hilbert}. The approximant is a mollified indicator. For a set $E$ we use the
+translation bound $\mathrm{Leb}(E\,\triangle\,(E+h))\le\Pi|h|$ for all $h\in\R^d$, which holds with $\Pi$ the perimeter of $E$
+\citep[Chapter~5]{evans2015measure}, and, in $\R$, with $\Pi=2N$ for a union of $N$ disjoint intervals.
+
+\begin{lemma}[Norm of a mollified indicator]
+\label{lem:newsobnorm}
+Let $s>1/2$, let $E\subset\R^d$ be bounded and measurable with $\mathrm{Leb}(E\,\triangle\,(E+h))\le\Pi|h|$ for all $h$, let
+$b\in C_c^\infty$ be a probability density supported in the closed unit ball, $b_w=w^{-d}b(\cdot/w)$, and
+$f_w=\mathbf 1_E*b_w$. Let $m$ be the smallest integer with $4m>2s-1$, $C_b=\|\Delta^mb\|_{L^1}$,
+$j_d(y)$ the mean of $\cos(yv_1)$ for $v$ uniform in the unit ball, and $c_d=1-\sup_{y\ge1}j_d(y)$. Then $c_d>0$,
+$0\le f_w\le1$, $f_w\in C_c^\infty$, and for $0<w\le1$
+\[
+\|f_w\|_{H^s}^2\ \le\ 2^s\,\mathrm{Leb}(E)+C_{d,s,b}\,\Pi\,w^{1-2s},
+\qquad
+C_{d,s,b}=\frac{2^{3s}}{2c_d}\Big[\frac1{1-2^{1-2s}}+\frac{C_b^2}{1-2^{-(4m+1-2s)}}\Big].
+\]
+\end{lemma}
+
+\begin{proof}
+The indicator has a Fourier tail of order $1/t$ beyond frequency $t$, because translating $E$ by $h$ changes it on a set of
+measure $\Pi|h|$, and mollification at width $w$ cuts the frequencies beyond $1/w$. Write $g=\mathbf 1_E$, so that
+$\widehat f_w(\xi)=\widehat g(\xi)\widehat b(w\xi)$. As $b$ is a probability density, $|\widehat b|\le1$, and
+$(\Delta^mb)^\wedge(\xi)=(-|\xi|^2)^m\widehat b(\xi)$ gives $|\widehat b(\xi)|\le\min(1,C_b|\xi|^{-2m})$.
+
+We first bound the Fourier tail of $g$. For $h\in\R^d$, Plancherel's identity gives
+\[
+(2\pi)^{-d}\int|\widehat g(\xi)|^2|e^{ih\cdot\xi}-1|^2\,d\xi=\|g(\cdot+h)-g\|_{L^2}^2=\mathrm{Leb}(E\,\triangle\,(E-h))\le\Pi|h| ,
+\]
+since $g(\cdot+h)-g$ takes values in $\{-1,0,1\}$. To isolate the high frequencies we average over $h$ uniform in the
+ball of radius $1/t$. The mean of $|e^{ih\cdot\xi}-1|^2=2-2\cos(h\cdot\xi)$ is $2\{1-j_d(|\xi|/t)\}$ by rotation
+invariance, and the mean of $|h|$ is at most $1/t$. The function $j_d$ is continuous, smaller than $1$ on $(0,\infty)$,
+since $\cos(yv_1)<1$ off a null set, and tends to $0$ at infinity by the Riemann--Lebesgue lemma, so $c_d>0$; in $\R$,
+$j_1(y)=\sin y/y$ and $c_1=1-\sin1$. As $1-j_d\ge0$ everywhere and $1-j_d(|\xi|/t)\ge c_d$ for $|\xi|\ge t$, the
+averaged identity gives
+\[
+\Upsilon(t)\coloneqq(2\pi)^{-d}\int_{|\xi|\ge t}|\widehat g(\xi)|^2\,d\xi\ \le\ \frac{\Pi}{2c_d\,t},\qquad t>0 .
+\]
+We now split the frequencies into the unit ball and dyadic shells. On $\{|\xi|<1\}$, $(1+|\xi|^2)^s\le2^s$ and
+$|\widehat b|\le1$, which contributes at most $2^s(2\pi)^{-d}\int|\widehat g|^2=2^s\mathrm{Leb}(E)$, the first term of
+the bound. On the shell $S_j=\{2^j\le|\xi|<2^{j+1}\}$, $j\ge0$, we have $(1+|\xi|^2)^s\le(2|\xi|^2)^s\le2^{3s}4^{sj}$,
+$|\widehat b(w\xi)|^2\le\min\{1,C_b^2(w2^j)^{-4m}\}$ and $(2\pi)^{-d}\int_{S_j}|\widehat g|^2\le\Upsilon(2^j)\le\Pi2^{-j}/(2c_d)$,
+so the shells contribute at most $\{2^{3s}\Pi/(2c_d)\}\sum_{j\ge0}2^{j(2s-1)}\min\{1,C_b^2w^{-4m}2^{-4mj}\}$. The sum grows geometrically up to the frequency $1/w$ and decays beyond it. Let $j_0\ge0$ be the integer with $2^{j_0}\le1/w<2^{j_0+1}$. As $2s-1>0$,
+$\sum_{j\le j_0}2^{j(2s-1)}\le2^{j_0(2s-1)}/(1-2^{1-2s})\le w^{1-2s}/(1-2^{1-2s})$, and as $2s-1-4m<0$,
+\[
+\sum_{j>j_0}C_b^2w^{-4m}2^{j(2s-1-4m)}\le\frac{C_b^2w^{-4m}2^{(j_0+1)(2s-1-4m)}}{1-2^{2s-1-4m}}\le\frac{C_b^2w^{1-2s}}{1-2^{-(4m+1-2s)}} .
+\]
+Adding the parts gives the bound, the two geometric series giving the two terms of $C_{d,s,b}$. Finally $0\le f_w\le1$ because $0\le g\le1$ and $b_w$ is a probability density, and
+$f_w$ is smooth with compact support because $b$ is and $E$ is bounded.
+\end{proof}
+
+The laws enter through an open set $G$ that carries the sign of $p-q$, the size of its boundary near the contact, and
+the order at which $p-q$ vanishes there. We use the open balls $B_\rho$ of radius $\rho$ about a fixed centre.
+
+\begin{theorem}[Margin for Sobolev kernels]
+\label{thm:newsobolev}
+Let $k(x,y)=k_0(x-y)$ on $\R^d$ with $\widehat{k_0}(\xi)\ge c(1+|\xi|^2)^{-s}$, $s>d/2$, and let $P,Q$ have Lebesgue
+densities $p,q$ with $0<\alpha^\star<1$. Let $G\subseteq\R^d$ be open with $p\ge q$ almost everywhere on $G$ and $p\le q$
+almost everywhere off $G$, and let $\rho\ge1$, $r>0$, $\ell>0$ and $w_0\in(0,1]$ be such that
+\begin{enumerate}[label=(G\arabic*),leftmargin=*]
+\item $\mathrm{Leb}(E_\rho\,\triangle\,(E_\rho+h))\le\Pi_\rho|h|$ for all $h$, where $E_\rho=G\cap B_\rho$.
+\item $\mathrm{Leb}(\{x\in B_\rho:\dist(x,\partial G)\le t\})\le V_\rho t$ for $0<t\le w_0$.
+\item $|p(x)-q(x)|\le\ell\,\dist(x,\partial G)^r$ for almost every $x\in B_\rho$ with $\dist(x,\partial G)\le w_0$.
+\end{enumerate}
+Let $T(\rho)=|P-Q|(\R^d\setminus B_{\rho-1})$, and for $0<w\le w_0$ let $f_w=\mathbf 1_{E_\rho}*b_w$ as in
+Lemma~\ref{lem:newsobnorm}. Then $f_w\in\Hh$, $0\le f_w\le1$, $\mathrm{err}(f_w)\le\ell V_\rho w^{r+1}+T(\rho)$, and for every
+$\epsilon\in[0,\alpha^\star]$
+\[
+D_{\alpha^\star-\epsilon}(P,Q)\ \ge\ \bar D_{\alpha^\star-\epsilon}\ \ge\ \frac{c^{1/2}\,\{\epsilon-\ell V_\rho w^{r+1}-T(\rho)\}_+}
+{\{2^s\mathrm{Leb}(B_\rho)+C_{d,s,b}\Pi_\rho w^{1-2s}\}^{1/2}} .
+\]
+\end{theorem}
+
+\begin{proof}
+The function $f_w$ is the approximate witness of Proposition~\ref{prop:newapproxgen}(ii), so we need its norm and its
+error. Lemma~\ref{lem:newsobnorm} and \eqref{eq:newnative} give $f_w\in\Hh$, $0\le f_w\le1$ and
+$\|f_w\|_\Hh^2\le c^{-1}\{2^s\mathrm{Leb}(B_\rho)+C_{d,s,b}\Pi_\rho w^{1-2s}\}$, as $E_\rho\subseteq B_\rho$. For the error,
+since $\mathbf 1_G=\mathbf 1_A$ almost everywhere
+for $|P-Q|$, $\mathrm{err}(f_w)=\int|\mathbf 1_G-f_w|\,d|P-Q|$. Off $B_{\rho-1}$ we use $|\mathbf 1_G-f_w|\le1$, which contributes at
+most $T(\rho)$. Inside $B_{\rho-1}$ the mollified indicator differs from $\mathbf 1_G$ only near $\partial G$. Let
+$x\in B_{\rho-1}$. The density $b_w$ is supported in the closed ball of radius $w\le1$ about $0$, and the
+closed ball $\bar B(x,w)$ lies in $B_\rho$, so $f_w(x)=\int\mathbf 1_G(x-y)b_w(y)\,dy$. If $\dist(x,\partial G)>w$, the connected
+set $\bar B(x,w)$ misses $\partial G$, so it lies in the open set $G$ or in the open set $\R^d\setminus\bar G$, and
+$f_w(x)=\mathbf 1_G(x)$. Hence $|\mathbf 1_G-f_w|\le\mathbf 1\{\dist(\cdot,\partial G)\le w\}$ on $B_{\rho-1}$, and (G2) and (G3) give
+$\int_{B_{\rho-1}}|\mathbf 1_G-f_w|\,|p-q|\le\ell w^r\,\mathrm{Leb}(\{x\in B_\rho:\dist(x,\partial G)\le w\})\le\ell V_\rho w^{r+1}$.
+Proposition~\ref{prop:newapproxgen}(ii) finishes the proof.
+\end{proof}
+
+\begin{corollary}[Exponent of the Sobolev margin]
+\label{cor:newsobolev}
+In the setting of Theorem~\ref{thm:newsobolev} put $\gamma=1+(2s-1)/\{2(r+1)\}$. Suppose either that $T(\rho)=0$, that
+is, $|P-Q|$ vanishes off $B_{\rho-1}$, or that $d=1$, $G=(x_0,\infty)$, the balls are centered at $x_0$, (G3) holds for
+every $\rho$ with the same $\ell$ and $w_0$, and $T(\rho)\le C_Te^{-\rho/a}$ for some $C_T,a>0$ and all $\rho\ge1$. Then there
+are $c_1>0$ and $\epsilon_1>0$ with $\bar D_{\alpha^\star-\epsilon}\ge c_1\epsilon^\gamma$ for $\epsilon\le\epsilon_1$, and
+Assumption~\ref{ass:margin} holds with this $\gamma$. Hence, with $\widehat\alpha$ computed as in
+Theorem~\ref{thm:loratemain} on a grid of $J$ levels fixed in advance with mesh $\Delta_{\mathcal G}$ below
+$\alpha^\star$, $\widehat\alpha\ge\alpha^\star-\Delta_{\mathcal G}-O_\Pp((n\wedge m)^{-1/(2\gamma)})$
+for fixed $J$, with $1/(2\gamma)=(r+1)/\{2(r+1)+2s-1\}$, equal to $2/(2s+3)$ for $r=1$.
+\end{corollary}
+
+\begin{proof}
+The width $w$ is chosen so that the error of $f_w$ is half of $\epsilon$, which balances error and norm in
+Theorem~\ref{thm:newsobolev}. If $T(\rho)=0$, write $V$ and $\Pi$ for $V_\rho$ and $\Pi_\rho$, put
+$w(\epsilon)=\{\epsilon/(2\ell V)\}^{1/(r+1)}$, so that $\ell Vw^{r+1}=\epsilon/2$, and let $w_1\in(0,w_0]$ be such that
+$C_{d,s,b}\Pi w^{1-2s}\ge2^s\mathrm{Leb}(B_\rho)$ for $w\le w_1$, so that the second term of the denominator dominates. For
+$\epsilon\le\epsilon_1=2\ell Vw_1^{r+1}$, Theorem~\ref{thm:newsobolev} gives
+$\bar D_{\alpha^\star-\epsilon}\ge c^{1/2}(\epsilon/2)(2C_{d,s,b}\Pi)^{-1/2}w(\epsilon)^{s-1/2}=c_1\epsilon^\gamma$, the exponent being $1+(s-\tfrac12)/(r+1)=\gamma$. In the second case,
+$E_\rho=(x_0,x_0+\rho)$, so $\Pi_\rho=2$, and $\{x:\dist(x,\partial G)\le t\}=[x_0-t,x_0+t]$, so $V_\rho=2$. Take
+$\rho(\epsilon)=\max\{2,1+a\log(4C_T/\epsilon)\}$, so that $T(\rho(\epsilon))\le\epsilon/4$, and $w(\epsilon)=\{\epsilon/(8\ell)\}^{1/(r+1)}$, so
+that $2\ell w^{r+1}=\epsilon/4$. The denominator in Theorem~\ref{thm:newsobolev} is
+$\{2^{s+1}\rho(\epsilon)+2C_{d,s,b}w(\epsilon)^{1-2s}\}^{1/2}$, in which the second term, a power of $1/\epsilon$, dominates the
+first, of order $\log(1/\epsilon)$, for small $\epsilon$. This gives $c_1$ and $\epsilon_1$ as before. In both cases, for
+$\epsilon\in[\epsilon_1,\alpha^\star]$ the path is nonincreasing, so $D_{\alpha^\star-\epsilon}\ge \bar D_{\alpha^\star-\epsilon_1}\ge
+c_1(\epsilon_1/\alpha^\star)^\gamma\epsilon^\gamma$, and Assumption~\ref{ass:margin} holds with $c_0=c_1(\epsilon_1/\alpha^\star)^\gamma$, since
+$D\ge \bar D$. The rate is Theorem~\ref{thm:lorate}, whose part (i) alone, with parts (ii) and (iii) for the size of
+$t_{n,m}$, gives the bound with probability at least $1-\eta$.
+\end{proof}
+
+A transversal crossing of a compact $C^2$ hypersurface $\partial G$, with $p-q$ continuously differentiable near it and
+$|P-Q|$ compactly supported, satisfies (G1)--(G3) with $r=1$. Indeed $\Pi_\rho$ is at most the sum of the areas of $\partial G$
+and $\partial B_\rho$, by the submodularity of the perimeter, $V_\rho$ is finite by the tube formula, and $\ell$ can be
+taken as a Lipschitz constant of $p-q$ near $\partial G$.
+
+\subsection{The Gaussian kernel}
+
+For $k(x,y)=\exp\{-(x-y)^2/(2\sigma^2)\}$ on $\R$, $\widehat{k_0}(\xi)=(2\pi)^{1/2}\sigma e^{-\sigma^2\xi^2/2}$, so by
+\eqref{eq:newnative} and Plancherel's identity every continuous $f\in L^2$ whose Fourier transform vanishes outside
+$[-\xi_0,\xi_0]$ lies in $\Hh$, with
+\begin{equation}
+\|f\|_\Hh^2\le\frac{e^{\sigma^2\xi_0^2/2}}{(2\pi)^{1/2}\sigma}\,\|f\|_{L^2}^2 ,
+\label{eq:newbandlim}
+\end{equation}
+the elementary half of the description of this RKHS by \citet{steinwart2006explicit}. Let $b$ be an even probability
+density with $\widehat b=0$ outside $[-1,1]$ and $m_2=\int t^2b(t)\,dt<\infty$, let $\bar b(t)=\int_t^\infty b$ for $t\ge0$, so that
+$\bar b\le1/2$, and $b_{\xi_0}(t)=\xi_0 b(\xi_0 t)$. The density $b(t)=4\pi\cos^2(t/2)/(\pi^2-t^2)^2$ qualifies: it is $h^2/\|h\|_{L^2}^2$
+for $h(t)=\cos(t/2)/(\pi^2-t^2)$, whose Fourier transform is $\cos(\pi\xi)$ on $[-1/2,1/2]$ and $0$ elsewhere, so that
+$\widehat b$, a multiple of the autocorrelation of $\widehat h$, vanishes outside $[-1,1]$. Moreover $\|h\|_{L^2}^2=1/(4\pi)$ and
+$m_2=\int|\widehat h'|^2/\int|\widehat h|^2=\pi^2$. For $t\ge2^{1/2}\pi$, $t^2-\pi^2\ge t^2/2$, so $b(t)\le16\pi t^{-4}$ and
+$\bar b(t)\le16\pi/(3t^3)$.
+
+The laws cross once, at $x_0$: $p\ge q$ almost everywhere on $(x_0,\infty)$ and $p\le q$ almost everywhere on
+$(-\infty,x_0)$, so that $A=(x_0,\infty)$ up to a null set of $|P-Q|$, and $|p-q|(x)\le\ell|x-x_0|$ for almost every
+$x$ with $|x-x_0|\le r_0$, for some $\ell>0$ and $r_0\in(0,\infty]$; we read $\bar b(\infty)$ as $0$. We write
+$T_+(\rho)=|P-Q|((x_0+\rho,\infty))$.
+
+\begin{lemma}[A band-limited step]
+\label{lem:newgaussstep}
+For $\xi_0>0$ and $\rho>0$, $f=\mathbf 1_{(x_0,x_0+\rho)}*b_{\xi_0}$ lies in $\Hh$, $0\le f\le1$,
+$\|f\|_\Hh^2\le\rho\,e^{\sigma^2\xi_0^2/2}/\{(2\pi)^{1/2}\sigma\}$, and
+\[
+\mathrm{err}(f)\ \le\ \frac{\ell m_2}{2\xi_0^2}+2T_+(\rho/2)+2\alpha^\star\{\bar b(\xi_0 r_0)+\bar b(\xi_0\rho/2)\} .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $g=\mathbf 1_{(x_0,x_0+\rho)}$. As $b_{\xi_0}$ is a probability density, $f$ is continuous, in $L^2$, with
+values in $[0,1]$, and $\widehat f=\widehat g\,\widehat b(\cdot/\xi_0)$ vanishes outside $[-\xi_0,\xi_0]$. Since $|\widehat b|\le1$,
+$\|f\|_{L^2}\le\|g\|_{L^2}=\rho^{1/2}$, and \eqref{eq:newbandlim} gives the norm bound.
+
+For the error we compare $f$ with $g$, and $g$ with $\mathbf 1_A$: $|\mathbf 1_A-f|\le|\mathbf 1_A-g|+|g-f|$, and $\mathbf 1_A-g=\mathbf 1_{[x_0+\rho,\infty)}$ almost everywhere, which
+contributes $T_+(\rho)\le T_+(\rho/2)$. Next, $|g-f|(x)\le\int|g(x)-g(x-y)|\,b_{\xi_0}(y)\,dy$. For $x_0<x<x_0+\rho$, $g(x-y)\neq g(x)$
+exactly when $y\ge x-x_0$ or $y\le x-x_0-\rho$, a set of $b_{\xi_0}$-mass $\bar b(\xi_0(x-x_0))+\bar b(\xi_0(x_0+\rho-x))$. For
+$x<x_0$ only $y<-|x-x_0|$ can change $g$, and for $x>x_0+\rho$ only $y>x-x_0-\rho$. Hence, for almost every $x$, $|g-f|(x)\le\bar b(\xi_0|x-x_0|)+\bar b(\xi_0|x-x_0-\rho|)$, the leakage of the mollifier across the two ends of the interval. Integrated against $|P-Q|$, it is at most
+\begin{align*}
+\ell\int_{|t|\le r_0}|t|\,\bar b(\xi_0|t|)\,dt+\bar b(\xi_0 r_0)\,|P-Q|(\R)
+&\le\frac{2\ell}{\xi_0^2}\int_0^\infty v\,\bar b(v)\,dv+2\alpha^\star\bar b(\xi_0 r_0)\\
+&=\frac{\ell m_2}{2\xi_0^2}+2\alpha^\star\bar b(\xi_0 r_0),
+\end{align*}
+because $\bar b$ is nonincreasing and $\int_0^\infty v\,\bar b(v)\,dv=\int_0^\infty b(y)\,y^2/2\,dy=m_2/4$. The second term is at most
+$1/2$ on $(x_0+\rho/2,\infty)$, a set of $|P-Q|$-mass $T_+(\rho/2)$, and at most $\bar b(\xi_0\rho/2)$ elsewhere, where
+$|x-x_0-\rho|\ge\rho/2$. Adding the contributions gives the bound.
+\end{proof}
+
+\begin{theorem}[Margin for the Gaussian kernel]
+\label{thm:newgauss}
+In this setting let $\theta\in(0,1)$, $\epsilon\in(0,\alpha^\star]$ and $\xi_\epsilon=\{\ell m_2/(2\theta\epsilon)\}^{1/2}$, and let
+$\rho>0$ satisfy $2T_+(\rho/2)+2\alpha^\star\{\bar b(\xi_\epsilon r_0)+\bar b(\xi_\epsilon\rho/2)\}\le(1-\theta)\epsilon/2$. Then
+\[
+D_{\alpha^\star-\epsilon}(P,Q)\ \ge\ \bar D_{\alpha^\star-\epsilon}\ \ge\ \frac{(1-\theta)\epsilon}2\Big\{\frac{(2\pi)^{1/2}\sigma}{\rho}\Big\}^{1/2}
+\exp\Big(-\frac{\sigma^2\ell m_2}{8\theta\epsilon}\Big) .
+\]
+If $T_+(t)\le C_Te^{-t/a}$, then $\rho_\epsilon=\max\{2,2a\log(8C_T/((1-\theta)\epsilon))\}$ satisfies the condition for all small
+$\epsilon$ when $b$ is the density above, and $\log\{1/\bar D_{\alpha^\star-\epsilon}\}\le\sigma^2\ell m_2/(8\theta\epsilon)+\log(1/\epsilon)+O(\log\log(1/\epsilon))$.
+\end{theorem}
+
+\begin{proof}
+The bandwidth $\xi_\epsilon$ is chosen so that the smoothing error near $x_0$ is the fraction $\theta$ of $\epsilon$,
+and the norm of the band-limited step then grows like $\exp\{\sigma^2\xi_\epsilon^2/4\}$. By
+Lemma~\ref{lem:newgaussstep} with $\xi_0=\xi_\epsilon$, $\ell m_2/(2\xi_\epsilon^2)=\theta\epsilon$, so
+$\mathrm{err}(f)\le\theta\epsilon+(1-\theta)\epsilon/2$ and $\epsilon-\mathrm{err}(f)\ge(1-\theta)\epsilon/2$, while
+$\|f\|_\Hh\le\{\rho/((2\pi)^{1/2}\sigma)\}^{1/2}\exp\{\sigma^2\ell m_2/(8\theta\epsilon)\}$, and Proposition~\ref{prop:newapproxgen}(ii) gives
+the bound. With the density above, $\bar b(\xi_\epsilon t)\le16\pi/\{3(\xi_\epsilon t)^3\}$ once $\xi_\epsilon t\ge2^{1/2}\pi$, which is
+of order $\epsilon^{3/2}$ for $t=r_0$ and for $t=\rho_\epsilon/2\ge1$, so the two terms in $\bar b$ are at most $(1-\theta)\epsilon/4$
+for small $\epsilon$, and $2T_+(\rho_\epsilon/2)\le2C_T\exp\{-\log(8C_T/((1-\theta)\epsilon))\}=(1-\theta)\epsilon/4$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newgauss}]
+The hypotheses of Proposition~\ref{prop:newsobolev} give the setting of Theorem~\ref{thm:newgauss}, with exponential tails,
+for every $\ell>\ell_0$ and a small enough $r_0$: $(p-q)(x)/(x-x_0)$ is continuous and nonnegative near $x_0$, away from $x_0$,
+and tends to $\ell_0$ at $x_0$. Given $c>\pi^2\sigma^2\ell_0/8$, choose $\theta<1$ and $\ell>\ell_0$ with $\pi^2\sigma^2\ell/(8\theta)<c$. Then the
+bound of Theorem~\ref{thm:newgauss}, with $m_2=\pi^2$, exceeds $\exp(-c/\epsilon)$ for small $\epsilon$. The upper bound is
+Proposition~\ref{prop:newmoments}(b) below with $2j$ vanishing moments, which gives the order $\epsilon^{1+j}$, as
+$M_{4j}=(4j-1)!!\,\sigma^{-4j}<\infty$ for every $j$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newrates}(iii)]
+Given $c>\pi^2\sigma^2\ell_0/4$, take $c'\in(\pi^2\sigma^2\ell_0/8,c/2)$. By the proof of Proposition~\ref{prop:newgauss},
+the bound of Theorem~\ref{thm:newgauss}, with $m_2=\pi^2$, $\rho=\rho_\epsilon$ and suitable $\theta<1$ and
+$\ell>\ell_0$, exceeds $\exp(-c'/\epsilon)$ for $0<\epsilon\le\epsilon_0$, for some $\epsilon_0\in(0,\alpha^\star]$. The
+proof of Theorem~\ref{thm:newgauss} obtains this bound as a lower bound on $(\epsilon-\mathrm{err}(f))/\|f\|_\Hh$ for a
+function $f\in\mathcal F$, so it is also a lower bound on $\omega_\Hh(\epsilon)$. By
+Proposition~\ref{prop:newapproxgen}(iii), $\omega_\Hh$ is nondecreasing and at most
+$\bar D_{\alpha^\star-\epsilon}=(1-\alpha^\star+\epsilon)D_{\alpha^\star-\epsilon}$, so part (ii) applies to $\omega=\omega_\Hh$,
+and $c>2c'$.
+\end{proof}
+
+\subsection{Explicit trimmings and sharpness}
+
+Upper bounds on the path come from explicit trimmings: nonnegative measures $P'\le P$ and $Q'\le Q$ of equal mass
+$1-\alpha$ give $\bar D_{\alpha}\le\|\int\phi\,d(P'-Q')\|_\Hh$. If $\nu=P'-Q'$ has total variation $|\nu|$, support in $[x_0-W,x_0+W]$
+and $\int(x-x_0)^j\,d\nu=0$ for $0\le j<N$, where $N\ge1$ and $j=0$ holds because the masses agree, then
+$|e^{it}-\sum_{j<N}(it)^j/j!|\le|t|^N/N!$ gives
+\begin{equation}
+|\widehat\nu(\xi)|\le|\nu|\min\{1,(|\xi|W)^N/N!\} .
+\label{eq:newmomentdecay}
+\end{equation}
+
+\begin{proposition}[Sobolev order below $3/2$]
+\label{prop:newupperone}
+Let $d=1$, $k(x,y)=k_0(x-y)$ with $\widehat{k_0}(\xi)\le C|\xi|^{-2s}$ for some $s\in(1/2,3/2)$, and suppose that
+$p-q\ge\ell'(x-x_0)^r$ almost everywhere on $(x_0,x_0+r_0)$ and $q-p\ge\ell'(x_0-x)^r$ almost everywhere on $(x_0-r_0,x_0)$,
+for some $\ell',r,r_0>0$. Then for $0<\epsilon\le\ell'r_0^{r+1}/(r+1)$, with $W_\epsilon=\{(r+1)\epsilon/\ell'\}^{1/(r+1)}$,
+\[
+\bar D_{\alpha^\star-\epsilon}\ \le\ 2\epsilon\,W_\epsilon^{s-1/2}\Big\{\frac C{2\pi}\Big(\frac2{3-2s}+\frac2{2s-1}\Big)\Big\}^{1/2} .
+\]
+\end{proposition}
+
+\begin{proof}
+We keep the common part together with the excess of $P$ on a short interval to the right of $x_0$ and that of $Q$ on
+one to the left, so that the two trimmed parts differ by a measure of mass zero carried near $x_0$, whose Fourier
+transform vanishes at the origin. The map $w\mapsto\int_{x_0}^{x_0+w}(p-q)$ is continuous, nondecreasing and at least $\ell'w^{r+1}/(r+1)$ on $[0,r_0]$, so some
+$w_P\le W_\epsilon$ gives it the value $\epsilon$, and likewise some $w_Q\le W_\epsilon$ on the left. As $p-q=(p-q)_+$ almost everywhere
+on $(x_0,x_0+w_P)$, the measure $P'=P\wedge Q+(p-q)\mathbf 1_{(x_0,x_0+w_P)}\,dx$ satisfies $P'\le P\wedge Q+(P-P\wedge Q)=P$ and has mass
+$1-\alpha^\star+\epsilon$. The measure $Q'$ is built in the same way, and $\nu=P'-Q'=(p-q)\mathbf 1_{(x_0-w_Q,x_0+w_P)}\,dx$ has $|\nu|=2\epsilon$, mass
+$0$ and support in $[x_0-W_\epsilon,x_0+W_\epsilon]$. By \eqref{eq:newbochner} and \eqref{eq:newmomentdecay} with $N=1$,
+$\|\int\phi\,d\nu\|_\Hh^2\le(2\pi)^{-1}C(2\epsilon)^2\int\min(1,\xi^2W_\epsilon^2)|\xi|^{-2s}\,d\xi$, and the integral is
+$W_\epsilon^{2s-1}\{2/(3-2s)+2/(2s-1)\}$.
+\end{proof}
+
+For larger $s$, and for the Gaussian kernel, the difference of the trimmings must have more vanishing moments. They
+are created by removing from the common part a small polynomial density near $x_0$, which needs the core to have
+positive density there.
+
+\begin{proposition}[Trimmings with vanishing moments]
+\label{prop:newmoments}
+Let $d=1$, let $p,q$ be continuous on $(x_0-r_0,x_0+r_0)$, let $e=p-q$ be differentiable at $x_0$ with
+$e'(x_0)=\ell_0>0$, and let $p(x_0)=q(x_0)>0$. For every integer $N\ge1$ there are $T_N\ge1$ and $w_N>0$ such that for
+$0<w\le w_N$ there are nonnegative measures $P'\le P$ and $Q'\le Q$ of equal mass $1-\alpha^\star+\epsilon(w)$, with
+$\epsilon(w)\ge\ell_0w^2/8$, whose difference $\nu$ satisfies $|\nu|\le2\ell_0w^2$, $\supp\nu\subseteq[x_0-T_Nw,x_0+T_Nw]$ and
+$\int(x-x_0)^j\,d\nu=0$ for $0\le j<N$. Consequently, with $w=(8\epsilon/\ell_0)^{1/2}$ and $0<\epsilon\le\ell_0w_N^2/8$:
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item if $\widehat{k_0}(\xi)\le C(1+\xi^2)^{-s}$ with $s>1/2$ and $N>s-1/2$, then
+$\bar D_{\alpha^\star-\epsilon}\le2\ell_0w^2(T_Nw)^{s-1/2}\{CI_{N,s}/(2\pi)\}^{1/2}$, which is at most a constant times
+$\epsilon^{(2s+3)/4}$, where $I_{N,s}=\int\min(1,v^{2N}/N!^2)|v|^{-2s}\,dv<\infty$.
+\item if $M_{2N}=(2\pi)^{-1}\int\xi^{2N}\widehat{k_0}(\xi)\,d\xi<\infty$, then
+$\bar D_{\alpha^\star-\epsilon}\le2\ell_0w^2(T_Nw)^NM_{2N}^{1/2}/N!$, which is at most a constant times $\epsilon^{1+N/2}$. For the
+Gaussian kernel $M_{2N}=(2N-1)!!\,\sigma^{-2N}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We add the excess $e$ on $(x_0-w,x_0+w)$ to the common part and cancel its first $N$ moments with a polynomial density
+removed from the common part on a fixed multiple of that interval. For $|t|<1$ let $F_w(t)=e(x_0+wt)/(\ell_0w)$, and
+$F_w(t)=0$ otherwise. Differentiability at $x_0$ gives $\sup_t|F_w(t)-t\mathbf 1\{|t|<1\}|\to0$ as $w\to0$.
+
+Let $T\ge1$ and let $\mathcal G_T$ map $M\in\R^N$ to the polynomial $G$ of degree less than $N$ with
+$\int_{-T}^Tt^jG(t)\,dt=M_j$ for $0\le j<N$, which exists and is unique because the Gram matrix of the monomials on
+$[-T,T]$ is positive definite. The map $\mathcal G_T$ is linear. Put $M_j(w)=-\int t^jF_w(t)\,dt$, so that $M(w)\to M(0)$,
+with $M_0(0)=0$ and $|M_j(0)|=|\int_{-1}^1t^{j+1}dt|\le2/3$. For $G_0=\mathcal G_T[M(0)]$, the polynomial $v\mapsto TG_0(Tv)$ has
+moments $T^{-j}M_j(0)$ on $[-1,1]$, so it is $\mathcal G_1$ applied to a vector of Euclidean norm at most
+$(2/3)N^{1/2}/T$, as $M_0(0)=0$. Hence $\int_{-T}^T|G_0|=\int_{-1}^1T|G_0(Tv)|\,dv\le c_N/T$ with
+$c_N=(2/3)N^{1/2}\|\mathcal G_1\|$, the operator norm from $\R^N$ to $L^1[-1,1]$. Fix $T=T_N=\max(1,8c_N)$, so that
+$\int|G_0|\le1/8$, and let $B_N=\sup_{[-T,T]}|G_0|+1$.
+
+The polynomials $G_w=\mathcal G_T[M(w)]$ converge to $G_0$ uniformly on $[-T,T]$. Choose $w_N>0$ so small that for $w\le w_N$ the following hold. First, $\int|G_w|\le1/4$
+and $\sup|G_w|\le B_N$. Next, $Tw\le r_0$, $\min(p,q)\ge p(x_0)/2$ on $[x_0-Tw,x_0+Tw]$ and $\ell_0wB_N\le p(x_0)/2$. Finally,
+$e>0$ on $(x_0,x_0+w)$, $e<0$ on $(x_0-w,x_0)$, and both $\int_0^we(x_0+t)\,dt$ and $-\int_{-w}^0e(x_0+t)\,dt$ lie between
+$3\ell_0w^2/8$ and $5\ell_0w^2/8$, which is possible because both equal $\ell_0w^2\{1/2+o(1)\}$.
+
+Let $a_P=e\,\mathbf 1_{(x_0,x_0+w)}$, $a_Q=-e\,\mathbf 1_{(x_0-w,x_0)}$, $g(x)=\ell_0wG_w((x-x_0)/w)\mathbf 1\{|x-x_0|\le Tw\}$, and
+$P'=P\wedge Q+(a_P-g_-)\,dx$, $Q'=P\wedge Q+(a_Q-g_+)\,dx$. As $|g|\le\ell_0wB_N\le\min(p,q)$ where $g\neq0$, both measures are nonnegative,
+and $P'\le P\wedge Q+(p-q)_+\,dx=P$, $Q'\le Q$. Their difference is $\nu=(e\,\mathbf 1_{(x_0-w,x_0+w)}+g)\,dx$, and for $j<N$
+\begin{align*}
+\int(x-x_0)^j\,d\nu&=\ell_0w^{j+2}\Big\{\int t^jF_w(t)\,dt+\int_{-T}^Tt^jG_w(t)\,dt\Big\}\\
+&=\ell_0w^{j+2}\{-M_j(w)+M_j(w)\}=0 .
+\end{align*}
+The case $j=0$ says that the masses agree, and they equal $1-\alpha^\star+\epsilon(w)$ with $\epsilon(w)=\int a_P-\int g_-$. As
+$\int|g|=\ell_0w^2\int|G_w|\le\ell_0w^2/4$, $\epsilon(w)\ge3\ell_0w^2/8-\ell_0w^2/4=\ell_0w^2/8$ and
+$|\nu|\le5\ell_0w^2/4+\ell_0w^2/4\le2\ell_0w^2$. The support of $\nu$ lies in $[x_0-Tw,x_0+Tw]$ because $T\ge1$.
+
+For the bounds, $w=(8\epsilon/\ell_0)^{1/2}\le w_N$ gives $\epsilon\le\epsilon(w)$, and $\bar D$ is nonincreasing, so
+$\bar D_{\alpha^\star-\epsilon}\le \bar D_{\alpha^\star-\epsilon(w)}\le\|\int\phi\,d\nu\|_\Hh$. By \eqref{eq:newbochner} and \eqref{eq:newmomentdecay}
+with $W=Tw$, in case (a) $\|\int\phi\,d\nu\|_\Hh^2\le(2\pi)^{-1}C|\nu|^2\int\min\{1,(|\xi|Tw)^{2N}/N!^2\}|\xi|^{-2s}\,d\xi
+=(2\pi)^{-1}C|\nu|^2(Tw)^{2s-1}I_{N,s}$, where $I_{N,s}$ is finite because $2N-2s>-1$ near $0$ and $2s>1$ at infinity. In case
+(b), $\|\int\phi\,d\nu\|_\Hh^2\le|\nu|^2(Tw)^{2N}M_{2N}/N!^2$. With $|\nu|\le2\ell_0w^2$ and $w^2=8\epsilon/\ell_0$ these are the
+bounds. For the Gaussian kernel, $M_{2N}=(-1)^Nk_0^{(2N)}(0)=(2N-1)!!\,\sigma^{-2N}$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newsobolev}]
+For the lower bound, $(p-q)(x)/(x-x_0)$ is continuous near $x_0$ with limit $\ell_0>0$, so for some $w_0\le1$ and $\ell<\infty$,
+$|p-q|(x)\le\ell|x-x_0|$ for $|x-x_0|\le w_0$, and Corollary~\ref{cor:newsobolev}, second case, applies with $r=1$, since
+$\widehat{k_0}\ge c(1+\xi^2)^{-s}$ with $s>1/2=d/2$. For the upper bound, Proposition~\ref{prop:newmoments}(a) with any
+$N>s-1/2$ applies, and $D_{\alpha^\star-\epsilon}\le \bar D_{\alpha^\star-\epsilon}/(1-\alpha^\star)$. For $s<3/2$ and $\alpha^\star<1$,
+Proposition~\ref{prop:newupperone} with $r=1$ already gives the upper bound, without $p(x_0)>0$.
+\end{proof}
+
+\subsection{The converse}
+
+For a version of the analytic baseline run with the larger threshold $\tau^{\mathrm S}$ of \eqref{eq:tauA} alone, an
+upper bound on the path gives a lower bound on the error. For $\tau^{\mathrm P}$, the threshold the baseline uses, no
+such converse is known.
+
+\begin{proposition}[The margin governs the rate]
+\label{prop:newconverse}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, let $\alpha^\star<1$ and $0<\delta<\delta'<1$, let
+$\widehat\alpha_{\mathrm{an}}^{\mathrm S}$ be \eqref{eq:alphaest} computed with the threshold $\tau^{\mathrm S}(\cdot,\delta)$, and put
+$g_{n,m}=\Delta_\phi\{(1/n+1/m)/2\}^{1/2}\{\log^{1/2}(1/\delta)-\log^{1/2}(1/\delta')\}$. Then, with probability at
+least $1-\delta'$,
+\[
+\alpha^\star-\widehat\alpha_{\mathrm{an}}^{\mathrm S}\ \ge\ \sup\big\{\epsilon\in[0,\alpha^\star]:\ D_{\alpha^\star-\epsilon}(P,Q)\le g_{n,m}\big\} ,
+\]
+a set that contains $0$, since the path vanishes at $\alpha^\star$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop:newconverse}]
+On the event where the statistic exceeds the path by at most $\tau^{\mathrm S}(\cdot,\delta')$, every level at which
+the path lies below the gap between the thresholds at $\delta$ and at $\delta'$ is accepted. Let $E^+$ be the event of Theorem~\ref{thm:twosided} at level $\delta'$, of probability at least $1-\delta'$. On $E^+$, for every
+$\epsilon\in[0,\alpha^\star]$, $\widehat D_{\alpha^\star-\epsilon}\le D_{\alpha^\star-\epsilon}+\tau^{\mathrm S}_{n,m}(\alpha^\star-\epsilon,\delta')$. With
+$\beta=(1-\alpha^\star+\epsilon)^{-1}\ge1$,
+\begin{align*}
+&\tau^{\mathrm S}_{n,m}(\alpha^\star-\epsilon,\delta)-\tau^{\mathrm S}_{n,m}(\alpha^\star-\epsilon,\delta')\\
+&\qquad=\beta\Delta_\phi\{(1/n+1/m)/2\}^{1/2}\{\log^{1/2}(1/\delta)-\log^{1/2}(1/\delta')\}\ge g_{n,m} .
+\end{align*}
+So if $D_{\alpha^\star-\epsilon}\le g_{n,m}$, then $\widehat D_{\alpha^\star-\epsilon}\le\tau^{\mathrm S}_{n,m}(\alpha^\star-\epsilon,\delta)$, the level
+$\alpha^\star-\epsilon$ is accepted, and $\widehat\alpha_{\mathrm{an}}^{\mathrm S}\le\alpha^\star-\epsilon$ by the definition \eqref{eq:alphaest}. The event does
+not depend on $\epsilon$, so this holds for all such $\epsilon$ at once.
+\end{proof}
+
+Under the hypotheses of Proposition~\ref{prop:newsobolev}, let $\epsilon_0>0$ be such that
+$D_{\alpha^\star-\epsilon}\le c_2\epsilon^{(2s+3)/4}$ for $\epsilon\le\epsilon_0$; then on $E^+$,
+$\alpha^\star-\widehat\alpha_{\mathrm{an}}^{\mathrm S}\ge\min\{\alpha^\star,\epsilon_0,(g_{n,m}/c_2)^{4/(2s+3)}\}$, of order $(n\wedge m)^{-2/(2s+3)}$ since
+$1/n+1/m\ge1/(n\wedge m)$. Under the hypotheses of Proposition~\ref{prop:newgauss}, the bound
+$D_{\alpha^\star-\epsilon}\le C_j\epsilon^j$ gives $\alpha^\star-\widehat\alpha_{\mathrm{an}}^{\mathrm S}\ge c(n\wedge m)^{-1/(2j)}$ on $E^+$ for every
+$j$ and $n\wedge m$ large, so the error is not $O((n\wedge m)^{-a})$ for any $a>0$.
+
+\subsection{The excess of the population ramp}
+\label{sec:excessproofs}
+
+This subsection proves Proposition~\ref{prop:excess}. Its arguments use $\alpha^\star<1$ only in part (ii) of the
+proposition: Lemmas~\ref{lem:excessbathtub} and~\ref{lem:excessid} and parts (i) and (iii) hold for any pair of
+probability measures with $\alpha<\TV(P,Q)\le1$, which Section~\ref{sec:laplaceproof} uses for empirical laws. Fix
+$\alpha<\alpha^\star$, with $\bar D$ and $\bar{\mathcal C}_\alpha$ as in
+Section~\ref{sec:generalmargin}; $\bar D_\alpha>0$ by \eqref{eq:zeroeq}. By Lemma~\ref{lem:attainment} there are parts
+$P'$ of $P$ and $Q'$ of $Q$ of mass $1-\alpha$ such that
+$d=\mu_{P'}-\mu_{Q'}$ is the element of minimal norm of $\bar{\mathcal C}_\alpha(P)-\bar{\mathcal C}_\alpha(Q)$, with $\|d\|_\Hh=\bar D_\alpha$, and
+$f^\star=d/\bar D_\alpha$ is the witness of Lemma~\ref{lem:popramp}, with the same cut points $t^\star$ and $u^\star$.
+
+\begin{lemma}[Bathtub for the closest parts]
+\label{lem:excessbathtub}
+Every measure $P''\le P$ satisfies $\int f^\star\,dP''\ge\int f^\star\,dP'+t^\star\{P''(\mathcal X)-(1-\alpha)\}$, and
+every $Q''\le Q$ satisfies $\int f^\star\,dQ''\le\int f^\star\,dQ'+u^\star\{Q''(\mathcal X)-(1-\alpha)\}$. Moreover
+$P'=P$ on $\{f^\star<t^\star\}$, $P'(\{f^\star>t^\star\})=0$, $Q'=Q$ on $\{f^\star>u^\star\}$ and
+$Q'(\{f^\star<u^\star\})=0$.
+\end{lemma}
+
+\begin{proof}
+As $d$ has minimal norm in a convex set, $\langle d,c-d\rangle_\Hh\ge0$ for every $c$ in it. With
+$c=\mu_{P''}-\mu_{Q'}$ for a part $P''$ of $P$ of mass $1-\alpha$ and the reproducing property, $P'$ minimizes
+$\int f^\star\,dP''$ over these parts; likewise $Q'$ maximizes $\int f^\star\,dQ''$ over the parts of $Q$ of mass
+$1-\alpha$. Suppose $(P-P')(\{f^\star<t^\star\})>0$. As $t^\star$ is a $(1-\alpha)$-quantile,
+$P(\{f^\star<t^\star\})\le1-\alpha$, so $P'(\{f^\star\ge t^\star\})=(1-\alpha)-P'(\{f^\star<t^\star\})\ge
+(P-P')(\{f^\star<t^\star\})>0$. Moving a small mass from $P'$ on $\{f^\star\ge t^\star\}$ to $P-P'$ on
+$\{f^\star<t^\star\}$ gives another part of mass $1-\alpha$ with a smaller integral of $f^\star$, a contradiction; so
+$P'=P$ on $\{f^\star<t^\star\}$. If $P'(\{f^\star>t^\star\})>0$, then, as $P(\{f^\star\le t^\star\})\ge1-\alpha$, the
+measure $P-P'$ has at least that mass on $\{f^\star=t^\star\}$, and moving mass there from $\{f^\star>t^\star\}$ lowers
+the integral; so $P'(\{f^\star>t^\star\})=0$. The claims on $Q'$ follow in the same way from
+$Q(\{f^\star>u^\star\})\le1-\alpha\le Q(\{f^\star\ge u^\star\})$.
+
+For the inequality, let $P''\le P$ have any mass and $\lambda=P''-P'$. On $\{f^\star<t^\star\}$, $\lambda=P''-P\le0$
+and $f^\star<t^\star$; on $\{f^\star>t^\star\}$, $\lambda=P''\ge0$ and $f^\star>t^\star$. So
+$\int_Af^\star\,d\lambda\ge t^\star\lambda(A)$ for each of the sets $A=\{f^\star<t^\star\}$,
+$\{f^\star=t^\star\}$ and $\{f^\star>t^\star\}$, and adding gives
+$\int f^\star\,d\lambda\ge t^\star\lambda(\mathcal X)=t^\star\{P''(\mathcal X)-(1-\alpha)\}$. The bound for
+$Q''$ is the same argument with the inequalities reversed.
+\end{proof}
+
+\begin{lemma}[Excess identity]
+\label{lem:excessid}
+\[
+\E_P\rp^\star-\E_Q\rp^\star-\alpha
+=\frac{\bar D_\alpha+\int(u^\star-f^\star)_+\,dP+\int(f^\star-t^\star)_+\,dQ}{t^\star-u^\star} .
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:excessbathtub}, $P-P'$ has mass $\alpha$ and is carried by $\{f^\star\ge t^\star\}$, where
+$\rp^\star=1$, and $Q-Q'$ is carried by $\{f^\star\le u^\star\}$, where $\rp^\star=0$. Hence the left side
+is $\int\rp^\star\,d(P'-Q')$. With the clipped witness $\tilde f=(f^\star\vee u^\star)\wedge t^\star$,
+$\rp^\star=(\tilde f-u^\star)/(t^\star-u^\star)$, and as $P'$ and $Q'$ have the same mass, the left side is
+$\int\tilde f\,d(P'-Q')/(t^\star-u^\star)$. On $\{f^\star\le t^\star\}$, which carries $P'$,
+$\tilde f=f^\star+(u^\star-f^\star)_+$, and on $\{f^\star\ge u^\star\}$, which carries $Q'$,
+$\tilde f=f^\star-(f^\star-t^\star)_+$. So $\int\tilde f\,d(P'-Q')=\langle f^\star,d\rangle_\Hh+\int(u^\star-f^\star)_+\,dP'
++\int(f^\star-t^\star)_+\,dQ'$, the first term is $\bar D_\alpha$, and $P'$ and $Q'$ may be replaced by $P$ and $Q$ in the
+other two, because $P'=P$ on $\{f^\star<u^\star\}\subseteq\{f^\star<t^\star\}$ and $Q'=Q$ on
+$\{f^\star>t^\star\}\subseteq\{f^\star>u^\star\}$.
+\end{proof}
+
+The two integrals are overshoots of the witness beyond its cut points, each against the law that is not trimmed there.
+
+\begin{proof}[Proof of Proposition~\ref{prop:excess}]
+The first inequality of (i) is Lemma~\ref{lem:excessid}, the integrals being nonnegative. For the second, let
+$\alpha'\in[0,1)$. As $f^\star$ has unit norm, the Cauchy--Schwarz inequality gives
+$\bar D_{\alpha'}\ge\int f^\star\,dP''-\int f^\star\,dQ''$ for the closest parts $P''$ of $P$ and $Q''$ of $Q$ of mass
+$1-\alpha'$, and by Lemma~\ref{lem:excessbathtub} the right side is at least
+$\int f^\star\,d(P'-Q')-(t^\star-u^\star)(\alpha'-\alpha)=\bar D_\alpha-(t^\star-u^\star)(\alpha'-\alpha)$.
+
+For (ii), let $\alpha=\alpha^\star-\epsilon$ with $\epsilon\le\epsilon_0/2$ and take $\alpha'=\alpha^\star-2\epsilon$ in
+(i): $t^\star-u^\star\le\{\bar D_{\alpha^\star-2\epsilon}-\bar D_{\alpha^\star-\epsilon}\}/\epsilon\le
+D_{\alpha^\star-2\epsilon}/\epsilon\le c_2(2\epsilon)^\gamma/\epsilon$, while
+$\bar D_{\alpha^\star-\epsilon}\ge(1-\alpha^\star)D_{\alpha^\star-\epsilon}\ge(1-\alpha^\star)c_1\epsilon^\gamma$. The first
+inequality of (i) gives the bound. Proposition~\ref{prop:newsobolev} gives the two-sided bound with
+$\gamma=(2s+3)/4$.
+
+For (iii), write $d(x)=\int k(x,y)\,d\nu(y)$ with $\nu=P'-Q'$, a finite signed measure with $\nu(\R)=0$. Since
+$(1-\sigma^2\partial_x^2)e^{-|x|/\sigma}=2\sigma\delta_0$ in the sense of distributions, $d-\sigma^2d''=2\sigma\nu$. The function
+$d$ is continuous and tends to $0$ at $\pm\infty$, and it is not zero, as $\|d\|_\Hh=\bar D_\alpha>0$; by Fubini's theorem
+$\int d(x)\,dx=2\sigma\nu(\R)=0$, so $d$ takes positive values and attains its maximum $M>0$ at some $z_0$. Suppose that
+$M>\bar D_\alpha t^\star$. The open set $O=\{f^\star>t^\star\}$ contains $z_0$, and on it $P'=0$ and $Q'=Q$ by
+Lemma~\ref{lem:excessbathtub}, as $t^\star>u^\star$, so $\nu=-Q\le0$ on $O$. On an open interval $I\ni z_0$ inside $O$
+on which $d>M/2$, the distribution $\sigma^2d''=d-2\sigma\nu$ is at least $M/2$, so $\tilde d(x)=d(x)-M(x-z_0)^2/(4\sigma^2)$ is
+convex on $I$. But $\frac12\{\tilde d(z_0+h)+\tilde d(z_0-h)\}\le d(z_0)-Mh^2/(4\sigma^2)<\tilde d(z_0)$ for small $h>0$, a contradiction.
+Hence $f^\star\le t^\star$ on $\R$, and the same argument at the minimum of $d$, where $\nu=P\ge0$ on
+$\{f^\star<u^\star\}$, gives $f^\star\ge u^\star$. Both overshoots in Lemma~\ref{lem:excessid} vanish.
+\end{proof}
+
+In (iii) the witness is therefore flat on the set it trims from each law, $P(\{f^\star=t^\star\})\ge\alpha$ and
+$Q(\{f^\star=u^\star\})\ge\alpha$. The argument rests on $k$ being the Green function of a second-order operator with a
+maximum principle.
+
+\subsection{Proof of Theorem~\ref{thm:laplacerate}}
+\label{sec:laplaceproof}
+
+Theorem~\ref{thm:laplacerate} is the following theorem with its constants absorbed in the $O$: as $\eta<1$,
+$L_{n,m}\ge\log(n\vee m)$, so $(\log(n\vee m))^{1/4}L_{n,m}^{1/2}\le L_{n,m}^{3/4}$ and
+$(\log(n\vee m))^{1/2}L_{n,m}\le L_{n,m}^{3/2}$.
+
+\begin{theorem}[Theorem~\ref{thm:laplacerate} with its constants]
+\label{thm:laplaceconst}
+Let $P,Q$ satisfy the hypotheses of Proposition~\ref{prop:newsobolev}, let $k(x,y)=e^{-|x-y|/\sigma}$ with $\sigma>0$
+fixed in advance, and let $n\wedge m\ge10$. Compute $\widehat\alpha$ at level $\delta$ as in
+Proposition~\ref{prop:loconsistency}, with the batches and fractions of Section~\ref{sec:betting},
+$\lambda_{\max}=\tfrac12$, initial variance $v_0^2\le4$ in \eqref{eq:fractions} and the running variance floored at
+$v^2_{\min}\in(0,4]$, an exact minimizer of \eqref{eq:qp} at each level, and a grid of $J$ levels in $(0,1)$ fixed
+in advance whose mesh below $\alpha^\star$ is $\Delta_{\mathcal G}$, but with cut points that are genuine empirical
+quantiles: any $(1-\alpha)$-quantile of the witness values at the $X$'s and any $\alpha$-quantile of those at the
+$Y$'s of the fitting batches, computed with or without the own terms. Let $\eta\in(0,1)$, $L_\delta=\log(1/\delta)$
+and $L_{n,m}=\log\{(n\vee m)/\eta\}$.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item If \eqref{eq:condR} holds for some $r_\ast\in(0,1]$ and $c_\ast>0$, then with probability at least $1-\delta-\eta$,
+\[
+\alpha^\star-\Delta_{\mathcal G}-C\,\frac{(\log(n\vee m))^{1/4}L_{n,m}^{1/2}
++v_{\min}^{-2}\{L_\delta^{1/2}+(\log(2J/\eta))^{1/2}\}}{(n\wedge m)^{1/2}}
+\ \le\ \widehat\alpha\ \le\ \alpha^\star .
+\]
+\item If instead $(P+Q)(\{x:|x-x_0|>t\})\le C'e^{-t/C'}$ for all $t>0$, then with probability at least
+$1-\delta-\eta$,
+\[
+\alpha^\star-\Delta_{\mathcal G}-C\bigg[\bigg\{\frac{(\log(n\vee m))^{1/2}L_{n,m}}{n\wedge m}\bigg\}^{4/9}
++\frac{L_\delta^{1/2}+(\log(2J/\eta))^{1/2}}{v_{\min}^{2}(n\wedge m)^{1/2}}\bigg]
+\le\widehat\alpha\le\alpha^\star .
+\]
+\end{enumerate}
+Here $C$ depends only on $\sigma$ and on the pair through $\alpha^\star$, the constants of
+Proposition~\ref{prop:newsobolev} with $s=1$, the tail constant $C'$ (that of $P+Q$ in (ii)), and, in (i), $c_\ast$, $r_\ast$ and
+the supremum of $p+q$ on $[x_0-r_\ast,x_0+r_\ast]$, which is finite once $r_\ast$ is small enough.
+\end{theorem}
+
+The constant $C$ degenerates when $c_\ast$ is small, as for narrow contaminations on a wide core, and it involves the
+constants $c_1$, $c_2$, $\epsilon_0$ of Proposition~\ref{prop:newsobolev}, which come from limiting arguments
+(Corollary~\ref{cor:newsobolev} and Proposition~\ref{prop:newmoments}) and are not explicit; whether $C$ is uniform over
+a natural class is open, and we return to it after Lemma~\ref{lem:laplocal}. The theorem needs exact minimizers of
+\eqref{eq:qp}, as self-clipping (Lemma~\ref{lem:lapclip}) is a first-order property whose survival under an inexact
+solve is open. In $\R^d$ the margin that Theorem~\ref{thm:newsobolev} gives a transversal crossing guarantees at best
+$(n\wedge m)^{-2/(d+3)}$, as a Sobolev kernel needs $s>d/2$, and the minimax rate is slower than parametric for
+$L_1$-type functionals \citep{lepski1999estimation,cai2011testing,han2020estimation}. The simulation of
+Section~\ref{sec:excessmc} agrees with the rate, but its cut points are interpolated between order statistics, which
+the theorem does not cover, and its grid approaches the known $\alpha^\star$ geometrically.
+
+The proof rests on a property special to the Laplace kernel on the line: the fitted witness never leaves the band
+between its cut points, so the fitted ramp maximizes the ratio of empirical excess to norm over the functions of oscillation at most
+one (Lemmas~\ref{lem:lapratio} and~\ref{lem:lapclip}). Comparing this ratio with the population path at the levels
+$\alpha^\star-\epsilon$ and $\alpha^\star-2\epsilon$ shows that the fitted ramp keeps a fixed fraction of $\epsilon$ as
+excess, up to two fluctuation terms (Lemma~\ref{lem:lapcompare}), which we bound through the norm and the error of the
+function, localized near $x_0$ by \eqref{eq:condR} (Lemmas~\ref{lem:lapintervals} to~\ref{lem:lapdev}); a fixed-point
+argument closes the bound (Proposition~\ref{prop:lapfitted}), and the bets are those of Theorem~\ref{thm:lorate}. Rescaling the data by $1/\sigma$ leaves the witness values, cut points and ramps unchanged and
+preserves the hypotheses with rescaled constants, so we take $\sigma=1$. The reproducing kernel Hilbert space of
+$e^{-|x-y|}$ is the Sobolev space $H^1(\R)$ with $\|f\|_\Hh^2=\tfrac12\int(f^2+f'^2)$, since $e^{-|x|}$ has Fourier
+transform $2/(1+\omega^2)$ \citep[Theorem~10.12]{wendland2005scattered}. Every $f\in\Hh$ is absolutely continuous,
+tends to $0$ at $\pm\infty$, and satisfies
+\begin{equation}
+|f(x)|\le\|f\|_\Hh,\qquad\int_a^b|f'|\le\sqrt{2(b-a)}\,\|f\|_\Hh .
+\label{eq:laphone}
+\end{equation}
+Write $\operatorname{osc}(f)=\sup f-\inf f$; for $f\in\Hh$ with $\operatorname{osc}(f)\le1$, $|f|\le1$, as $f$ tends to
+$0$ at infinity. For bounded $f$ let
+$L(f)=\int f\,d(P-Q)$ and $\mathrm{err}(f)=\alpha^\star-L(f)$, the error of Section~\ref{sec:linearmargin} when $f$ takes
+values in $[0,1]$. If $\operatorname{osc}(f)\le1$, then $0\le\mathrm{err}(f)\le2$, and with $M_f=\sup f$, $m_f=\inf f$,
+\begin{equation}
+\mathrm{err}(f)=\alpha^\star\{1-(M_f-m_f)\}+\int(M_f-f)(p-q)_+\,dx+\int(f-m_f)(q-p)_+\,dx ,
+\label{eq:laperr}
+\end{equation}
+all three terms being nonnegative: the error of a function of oscillation at most one is its loss of range plus its
+distances from its maximum where $p>q$ and from its minimum where $q>p$. With $\bar D$ as in
+Section~\ref{sec:generalmargin}, $\bar D_\alpha$ is the smallest $\|\mu_{P'}-\mu_{Q'}\|_\Hh$ over parts $P'\le P$,
+$Q'\le Q$ of mass $1-\alpha$, and we put
+$V(\epsilon)=\bar D_{\alpha^\star-\epsilon}$. For other laws $\tilde P,\tilde Q$ we write $\bar D_\alpha(\tilde P,\tilde Q)=(1-\alpha)D_\alpha(\tilde P,\tilde Q)$ for
+their rescaled path and $\tilde L(f)=\int f\,d(\tilde P-\tilde Q)$.
+
+By Proposition~\ref{prop:newsobolev} with $s=1$ there are $0<c_1\le c_2$ and $\epsilon_0\in(0,\alpha^\star]$ with
+$c_1\epsilon^{5/4}\le D_{\alpha^\star-\epsilon}\le c_2\epsilon^{5/4}$ for $0<\epsilon\le\epsilon_0$. Put
+\[
+\rho_0=\frac{(1-\alpha^\star)c_1}{2^{5/4}c_2},\quad c_V=(1-\alpha^\star)c_1\Big(\frac{\epsilon_0}{\alpha^\star}\Big)^{5/4},
+\quad\kappa_0=\min\Big\{\rho_0,\frac{(1-\alpha^\star)c_1(\epsilon_0/2)^{5/4}}{2\alpha^\star}\Big\},
+\]
+so that $\rho_0,\kappa_0\in(0,1)$ and $c_V>0$. Here $\rho_0$ is a lower bound on $V(\epsilon)/V(2\epsilon)$
+for $\epsilon<\epsilon_0/2$, by the two-sided bound and $(1-\alpha^\star)D_{\alpha^\star-\epsilon}\le V(\epsilon)\le
+D_{\alpha^\star-\epsilon}$; $c_V$ extends the lower bound to all levels, $V(\epsilon)\ge c_V\epsilon^{5/4}$ for
+$\epsilon\in(0,\alpha^\star]$, as $V(\epsilon)\ge(1-\alpha^\star)D_{\alpha^\star-\epsilon}$ and $V$ is nondecreasing; and
+$\kappa_0$ is the fraction of $\epsilon$ that the comparison below guarantees as excess. In (i) put $\bar p=\sup_{[x_0-r_\ast,x_0+r_\ast]}(p+q)$, which is finite once $r_\ast$ is small, as $p,q$ are continuous near
+$x_0$, and shrinking $r_\ast$ keeps \eqref{eq:condR} with the same $c_\ast$; off this
+interval $p+q\le|p-q|/(c_\ast r_\ast)$, so $P+Q$ inherits the exponential tails of $|P-Q|$.
+
+\begin{lemma}[Ratio inequality]
+\label{lem:lapratio}
+For any probability measures $\tilde P,\tilde Q$, any $\alpha\in[0,1)$ and any $\varphi\in\Hh\setminus\{0\}$ with
+$\operatorname{osc}(\varphi)\le1$, $\bar D_\alpha(\tilde P,\tilde Q)\ge\{\tilde L(\varphi)-\alpha\}/\|\varphi\|_\Hh$. In particular
+$V(\epsilon')\ge\{\epsilon'-\mathrm{err}(\varphi)\}/\|\varphi\|_\Hh$ for $\epsilon'\in[0,\alpha^\star]$.
+\end{lemma}
+
+\begin{proof}
+For parts $P''\le\tilde P$, $Q''\le\tilde Q$ of mass $1-\alpha$, $\int\varphi\,dP''\ge\int\varphi\,d\tilde P-\alpha\sup\varphi$ and
+$\int\varphi\,dQ''\le\int\varphi\,d\tilde Q-\alpha\inf\varphi$, so $\|\varphi\|_\Hh\|\mu_{P''}-\mu_{Q''}\|_\Hh\ge
+\int\varphi\,d(P''-Q'')\ge\tilde L(\varphi)-\alpha$; take the infimum over the parts.
+\end{proof}
+
+At a level $\alpha$ and a batch $b$, let $\tilde P,\tilde Q$ be the empirical laws of the fitting batches, of sizes
+$n',m'$, with the pooled points pairwise distinct (almost surely, as $P$ and $Q$ have densities), let $\widehat f$ be the witness direction, $\bar{\widehat D}=\bar
+D_\alpha(\tilde P,\tilde Q)$, $\widehat t=\widehat f(X)_{(\lceil n'(1-\alpha)\rceil)}$ and $\widehat u=\widehat f(Y)_{(\lfloor m'\alpha\rfloor+1)}$,
+the smallest $(1-\alpha)$-quantile of the values at the $X$'s and the largest $\alpha$-quantile of those at the $Y$'s.
+By Lemma~\ref{lem:lapclip}, $\widehat t$ is also the $(n'_{1-\alpha}+1)$-th smallest value at the $X$'s,
+$n'_{1-\alpha}=\lfloor n'(1-\alpha)\rfloor$, the cut of Proposition~\ref{prop:bangbang}, and likewise for $\widehat u$.
+
+\begin{lemma}[The fitted witness clips itself]
+\label{lem:lapclip}
+Let $\alpha\in(0,1)$. Then $\bar{\widehat D}>0$, $\widehat u\le\widehat f\le\widehat t$ on $\R$, $\widehat s=\widehat t-\widehat u
+=\operatorname{osc}(\widehat f)>0$, the values of $\widehat f$ at the $X$'s of rank at least $\lceil n'(1-\alpha)\rceil$
+equal $\widehat t$, and those at the $Y$'s of rank at most $\lfloor m'\alpha\rfloor+1$ equal $\widehat u$. Hence every
+genuine $(1-\alpha)$-quantile of the values at the $X$'s is $\widehat t$, every genuine $\alpha$-quantile of those at the
+$Y$'s is $\widehat u$, and the plain ramp is $\widehat\rp=(\widehat f-\widehat u)/\widehat s$. Moreover
+$\widehat\varphi=\widehat f/\widehat s$ has $\operatorname{osc}(\widehat\varphi)=1$, $\widehat N=\|\widehat\varphi\|_\Hh=
+1/\widehat s\ge\tfrac12$ and
+\[
+\tilde L(\widehat\varphi)-\alpha=\bar{\widehat D}\,\widehat N ,
+\]
+so by Lemma~\ref{lem:lapratio} $\widehat\varphi$ maximizes $\{\tilde L(\varphi)-\alpha\}/\|\varphi\|_\Hh$ over
+$\operatorname{osc}(\varphi)\le1$. With the own terms removed, the values at the $X$'s of rank at least
+$\lceil n'(1-\alpha)\rceil$ lie in $[\widehat t-1/(n'\bar{\widehat D}),\widehat t]$ and those at the $Y$'s of rank at most
+$\lfloor m'\alpha\rfloor+1$ in $[\widehat u,\widehat u+1/(m'\bar{\widehat D})]$.
+\end{lemma}
+
+\begin{proof}
+The empirical laws are themselves a pair to which the results on the population ramp apply. Since
+$\TV(\tilde P,\tilde Q)=1>\alpha$, $\bar{\widehat D}>0$ by \eqref{eq:zeroeq}. As noted at the start of
+Section~\ref{sec:excessproofs}, Lemmas~\ref{lem:excessbathtub} and~\ref{lem:excessid} and
+Proposition~\ref{prop:excess}(iii) use only Assumption~\ref{ass:regularity}, Lemmas~\ref{lem:attainment}
+and~\ref{lem:popramp}, and $\alpha<\TV(P,Q)$. They therefore hold for $\tilde P,\tilde Q$ and any
+$\alpha<1=\TV(\tilde P,\tilde Q)$,
+and the distributional argument of (iii) applies to the atomic measure $\nu=P''-Q''$ unchanged, as $\nu\le0$ on
+$\{\widehat f>\widehat t\}$. Applied to $\tilde P,\tilde Q$ they give the two facts from which everything else is read
+off: $\widehat u\le\widehat f\le\widehat t$ on $\R$, and $\tilde P\widehat\rp-\tilde Q\widehat\rp-\alpha=\bar{\widehat D}/\widehat s$. Both bounds are values of $\widehat f$ at sample points, so
+$\operatorname{osc}(\widehat f)=\widehat s$, and $\widehat s>0$, as $\int\widehat f\,dx=0$ forces
+$\max\widehat f>0>\min\widehat f$. The order statistics of rank at least $\lceil n'(1-\alpha)\rceil$ are at least
+$\widehat t$ and at most $\max\widehat f\le\widehat t$, so they equal $\widehat t$, and likewise those of the $Y$'s of
+rank at most $\lfloor m'\alpha\rfloor+1$ equal $\widehat u$. A genuine $(1-\alpha)$-quantile lies between the order
+statistics of ranks $\lceil n'(1-\alpha)\rceil$ and $\lfloor n'(1-\alpha)\rfloor+1$, and a genuine $\alpha$-quantile
+between those of ranks $\lceil m'\alpha\rceil\ge1$ and $\lfloor m'\alpha\rfloor+1$, so they are $\widehat t$ and
+$\widehat u$. As $\widehat\rp$ and $\widehat\varphi$ differ by a constant, $\tilde L(\widehat\varphi)=\tilde
+P\widehat\rp-\tilde Q\widehat\rp$, which gives the identity, and $\widehat N\ge\sup|\widehat\varphi|\ge\tfrac12$ by
+\eqref{eq:laphone}, as $\operatorname{osc}(\widehat\varphi)=1$. Finally, in the normalization of \eqref{eq:witness} the
+own term at $X_i$ is $w_i/\widehat D_\alpha=w_i(1-\alpha)/\bar{\widehat D}\in[0,1/(n'\bar{\widehat D})]$, and at $Y_j$ it
+is at most $1/(m'\bar{\widehat D})$; lowering each value by at most $c$ lowers each order statistic by at most $c$.
+\end{proof}
+
+At the population level, let $f^\star$, $t^\star$, $u^\star$ and $\rp^\star$ be as in
+Proposition~\ref{prop:excess} at $\alpha=\alpha^\star-\epsilon\in(0,\alpha^\star)$, $s^\star=t^\star-u^\star$ and
+$\varphi^\star=f^\star/s^\star$. By Proposition~\ref{prop:excess}(iii), $\operatorname{osc}(\varphi^\star)\le1$,
+$\|\varphi^\star\|_\Hh=1/s^\star$ and
+\begin{equation}
+L(\varphi^\star)-\alpha=\E_P\rp^\star-\E_Q\rp^\star-\alpha=V(\epsilon)/s^\star\le\epsilon ,
+\label{eq:lappop}
+\end{equation}
+the last inequality because $L(\varphi^\star)\le\alpha^\star$. So $s^\star\ge V(\epsilon)/\epsilon$,
+$\|\varphi^\star\|_\Hh\le c_V^{-1}\epsilon^{-1/4}$, $\mathrm{err}(\varphi^\star)\le\epsilon$, and $s^\star\le\operatorname{osc}(f^\star)\le2$.
+
+\begin{lemma}[Comparison]
+\label{lem:lapcompare}
+Let $\Delta(\varphi)=\int\varphi\,d\{(\tilde P-P)-(\tilde Q-Q)\}$, $\widehat\Delta=\Delta(\widehat\varphi)$,
+$\Delta^\star=\Delta(\varphi^\star)$, $\widehat T=\mathrm{err}(\widehat\varphi)$, $y=V(\epsilon)+s^\star\Delta^\star$ and
+$e=\E_P\widehat\rp-\E_Q\widehat\rp-\alpha=\epsilon-\widehat T$. Then:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item $e+\widehat\Delta=\bar{\widehat D}\widehat N$, $\bar{\widehat D}\ge y$, and $\widehat Ny+\widehat T\le\epsilon+\widehat\Delta$;
+\item if $\kappa_0\epsilon-|\Delta^\star|-\widehat\Delta>0$, then $e\ge\kappa_0\epsilon-|\Delta^\star|-\widehat\Delta$;
+\item if $|\Delta^\star|\le\kappa_0\epsilon/4$, then $y\ge V(\epsilon)/2\ge c_V\epsilon^{5/4}/2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (i) collects the basic relations. The identity is Lemma~\ref{lem:lapclip}, as
+$\tilde L(\widehat\varphi)-L(\widehat\varphi)=\widehat\Delta$. By Lemma~\ref{lem:lapratio} for $\tilde P,\tilde Q$ and
+$\varphi^\star$, and \eqref{eq:lappop}, $\bar{\widehat D}\ge s^\star\{L(\varphi^\star)-\alpha+\Delta^\star\}=y$, and
+multiplying by $\widehat N>0$ gives the last inequality, since $\bar{\widehat D}\widehat N=e+\widehat\Delta=\epsilon-\widehat
+T+\widehat\Delta$.
+
+Parts (ii) and (iii) compare the path at two levels. A fitted ramp with a small excess $e$ has error
+$\widehat T=\epsilon-e$ close to $\epsilon$, so at the level $\alpha^\star-2\epsilon$ it still has an excess of about
+$\epsilon$. Lemma~\ref{lem:lapratio} at that level then forces its norm $\widehat N$ up, and by (i) a large $\widehat N$
+forces $e$ up. The population enters through Proposition~\ref{prop:excess}(i) at $\alpha'=\alpha^\star-2\epsilon$, by
+which the population gap is a supporting slope of the path,
+\[
+s^\star\epsilon\ \le\ V(2\epsilon)-V(\epsilon)\qquad(2\epsilon\le\alpha^\star).
+\]
+Suppose first $\epsilon<\epsilon_0/2$, so that $V(\epsilon)/V(2\epsilon)\ge\rho_0\ge\kappa_0$.
+If $|\Delta^\star|\ge\epsilon V(\epsilon)/V(2\epsilon)$, then $\kappa_0\epsilon-|\Delta^\star|-\widehat\Delta\le-\widehat\Delta<e$
+by (i), as $\bar{\widehat D}\widehat N>0$, and (ii) holds; so assume $|\Delta^\star|<\epsilon V(\epsilon)/V(2\epsilon)$. Then
+$s^\star|\Delta^\star|<\{V(2\epsilon)-V(\epsilon)\}V(\epsilon)/V(2\epsilon)$, hence $0<y<V(2\epsilon)$ and
+$r=y/V(2\epsilon)\in(0,1)$. If $e+\epsilon\le0$, then $\widehat\Delta>\epsilon$ by (i), as $\bar{\widehat D}\widehat N>0$,
+contradicting the hypothesis of (ii). Otherwise $2\epsilon-\widehat T=e+\epsilon>0$, Lemma~\ref{lem:lapratio} at the
+level $\alpha^\star-2\epsilon$ gives $\widehat N\ge(e+\epsilon)/V(2\epsilon)$, and with (i)
+\[
+e+\widehat\Delta=\bar{\widehat D}\widehat N\ \ge\ y\widehat N\ \ge\ r(e+\epsilon),
+\qquad\text{that is,}\qquad(1-r)e\ \ge\ r\epsilon-\widehat\Delta .
+\]
+As $s^\star\epsilon\le V(2\epsilon)$, $r\epsilon\ge\epsilon V(\epsilon)/V(2\epsilon)-|\Delta^\star|$, so
+$(1-r)e\ge\kappa_0\epsilon-|\Delta^\star|-\widehat\Delta>0$, whence $e>0$ and $e\ge(1-r)e$. For (iii),
+$s^\star|\Delta^\star|\le\kappa_0V(2\epsilon)/4\le V(\epsilon)/4$, as $s^\star\le V(2\epsilon)/\epsilon$.
+
+If $\epsilon\ge\epsilon_0/2$, the path is bounded below by a constant: $V(\epsilon)\ge(1-\alpha^\star)c_1(\epsilon_0/2)^{5/4}\ge
+2\kappa_0\alpha^\star\ge2\kappa_0\epsilon$, and $s^\star\le2$. For (iii), $s^\star|\Delta^\star|\le\kappa_0\epsilon/2\le
+V(\epsilon)/4$. For (ii), if $y\ge0$, (i) and $\widehat N\ge\tfrac12$ give $e+\widehat\Delta\ge y/2\ge
+V(\epsilon)/2-|\Delta^\star|$, which is enough; if $y<0$, then $|\Delta^\star|>V(\epsilon)/2\ge\kappa_0\epsilon$, while
+$e+\widehat\Delta=\bar{\widehat D}\widehat N>0$, so $e>-\widehat\Delta>\kappa_0\epsilon-|\Delta^\star|-\widehat\Delta$.
+\end{proof}
+
+We bound $\Delta^\star$ and $\widehat\Delta$ next, the second for a function fitted on the same data. We do it for
+all functions of oscillation at most one at once, in terms of their norm and error, on one event that does not depend
+on the level.
+
+\begin{lemma}[Intervals]
+\label{lem:lapintervals}
+Let $\tilde P$ be the empirical law of $n$ independent draws from $P$, which has a continuous distribution function,
+let $\eta'\in(0,1)$, $x=\log\{2(n+1)^2/\eta'\}$ and $c_x=2x+4$. With probability at least $1-\eta'$, every interval
+$I\subseteq\R$ satisfies $|\tilde P(I)-P(I)|\le\{2P(I)x/n\}^{1/2}+c_x/n$.
+\end{lemma}
+
+\begin{proof}
+After the probability integral transform, a grid of at most $(n+1)^2$ intervals brackets every interval to within
+$2/n$, so Bernstein's inequality and a union bound over the grid suffice. Almost surely no observation lies in an interval of
+constancy of the distribution function $F$ or at one of its endpoints, so $X_i\in I$ if and only if $F(X_i)\in J$ for the interval $J$ with endpoints $F(\inf I),F(\sup I)$ of the
+same types, and $P(I)=|J|$; it suffices to treat uniform variables. For each of the at most $(n+1)^2$ intervals $G$ with
+endpoints in $\{0,1/n,\dots,1\}$, Bernstein's inequality \citep[Section~2.8]{boucheron2013concentration} for the binomial
+count, with deviation $\tau=(2n|G|x)^{1/2}+2x/3$, which satisfies $\tau^2\ge2x(n|G|+\tau/3)$, bounds
+$|\tilde P(G)-|G||$ by $(2|G|x/n)^{1/2}+2x/(3n)$ outside an event of probability $2e^{-x}$; a union bound covers all of
+them. A general $J$ lies between grid intervals $G^-\subseteq J\subseteq G^+$ with $|G^+|-|J|\le2/n$ and $|J|-|G^-|\le2/n$,
+which costs at most $(2\sqrt x+2)/n$; and $2\sqrt x+2x/3+2\le c_x$ as $x>2$.
+\end{proof}
+
+\begin{lemma}[Localized deviation]
+\label{lem:lapbv}
+On the event of Lemma~\ref{lem:lapintervals}, for every bounded interval $I$ and every $h:\R\to[0,1]$ continuous on
+the closure of $I$ with total variation $\mathrm V_I(h)$ there,
+\[
+\Big|\int_Ih\,d(\tilde P-P)\Big|\le\Big[2\{\mathrm V_I(h)+1\}\Big(\int_Ih\,dP\Big)\frac xn\Big]^{1/2}+\{\mathrm V_I(h)+1\}\frac{c_x}n .
+\]
+\end{lemma}
+
+\begin{proof}
+A function of bounded variation is an average of indicators of its upper level sets, each a union of few intervals,
+to which Lemma~\ref{lem:lapintervals} applies. By Tonelli's theorem, $\int_Ih\,d(\tilde P-P)=\int_0^1(\tilde P-P)(A_s)\,ds$ and $\int_Ih\,dP=\int_0^1P(A_s)\,ds$, with
+$A_s=\{z\in I:h(z)>s\}$. Each component $C$ of the relatively open set $A_s$ other than the rightmost one has
+$\sup C\in I\setminus A_s$ and $h(\sup C)=s$, so $A_s$ has at most $N(s)+1$ components, $N(s)$ being the number of
+points of $\bar I$ where $h=s$. By Banach's indicatrix theorem \citep{banach1925lignes}, $N$ is measurable and
+$\int N(s)\,ds=\mathrm V_I(h)$. Where $N(s)<\infty$, the event and the Cauchy--Schwarz inequality over the components give
+$|(\tilde P-P)(A_s)|\le[2\{N(s)+1\}P(A_s)x/n]^{1/2}+\{N(s)+1\}c_x/n$; integrate over $s$ and use the Cauchy--Schwarz
+inequality once more.
+\end{proof}
+
+\begin{lemma}[Deviation of functions of $\Hh$]
+\label{lem:lapdev}
+Let $\tilde P,\tilde Q$ be empirical laws of $n$ draws from $P$ and $m$ draws from $Q$ on whose events of
+Lemma~\ref{lem:lapintervals} the same $x\ge\log8$ holds, let $K\ge1$, $\pi_K=(P+Q)(\{|z-x_0|>K\})$,
+$s_{n,m}=(x/n)^{1/2}+(x/m)^{1/2}$ and $r_{n,m}=1/n+1/m$. Let $\varphi\in\Hh$ with $\operatorname{osc}(\varphi)\le1$,
+$N=\max(\|\varphi\|_\Hh,\tfrac12)$ and $T=\mathrm{err}(\varphi)$.
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $|\Delta(\varphi)|\le a'+\varpi'N^{1/2}+bN$, with $a'=5s_{n,m}+4c_xr_{n,m}+2\pi_K$, $\varpi'=2K^{1/4}s_{n,m}$
+and $b=6K^{1/2}c_xr_{n,m}$.
+\item Under \eqref{eq:condR}, $|\Delta(\varphi)|\le a+\varpi N^{1/2}T^{3/10}+bN$, with $a=A_0s_{n,m}+7c_xr_{n,m}+2\pi_K$,
+$\varpi=A_1K^{1/4}s_{n,m}$, $A_0=4+2(2\bar p)^{1/2}+4(c_\ast r_\ast)^{-1/2}$ and
+$A_1=2\{(2\sqrt2\,\bar p)^{1/2}+2^{1/5}(2\sqrt2/(c_\ast r_\ast))^{1/2}\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We bound $\int\varphi\,d(\tilde P-P)$; the bound for $\tilde Q$ is the same, and the two add. On the window
+$W=[x_0-K,x_0+K]$ Lemma~\ref{lem:lapbv} applies, with the variation of $\varphi$ controlled by its norm, and off $W$ only
+the tail mass enters. Let $M_\varphi=\sup\varphi$ and $m_\varphi=\inf\varphi$. By \eqref{eq:laphone} the variation of $\varphi$ on
+an interval of length $\lambda$ is at most $(2\lambda)^{1/2}N$, and off $W$, as $|\varphi|\le1$,
+$|\int_{W^c}\varphi\,d(\tilde P-P)|\le\tilde P(W^c)+P(W^c)\le2\pi^P_K+2(\pi^P_Kx/n)^{1/2}+2c_x/n$, with
+$\pi^P_K=P(W^c)$, by the event of Lemma~\ref{lem:lapintervals} for the two half-lines. For (a), write $\varphi=m_\varphi+h$ on $W$ and apply
+Lemma~\ref{lem:lapbv} with $\mathrm V_W(h)\le2K^{1/2}N$ and $\int_Wh\,dP\le1$, and the event to $m_\varphi(\tilde P-P)(W)$.
+
+For (b), the error $T$ controls the mass that $\varphi$ carries away from its extreme values where $p\neq q$, and
+\eqref{eq:condR} turns this into mass under $P$ away from $x_0$. Note that $T>0$: if
+$\operatorname{osc}(\varphi)<1$ by \eqref{eq:laperr}; otherwise $T=0$ would force $\varphi=M_\varphi$ almost everywhere on
+$\{p>q\}$ and $\varphi=m_\varphi$ on $\{q>p\}$, which by \eqref{eq:condR} contain punctured neighborhoods of $x_0$ on the
+right and on the left, and continuity at $x_0$ would give $M_\varphi=m_\varphi$. Write $\varphi=M_\varphi-h$ on $R_+=(x_0,\infty)$ and
+$\varphi=m_\varphi+h$ on $R_-=(-\infty,x_0]$, with $h\in[0,1]$. As $(\tilde P-P)(\R)=0$,
+\[
+\int\varphi\,d(\tilde P-P)=(M_\varphi-m_\varphi)(\tilde P-P)(R_+)-\int_{R_+}h\,d(\tilde P-P)+\int_{R_-}h\,d(\tilde P-P),
+\]
+and by \eqref{eq:laperr}, $\int_{R_+}h(p-q)\le T$ and $\int_{R_-}h(q-p)\le T$. Put $w=\min(r_\ast,T^{2/5})$ and split $R_+$
+into $I_1=(x_0,x_0+w]$, $I_2=(x_0+w,x_0+K]$ and $(x_0+K,\infty)$. On the short interval $I_1$,
+$\mathrm V_{I_1}(h)\le(2w)^{1/2}N$ and $\int_{I_1}h\,dP\le\bar pw$. On $I_2$ the densities differ, \eqref{eq:condR} gives
+$p\le(p-q)/(c_\ast w)$, so $\int_{I_2}h\,dP\le T/(c_\ast w)$, while $\mathrm V_{I_2}(h)\le(2K)^{1/2}N$.
+Lemma~\ref{lem:lapbv} bounds the two pieces by
+\begin{multline*}
+(2\sqrt2\,\bar p)^{1/2}w^{3/4}N^{1/2}\Big(\frac xn\Big)^{1/2}+(2\bar p)^{1/2}\Big(\frac xn\Big)^{1/2}
++(\sqrt2N+\sqrt2K^{1/2}N+2)\frac{c_x}n\\
++\Big\{\Big(\frac{2\sqrt2}{c_\ast}\Big)^{1/2}K^{1/4}N^{1/2}+\Big(\frac2{c_\ast}\Big)^{1/2}\Big\}\Big(\frac Tw\Big)^{1/2}\Big(\frac xn\Big)^{1/2} .
+\end{multline*}
+The width $w$ balances the first and the last term: it gives $w^{3/4}\le T^{3/10}$ and
+$(T/w)^{1/2}\le2^{1/5}r_\ast^{-1/2}T^{3/10}$, since if $w=T^{2/5}$ the latter is $T^{3/10}$, and if $w=r_\ast<T^{2/5}$ it is
+$T^{3/10}T^{1/5}r_\ast^{-1/2}$ with $T\le2$; also $(T/w)^{1/2}\le(2/r_\ast)^{1/2}$. The half-line $R_-$ is split in the same
+way, with $q-p$ for $p-q$. Adding the bounds for the two half-lines, for the term $(M_\varphi-m_\varphi)(\tilde
+P-P)(R_+)$, which the event of Lemma~\ref{lem:lapintervals} controls, and off $W$, and using
+$2\sqrt2(1+K^{1/2})\le6K^{1/2}$, we get
+\[
+\Big|\int\varphi\,d(\tilde P-P)\Big|\le A_0\Big(\frac xn\Big)^{1/2}+\frac{7c_x}n+2\pi^P_K
++A_1K^{1/4}N^{1/2}T^{3/10}\Big(\frac xn\Big)^{1/2}+\frac{6K^{1/2}Nc_x}n ,
+\]
+where $A_0$ collects the constant terms, $2(2\bar p)^{1/2}+4(c_\ast r_\ast)^{-1/2}$ from the two half-lines and at most
+$4$ from $(\tilde P-P)(R_+)$ and the tails. For $\tilde Q$, use $q\le(p-q)/(c_\ast w)$ on $I_2$ and $Q(I_1)\le\bar pw$.
+\end{proof}
+
+\begin{lemma}[Other cut points]
+\label{lem:lapown}
+Let $\widehat u\le\tilde u<\tilde t\le\widehat t$, $a_o=(\tilde u-\widehat u)/\widehat s$ and $b_o=(\widehat t-\tilde t)/\widehat
+s$, so that $a_o+b_o<1$. The ramp $\tilde\rp$ of $\widehat f$ between $\tilde u$ and $\tilde t$ satisfies
+$\E_P\tilde\rp-\E_Q\tilde\rp\ge\E_P\widehat\rp-\E_Q\widehat\rp-\max(a_o,b_o)\,\mathrm{err}(\widehat\rp)/(1-a_o-b_o)$. By
+Lemma~\ref{lem:lapclip}, own-term cut points at genuine quantiles have $a_o\le1/(m'\bar{\widehat D}\widehat s)$ and
+$b_o\le1/(n'\bar{\widehat D}\widehat s)$.
+\end{lemma}
+
+\begin{proof}
+Moving the cut points inward rescales the ramp, and the error of the ramp controls what the rescaling costs. As $\widehat f=\widehat u+\widehat s\widehat\rp$, $\tilde\rp=\chi(\widehat\rp)$ with
+$\chi(s)=\min[1,\max\{0,(s-a_o)/(1-a_o-b_o)\}]$, and checking the three pieces $[0,a_o]$, $[a_o,1-b_o]$, $[1-b_o,1]$
+gives $-a_o(1-s)\le(1-a_o-b_o)\{\chi(s)-s\}\le b_os$ on $[0,1]$. Integrate against $(p-q)_+$ and $(q-p)_+$ and use
+$\mathrm{err}(\rp)=\int(1-\rp)(p-q)_++\int\rp(q-p)_+$ for $[0,1]$-valued $\rp$.
+\end{proof}
+
+\begin{proposition}[The fitted ramp keeps a linear excess]
+\label{prop:lapfitted}
+On the events of Lemma~\ref{lem:lapintervals} for $\tilde P$ and $\tilde Q$ with a common $x\ge\log8$, and with the
+constants of Lemma~\ref{lem:lapdev} for the sizes $n',m'$, put, in case (i) of Theorem~\ref{thm:laplacerate},
+\[
+\epsilon_{\mathrm{fit}}=\max\Big\{\frac{24a}{\kappa_0},\frac{108\varpi}{\kappa_0c_V^{1/2}},\Big(\frac{300b}{\kappa_0c_V}\Big)^{4/5},
+\Big(\frac2{c_V}\Big)^{20/33}\varpi^{40/33},\Big(\frac{1920}{\kappa_0c_V^2(n'\wedge m')}\Big)^{2/3}\Big\},
+\]
+and in case (ii)
+\[
+\epsilon_{\mathrm{fit}}=\max\{24a'/\kappa_0,(60\varpi'\kappa_0^{-1}c_V^{-1/2})^{8/9},(156b\kappa_0^{-1}c_V^{-1})^{4/5},
+(576\kappa_0^{-1}c_V^{-2}(n'\wedge m')^{-1})^{2/3}\}.
+\]
+At every level $\alpha=\alpha^\star-\epsilon\in(0,\alpha^\star)$ with
+$\epsilon\ge\epsilon_{\mathrm{fit}}$, the ramp fitted on $\tilde P,\tilde Q$ with genuine-quantile cut points, plain or
+own-term, has cut points that do not cross and $\E_P\rp-\E_Q\rp-\alpha\ge\kappa_0\epsilon/2$.
+\end{proposition}
+
+\begin{proof}
+In case (i) we bound the fluctuation of the population ramp, then the norm and the error of the fitted ramp by a
+fixed-point argument, and then its fluctuation; the constants $24$, $108$ and $300$ in $\epsilon_{\mathrm{fit}}$ are
+chosen so that $a$, $\varpi$ and $b$ each contribute at most $\kappa_0\epsilon/12$ at the end; the fourth term gives $\varpi^5y^{-5/2}\le\epsilon$, and the fifth, with $1920=48\cdot40$, bounds the shifts $a_o,b_o$ of the own-term cut points by $\kappa_0/40$. As
+$\|\varphi^\star\|_\Hh\le c_V^{-1}\epsilon^{-1/4}$ and $\mathrm{err}(\varphi^\star)\le\epsilon$, Lemma~\ref{lem:lapdev}(b) and
+the first three terms of $\epsilon_{\mathrm{fit}}$ give
+\[
+|\Delta^\star|\le a+c_V^{-1/2}\varpi\epsilon^{7/40}+c_V^{-1}b\epsilon^{-1/4}\le\kappa_0\epsilon\Big(\frac1{24}+\frac1{108}+\frac1{300}\Big)<\frac{\kappa_0\epsilon}4 .
+\]
+By Lemma~\ref{lem:lapcompare}(iii), $y\ge c_V\epsilon^{5/4}/2$, so $b\le y/4$. The fitted ramp now appears on both sides:
+Lemma~\ref{lem:lapcompare}(i) and Lemma~\ref{lem:lapdev}(b) for $\widehat\varphi$ give
+$\widehat Ny+\widehat T\le\epsilon+a+\varpi\widehat N^{1/2}\widehat T^{3/10}+b\widehat N$. The weighted arithmetic--geometric mean inequality $u^{1/2}v^{3/10}w^{1/5}\le u/2+3v/10+w/5$ with $u=\widehat Ny$,
+$v=\widehat T$ and $w=\varpi^5y^{-5/2}$ separates the unknowns on the right, and with $b\widehat N\le\widehat Ny/4$ gives
+\[
+\frac{\widehat Ny}4+\frac{7\widehat T}{10}\le\epsilon+a+\frac{\varpi^5y^{-5/2}}5\le3\epsilon ,
+\]
+the fourth term of $\epsilon_{\mathrm{fit}}$ giving $\varpi^5y^{-5/2}\le\epsilon$. Hence $\widehat N\le24c_V^{-1}\epsilon^{-1/4}$
+and $\widehat T\le5\epsilon$: up to constants, the fitted ramp has the norm and the error of the population one.
+Lemma~\ref{lem:lapdev}(b) once more gives $\widehat\Delta\le a+8c_V^{-1/2}\varpi+24c_V^{-1}b\epsilon^{-1/4}$, so that
+$|\Delta^\star|+\widehat\Delta\le2a+9c_V^{-1/2}\varpi+25c_V^{-1}b\epsilon^{-1/4}\le\kappa_0\epsilon/4$, and by Lemma~\ref{lem:lapcompare}(ii) the plain ramp has excess at least $3\kappa_0\epsilon/4$. For own-term cut points,
+$\bar{\widehat D}\widehat s\ge y/\widehat N\ge c_V^2\epsilon^{3/2}/48$, so by Lemma~\ref{lem:lapown} and the fifth term
+$\max(a_o,b_o)\le\kappa_0/40$, and the loss is at most $(\kappa_0/40)(20/19)\,5\epsilon<\kappa_0\epsilon/4$.
+
+Case (ii) is the same argument with part (a) of Lemma~\ref{lem:lapdev}, which has no factor $T^{3/10}$. It gives
+$|\Delta^\star|\le a'+c_V^{-1/2}\varpi'\epsilon^{-1/8}+c_V^{-1}b\epsilon^{-1/4}\le\kappa_0\epsilon/4$, so
+$y\ge c_V\epsilon^{5/4}/2\ge4b$. With $\varpi'\widehat N^{1/2}\le\widehat Ny/4+\varpi'^2/y$ and $\varpi'^2/y\le\epsilon$
+(second term), $\widehat Ny/2+\widehat T\le3\epsilon$, so $\widehat N\le12c_V^{-1}\epsilon^{-1/4}$, $\widehat T\le3\epsilon$ and
+$|\Delta^\star|+\widehat\Delta\le2a'+5c_V^{-1/2}\varpi'\epsilon^{-1/8}+13c_V^{-1}b\epsilon^{-1/4}\le\kappa_0\epsilon/4$; the own
+terms have $\max(a_o,b_o)\le24/\{c_V^2(n'\wedge m')\epsilon^{3/2}\}\le\kappa_0/24$ and cost less than $\kappa_0\epsilon/4$.
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:laplaceconst}]
+The structure is that of the proof of Theorem~\ref{thm:lorate}, with Proposition~\ref{prop:lapfitted} in place of the
+margin: one event makes every fitted ramp good, and a union over the levels handles the bets.
+
+We first fix the fitting event. Take
+\[
+x=\log\{16(n\vee m+1)^2/\eta\},\qquad K=\max\{1,C'\log(n\vee m)\},
+\]
+so that the window of Lemma~\ref{lem:lapdev} leaves a tail mass of order $1/(n\vee m)$. Let $\mathcal E_{\mathrm{fit}}$
+be the intersection of the events of Lemma~\ref{lem:lapintervals}, each with $\eta'=\eta/8$, for the $X$'s and the
+$Y$'s of batch $0$ and of batches $0$ and $1$. These events weaken as $x$ grows, so all four hold with this $x$, and
+$\Pp(\mathcal E_{\mathrm{fit}}^c)\le\eta/2$. The constants of Lemma~\ref{lem:lapdev} and the last term of
+$\epsilon_{\mathrm{fit}}$ decrease in the sample sizes, so the $\epsilon_{\mathrm{fit}}$ of batch $0$ serves for both
+fits.
+
+Next we choose the distance $\epsilon$ from $\alpha^\star$. Let
+\[
+\widetilde T_{\mathrm{bet}}(J')=\Big(\frac2N\Big)^{1/2}\Big\{\Big(1+\frac{16}{v^2_{\min}}\Big)L_\delta^{1/2}
++\frac2{v_{\min}}\big(\log(2J'/\eta)\big)^{1/2}\Big\},
+\]
+the $T_{\mathrm{bet}}(\eta,J')$ of \eqref{eq:loconst} divided by $2\Delta_\phi$. With $J_\epsilon$ and $a_\epsilon$ as in
+Theorem~\ref{thm:lorate}, fix $\epsilon\in[\epsilon_{\mathrm{fit}},\alpha^\star)$ with
+$\kappa_0\epsilon\ge2\widetilde T_{\mathrm{bet}}(J_\epsilon)$, and put $\varrho_\ast=\kappa_0\epsilon/2$. Write each grid
+level $\alpha_j\le\alpha^\star-\epsilon$ as $\alpha_j=\alpha^\star-\epsilon\xi_j$, so that $\xi_j\ge1$ and
+$\epsilon\xi_j\ge\epsilon_{\mathrm{fit}}$. On $\mathcal E_{\mathrm{fit}}$, Proposition~\ref{prop:lapfitted} at the level
+$\alpha_j$ shows that both batches have a ramp with
+\[
+\E_P\rp_b-\E_Q\rp_b-\alpha_j\ \ge\ \varrho_\ast\xi_j .
+\]
+
+The bets then win at every such level. As $1>\kappa_0\epsilon\ge10(2L_\delta/N)^{1/2}$, we have $N\ge200L_\delta$, and
+the first bound of \eqref{eq:betbounds}, with $\mathcal E=\mathcal E_{\mathrm{fit}}$ and $\varrho=\varrho_\ast\xi_j$,
+gives
+\[
+\Pp\big(\mathcal E_{\mathrm{fit}}\cap\{H_{0,\alpha_j}\text{ is not rejected}\}\big)
+\le\exp\Big\{-\frac{v^2_{\min}}{4L_\delta}\big(\varrho_\ast\xi_jS-C_0\big)_+^2\Big\},
+\]
+with $S=(NL_\delta/2)^{1/2}$ and $C_0=L_\delta(1+16/v^2_{\min})$. Multiplied by $S$, the condition
+$\varrho_\ast\ge\widetilde T_{\mathrm{bet}}(J_\epsilon)$ reads
+$a_\ast=\varrho_\ast S-C_0\ge2v_{\min}^{-1}\{L_\delta\log(2J_\epsilon/\eta)\}^{1/2}$. Since
+$\varrho_\ast\xi_jS-C_0\ge a_\ast\xi_j$, each term is at most $e^{-A\xi_j^2}$ with
+$A=v^2_{\min}a_\ast^2/(4L_\delta)\ge\log(2J_\epsilon/\eta)>\log2$. The summation over the levels in the proof of
+Theorem~\ref{thm:lorate}, with $\gamma=1$, bounds the sum by $\eta/2$, and \eqref{eq:downclosed} gives
+$\Pp(\widehat\alpha<a_\epsilon)\le\eta$. Put $\epsilon_{n,m}=\max\{\epsilon_{\mathrm{fit}},2\widetilde
+T_{\mathrm{bet}}(J)/\kappa_0\}$, which is either at least $\alpha^\star$ or satisfies the requirements on $\epsilon$.
+With Corollary~\ref{cor:lower}, with probability at least $1-\delta-\eta$,
+\[
+\alpha^\star-\Delta_{\mathcal G}-\min\{\epsilon_{n,m},\alpha^\star\}\ \le\ \widehat\alpha\ \le\ \alpha^\star .
+\]
+
+It remains to read the orders of the terms of $\epsilon_{\mathrm{fit}}$ and of $\widetilde T_{\mathrm{bet}}$. As in the
+proof of Theorem~\ref{thm:lorate}(iii), $n'\wedge m'\ge(n\wedge m)/5$ and $N\ge(n\wedge m)/2$ for $n\wedge m\ge10$, so
+that
+\[
+s_{n',m'}\le2\Big(\frac{5x}{n\wedge m}\Big)^{1/2},\qquad r_{n',m'}\le\frac{10}{n\wedge m},\qquad
+\pi_K\le\frac{C''}{n\vee m},
+\]
+with $C''$ depending on $C'$ and, in case (i), on $c_\ast r_\ast$, and
+$K^{1/4}x^{1/2}\le C'''(\log(n\vee m))^{1/4}L_{n,m}^{1/2}$ with $C'''\ge1$ depending only on $C'$. If
+$K^{1/2}x>n\wedge m$, the bounds of the theorem exceed $1>\alpha^\star$ once $C\ge C'''$, and there is nothing to prove.
+Otherwise $u=K^{1/4}\{x/(n\wedge m)\}^{1/2}\le1$, and $u^{8/5}=\{K^{1/2}x/(n\wedge m)\}^{4/5}$, $u^{40/33}$,
+$(n\wedge m)^{-2/3}$ and $x/(n\wedge m)$, the other quantities through which $a$, $\varpi$, $b$ and the last term enter
+$\epsilon_{\mathrm{fit}}$ in case (i), are all at most $u$. Hence
+\[
+\epsilon_{\mathrm{fit}}\le Cu\ \text{ in case (i)},\qquad
+\epsilon_{\mathrm{fit}}\le C\Big\{\frac{K^{1/2}x}{n\wedge m}\Big\}^{4/9}\ \text{ in case (ii)},
+\]
+and, as $v^2_{\min}\le4$,
+\[
+\widetilde T_{\mathrm{bet}}(J)\le\frac{2\{20L_\delta^{1/2}+4(\log(2J/\eta))^{1/2}\}}{v^2_{\min}(n\wedge m)^{1/2}}.
+\]
+\end{proof}
+
+Near every pair covered by part (i) no valid lower bound does better than $(n\wedge m)^{-1/2}$. The pairs of Proposition~\ref{prop:lower2pt} are separated
+and do not satisfy these hypotheses, so we perturb $P$ away from $x_0$ instead.
+
+\begin{lemma}[A local two-point bound]
+\label{lem:laplocal}
+Let $(P,Q)$ satisfy the hypotheses of Theorem~\ref{thm:laplacerate}(i), let $r\in(0,r_\ast]$ be such that $p,q$ are continuous
+and positive on $[x_0-2r,x_0+2r]$, put $A_1=(x_0+r,x_0+2r)$, $B_1=(x_0-2r,x_0-r)$, $\pi=\min\{P(A_1),P(B_1)\}>0$ and, for
+$h\in[0,1]$,
+\[
+P_h=P+h\pi\Big\{\frac{P(\cdot\cap A_1)}{P(A_1)}-\frac{P(\cdot\cap B_1)}{P(B_1)}\Big\}.
+\]
+Then $P_h$ is a probability measure, $\TV(P_h,Q)=\alpha^\star+h\pi$, and $(P_h,Q)$ satisfies the hypotheses of
+Theorem~\ref{thm:laplacerate}(i), with $c_\ast/2$, $2\bar p$ and a tail constant depending only on $C'$ and $r$. Every
+$\tilde\alpha$, a measurable function of the samples and of an independent randomization, with
+$\Pp_{P,Q}(\tilde\alpha>\alpha^\star)\le\delta$ satisfies
+$\Pp_{P_h,Q}\{\TV(P_h,Q)-\tilde\alpha\ge h\pi\}\ge1-\delta-h(n\pi)^{1/2}$. The same holds for the second sample, with $Q$
+moved from $A_1$ to $B_1$, $m$ in place of $n$ and $\pi'=\min\{Q(A_1),Q(B_1)\}$ in place of $\pi$.
+\end{lemma}
+
+\begin{proof}
+Moving mass $h\pi$ from $B_1$ to $A_1$, away from $x_0$, raises the total variation by $h\pi$ without touching the
+crossing, and costs little in $\chi^2$-divergence. The density of $P_h$ is $p\{1+h\pi/P(A_1)\}$ on $A_1$, $p\{1-h\pi/P(B_1)\}\ge0$ on $B_1$ and $p$ elsewhere; it jumps
+at $x_0\pm r$ and $x_0\pm2r$, which is harmless, as the hypotheses ask continuity near $x_0$ only. By
+\eqref{eq:condR}, $p>q$ almost everywhere on $A_1$ and $q>p$ on $B_1$, so $p_h-q$ has the sign of $p-q$ everywhere and
+$\TV(P_h,Q)=\int_{\{p>q\}}(p_h-q)=\alpha^\star+h\pi$. Near $x_0$ nothing changes, so the hypotheses of
+Proposition~\ref{prop:newsobolev} hold; on $A_1$, $|p_h-q|\ge|p-q|$ and $p_h+q\le2(p+q)$, and on $B_1$, $|p_h-q|\ge|p-q|$ and
+$p_h\le p$, which gives \eqref{eq:condR} with $c_\ast/2$. Further, $\chi^2(P_h\|P)=(h\pi)^2\{1/P(A_1)+1/P(B_1)\}\le2h^2\pi$, so,
+by $\mathrm{KL}\le\chi^2$ for each of the $n$ observations and Pinsker's inequality, the laws of the data and the randomization under $(P,Q)$ and
+$(P_h,Q)$ are at total variation at most $\{n\chi^2(P_h\|P)/2\}^{1/2}\le h(n\pi)^{1/2}$, and on $\{\tilde\alpha\le\alpha^\star\}$ the
+error at $(P_h,Q)$ is at least $h\pi$. For the second sample, $Q_h=Q+h\pi'\{Q(\cdot\cap B_1)/Q(B_1)-Q(\cdot\cap A_1)/Q(A_1)\}$
+with $\pi'=\min\{Q(A_1),Q(B_1)\}$ gives $\TV(P,Q_h)=\alpha^\star+h\pi'$ in the same way.
+\end{proof}
+
+With $h=(1-\delta)/\{2(n\pi)^{1/2}\}$, which is at most $1$ once $n\pi\ge1/4$, a valid lower bound falls short at $(P_h,Q)$
+by at least $\tfrac12(1-\delta)(\pi/n)^{1/2}$ with probability at least $(1-\delta)/2$. The constants of
+Proposition~\ref{prop:newsobolev} for $(P_h,Q)$ exist; whether they stay bounded uniformly in $h$, as a minimax
+statement over a class containing these pairs would need, is open.
+
+\subsection{The two-point lower bound and the minimax rate}
+\label{sec:optproofs}
+
+This subsection proves Proposition~\ref{prop:lower2pt} and Corollary~\ref{cor:minimax} of the main text. The
+perturbed pairs of Proposition~\ref{prop:lower2pt} satisfy the margin condition with a constant that does not depend on
+$a$ or $h$.
+
+\begin{lemma}[The two-point pairs satisfy the margin]
+\label{lem:twopointmargin}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, let $R$, $P_0$ and $Q_0$ be probability measures
+concentrated on pairwise disjoint measurable sets $S_R$, $S_P$ and $S_Q$, define $P_a$, $Q_a$, $P_{a,h}$ and $Q_{a,h}$
+as in Proposition~\ref{prop:lower2pt}, and suppose some $f\in\Hh$ takes the value $0$ on $S_R$, $1$ on $S_P$ and $-1$
+on $S_Q$. Then for every $a\in(0,1)$ and $h\in[0,1-a)$, each of the pairs $(P_{a,h},Q_a)$ and $(P_a,Q_{a,h})$, with
+$\alpha^\star=a+h$, satisfies $D_{\alpha^\star-\epsilon}\ge\epsilon/\|f\|_\Hh$ for all $\epsilon\in[0,\alpha^\star]$,
+that is, Assumption~\ref{ass:margin} with $\gamma=1$ and $c_0=1/\|f\|_\Hh$.
+\end{lemma}
+
+\begin{proof}
+Consider $(P_{a,h},Q_a)$ and fix $\alpha\in[0,\alpha^\star]$. Under $P_{a,h}$, $f(X)\in\{0,1\}$ almost surely with
+$P_{a,h}(f(X)=1)=a+h$. Since $1-\alpha\ge1-a-h$, an $\alpha$-trimming $P'=gP_{a,h}$ puts mass at most
+$\beta(1-a-h)\le1$ on $\{f=0\}$, so $\E_{P'}f\ge1-\beta(1-a-h)=(a+h-\alpha)/(1-\alpha)$. Under $Q_a$,
+$f(Y)\in\{0,-1\}$ almost surely with $Q_a(f(Y)=-1)=a$, and an $\alpha$-trimming $Q'$ puts mass at most
+$\min\{1,\beta(1-a)\}$ on $\{f=0\}$, so $\E_{Q'}f\le-(1-\beta(1-a))_+=-(a-\alpha)_+/(1-\alpha)\le0$. By the reproducing
+property and the Cauchy--Schwarz inequality, for all such $P'$ and $Q'$,
+\[
+\MMD(P',Q')\ge\frac{\E_{P'}f-\E_{Q'}f}{\|f\|_\Hh}\ge\frac{a+h-\alpha}{(1-\alpha)\|f\|_\Hh}\ge\frac{\alpha^\star-\alpha}{\|f\|_\Hh} .
+\]
+Taking the infimum over $P'$ and $Q'$ and putting $\alpha=\alpha^\star-\epsilon$ gives the claim. The pair
+$(P_a,Q_{a,h})$ is the same computation with $-f$ in place of $f$ and the roles of the two laws exchanged.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:lower2pt}]
+The two pairs are close in $\chi^2$, so a bound valid at the first must often fall short at the second, by Le Cam's
+two-point method. The three measures are mutually singular. Hence $P_{a,h}\wedge Q_a$ has mass $\min(1-a-h,1-a)=1-a-h$ on $S_R$ and
+none elsewhere, so $\TV(P_{a,h},Q_a)=a+h$, and likewise $\TV(P_a,Q_{a,h})=a+h$ and $\TV(P_a,Q_a)=a$. The density of
+$P_{a,h}$ with respect to $P_a$ is $(1-a-h)/(1-a)$ on $S_R$ and $(a+h)/a$ on $S_P$, so
+\[
+\chi^2(P_{a,h}\,\|\,P_a)=(1-a)\Big(\frac h{1-a}\Big)^2+a\Big(\frac ha\Big)^2=\frac{h^2}{a(1-a)} .
+\]
+Let $\mathbb Q_0$ and $\mathbb Q_1$ be the laws of the data and the randomization under $(P_a,Q_a)$ and under
+$(P_{a,h},Q_a)$. They differ only in the law of the $n$ observations of the first sample, and the Kullback--Leibler
+divergence adds over independent coordinates, so with $\mathrm{KL}\le\log(1+\chi^2)\le\chi^2$,
+$\mathrm{KL}(\mathbb Q_1\|\mathbb Q_0)\le nh^2/\{a(1-a)\}$. By Pinsker's inequality
+$\TV(\mathbb Q_0,\mathbb Q_1)\le\{\mathrm{KL}(\mathbb Q_1\|\mathbb Q_0)/2\}^{1/2}\le h\{n/(2a(1-a))\}^{1/2}$. Therefore
+\[
+\Pp_{P_{a,h},Q_a}(\tilde\alpha\le a)\ge\Pp_{P_a,Q_a}(\tilde\alpha\le a)-\TV(\mathbb Q_0,\mathbb Q_1)
+\ge1-\delta-h\sqrt{n/\{2a(1-a)\}},
+\]
+and on $\{\tilde\alpha\le a\}$ the error at $(P_{a,h},Q_a)$, whose total variation is $a+h$, is at least $h$. The same
+argument with the second sample perturbed gives the bound with $m$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:minimax}]
+Write $\bar n=n\wedge m$. For (i), let $R$, $P_0$ and $Q_0$ be the point masses at $x_2$, $x_1$ and $x_3$, put $a=a_0$ and
+$h=c_{\mathrm{lo}}\bar n^{-1/2}$, so that $a_0+h\le a_1<1$ by the condition on $\bar n$. The pair $(P_{a_0},Q_{a_0})$ belongs to
+$\mathcal M$ by Example~\ref{ex:separated}, since $c_0\le1/\|f\|_\Hh\le2/\|f\|_\Hh$, and the two perturbed pairs belong
+to $\mathcal M$ by Lemma~\ref{lem:twopointmargin}. If $\bar n=n$, Proposition~\ref{prop:lower2pt} at the pair
+$(P_{a_0,h},Q_{a_0})$ gives an error of at least $h$ with probability at least
+$1-\delta-h\{n/(2a_0(1-a_0))\}^{1/2}=(1-\delta)/2$; if $\bar n=m$, the pair $(P_{a_0},Q_{a_0,h})$ gives the same with $m$.
+
+For (ii), validity is Corollary~\ref{cor:lower}. On the grid $\{j\bar n^{-1/2}\}$ the smallest gap is $\Delta_{\min}=\bar n^{-1/2}$ and
+the mesh below $\alpha^\star$ is at most $\bar n^{-1/2}$. Apply Theorem~\ref{thm:lorate}(i) with $\epsilon=C_\epsilon
+\bar n^{-1/2}$: then $J_\epsilon\le2(1+C_\epsilon)$ does not grow with $\bar n$, and by Theorem~\ref{thm:lorate}(iii),
+$r_1\le12/\bar n$ and the number of pairs is at least $\bar n/2$, so $\beta_\star\max\{T_{\mathrm{fit}}(\eta),
+T_{\mathrm{bet}}(\eta,J_\epsilon)\}\le C''(C_\epsilon)\bar n^{-1/2}$ with $\beta_\star\le(1-a_1)^{-1}$ and $C''(C_\epsilon)$
+growing like $\{\log(1+C_\epsilon)\}^{1/2}$. Choose $C_\epsilon$ with $c_0C_\epsilon\ge C''(C_\epsilon)$ and let
+$\bar n\ge10$, so that Theorem~\ref{thm:lorate}(iii) applies; every step of the proof holds for these sizes, so $n_1=10$
+will do. If $\epsilon>\alpha^\star$, then $\widehat\alpha\ge0>\alpha^\star
+-\epsilon$ and there is nothing to prove. Otherwise $\epsilon\in(0,\alpha^\star]$, Theorem~\ref{thm:lorate}(i) gives
+$\Pp(\widehat\alpha<a_\epsilon)\le\eta$, and $a_\epsilon\ge\alpha^\star-\epsilon-\bar n^{-1/2}$. In both
+cases $\Pp(\alpha^\star-\widehat\alpha>(C_\epsilon+1)\bar n^{-1/2})\le\eta$. Take $C=C_\epsilon+1$.
+\end{proof}

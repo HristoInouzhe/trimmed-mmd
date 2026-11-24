@@ -1,0 +1,214 @@
+[
+  {
+    "scenario": "sobolev_m2",
+    "n": 5000,
+    "reps": 26,
+    "noise_floor": 0.0016082035476517387,
+    "floor_multiple_required": 4.0,
+    "gamma_hat_all_points": 0.6260382661145042,
+    "c0_hat_all_points": 0.08684107293255111,
+    "n_points_all": 6,
+    "gamma_hat_floor_restricted": null,
+    "c0_hat_floor_restricted": null,
+    "n_points_floor_restricted": 1,
+    "gamma_hat": 1.5356289962240184,
+    "c0_hat": 3.9141655125223416,
+    "n_points_used": 6,
+    "local_slopes": [
+      {
+        "eps_from": 0.01351454946792141,
+        "eps_to": 0.010135912100941058,
+        "gamma_local": 1.505849234342146
+      },
+      {
+        "eps_from": 0.010135912100941058,
+        "eps_to": 0.0076019340757057935,
+        "gamma_local": 1.4675305378619554
+      },
+      {
+        "eps_from": 0.0076019340757057935,
+        "eps_to": 0.005067956050470529,
+        "gamma_local": 1.4315518827429239
+      },
+      {
+        "eps_from": 0.005067956050470529,
+        "eps_to": 0.0033786373669803527,
+        "gamma_local": 1.4564015891305626
+      },
+      {
+        "eps_from": 0.0033786373669803527,
+        "eps_to": 0.0016893186834901763,
+        "gamma_local": 1.7369747090232062
+      }
+    ],
+    "lemma11_requires_gamma_at_least_1": true,
+    "consistent_with_lemma11": true,
+    "m_spline": 2,
+    "t_used": 2.3,
+    "matern_s": 2.0,
+    "matern_nu": 1.5,
+    "theta": 0.5348837209302325,
+    "gamma_predicted": 1.8695652173913044,
+    "alpha_star": 0.0844659341745088,
+    "eps_dgp": 0.05
+  },
+  {
+    "scenario": "sobolev_m3",
+    "n": 5000,
+    "reps": 26,
+    "noise_floor": 0.002052836509924741,
+    "floor_multiple_required": 4.0,
+    "gamma_hat_all_points": 0.5932903220134942,
+    "c0_hat_all_points": 0.0911359271951936,
+    "n_points_all": 6,
+    "gamma_hat_floor_restricted": null,
+    "c0_hat_floor_restricted": null,
+    "n_points_floor_restricted": 0,
+    "gamma_hat": 1.5161105532521553,
+    "c0_hat": 4.327965591179271,
+    "n_points_used": 6,
+    "local_slopes": [
+      {
+        "eps_from": 0.013126722947549505,
+        "eps_to": 0.009845042210662125,
+        "gamma_local": 1.5090399839112731
+      },
+      {
+        "eps_from": 0.009845042210662125,
+        "eps_to": 0.007383781657996594,
+        "gamma_local": 1.4541185436405433
+      },
+      {
+        "eps_from": 0.007383781657996594,
+        "eps_to": 0.0049225211053310625,
+        "gamma_local": 1.427276274015393
+      },
+      {
+        "eps_from": 0.0049225211053310625,
+        "eps_to": 0.0032816807368873796,
+        "gamma_local": 1.4485005053324445
+      },
+      {
+        "eps_from": 0.0032816807368873796,
+        "eps_to": 0.0016408403684436829,
+        "gamma_local": 1.6843062087850433
+      }
+    ],
+    "lemma11_requires_gamma_at_least_1": true,
+    "consistent_with_lemma11": true,
+    "m_spline": 3,
+    "t_used": 3.3,
+    "matern_s": 2.0,
+    "matern_nu": 1.5,
+    "theta": 0.6226415094339622,
+    "gamma_predicted": 1.6060606060606062,
+    "alpha_star": 0.0820420184221844,
+    "eps_dgp": 0.05
+  },
+  {
+    "scenario": "sobolev_m4",
+    "n": 5000,
+    "reps": 26,
+    "noise_floor": 0.0019829272158169357,
+    "floor_multiple_required": 4.0,
+    "gamma_hat_all_points": 0.5763724411546609,
+    "c0_hat_all_points": 0.07462819636980247,
+    "n_points_all": 6,
+    "gamma_hat_floor_restricted": null,
+    "c0_hat_floor_restricted": null,
+    "n_points_floor_restricted": 0,
+    "gamma_hat": 1.9106636247817819,
+    "c0_hat": 24.208433771078035,
+    "n_points_used": 6,
+    "local_slopes": [
+      {
+        "eps_from": 0.01281774811164306,
+        "eps_to": 0.009613311083732298,
+        "gamma_local": 1.5485203739786548
+      },
+      {
+        "eps_from": 0.009613311083732298,
+        "eps_to": 0.00720998331279922,
+        "gamma_local": 1.567492669771629
+      },
+      {
+        "eps_from": 0.00720998331279922,
+        "eps_to": 0.004806655541866142,
+        "gamma_local": 1.5306327126043469
+      },
+      {
+        "eps_from": 0.004806655541866142,
+        "eps_to": 0.0032044370279107615,
+        "gamma_local": 1.6717927622313287
+      },
+      {
+        "eps_from": 0.0032044370279107615,
+        "eps_to": 0.0016022185139553807,
+        "gamma_local": 2.7305788394275403
+      }
+    ],
+    "lemma11_requires_gamma_at_least_1": true,
+    "consistent_with_lemma11": true,
+    "m_spline": 4,
+    "t_used": 4.3,
+    "matern_s": 2.0,
+    "matern_nu": 1.5,
+    "theta": 0.6825396825396826,
+    "gamma_predicted": 1.4651162790697674,
+    "alpha_star": 0.08011092569776916,
+    "eps_dgp": 0.05
+  },
+  {
+    "scenario": "sobolev_m5",
+    "n": 5000,
+    "reps": 26,
+    "noise_floor": 0.002228225048892615,
+    "floor_multiple_required": 4.0,
+    "gamma_hat_all_points": 0.558109686841472,
+    "c0_hat_all_points": 0.0852739186662877,
+    "n_points_all": 6,
+    "gamma_hat_floor_restricted": null,
+    "c0_hat_floor_restricted": null,
+    "n_points_floor_restricted": 0,
+    "gamma_hat": 1.3313682999469576,
+    "c0_hat": 2.0574264126996065,
+    "n_points_used": 6,
+    "local_slopes": [
+      {
+        "eps_from": 0.012547013373189614,
+        "eps_to": 0.009410260029892203,
+        "gamma_local": 1.4322867602609501
+      },
+      {
+        "eps_from": 0.009410260029892203,
+        "eps_to": 0.007057695022419153,
+        "gamma_local": 1.3765385692029688
+      },
+      {
+        "eps_from": 0.007057695022419153,
+        "eps_to": 0.004705130014946102,
+        "gamma_local": 1.335529061380365
+      },
+      {
+        "eps_from": 0.004705130014946102,
+        "eps_to": 0.0031367533432974104,
+        "gamma_local": 1.2990496641140739
+      },
+      {
+        "eps_from": 0.0031367533432974104,
+        "eps_to": 0.0015683766716487052,
+        "gamma_local": 1.3002651890240349
+      }
+    ],
+    "lemma11_requires_gamma_at_least_1": true,
+    "consistent_with_lemma11": true,
+    "m_spline": 5,
+    "t_used": 5.3,
+    "matern_s": 2.0,
+    "matern_nu": 1.5,
+    "theta": 0.726027397260274,
+    "gamma_predicted": 1.3773584905660377,
+    "alpha_star": 0.0784188335824351,
+    "eps_dgp": 0.05
+  }
+]

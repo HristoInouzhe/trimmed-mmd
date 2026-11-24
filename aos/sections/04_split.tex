@@ -1,0 +1,174 @@
+\section{The split-sample lower bound}
+\label{sec:split}
+
+The threshold of Section~\ref{sec:analytic} is a worst case over the whole null. Our method avoids it: we fit the
+witness and its two cuts on part of the data and test a fixed function on the rest, refitting on each batch. The
+batches and the number of bets are fixed in advance, so the test is valid at every sample size but not anytime-valid.
+Validity rests on one inequality, $\E_P\rp-\E_Q\rp\le\TV(P,Q)$ for every $\rp$ with values in $[0,1]$, as in the
+framework of \citet{naf2022hplb}, with the clipped witness in the role of their classifier.
+
+\subsection{A ramp of the witness}
+\label{sec:ramp}
+
+Any unit vector $f\in\Hh$ gives a lower bound on the distance between two sets $A,B\subset\Hh$,
+\[
+\dist(A,B)\ge\mathrm{sep}(f;A,B)\coloneqq\inf_{a\in A}\langle f,a\rangle_\Hh-\sup_{b\in B}\langle f,b\rangle_\Hh ,
+\]
+with equality when $A,B$ are convex and weakly compact, $\dist(A,B)>0$, and $f$ is the direction of the minimal-norm
+difference (Lemma~\ref{lem:separation} of the supplement). A direction chosen from data is therefore harmless once it
+is independent of the data on which it is evaluated. For the trimmed regions both terms of $\mathrm{sep}$ are trimmed
+means by Lemma~\ref{lem:cvar}, of $f(X)$ over the lower and of $f(Y)$ over the upper $(1-\alpha)$-fraction of its
+distribution. A trimmed mean is cut at a quantile, which depends on the data and makes it hard to calibrate. With the cut fixed in advance it becomes an ordinary mean, as in the second reading of Lemma~\ref{lem:cvar}. For a bounded
+measurable $f$ and reals $t,u$ put
+\[
+\theta(f;t,u)\coloneqq\E_P\big[t-\beta(t-f(X))_+\big]-\E_Q\big[u+\beta(f(Y)-u)_+\big].
+\]
+
+\begin{lemma}[Cut points turn the separation into a ramp]
+\label{lem:ramp}
+Let $f$ be bounded and measurable and $\alpha\in[0,1)$. Then:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item $\theta(f;t,u)\le\inf_{P'\in R_\alpha(P)}\E_{P'}f-\sup_{Q'\in R_\alpha(Q)}\E_{Q'}f$ for all reals $t,u$; the
+supremum of the left side over $(t,u)$ equals the right side and is attained at a $(1-\alpha)$-quantile of $f(X)$
+and an $\alpha$-quantile of $f(Y)$; and for $f$ in the unit ball of $\Hh$ the right side is
+$\mathrm{sep}(f;\mathcal C_\alpha(P),\mathcal C_\alpha(Q))$;
+\item if $t>u$, then with the clipped witness $\tilde f=(f\vee u)\wedge t$ and the ramp $\rp=(\tilde f-u)/(t-u)$, which
+takes values in $[0,1]$, $\theta(\tilde f;t,u)=\beta(t-u)\big(\E_P\rp-\E_Q\rp-\alpha\big)\ge\theta(f;t,u)$;
+\item every measurable $\rp$ with values in $[0,1]$, the ramp in particular, has $\E_P\rp-\E_Q\rp\le\TV(P,Q)$.
+\end{enumerate}
+\end{lemma}
+
+In practice $f$ is the witness direction $\widehat f$. The \emph{clipped witness} $\tilde f$ is $f$ with its values
+below $u$ raised to $u$ and above $t$ lowered to $t$, and the \emph{ramp} $\psi$ rescales it to $[0,1]$, a soft
+classifier, as the witness is large where $P$ has more mass. By part (i), the trimmed separation in direction $f$ is the
+largest value of $\theta(f;t,u)$ over the cut points, attained at the cuts of Proposition~\ref{prop:bangbang}, and once
+these are fixed $\theta$ is a difference of two ordinary means. By part (ii), clipping never lowers $\theta$ and turns
+it into a positive multiple of $\E_P\psi-\E_Q\psi-\alpha$, which by part (iii) never exceeds $\TV(P,Q)-\alpha$. So,
+with the cut points fixed, a test that rejects $\E_P\psi-\E_Q\psi\le\alpha$ shows that $\TV(P,Q)>\alpha$, with no
+further assumption on the laws.
+
+\subsection{A betting test}
+\label{sec:betting}
+
+The test of $\E_P\psi-\E_Q\psi\le\alpha$ must use data that played no part in choosing $\psi$, and it should keep its
+level at every sample size. We obtain both by splitting the samples. Before the data are examined, each sample is put in
+a random order and cut into three batches, the first quarter (batch $0$), the second quarter (batch $1$) and the second
+half (batch $2$). Batch $0$ is used only for fitting, and
+batches $1$ and $2$ are bet on, each with a function fitted on the batches before it. Any number of batches at fractions
+fixed in advance would do (Section~\ref{sec:bettingdetails} of the supplement).
+
+Before betting on batch $b\in\{1,2\}$, we solve \eqref{eq:qp} at level $\alpha$ on the batches before it and take the
+witness direction $\widehat f_b$. Its cut points are those at which a trimming at level $\alpha$ would cut: the
+smallest $(1-\alpha)$-quantile $\widehat t_b$ of its values at the $X$'s of those batches, their
+$\lceil n_{<b}(1-\alpha)\rceil$-th order statistic, and the largest $\alpha$-quantile $\widehat u_b$ of its values at
+their $Y$'s, the $(\lfloor m_{<b}\alpha\rfloor+1)$-th, where $n_{<b},m_{<b}$ are the sizes of the batches before $b$.
+Each value is computed without the point's own term in \eqref{eq:witness}, which pulls the value at a fitting point
+toward its own sample, and removing it is a cheap leave-one-out correction of the in-sample bias of these quantiles.
+If $\widehat t_b>\widehat u_b$, let $\psi_b$ be the ramp of $\widehat f_b$ between $\widehat u_b$ and $\widehat t_b$;
+otherwise batch $b$ is skipped.
+
+Within batch $b$ each $X$ is paired with a block of $Y$'s (or the reverse when the $Y$'s are fewer), and each pair
+gives $Z=\psi_b(X)-\overline{\psi_b(Y)}$, the bar being the mean over the block. Given the earlier batches, $Z$ takes
+values in $[-1,1]$ and has mean $\E_P\psi_b-\E_Q\psi_b$, at most $\alpha$ under $H_{0,\alpha}$ by
+Lemma~\ref{lem:ramp}(iii). The pairs of both batches, numbered $k=1,\dots,N$, number about $\tfrac34\min(n,m)$, fixed
+before any data are seen. A gambler starts with wealth $K_0=1$ and at pair $k$ stakes a fraction $\lambda_k$ of
+the current wealth on $Z_k$ exceeding $\alpha$,
+\[
+K_k=K_{k-1}\{1+\lambda_k(Z_k-\alpha)\}=\prod_{l\le k}\{1+\lambda_l(Z_l-\alpha)\}.
+\]
+When the fitted ramp has $\E_P\rp_b-\E_Q\rp_b>\alpha$, as it does below $\alpha^\star$ for large samples
+(Proposition~\ref{prop:loconsistency}), the logarithm of the wealth grows linearly in $k$ with well-chosen fractions.
+The test rejects
+$H_{0,\alpha}$ as soon as the wealth reaches $1/\delta$. Each fraction $\lambda_k\in[0,\lambda_{\max}/(1+\alpha)]$,
+$\lambda_{\max}\in(0,1]$, may depend on earlier batches and pairs only, and the bound keeps the wealth nonnegative.
+Such fitting rules and fractions are called predictable (Section~\ref{sec:bettingdetails} of the supplement). Ours stake more when the earlier pairs vary little, through a
+running estimate of their variance started from the variance of the ramp on the fitting batches
+(Equation~\eqref{eq:fractions} of the supplement). Algorithm~\ref{alg:split} lists the method with
+every default.
+
+\begin{theorem}[Validity of the betting test]
+\label{thm:betting}
+Let $X_1,\dots,X_n$ be i.i.d.\ $P$ and $Y_1,\dots,Y_m$ i.i.d.\ $Q$, the two samples independent, cut into batches as
+above. Fix $\alpha\in[0,1)$ and $\delta\in(0,1)$. For every predictable fitting rule and fractions, all sample sizes and
+every pair with $\TV(P,Q)\le\alpha$,
+\[
+\Pp\Big(\max_{k\le N}K_k\ge1/\delta\ \Big|\ \text{batch }0\Big)\le\delta .
+\]
+Hence rejecting $H_{0,\alpha}$ when $\max_{k\le N}K_k\ge1/\delta$ has level at most $\delta$ for every sample size,
+uniformly over $H_{0,\alpha}$, with no assumption on the laws, the kernel or the witness, and a rejection shows that
+$\TV(P,Q)>\alpha$.
+\end{theorem}
+
+Given the earlier batches and pairs, $\E Z_k\le\alpha$ by Lemma~\ref{lem:ramp}(iii), so $K_k$ is a nonnegative
+supermartingale started at one, and the maximal inequality of \citet{ville1939} bounds the probability that it ever
+reaches $1/\delta$. The test is the two-sample test by betting of \citet{shekhar2024nonparametric}, with the ramp as
+the predictable function and the null $\E_P\rp-\E_Q\rp\le\alpha$ in place of $P=Q$. Any function with
+values in $[0,1]$ fitted on earlier batches may replace the ramp, such as the predicted labels or probabilities of a
+classifier; \citet{podkopaev2023sequential} bet on classifiers in this way in their predictive tests, and
+Section~\ref{sec:numharder} compares such classifiers with the ramp. Betting tests of a tolerance on a difference of means audit fairness
+\citep{chugg2023auditing}, and \citet{pandeva2024deep} bet with learned functions on nulls defined by operators. Unlike
+these and \citet{shekhar2024nonparametric}, our test fixes $N$ and the batches in advance, and $\lambda_k$ depends on
+$N$. Our fractions, adapted from \citet[Remark~1]{waudbysmith2024estimating} with $\lambda_{\max}=\tfrac12$, are
+explicit and enter the rates of Section~\ref{sec:rates}. Against a small effect, at $\delta=0.05$ and power $0.8$, the
+betting test needs, heuristically, about $\cstBetRatioEighty$ times as many bet-on pairs as a test calibrated by the
+central limit theorem, and the quarter of each sample used only for fitting comes on top
+(Section~\ref{sec:bettingdetails} of the supplement). Online Newton steps or mixtures over fractions may recover part
+of this loss.
+
+\subsection{The lower confidence bound}
+\label{sec:lower}
+
+Running the test of Theorem~\ref{thm:betting} on a grid of levels gives our lower confidence bound on $\alpha^\star$, the
+split-sample bound $\widehat\alpha$.
+
+\begin{corollary}[Lower confidence bound for the contamination level]
+\label{cor:lower}
+Fix a grid $\alpha_1<\dots<\alpha_J$ in advance, test each $H_{0,\alpha_j}$ by Theorem~\ref{thm:betting} on the same
+batches, with any fitting rule at each level, and read the grid upward, stopping at the first failure:
+\begin{equation}
+\widehat\alpha\coloneqq\max\big\{\alpha_j:\ H_{0,\alpha_i}\text{ is rejected for every }i\le j\big\},
+\label{eq:downclosed}
+\end{equation}
+with $\widehat\alpha=0$ if $H_{0,\alpha_1}$ is not rejected. Then
+$\Pp(\widehat\alpha>\TV(P,Q))\le\delta$ for all sample sizes and every pair $(P,Q)$, with no
+multiplicity correction. Moreover, the probability that $H_{0,\widehat\alpha}$ is rejected and
+$\TV(P,Q)\le\widehat\alpha$ is at most $\delta$, so a rejected $\widehat\alpha$ shows
+$\TV(P,Q)>\widehat\alpha$.
+\end{corollary}
+
+When the grid starts at $\alpha_1=0$, the value $\widehat\alpha=0$ means either that $H_{0,0}$ was rejected, which
+shows $\TV(P,Q)>0$, or that nothing was rejected, and we report which. Only the first true null on the grid can make
+$\widehat\alpha$ too large, which is why no correction is needed, whereas bisection could test several true nulls, as
+the refitted ramp may accept a level and reject a larger one. The grid may be chosen from batch $0$
+(Remark~\ref{rem:batch0grid} of the supplement). The bound is of the kind of the lower bound of
+\citet[Theorem~7]{blanchard2010semi} on a mixture proportion, with one function fitted on earlier batches in place of
+their uniform bound over a class, so no complexity term enters. With a witness fitted at each level it is also
+consistent, up to the grid.
+
+\begin{proposition}[Consistency of the lower bound]
+\label{prop:loconsistency}
+Let Assumption~\ref{ass:regularity} hold, and compute $\widehat\alpha$ with a kernel fixed before the data are seen,
+an exact minimizer of \eqref{eq:qp} at each level, cut points within one rank of the quantiles of
+Section~\ref{sec:betting} (Equation~\eqref{eq:cutrank} of the supplement), and the fractions of
+Section~\ref{sec:betting} with their running variance estimate floored at a constant $v^2_{\min}\in(0,4]$ that does
+not depend on $n,m$. Let $\alpha_{j^\star}=\max\{\alpha_j:\alpha_j<\alpha^\star\}$,
+or $0$ if no level is below $\alpha^\star$. Then $\Pp(\widehat\alpha>\alpha_{j^\star})\le\delta$ for all
+$n,m$, and $\Pp(\widehat\alpha<\alpha_{j^\star})\to0$ as $n,m\to\infty$; if $\alpha^\star$ is not a grid
+level, also $\Pp(\widehat\alpha>\alpha_{j^\star})\to0$. On grids fixed in advance whose mesh tends to
+zero, with $\log J=o(n\wedge m)$, $\widehat\alpha\to\alpha^\star$ in probability.
+\end{proposition}
+
+Below $\alpha^\star$ the excess of the population ramp over $\alpha$ is at least $D_\alpha/(\beta \Delta_\phi)$
+(Lemma~\ref{lem:popramp} of the supplement), once the fitting batches are large the fitted ramp keeps half of this
+excess, with no density condition, and betting has power tending to one against a fixed excess. Fitting the witness at
+the level tested matters here. A single witness fitted at $\alpha=0$, the one a test of $P=Q$ would use, is valid and cheaper but need not be consistent:
+Section~\ref{sec:alphazero} of the supplement gives laws with $\TV(P,Q)=\loExTV$ on which every ramp of its limit has
+$\E_P\rp-\E_Q\rp\le\loExKS$.
+
+The proposition, like the rates of Section~\ref{sec:rates}, assumes a kernel fixed in advance and exact minimizers,
+and its constants grow like $1/v^2_{\min}$ through the bound $\lambda_k\le\{2\log(1/\delta)/(Nv^2_{\min})\}^{1/2}$, an
+artifact of the proof, as the fractions keep the quadratic term of the wealth of order $\log(1/\delta)$ once the
+running variance tracks the second moment. Our runs use the floor $10^{-8}$, a median-distance
+bandwidth computed on the fitting batches, and accelerated projected gradient stopped at a relative tolerance
+(Algorithm~\ref{alg:split} of the supplement). Validity is unaffected, but for these runs Proposition~\ref{prop:loconsistency} and
+Theorems~\ref{thm:loratemain} and~\ref{thm:laplacerate} describe the trend only.

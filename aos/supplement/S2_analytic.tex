@@ -1,0 +1,194 @@
+\section{Proofs for Section~\ref{sec:analytic}}
+\label{app:analytic}
+
+The proofs of this section use the constants $\beta$, $\kappa$, $\Delta_\phi$, $\bar\kappa^2$, $n_\star$, $c$ and $L$ of
+Section~\ref{sec:analytic} and the separation $\mathrm{sep}$ of \eqref{eq:sep}. We first prove a two-sided bound on the
+statistic, the tool behind the proofs of Sections~\ref{app:split} to~\ref{app:trimming} and behind the threshold
+$\tau^{\mathrm S}$, which is valid but larger than $\tau^{\mathrm P}$ at our sample sizes, and then the results of
+Section~\ref{sec:analytic}. We write $D_\alpha=D_\alpha(P,Q)$ and add
+the subscript $n,m$ and the argument $\delta$ to the thresholds of Section~\ref{sec:analytic} where they vary, as in
+$\tau_{n,m}(\alpha,\delta)$ and $\tau^{\mathrm S}_{n,m}(\alpha,\delta)$.
+
+The null hypotheses of Section~\ref{sec:analytic} are total-variation neighborhoods of $P=Q$. Equivalence tests \citep{wellek2010equivalence}
+put a neighborhood of fixed size in the alternative instead, with a trimmed Mallows distance in
+\citet{munkczado1998} and the MMD in \citet{liugandy2026equivalence}, so that a rejection shows that two laws are
+close. In \eqref{eq:null} a rejection shows that they are far apart, and $\alpha$ is varied to locate $\alpha^\star$.
+
+\subsection{A two-sided bound on the statistic}
+
+\begin{theorem}[Concentration of the trimmed discrepancy]
+\label{thm:twosided}
+Under (A1) and (A2) of Assumption~\ref{ass:regularity}, for every pair $(P,Q)$, all $n,m\ge1$ and $\delta\in(0,1)$
+there are events $E^+$ and $E^-$, not depending on $\alpha$, each of probability at least $1-\delta$, such that for every
+$\alpha\in[0,1)$,
+\[
+\widehat D_\alpha\le D_\alpha+\tau^{\mathrm S}_{n,m}(\alpha,\delta)\ \text{ on }E^+,
+\qquad
+\widehat D_\alpha\ge D_\alpha-\tau^{\mathrm S}_{n,m}(\alpha,\delta)\ \text{ on }E^-,
+\]
+where
+\begin{equation}
+\tau^{\mathrm S}_{n,m}(\alpha,\delta)=\beta\Big[\,2\kappa/\sqrt{n_\star}+2\kappa(e_n+e_m)+\Delta_\phi\sqrt{\log(1/\delta)/(2n_\star)}\,\Big]
+\label{eq:tauA}
+\end{equation}
+and $e_k=\E|\varepsilon_1+\dots+\varepsilon_k|/k\le k^{-1/2}$ for independent Rademacher signs $\varepsilon_i$.
+\end{theorem}
+
+The statistic is the largest separation over directions, a difference of two extreme trimmed means, each the best of
+a family of ordinary means of hinge functions. So one supremum of centered means over the two samples controls it at
+every level, a change of one observation moves that supremum by at most $\Delta_\phi/n$, and the level enters only
+through $\beta$, the largest weight a trimming can put on one observation. The suprema $\Gamma$ and $\Gamma^-$ of the proof do not involve $\alpha$; computed on the fitting batches,
+they control the fitted ramps in the proofs of Proposition~\ref{prop:loconsistency} and Theorem~\ref{thm:lorate}.
+
+\begin{proof}
+We first bound the difference of the two paths, at every level at once, by $\beta$ times a supremum that does not
+involve $\alpha$, and then bound that supremum by Lemma~\ref{lem:hinge}. Fix $\alpha$ and write
+$\mathcal A=\mathcal C_\alpha(P)$, $\mathcal B=\mathcal C_\alpha(Q)$, $\mathcal A_n=\mathcal C_\alpha(P_n)$ and
+$\mathcal B_m=\mathcal C_\alpha(Q_m)$. Recall from \eqref{eq:sep} that the separation of two sets in the direction $f$ is
+$\inf_a\langle f,a\rangle_\Hh-\sup_b\langle f,b\rangle_\Hh$, so that in terms of support functions
+$\mathrm{sep}(f)=\mathrm{sep}(f;\mathcal A,\mathcal B)=-h_{\mathcal A}(-f)-h_{\mathcal B}(f)$ and
+$\mathrm{sep}_n(f)=\mathrm{sep}(f;\mathcal A_n,\mathcal B_m)=-h_{\mathcal A_n}(-f)-h_{\mathcal B_m}(f)$.
+By \eqref{eq:distmax}, $\widehat D_\alpha=\max_{f\in B_\Hh}\mathrm{sep}_n(f)$, and $\mathrm{sep}(f)\le D_\alpha$ for every
+$f\in B_\Hh$ by \eqref{eq:sep}. It is therefore enough to bound $\mathrm{sep}_n(f)-\mathrm{sep}(f)$ uniformly in $f$.
+
+Fix $f\in B_\Hh$. Each support function is an infimum over cuts (Lemma~\ref{lem:cvar}), and evaluating the population
+infimum at the cut that is optimal for the sample compares the two. By Lemmas~\ref{lem:cvar} and~\ref{lem:tcompact},
+applied to $P_n$ and the direction $-f$, there is $t_n\in[-\kappa,\kappa]$ with
+\[
+h_{\mathcal A_n}(-f)=t_n+\beta P_n(-f-t_n)_+,
+\qquad\text{while}\qquad
+h_{\mathcal A}(-f)\le t_n+\beta P(-f-t_n)_+ .
+\]
+Hence $h_{\mathcal A}(-f)-h_{\mathcal A_n}(-f)\le\beta(P-P_n)(-f-t_n)_+$, and in the same way
+$h_{\mathcal B}(f)-h_{\mathcal B_m}(f)\le\beta(Q-Q_m)(f-t'_m)_+$ for the cut $t'_m\in[-\kappa,\kappa]$ optimal for $Q_m$
+and $f$. Adding the two bounds and using $\mathrm{sep}(f)\le D_\alpha$,
+\[
+\mathrm{sep}_n(f)-D_\alpha\le\beta\Gamma,
+\qquad
+\Gamma=\sup_{f\in B_\Hh,\ t,t'\in[-\kappa,\kappa]}\Big[(P-P_n)(-f-t)_++(Q-Q_m)(f-t')_+\Big],
+\]
+for every $f\in B_\Hh$. Taking the maximum over $f$ gives $\widehat D_\alpha-D_\alpha\le\beta\Gamma$ for every $\alpha$,
+and $\Gamma$ does not involve $\alpha$. The reverse inequality $D_\alpha-\widehat D_\alpha\le\beta\Gamma^-$, with
+$\Gamma^-=\sup[(P_n-P)(-f-t)_++(Q_m-Q)(f-t')_+]$ over the same set, follows in the same way, with the roles of the
+population and the sample exchanged: one evaluates at a maximizer of $\mathrm{sep}$, which exists by \eqref{eq:distmax}
+and Lemma~\ref{lem:attainment}, and at the population minimizers of Lemma~\ref{lem:tcompact}.
+
+We now bound $\Gamma$ and $\Gamma^-$. The supremum $\Gamma$ is that of Lemma~\ref{lem:hinge} with
+$\varphi^1_x=\varphi^2_y=(\cdot)_+$, $v=f$, $a=-t$, $b=t'$, $r=1$ and $\rho_1=\rho_2=\kappa$, and $\Gamma^-$ is its
+counterpart. Replacing $X_i$ by $X_i'$ changes $(-f(X_i)-t)_+$ by at most
+$|f(X_i)-f(X_i')|\le\|\phi(X_i)-\phi(X_i')\|_\Hh\le\Delta_\phi$, and likewise for the $Y$'s, so
+$\Delta_1=\Delta_2=\Delta_\phi$. The lemma gives $\E\Gamma,\E\Gamma^-\le2\kappa/\sqrt{n_\star}+2\kappa(e_n+e_m)$ and, at $e^{-\chi}=\delta$, as $\Delta_\phi^2(1/n+1/m)/2=\Delta_\phi^2/(2n_\star)$, it gives
+$\Pp\big(\Gamma>\E\Gamma+\Delta_\phi\sqrt{\log(1/\delta)/(2n_\star)}\big)\le\delta$, and the same for $\Gamma^-$. The
+bracket in \eqref{eq:tauA} is the sum of these two bounds, so the events $E^+=\{\beta\Gamma\le\tau^{\mathrm S}_{n,m}(\alpha,\delta)\}$
+and $E^-=\{\beta\Gamma^-\le\tau^{\mathrm S}_{n,m}(\alpha,\delta)\}$ have probability at least $1-\delta$. They do not
+depend on $\alpha$, because both sides of each inequality carry the factor $\beta$.
+\end{proof}
+
+\subsection{A feasible point near the common embedding}
+
+The reduction behind Theorem~\ref{thm:plugin}, explained in Section~\ref{sec:analytic}, is the following lemma.
+
+\begin{lemma}[A feasible point near the common embedding]
+\label{lem:plugin}
+Let $\alpha\in[0,1)$, and let $R$ be a probability measure with $R\ll P$ and $R\ll Q$ whose densities have versions
+$g_P=dR/dP$ and $g_Q=dR/dQ$ with values in $[0,(1-\alpha)^{-1}]$. Put $\mu_R=\E_R[\phi(X)]$,
+$\rho_R=\sup_x\|\phi(x)-\mu_R\|_\Hh$,
+\begin{gather*}
+U_X=\frac1n\sum_{i=1}^ng_P(X_i)\big(\phi(X_i)-\mu_R\big),\qquad
+U_Y=\frac1m\sum_{j=1}^mg_Q(Y_j)\big(\phi(Y_j)-\mu_R\big),\\
+S_X=\frac1n\sum_{i=1}^ng_P(X_i),\qquad
+S_Y=\frac1m\sum_{j=1}^mg_Q(Y_j).
+\end{gather*}
+Then, for every realization of the samples,
+$\widehat D_\alpha\le\max\{\|U_X-U_Y\|_\Hh,\|U_X\|_\Hh,\|U_Y\|_\Hh\}+\rho_R\big[(1-S_X)_++(1-S_Y)_+\big]$.
+\end{lemma}
+
+\begin{proof}
+Any feasible pair of weights bounds the statistic from above. The weights $g_P(X_i)/n$ and $g_Q(Y_j)/m$ respect the
+caps but their totals need not be one, so we repair the totals and pay in proportion to the shortfall. By
+Proposition~\ref{prop:georep} the capped simplex $\{0\le w_i\le\beta/n,\ \sum_iw_i=1\}$ parametrizes
+$\mathcal C_\alpha(P_n)$. Let $w^0_i=g_P(X_i)/n\in[0,\beta/n]$, so that $\sum_iw^0_i\phi(X_i)=U_X+S_X\mu_R$.
+
+If $S_X\ge1$, put $w=w^0/S_X$, which respects the caps, and then $\sum_iw_i\phi(X_i)-\mu_R=U_X/S_X$. If $S_X<1$, the
+room under the caps is $\sum_i(\beta/n-w^0_i)=\beta-S_X\ge1-S_X$, so there is $u$ with $0\le u_i\le\beta/n-w^0_i$ and
+$\sum_iu_i=1-S_X$; put $w=w^0+u$, and then $\sum_iw_i\phi(X_i)-\mu_R=U_X+\sum_iu_i(\phi(X_i)-\mu_R)$. In both cases
+$\sum_iw_i\phi(X_i)-\mu_R=\lambda_XU_X+r_X$ with $\lambda_X\in(0,1]$ and $\|r_X\|_\Hh\le\rho_R(1-S_X)_+$, the bound on
+$r_X$ because $u$ has total mass $1-S_X$ and each $\phi(X_i)-\mu_R$ has norm at most $\rho_R$.
+
+Doing the same on the $Y$ side gives a feasible pair $(w,v)$, so
+\[
+\widehat D_\alpha\le\Big\|\sum_iw_i\phi(X_i)-\sum_jv_j\phi(Y_j)\Big\|_\Hh\le\|\lambda_XU_X-\lambda_YU_Y\|_\Hh+\|r_X\|_\Hh
++\|r_Y\|_\Hh .
+\]
+The unknown factors $\lambda_X$ and $\lambda_Y$ are removed as follows. The map
+$(\lambda,\lambda')\mapsto\|\lambda U_X-\lambda'U_Y\|_\Hh$ is convex on $[0,1]^2$, so it is at most its largest value at a
+vertex, $\max\{0,\|U_X\|_\Hh,\|U_Y\|_\Hh,\|U_X-U_Y\|_\Hh\}$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:plugin}}
+
+The proof bounds the three norms and the two shortfalls of Lemma~\ref{lem:plugin} separately, and uses four facts
+about the summands. Write $\xi=g_P(X)(\phi(X)-\mu_R)$ and $W=1-g_P(X)$, so that $U_X$ and $1-S_X$ are averages of $n$
+independent copies of $\xi$ and $W$, and recall that $\bar\kappa^2=\min(\kappa^2,\Delta_\phi^2/2)$. Then
+\begin{gather*}
+\E\xi=0,\qquad\E\|\xi\|_\Hh^2\le\beta\bar\kappa^2, \tag{i}\\
+\|\xi(x)\|_\Hh\le\beta\rho_R,\qquad\|\xi(x)-\xi(x')\|_\Hh\le\beta\Delta_\phi, \tag{ii}\\
+\E W=0,\qquad 1-\beta\le W\le1,\qquad\operatorname{Var}W\le\beta-1, \tag{iii}\\
+\rho_R\le\Delta_\phi . \tag{iv}
+\end{gather*}
+For (i), $\E\|\xi\|_\Hh^2=\E_P[g_P^2\|\phi-\mu_R\|_\Hh^2]\le\beta\,\E_R\|\phi-\mu_R\|_\Hh^2$ since $g_P\le\beta$, and the last
+variance is at most $\kappa^2$, as $\E_R\|\phi-\mu_R\|_\Hh^2=\E_Rk(X,X)-\|\mu_R\|_\Hh^2$, and at most $\Delta_\phi^2/2$, as
+it equals $\tfrac12\E_{R\otimes R}\|\phi(X)-\phi(X')\|_\Hh^2$. For (ii), the map
+$(p,q)\mapsto\|p(\phi(x)-\mu_R)-q(\phi(x')-\mu_R)\|_\Hh$ is convex on $[0,\beta]^2$, and its values at the vertices are at
+most these bounds, using $\rho_R\le\Delta_\phi$. In (iii),
+$\operatorname{Var}W=\E_Pg_P^2-1\le\beta-1$ as $g_P^2\le\beta g_P$. For (iv), $\mu_R$ lies in the closed convex hull of
+$\phi(\mathcal X)$. The same holds for $g_Q$, $Q$ and the $Y$ side.
+
+\begin{proof}
+Under the null, \eqref{eq:tvintersect} gives a common trimming $R$, so Lemma~\ref{lem:plugin} applies, and it bounds
+the statistic by three norms and two shortfalls. We bound six tails in closed form, each by $\delta/6$, which explains
+$L=\log(6/\delta)$ in the threshold.
+
+The level $\alpha=0$ is simpler and is treated first. There $0\le g_P\le1$ and $\E_Pg_P=1$ force $g_P=1$
+$P$-almost surely, so $S_X=S_Y=1$ and $\widehat D_0\le\|U_X-U_Y\|_\Hh$ almost surely. As $U_X-U_Y$ is a sum of $n+m$
+independent centered vectors, (i) gives $\E\|U_X-U_Y\|_\Hh\le(\E\|U_X-U_Y\|_\Hh^2)^{1/2}\le\bar\kappa/\sqrt{n_\star}$.
+Changing one $X_i$ changes $\|U_X-U_Y\|_\Hh$ by at most $\Delta_\phi/n$ by (ii), and one $Y_j$ by at most
+$\Delta_\phi/m$, so McDiarmid's inequality gives
+$\Pp(\|U_X-U_Y\|_\Hh>\bar\kappa/\sqrt{n_\star}+\Delta_\phi\sqrt{\log(1/\delta)/(2n_\star)})\le\delta$, which is the bound
+at $\alpha=0$.
+
+Now let $\alpha>0$, and split the threshold as $\tau^{\mathrm P}(\alpha)=T_1+\Delta_\phi T_2$, with
+\[
+T_1=\sqrt{\beta\bar\kappa^2/n_\star}+\beta\Delta_\phi\sqrt{L/(2n_\star)},
+\qquad
+T_2=\sqrt{2(\beta-1)L/n_\star}+cL/3 .
+\]
+By Lemma~\ref{lem:plugin} and (iv), the event $\{\widehat D_\alpha>T_1+\Delta_\phi T_2\}$ is contained in
+$\{\max(\|U_X-U_Y\|_\Hh,\|U_X\|_\Hh,\|U_Y\|_\Hh)>T_1\}\cup\{(1-S_X)_++(1-S_Y)_+>T_2\}$. The term $T_1$ handles the norms. For each of $\|U_X-U_Y\|_\Hh$, $\|U_X\|_\Hh$ and $\|U_Y\|_\Hh$ the mean is at most
+$\sqrt{\beta\bar\kappa^2/n_\star}$ by (i), the sum of squared bounded differences is at most $\beta^2\Delta_\phi^2/n_\star$ by
+(ii), and McDiarmid's inequality bounds the probability of exceeding $T_1$ by $e^{-L}=\delta/6$. The term $T_2$ handles
+the shortfalls. The event $\{(1-S_X)_++(1-S_Y)_+>T_2\}$ is contained in
+$\{1-S_X>T_2\}\cup\{1-S_Y>T_2\}\cup\{(1-S_X)+(1-S_Y)>T_2\}$, and each of these is the upper tail of a sum of
+independent centered terms bounded above by $c$, with variance sum at most $V=(\beta-1)/n_\star$ by (iii). Bernstein's
+inequality in sub-gamma form, $\Pp(S\ge\sqrt{2VL}+cL/3)\le e^{-L}$, which needs only the upper bound $c$ on the summands
+\citep[Section~2.4 and Theorem~2.10]{boucheron2013concentration}, bounds each by $e^{-L}=\delta/6$. The six tails add up
+to at most $\delta$.
+
+The threshold is monotone: on $(0,1)$, $T_1$ and $T_2$ increase with $\beta$, hence with
+$\alpha$, and as $\alpha\downarrow0$ the threshold $\tau^{\mathrm P}(\alpha)=T_1+\Delta_\phi T_2$ decreases to
+$\bar\kappa/\sqrt{n_\star}+\Delta_\phi\sqrt{L/(2n_\star)}+\Delta_\phi cL/3$, which is at least
+$\tau^{\mathrm P}_{n,m}(0,\delta)$ because $L>\log(1/\delta)$.
+\end{proof}
+
+\subsection{Proof of Lemma~\ref{lem:oneevent}}
+
+\begin{proof}
+Above $\alpha^\star$ the empirical path can only fall and the threshold can only rise, so the single level
+$\alpha^\star$ carries the guarantee. The probability bound is the hypothesis at $\alpha=\alpha^\star$, which is a true
+null. The regions are nested in
+$\alpha$, so $\alpha\mapsto\widehat D_\alpha$ is nonincreasing, and for $\alpha\ge\alpha^\star$ on the event,
+\[
+\widehat D_\alpha\ \le\ \widehat D_{\alpha^\star}\ \le\ \tau(\alpha^\star)\ \le\ \tau(\alpha),
+\]
+by monotonicity of the path, by the event, and since $\tau$ is nondecreasing.
+\end{proof}

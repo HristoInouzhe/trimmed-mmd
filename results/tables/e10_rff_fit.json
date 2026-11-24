@@ -1,0 +1,8 @@
+{
+  "generic_rate_exponent": -0.4949108822922162,
+  "generic_const": 4.0475183896763225,
+  "degenerate_rate_exponent": -0.5398930421978291,
+  "degenerate_const": 0.7553747501960593,
+  "theory_predicts_exponent": -0.5,
+  "degenerate_error_nonvanishing": false
+}

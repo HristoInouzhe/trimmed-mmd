@@ -1,0 +1,35 @@
+[project]
+name = "trimmedmmd"
+version = "0.1.0"
+description = "Trimmed kernel mean embeddings: finite-sample inference for the total-variation null"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Hristo Inouzhe" }]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "matplotlib>=3.7",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+# Used by the experiment harness, not by the library itself: `threadpoolctl`
+# pins BLAS to one thread inside each worker process (without it a run on a
+# many-core box oversubscribes badly), and `psutil` reports usable RAM when
+# sizing the resource envelope. Both degrade gracefully if absent.
+run = ["threadpoolctl>=3.0", "psutil>=5.9"]
+# Only the transport geometry of `trimmedmmd.trimmings` needs POT; without
+# it that module falls back to a HiGHS LP on the same program, which agrees
+# to machine precision but is slower. Everything else is numpy/scipy only.
+ot = ["POT>=0.9"]
+
+[project.scripts]
+trimmedmmd = "trimmedmmd.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

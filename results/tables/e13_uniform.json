@@ -1,0 +1,12 @@
+{
+  "scenario": "disjoint_d2_a20",
+  "n": 300,
+  "reps": 4000,
+  "delta": 0.05,
+  "n_grid": 30,
+  "eta": 0.1,
+  "alpha_star": 0.2,
+  "any_alpha_violation_rate": 0.0,
+  "naive_independent_union_bound_estimate": 1.0,
+  "consistent_with_single_controlling_event": true
+}

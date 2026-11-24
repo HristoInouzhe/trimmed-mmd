@@ -1,0 +1,5 @@
+dataset,splits,mean_lower,median_lower,min_lower,max_lower,sd_lower,frac_certifying_any,frac_at_grid_max,grid_max
+rhc,8,0.26875,0.25,0.25,0.3,0.0258774584753382,1.0,0.0,0.75
+nhanes_child,8,0.7875000000000001,0.8,0.75,0.8,0.023145502494313807,1.0,0.0,0.95
+nhanes_age,8,0.31875,0.3,0.3,0.35,0.0258774584753382,1.0,0.0,0.75
+nhanes_bmi,8,0.0375,0.05,0.0,0.05,0.0231455024943137,0.75,0.0,0.75

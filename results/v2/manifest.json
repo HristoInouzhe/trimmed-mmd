@@ -1,0 +1,39 @@
+{
+  "envelope": {
+    "cpu_count": 48,
+    "ram_gb": 125.76,
+    "ram_tier": "huge",
+    "max_workers": 8,
+    "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.39",
+    "profile": "modest",
+    "n_reps": 200,
+    "n_mc_null": 400,
+    "max_n_gram": 6381,
+    "max_n_rff": 20000,
+    "n_features": 512,
+    "device": "auto",
+    "gpu_free_gb": 14.6396484375,
+    "gpu_tenants": 2,
+    "reserved_cores": 2,
+    "headroom_frac": 0.15
+  },
+  "started": "2026-11-08 02:38:56",
+  "v2": {
+    "threshold": "plugin",
+    "certificate": "all",
+    "outdir": "results/v2",
+    "only": [
+      "E1",
+      "E1B",
+      "E2",
+      "E6",
+      "E7",
+      "E8"
+    ],
+    "workers": 8,
+    "e7_reps": 200,
+    "checkpoints": "/nvme0n1-disk/trimmed-mmd/results/v2/checkpoints"
+  },
+  "elapsed_seconds": 3221.5,
+  "finished": "2026-11-08 03:32:38"
+}

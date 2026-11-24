@@ -1,0 +1,53 @@
+{
+ "covariates": "paper",
+ "d": 33,
+ "names": [
+  "age",
+  "edu",
+  "surv2md1",
+  "das2d3pc",
+  "aps1",
+  "scoma1",
+  "meanbp1",
+  "wblc1",
+  "hrt1",
+  "resp1",
+  "temp1",
+  "pafi1",
+  "alb1",
+  "hema1",
+  "bili1",
+  "crea1",
+  "sod1",
+  "pot1",
+  "paco21",
+  "ph1",
+  "wtkilo1",
+  "cardiohx",
+  "chfhx",
+  "dementhx",
+  "psychhx",
+  "chrpulhx",
+  "renalhx",
+  "liverhx",
+  "gibledhx",
+  "malighx",
+  "immunhx",
+  "transhx",
+  "amihx"
+ ],
+ "sigma": 7.7430837036331965,
+ "timing_seconds": {
+  "energy": 15.111444473266602,
+  "kernel": 166.502671957016
+ },
+ "seconds_total": 183.6,
+ "skip_kernel": false,
+ "check_vs_results_v3_rhc_estimand_csv_max_abs_diff": {
+  "unweighted": 2.55351295663786e-15,
+  "energy": 9.575341408663007e-09,
+  "kernel": 8.452725754282131e-06,
+  "ato": 5.551115123125783e-16,
+  "atm": 2.491062911502695e-15
+ }
+}

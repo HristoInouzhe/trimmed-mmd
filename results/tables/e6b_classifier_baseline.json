@@ -1,0 +1,70 @@
+{
+ "context_analytic_power_alpha0_from_e1_power_vs_n": {
+  "100": {
+   "power_analytic": 0.0,
+   "reps": 50
+  },
+  "200": {
+   "power_analytic": 0.0,
+   "reps": 50
+  },
+  "400": {
+   "power_analytic": 0.0,
+   "reps": 50
+  },
+  "800": {
+   "power_analytic": 0.0,
+   "reps": 50
+  },
+  "1600": {
+   "power_analytic": 0.0,
+   "reps": 50
+  },
+  "3200": {
+   "power_analytic": 1.0,
+   "reps": 50
+  }
+ },
+ "script": "scripts/exp_classifier_baseline.py",
+ "command": "PYTHONPATH=src python3 -I scripts/exp_classifier_baseline.py --workers 16 --reps 100",
+ "scenario": "disjoint_d2_a20",
+ "dgp": "P = 0.8 N(0, I_2) + 0.2 U([-9,-8]^2), Q = 0.8 N(0, I_2) + 0.2 U([8,9]^2); TV(P,Q) = 0.2 exactly",
+ "seeds": "replicate i uses numpy default_rng(70000 + i), i = 0..99, at every n (same seeds and draws as e6_calibrations.csv for n = 200, 400)",
+ "sizes_table": [
+  200,
+  400
+ ],
+ "sizes_extra": [
+  800,
+  1600,
+  3200
+ ],
+ "reps": 100,
+ "delta": 0.05,
+ "alpha_star": 0.2,
+ "split": "fold 1 = first floor(n/2) rows of each sample (rows are in random order), fold 2 = the rest",
+ "rule": "reject H_{0,alpha} iff TPR - FPR - sqrt(log(2/delta)/(2 n2)) - sqrt(log(2/delta)/(2 m2)) > alpha, rates on fold 2",
+ "classifiers": {
+  "gbm": "sklearn HistGradientBoostingClassifier, default hyperparameters (max_iter=100, learning_rate=0.1, max_leaf_nodes=31), random_state = replicate seed; label X if predicted probability > 0.5 (predict)",
+  "knn": "sklearn KNeighborsClassifier, k = int(sqrt(n1+m1)) | 1 (odd), Euclidean, majority vote"
+ },
+ "primary_classifier": "gbm",
+ "data_identity_check": {
+  "200": {
+   "mean_mmd_here": 0.2836886574165869,
+   "mean_mmd_e6": 0.2836886574165869,
+   "identical": true
+  },
+  "400": {
+   "mean_mmd_here": 0.2864486771879402,
+   "mean_mmd_e6": 0.2864486771879402,
+   "identical": true
+  }
+ },
+ "sklearn": "1.8.0",
+ "numpy": "2.4.4",
+ "python": "3.12.13",
+ "workers": 16,
+ "threads_per_worker": 1,
+ "seconds": 6.0
+}

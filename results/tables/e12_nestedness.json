@@ -1,0 +1,12 @@
+{
+  "scenario": "disjoint_d2_a20",
+  "n": 300,
+  "reps": 1600,
+  "n_grid": 25,
+  "delta": 0.05,
+  "alpha_star": 0.2,
+  "non_nested_count": 0,
+  "non_nested_rate": 0.0,
+  "max_transitions": 0,
+  "mean_transitions": 0.0
+}

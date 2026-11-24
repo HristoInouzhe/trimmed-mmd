@@ -1,0 +1,5 @@
+dataset,route,bandwidth,sigma,delta_per_test,n,m,H00_rejected,alpha_hat,alpha_last,certified_fine,D0,tau0,unresolved,threshold
+rhc_full,pooled median (paper),pooled median,8.962717049904988,0.05,2184,3551,True,0.05,0.0,0.0125,0.11196236859252102,0.0742605011253735,,aos
+rhc_full,pilot (tune-then-test),0.5 x pilot median,4.501347939202601,0.05,1529,2486,True,0.05,0.0,0.0,0.12178802093893978,0.08875264150004258,,aos
+rhc_full,"pilot, strict (pilot standardization)",0.5 x pilot median,4.522028492190025,0.05,1529,2486,True,0.05,0.0,0.0,0.1217875275757508,0.08875264150004258,,aos
+rhc_full,"pilot, selection by largest pilot D0 (sensitivity)",0.7 x pilot median,6.301887114883641,0.05,1529,2486,True,0.05,0.0,0.0125,0.13087663143081002,0.08875264150004258,,aos

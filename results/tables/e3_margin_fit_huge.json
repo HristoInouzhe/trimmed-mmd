@@ -1,0 +1,45 @@
+{
+  "scenario": "disjoint_d2_a20",
+  "n": 2000,
+  "reps": 32,
+  "noise_floor": 0.013647287360780186,
+  "floor_multiple_required": 4.0,
+  "gamma_hat_all_points": 0.8789883523168804,
+  "c0_hat_all_points": 1.1476514873209973,
+  "n_points_all": 6,
+  "gamma_hat_floor_restricted": 0.8989797227039892,
+  "c0_hat_floor_restricted": 1.2018849585726548,
+  "n_points_floor_restricted": 5,
+  "gamma_hat": 1.062903719737275,
+  "c0_hat": 1.5799725226474568,
+  "n_points_used": 6,
+  "local_slopes": [
+    {
+      "eps_from": 0.16,
+      "eps_to": 0.12,
+      "gamma_local": 0.9278719491008373
+    },
+    {
+      "eps_from": 0.12,
+      "eps_to": 0.09,
+      "gamma_local": 0.9775246546840048
+    },
+    {
+      "eps_from": 0.09,
+      "eps_to": 0.06,
+      "gamma_local": 1.0349329600302728
+    },
+    {
+      "eps_from": 0.06,
+      "eps_to": 0.04000000000000001,
+      "gamma_local": 1.0968810108195066
+    },
+    {
+      "eps_from": 0.04000000000000001,
+      "eps_to": 0.01999999999999999,
+      "gamma_local": 1.1447175773858391
+    }
+  ],
+  "lemma11_requires_gamma_at_least_1": true,
+  "consistent_with_lemma11": true
+}

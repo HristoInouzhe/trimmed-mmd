@@ -1,0 +1,24 @@
+{
+  "instances": 34,
+  "grid": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6
+  ],
+  "eps": 0.3,
+  "n": 25,
+  "m": 20,
+  "d": 2,
+  "n_restarts": 3,
+  "monotonicity_violations": 0,
+  "monotonicity_checks": 204,
+  "violation_rate": 0.0,
+  "max_violation_size": 0.0,
+  "max_consecutive_gap": 1.2635008017585525,
+  "mean_consecutive_gap": 0.27950423807451924,
+  "max_gap_to_mean_gap_ratio": 4.520506774647502
+}

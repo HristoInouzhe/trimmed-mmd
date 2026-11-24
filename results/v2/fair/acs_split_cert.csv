@@ -1,0 +1,55 @@
+method,alpha,split,certified_level,sep_at_zero,certified_at_zero,n_x,n_y,certificate,witness
+original,0.0,0,0.3,,True,62543,57457,sequential,per_level
+original,0.0,1,0.3,,True,62543,57457,sequential,per_level
+original,0.0,2,0.3,,True,62543,57457,sequential,per_level
+original,0.0,3,0.3,,True,62543,57457,sequential,per_level
+original,0.0,4,0.3,,True,62543,57457,sequential,per_level
+original,0.0,5,0.3,,True,62543,57457,sequential,per_level
+kernel trimming,0.25,0,0.1,,True,46899,43103,sequential,per_level
+kernel trimming,0.25,1,0.1,,True,46899,43103,sequential,per_level
+kernel trimming,0.25,2,0.1,,True,46899,43103,sequential,per_level
+kernel trimming,0.25,3,0.1,,True,46899,43103,sequential,per_level
+kernel trimming,0.25,4,0.1,,True,46899,43103,sequential,per_level
+kernel trimming,0.25,5,0.1,,True,46899,43103,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,0,0.1,,True,46907,43093,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,1,0.1,,True,46907,43093,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,2,0.1,,True,46907,43093,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,3,0.1,,True,46907,43093,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,4,0.1,,True,46907,43093,sequential,per_level
+"propensity (GBM, cross-fit)",0.25,5,0.1,,True,46907,43093,sequential,per_level
+kernel trimming,0.35,0,-1.0,,False,40527,37310,sequential,per_level
+kernel trimming,0.35,1,-1.0,,False,40527,37310,sequential,per_level
+kernel trimming,0.35,2,-1.0,,False,40527,37310,sequential,per_level
+kernel trimming,0.35,3,-1.0,,False,40527,37310,sequential,per_level
+kernel trimming,0.35,4,-1.0,,False,40527,37310,sequential,per_level
+kernel trimming,0.35,5,-1.0,,False,40527,37310,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,0,0.1,,True,40653,37347,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,1,0.1,,True,40653,37347,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,2,0.1,,True,40653,37347,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,3,0.1,,True,40653,37347,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,4,0.1,,True,40653,37347,sequential,per_level
+"propensity (GBM, cross-fit)",0.35,5,0.1,,True,40653,37347,sequential,per_level
+kernel trimming,0.4,0,-1.0,,False,37483,34431,sequential,per_level
+kernel trimming,0.4,1,-1.0,,False,37483,34431,sequential,per_level
+kernel trimming,0.4,2,-1.0,,False,37483,34431,sequential,per_level
+kernel trimming,0.4,3,-1.0,,False,37483,34431,sequential,per_level
+kernel trimming,0.4,4,-1.0,,False,37483,34431,sequential,per_level
+kernel trimming,0.4,5,-1.0,,False,37483,34431,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,0,0.1,,True,37526,34474,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,1,0.1,,True,37526,34474,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,2,0.1,,True,37526,34474,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,3,0.1,,True,37526,34474,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,4,0.1,,True,37526,34474,sequential,per_level
+"propensity (GBM, cross-fit)",0.4,5,0.1,,True,37526,34474,sequential,per_level
+kernel trimming,0.5,0,-1.0,,False,31340,28677,sequential,per_level
+kernel trimming,0.5,1,-1.0,,False,31340,28677,sequential,per_level
+kernel trimming,0.5,2,-1.0,,False,31340,28677,sequential,per_level
+kernel trimming,0.5,3,-1.0,,False,31340,28677,sequential,per_level
+kernel trimming,0.5,4,-1.0,,False,31340,28677,sequential,per_level
+kernel trimming,0.5,5,-1.0,,False,31340,28677,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,0,0.2,,True,31272,28728,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,1,0.2,,True,31272,28728,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,2,0.2,,True,31272,28728,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,3,0.2,,True,31272,28728,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,4,0.2,,True,31272,28728,sequential,per_level
+"propensity (GBM, cross-fit)",0.5,5,0.2,,True,31272,28728,sequential,per_level

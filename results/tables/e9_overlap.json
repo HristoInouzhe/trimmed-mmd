@@ -1,0 +1,65 @@
+{
+  "overlap": {
+    "alpha_read": 0.08,
+    "n_dropped_mmd": 31,
+    "n_dropped_w2": 32,
+    "n_common": 27,
+    "jaccard": 0.75
+  },
+  "identifiability": [
+    {
+      "alpha": 0.02,
+      "value_1": 0.07378905763232542,
+      "value_2": 0.07378905763219752,
+      "value_gap": 1.2789769243681803e-13,
+      "dropped_1": 8,
+      "dropped_2": 8,
+      "jaccard_two_starts": 1.0
+    },
+    {
+      "alpha": 0.06,
+      "value_1": 0.035170592515182036,
+      "value_2": 0.03517059251505261,
+      "value_gap": 1.2942424909567762e-13,
+      "dropped_1": 23,
+      "dropped_2": 23,
+      "jaccard_two_starts": 1.0
+    },
+    {
+      "alpha": 0.08,
+      "value_1": 0.022548140821296612,
+      "value_2": 0.022548135025094392,
+      "value_gap": 5.796202219576774e-09,
+      "dropped_1": 30,
+      "dropped_2": 31,
+      "jaccard_two_starts": 0.967741935483871
+    },
+    {
+      "alpha": 0.12,
+      "value_1": 0.0015941713783804165,
+      "value_2": 0.0015941333744265947,
+      "value_gap": 3.8003953821809724e-08,
+      "dropped_1": 44,
+      "dropped_2": 44,
+      "jaccard_two_starts": 1.0
+    },
+    {
+      "alpha": 0.2,
+      "value_1": 1.275257359054838e-05,
+      "value_2": 1.5061757319727391e-05,
+      "value_gap": 2.3091837291790107e-06,
+      "dropped_1": 31,
+      "dropped_2": 34,
+      "jaccard_two_starts": 0.9117647058823529
+    },
+    {
+      "alpha": 0.3,
+      "value_1": 2.2673672682007794e-05,
+      "value_2": 2.220248015794217e-05,
+      "value_gap": 4.7119252406562496e-07,
+      "dropped_1": 33,
+      "dropped_2": 31,
+      "jaccard_two_starts": 0.8823529411764706
+    }
+  ]
+}

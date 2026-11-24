@@ -1,0 +1,50 @@
+\section{Final comments}
+\label{sec:discussion}
+
+We have bounded $\alpha^\star=\TV(P,Q)$ from below by following the embeddings of all trimmings of the two laws
+rather than one optimal trimming. They form convex regions that meet exactly at $\alpha^\star$ and fluctuate like
+sample means, which gives guarantees at every sample size on any sample space with a kernel as in
+Assumption~\ref{ass:regularity}, and the witness of their closest points chooses both the trimming and the function
+bet on.
+
+The common fraction is a choice. If the two laws may lose different fractions, the larger of the two is still at
+least $\alpha^\star$ (Section~\ref{sec:regions}), so equal fractions minimize the loss of the arm that loses more.
+Fractions $\alpha_1$ of $P$ and $\alpha_2$ of $Q$ leave a common remainder
+exactly when $\int\min\{p/(1-\alpha_1),q/(1-\alpha_2)\}\ge1$, that is, when
+$E_\zeta(P\,\|\,Q)=\sup_A\{P(A)-\zeta Q(A)\}\le\alpha_1$ with $\zeta=(1-\alpha_1)/(1-\alpha_2)$, the hockey-stick
+divergence of information theory and differential privacy \citep{polyanskiy2010channel}, whose values over $\zeta$
+trace the trade-off curve of testing $P$ against $Q$ \citep{dong2022gaussian}. The regions, their witness and the
+betting test carry over, with the weights and cuts of each law at its own fraction and bets on
+$\psi(X)-\zeta\psi(Y)$, whose best choice is the indicator of $\{p>\zeta q\}$. A bound for each $\zeta$ would say how much of one arm must go to
+keep more of the other. The rates of Section~\ref{sec:rates} are proved for equal fractions, and we expect them to carry
+over along each ray of fixed $\zeta$, where the rescaled distance is still convex and the paired statistics bounded.
+
+The dimension can enter the rate $(n\wedge m)^{-1/(2\gamma)}$ of Theorem~\ref{thm:loratemain} only through the margin
+exponent $\gamma$. Contaminations separated by a function of the RKHS give $\gamma=1$ in every
+dimension. When they touch, the margin proved for Sobolev kernels in Section~\ref{sec:linearmargin} has
+$\gamma=1+(2s-1)/\{2(r+1)\}$ when $p-q$ vanishes to order $r$ where the contaminations meet, and a Sobolev kernel on
+$\R^d$ is bounded only for $s>d/2$, so the guaranteed rate is slower than $(n\wedge m)^{-(r+1)/(2r+1+d)}$: for a
+transversal crossing, $(n\wedge m)^{-2/(d+3)}$ at best, and $(n\wedge m)^{-2/(d+4)}$ with the Laplace kernel. Only a
+contact that is flat compared with $d$ keeps the dimension out of this guarantee. Whether the dimension enters the rate
+itself is open; on the line, for the Laplace kernel, densities that cross once and samples of comparable size, the
+margin is pessimistic (Theorem~\ref{thm:laplacerate}).
+
+What rate is possible in $\R^d$? We expect that of classification. Betting on a function $\hat f$ fitted on half of the data certifies
+at most $\E_P\hat f-\E_Q\hat f=\alpha^\star-\mathrm{err}(\hat f)$, except with probability $\delta$, so a plug-in
+classifier falls short of $\alpha^\star$ by at least $\mathrm{err}(\hat f)$, unless the bound is zero, and, up to logarithmic factors, by at most
+$\mathrm{err}(\hat f)$ plus the mesh of the grid and a betting error of order $(n\wedge m)^{-1/2}$. On
+the class of \citet[Section~3]{audibert2007fast}, with $p/(p+q)$ H\"older of order $\beta_{\mathrm H}$, margin exponent
+$\kappa_{\mathrm M}$, $(P+Q)/2$ under their strong density assumption and $\kappa_{\mathrm M}\beta_{\mathrm H}\le d$, their
+bounds make this shortfall of order
+$\max\{(n\wedge m)^{-1/2},(n\wedge m)^{-\beta_{\mathrm H}(1+\kappa_{\mathrm M})/(2\beta_{\mathrm H}+d)}\}$, in which the
+regularity $\beta_{\mathrm H}$ again offsets the dimension. We conjecture
+that every lower bound valid at level $\delta$ uniformly over this class, even one that reports only a value, has a
+worst-case error at least of this order up to a logarithmic factor, so that locating the difference costs nothing in
+rate. The natural route to this lower bound is that of nonsmooth functionals, fuzzy hypotheses with matched moments,
+where polynomial approximation gains
+exactly a logarithmic factor over plug-in \citep{lepski1999estimation,cai2011testing,han2020estimation}.
+
+Whether our kernel bounds attain this rate, whether the near-parametric rate of Theorem~\ref{thm:laplacerate}(i) holds without
+condition \eqref{eq:condR}, for other kernels and in $\R^d$, and how to choose the kernel from the data with a
+guarantee, are open, and so is whether averaging the e-values of fits with the batches' roles exchanged, which lets
+every observation be bet on without losing validity \citep{vovk2021evalues}, gains power over a single split.

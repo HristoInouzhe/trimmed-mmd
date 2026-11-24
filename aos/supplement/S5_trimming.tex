@@ -1,0 +1,417 @@
+\section{Proofs for Section~\ref{sec:trimming} and Proposition~\ref{prop:bangbang}}
+\label{app:trimming}
+
+This section proves Proposition~\ref{prop:bangbang} and the results of Section~\ref{sec:trimming}, and with them the
+uniform bound \eqref{eq:hausdorff} (Corollary~\ref{cor:uniform}). The witnesses, cuts, kept sets, trimming densities,
+the constants $c_f$, $C_f$, $c'_f$, $r_Q$ and the modulus $\Omega$ are those of Section~\ref{sec:trimming}.
+
+\subsection{Structure of the trimming}
+
+\begin{proof}[Proof of Proposition~\ref{prop:bangbang}]
+The minimizing difference of two polytopes is unique, and the gradient in the weights is the witness, so each
+optimal weight vector solves the bathtub problem of Lemma~\ref{lem:trimmedmean}. The objective is continuous and convex
+on a compact convex set, so $\mathcal T_\alpha$ is nonempty, compact and convex.
+
+(i) With $u=\sum_iw_i\phi(X_i)$ and $z=\sum_jv_j\phi(Y_j)$ the objective is $\|u-z\|_\Hh^2$, and $u-z$ ranges over the
+convex compact set $\mathcal C_\alpha(P_n)-\mathcal C_\alpha(Q_m)$ (Proposition~\ref{prop:georep}), whose element of
+minimal norm is unique and has norm $\widehat D_\alpha$.
+
+(ii) The objective $F$ is convex and differentiable, so $(w^\star,v^\star)\in\mathcal T_\alpha$ if and only if $w^\star$ minimizes $w\mapsto\langle\nabla_wF(w^\star,v^\star),w\rangle$ over the capped simplex, and likewise for $v^\star$. By the reproducing property and part (i), at every minimizer
+\[
+(\nabla_wF)_i=2(K_{XX}w^\star-K_{XY}v^\star)_i=2\langle\phi(X_i),u^\star-z^\star\rangle_\Hh=2\,\widehat d(X_i),
+\]
+the last equality because $u^\star-z^\star=\widehat d$ is the same at every minimizer, and Lemma~\ref{lem:trimmedmean}, in its
+minimum form, describes the minimizers of this linear function. The statement for $v^\star$ follows from $(\nabla_vF)_j=-2\,\widehat d(Y_j)$ and the maximum form
+of the same lemma.
+
+(iii) $\widehat D_\alpha=0$ forces $\widehat d=0$ by (i), that is, $u^\star=z^\star$. Conversely, every feasible pair
+with $u=z$ attains the value $0$, which is the minimum.
+\end{proof}
+
+The population trimming has the same threshold form \eqref{eq:popdensity}.
+
+\begin{lemma}[Threshold form of the population trimming]
+\label{lem:popthreshold}
+Let Assumption~\ref{ass:regularity} hold, let $\alpha\in[0,1)$, and suppose that
+$\dist(\mathcal C_\alpha(P),\mathcal C_\alpha(Q))>0$. Let $d^\star$ be the element of minimal norm of
+$\mathcal C_\alpha(P)-\mathcal C_\alpha(Q)$, write $d^\star=a^\star-b^\star$ with $a^\star=\E_P[g^\star\phi]$ for some
+$g^\star\in\mathcal G_\alpha(P)$ and $b^\star\in\mathcal C_\alpha(Q)$, and let $t$ be any $(1-\alpha)$-quantile of
+$d^\star(X)$ for $X\sim P$. Then $g^\star=\beta$ $P$-almost surely on $\{d^\star<t\}$ and $g^\star=0$ $P$-almost surely
+on $\{d^\star>t\}$.
+\end{lemma}
+
+\begin{proof}
+We show that $g^\star$ minimizes a linear functional of the density, and then that every minimizer of that
+functional has the threshold form. The set $\mathcal C_\alpha(P)-\mathcal C_\alpha(Q)$ is convex and weakly compact, as the image of the weakly compact
+product of the two regions (Lemma~\ref{lem:attainment}) under the weakly continuous map $(a,b)\mapsto a-b$, hence
+norm-closed; so $d^\star$ exists, and it has a decomposition of the stated form by \eqref{eq:region}. For
+$a\in\mathcal C_\alpha(P)$, $a-b^\star$ lies in the same set, so $\langle a-a^\star,d^\star\rangle_\Hh\ge0$, and by the
+reproducing property $g^\star$ minimizes $g\mapsto\E_P[gU]$ over $\mathcal G_\alpha(P)$, where $U=d^\star(X)$.
+
+The threshold density is such a minimizer, and every minimizer agrees with it off the cut. Since $\Pp(U<t)\le1-\alpha\le\Pp(U\le t)$, there is
+$c\in[0,\beta]$ such that $h=\beta\mathbf 1\{U<t\}+c\mathbf 1\{U=t\}$ lies in $\mathcal G_\alpha(P)$, as in the proof of
+Lemma~\ref{lem:cvar}. For every $g\in\mathcal G_\alpha(P)$, $(g-h)(U-t)\ge0$ pointwise, because $h=\beta\ge g$ where $U<t$
+and $h=0\le g$ where $U>t$, and $\E[(g-h)(U-t)]=\E[gU]-\E[hU]$ since $\E g=\E h=1$. So $h$ is a minimizer, and $(g^\star-h)(U-t)\ge0$ has
+expectation at most $0$, hence vanishes almost surely: $g^\star=\beta$ where $U<t$ and $g^\star=0$ where $U>t$.
+\end{proof}
+
+\subsection{The parametric rate}
+
+Throughout this subsection $\alpha\in(0,1)$, $\mathcal A=\mathcal C_\alpha(P)$, $\mathcal B=\mathcal C_\alpha(Q)$,
+$\mathcal A_n,\mathcal B_m$ are the empirical regions, $\mathrm{sep}(f)=\mathrm{sep}(f;\mathcal A,\mathcal B)$ and
+$\mathrm{sep}_n(f)=\mathrm{sep}(f;\mathcal A_n,\mathcal B_m)$ as in \eqref{eq:sep}, and $\xi(f)=\mathrm{sep}_n(f)-
+\mathrm{sep}(f)$ is the fluctuation of the separation. For a probability measure $R$ and a bounded measurable $f$ write
+\begin{equation}
+\begin{aligned}
+L_R(f)&=\inf_{g\in\mathcal G_\alpha(R)}\E_R[gf]=\sup_{t\in\R}\big\{t-\beta\,\E_R(t-f)_+\big\},\\
+U_R(f)&=\sup_{g\in\mathcal G_\alpha(R)}\E_R[gf]=\inf_{u\in\R}\big\{u+\beta\,\E_R(f-u)_+\big\},
+\end{aligned}
+\label{eq:twotail}
+\end{equation}
+the equalities being Lemma~\ref{lem:cvar} applied to $-f$ and to $f$. For $f\in\Hh$ these are
+$L_R(f)=-h_{\mathcal C_\alpha(R)}(-f)$ and $U_R(f)=h_{\mathcal C_\alpha(R)}(f)$, with the support functions of
+Section~\ref{sec:regions}. The function maximized in $L_R$ is concave with
+right and left derivatives $1-\beta R(f\le t)$ and $1-\beta R(f<t)$, so its maximizers are the $t$ with
+$R(f<t)\le1-\alpha\le R(f\le t)$, the $(1-\alpha)$-quantiles of $f$ under $R$; likewise the minimizers in $U_R$ are the
+$\alpha$-quantiles. By Proposition~\ref{prop:georep}, $\mathrm{sep}(f)=L_P(f)-U_Q(f)$ and
+$\mathrm{sep}_n(f)=L_{P_n}(f)-U_{Q_m}(f)$.
+
+\begin{lemma}[A quadratic margin on the unit sphere]
+\label{lem:sepmargin}
+Let $K\subset\Hh$ be nonempty, convex and closed, write $\mathrm{sep}_K(f)=\inf_{z\in K}\langle f,z\rangle_\Hh$, let
+$d^\star$ be its element of minimal norm, suppose $D=\|d^\star\|_\Hh>0$, and put $f^\star=d^\star/D$. Then
+$\mathrm{sep}_K(f)\le\langle f,d^\star\rangle_\Hh$ for every $f\in\Hh$, $\mathrm{sep}_K(f^\star)=D=\max_{f\in B_\Hh}
+\mathrm{sep}_K(f)$, and
+\[
+\mathrm{sep}_K(f^\star)-\mathrm{sep}_K(u)\ \ge\ \tfrac D2\,\|u-f^\star\|_\Hh^2
+\qquad\text{for every }u\in\Hh\text{ with }\|u\|_\Hh=1 .
+\]
+For $d'\in\Hh$ with $D'=\|d'\|_\Hh>0$ and $f'=d'/D'$,
+$\|d'-d^\star\|_\Hh^2=(D'-D)^2+D'D\,\|f'-f^\star\|_\Hh^2$.
+\end{lemma}
+
+\begin{proof}
+Since $d^\star\in K$, $\mathrm{sep}_K(f)\le\langle f,d^\star\rangle_\Hh$. For $z\in K$ and $t\in(0,1]$,
+$\|d^\star\|_\Hh^2\le\|d^\star+t(z-d^\star)\|_\Hh^2$ by convexity, and letting $t\downarrow0$ gives $\langle d^\star,z-d^\star\rangle_\Hh\ge0$, that is, $\langle f^\star,z\rangle_\Hh\ge D$ on $K$. So
+$\mathrm{sep}_K(f^\star)\ge D=\langle f^\star,d^\star\rangle_\Hh\ge\mathrm{sep}_K(f^\star)$, and for $f\in B_\Hh$,
+$\mathrm{sep}_K(f)\le\langle f,d^\star\rangle_\Hh\le D$ by Cauchy--Schwarz. For a unit vector $u$,
+$\langle u,f^\star\rangle_\Hh=1-\tfrac12\|u-f^\star\|_\Hh^2$, so $\mathrm{sep}_K(u)\le D\langle u,f^\star\rangle_\Hh=
+D-\tfrac D2\|u-f^\star\|_\Hh^2$. Finally $\|D'f'-Df^\star\|_\Hh^2=D'^2+D^2-2D'D\langle f',f^\star\rangle_\Hh$, and
+substituting $\langle f',f^\star\rangle_\Hh=1-\tfrac12\|f'-f^\star\|_\Hh^2$ gives the identity.
+\end{proof}
+
+\begin{lemma}[A basic inequality at two cuts]
+\label{lem:basicineq}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, let $\alpha\in(0,1)$, and suppose $D=D_\alpha(P,Q)>0$ and
+$\widehat D=\widehat D_\alpha>0$. Let $f^\star=d^\star/D$ and $\widehat f=\widehat d/\widehat D$, let $t^\star$ be a
+$(1-\alpha)$-quantile of $f^\star(X)$ for $X\sim P$ and $u^\star$ an $\alpha$-quantile of $f^\star(Y)$ for $Y\sim Q$,
+and let $\widehat t$ be the $(n_{1-\alpha}+1)$-th smallest of the values $\widehat f(X_i)$ and $\widehat u$ the
+$(m_{1-\alpha}+1)$-th largest of the values $\widehat f(Y_j)$. Then, for every realization of the samples,
+\[
+\begin{aligned}
+\tfrac D2\|\widehat f-f^\star\|_\Hh^2\ \le\ \xi(\widehat f)-\xi(f^\star)
+\ \le\ \beta\Big[&(P-P_n)\big\{(\widehat t-\widehat f)_+-(t^\star-f^\star)_+\big\}\\
+&+(Q-Q_m)\big\{(\widehat f-\widehat u)_+-(f^\star-u^\star)_+\big\}\Big].
+\end{aligned}
+\]
+\end{lemma}
+
+\begin{proof}
+The population separation loses at $\widehat f$ at most the difference of the fluctuations, and the
+quadratic margin turns that loss into a squared distance; the right-hand side then comes from evaluating each trimmed
+mean at a cut that is optimal for the other measure. The set $\mathcal A-\mathcal B$ is nonempty, convex and closed (proof of
+Lemma~\ref{lem:popthreshold}), with element of minimal norm $d^\star$, and $\mathrm{sep}=\mathrm{sep}_{\mathcal
+A-\mathcal B}$; the same holds for the polytope $\mathcal A_n-\mathcal B_m$ and $\widehat d$
+(Proposition~\ref{prop:bangbang}(i)). By Lemma~\ref{lem:sepmargin}, $\widehat f$ maximizes $\mathrm{sep}_n$ over
+$B_\Hh\ni f^\star$, so $\mathrm{sep}(f^\star)-\mathrm{sep}(\widehat f)=[\mathrm{sep}_n(f^\star)-\mathrm{sep}_n(\widehat
+f)]+\xi(\widehat f)-\xi(f^\star)\le\xi(\widehat f)-\xi(f^\star)$, and Lemma~\ref{lem:sepmargin} at $u=\widehat f$ bounds
+the left-hand side below by $\tfrac D2\|\widehat f-f^\star\|^2_\Hh$.
+
+At $\widehat f$ we bound the fluctuation from above, using the empirical cuts. Since $P_n(\widehat f<\widehat t)\le n_{1-\alpha}/n\le1-\alpha<(n_{1-\alpha}+1)/n\le
+P_n(\widehat f\le\widehat t)$, $\widehat t$ is a $(1-\alpha)$-quantile of $\widehat f$ under $P_n$. By the
+characterization after \eqref{eq:twotail}, $L_{P_n}(\widehat f)=\widehat t-\beta P_n(\widehat t-\widehat f)_+$, while
+$L_P(\widehat f)\ge\widehat t-\beta P(\widehat t-\widehat f)_+$, so $L_{P_n}(\widehat f)-L_P(\widehat f)\le\beta(P-P_n)
+(\widehat t-\widehat f)_+$. Likewise $\widehat u$, the $k$-th smallest of the $\widehat f(Y_j)$ with $k=m-m_{1-\alpha}$, is an $\alpha$-quantile of
+$\widehat f$ under $Q_m$, as $\alpha\le k/m<\alpha+1/m$ gives $Q_m(\widehat f<\widehat u)<\alpha\le Q_m(\widehat f\le\widehat u)$. So
+$U_{Q_m}(\widehat f)=\widehat u+\beta Q_m(\widehat f-\widehat u)_+$ and $U_Q(\widehat f)\le\widehat u+\beta Q(\widehat
+f-\widehat u)_+$. Adding, since $\xi=(L_{P_n}-L_P)+(U_Q-U_{Q_m})$,
+$\xi(\widehat f)\le\beta[(P-P_n)(\widehat t-\widehat f)_++(Q-Q_m)(\widehat f-\widehat u)_+]$.
+
+At $f^\star$ we bound it from below in the same way, using the population cuts. Now $t^\star$ maximizes the population objective, so $L_P(f^\star)=t^\star-\beta
+P(t^\star-f^\star)_+$, while $L_{P_n}(f^\star)\ge t^\star-\beta P_n(t^\star-f^\star)_+$; and $U_Q(f^\star)=u^\star+\beta
+Q(f^\star-u^\star)_+$, while $U_{Q_m}(f^\star)\le u^\star+\beta Q_m(f^\star-u^\star)_+$. Hence
+$\xi(f^\star)\ge\beta[(P-P_n)(t^\star-f^\star)_++(Q-Q_m)(f^\star-u^\star)_+]$, and subtracting gives the claim.
+\end{proof}
+
+The next lemma uses, as in Section~\ref{app:analytic}, $n_\star=nm/(n+m)$ and $e_k=\E|\varepsilon_1+\dots+
+\varepsilon_k|/k\le k^{-1/2}$ for independent Rademacher signs $\varepsilon_i$.
+
+\begin{lemma}[A local modulus for the ramps]
+\label{lem:localmod}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, let $f^\star\in\Hh$ and $t^\star,u^\star\in\R$ be fixed, and
+let $r,\lambda_1,\lambda_2\ge0$. Let $\mathcal H(r)$ be the set of pairs of functions $h_1=(t-f)_+-(t^\star-f^\star)_+$
+and $h_2=(f-u)_+-(f^\star-u^\star)_+$ with $f\in\Hh$, $\|f-f^\star\|_\Hh\le r$, $|t-t^\star|\le\kappa r+\lambda_1$ and
+$|u-u^\star|\le\kappa r+\lambda_2$, and put $\Gamma(r)=\sup_{(h_1,h_2)\in\mathcal H(r)}[(P-P_n)h_1+(Q-Q_m)h_2]$. Then $\Gamma(r)$
+is measurable, nonnegative and nondecreasing in $r$,
+\[
+\E \Gamma(r)\le2\big[\kappa r/\sqrt{n_\star}+(\kappa r+\lambda_1)e_n+(\kappa r+\lambda_2)e_m\big],
+\]
+and for every $\chi>0$, with probability at least $1-e^{-\chi}$,
+\[
+\Gamma(r)\le\kappa r\,L(\chi)+M(\chi),
+\qquad
+\begin{aligned}
+L(\chi)&=2/\sqrt{n_\star}+2(e_n+e_m)+2\sqrt{2\chi/n_\star},\\
+M(\chi)&=2(\lambda_1e_n+\lambda_2e_m)+\sqrt{2\chi\big(\lambda_1^2/n+\lambda_2^2/m\big)} .
+\end{aligned}
+\]
+\end{lemma}
+
+\begin{proof}
+Write $f=f^\star+v$, $t=t^\star+a$, $u=u^\star+b$, and for each $x$ let $\varphi^1_x(z)=(t^\star-f^\star(x)+z)_+-(t^\star-
+f^\star(x))_+$ and $\varphi^2_x(z)=(f^\star(x)-u^\star+z)_+-(f^\star(x)-u^\star)_+$. Both are $1$-Lipschitz and vanish
+at $0$, and $h_1(x)=\varphi^1_x(a-v(x))$, $h_2(y)=\varphi^2_y(v(y)-b)$, so $\Gamma(r)$ is the supremum $\Gamma$ of
+Lemma~\ref{lem:hinge} with these maps, radius $r$ and $\rho_i=\kappa r+\lambda_i$. That lemma gives the measurability and
+the bound on $\E \Gamma(r)$. The choice $(v,a,b)=0$ gives $\Gamma(r)\ge0$, and the classes increase with $r$. Since
+$|\varphi^i_x(z)|\le|z|$, every pair has $|h_1|\le2\kappa r+\lambda_1$ and $|h_2|\le2\kappa r+\lambda_2$, so the tail
+bound of the lemma holds with $\Delta_i=2(2\kappa r+\lambda_i)$. With probability at least $1-e^{-\chi}$, by
+Minkowski's inequality in $\R^2$,
+\[
+\begin{aligned}
+\Gamma(r)&\le\E \Gamma(r)+\sqrt{2\chi\big[(2\kappa r+\lambda_1)^2/n+(2\kappa r+\lambda_2)^2/m\big]}\\
+&\le\E \Gamma(r)+\sqrt{2\chi}\,\big[2\kappa r/\sqrt{n_\star}+(\lambda_1^2/n+\lambda_2^2/m)^{1/2}\big],
+\end{aligned}
+\]
+and adding the bound on $\E \Gamma(r)$ and collecting the terms in $\kappa r$ gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{cor:trimrate}]
+The basic inequality of Lemma~\ref{lem:basicineq} bounds $\tfrac D2\widehat r^{\,2}$ by a supremum whose mean grows
+linearly in $\widehat r$, which forces $\widehat r$ to be of order $(n\wedge m)^{-1/2}$; dyadic shells and Markov's
+inequality turn this into a rate, as in the proof of \citet[Theorem~3.2.5]{vandervaart1996weak}. We work with the
+direction $f^\star=d^\star/D$, so cuts and radii on the scale of $d^\star$ are divided by $D$. Precisely, we show
+that for every $\eta\in(0,1)$ there are a constant $C_\eta$, depending on $\eta$ alone, and a size $n_\eta$, depending on
+$\eta$, $(P,Q,k,\alpha)$ and $r_Q$, such that for $n\wedge m\ge n_\eta$ each of the four bounds holds with $C_\eta$ in
+place of $O_\Pp$ with probability at least $1-\eta$.
+
+We write $\widehat D=\widehat D_\alpha$, $f^\star=d^\star/D$, $\widehat f=\widehat d/\widehat D$ when $\widehat D>0$,
+$\widehat r=\|\widehat f-f^\star\|_\Hh$, $t^\star=t_\alpha/D$ and $u^\star=u_\alpha/D$, which are a
+$(1-\alpha)$-quantile of $f^\star(X)$ and an $\alpha$-quantile of $f^\star(Y)$, and let $\widehat t$ and $\widehat u$ be
+as in Lemma~\ref{lem:basicineq}, so that $\widehat t=\widehat t_n/\widehat D$. Write $\underline c=\min(c_f,c'_f)$ and
+$\underline n=n\wedge m$, fix $\eta\in(0,1)$ and put $\eta'=\eta/2$,
+\[
+\lambda_X=\frac1{c_f}\Big(\varepsilon_n+\frac1n\Big),\qquad
+\lambda_Y=\frac1{c'_f}\Big(\varepsilon_m+\frac1m\Big),\qquad
+\varepsilon_n=\Big\{\frac{\log(10/\eta')}{2n}\Big\}^{1/2},
+\]
+with $\varepsilon_m$ defined likewise, and $\tau^{\mathrm S}=\tau^{\mathrm S}_{n,m}(\alpha,\eta'/5)$ as in
+\eqref{eq:tauA}. Let $\Gamma$ be the process of Lemma~\ref{lem:localmod} for $f^\star,t^\star,u^\star$,
+$\lambda_1=\lambda_X/D$ and $\lambda_2=\lambda_Y/D$. The proof uses four events, each of probability at least
+$1-\eta'/5$: the events $E^+$ and $E^-$ of Theorem~\ref{thm:twosided} at level $\eta'/5$, and, by the
+Dvoretzky--Kiefer--Wolfowitz inequality with Massart's constant \citep{massart1990dkw},
+$E_X=\{\sup_t|F_n(t)-F(t)|\le\varepsilon_n\}$ for the distribution function $F$ of $d^\star(X)$ and the empirical one
+$F_n$ of the $d^\star(X_i)$, and the analogous $E_Y$ for the $d^\star(Y_j)$, with $G$, $G_m$ and $\varepsilon_m$. Let
+$E=E^-\cap E_X\cap E_Y$, so $\Pp(E^c)\le3\eta/10$. For $n\wedge m$ large enough, $\tau^{\mathrm S}<D$ and $\max(\lambda_X,\lambda_Y)\le r_Q$.
+
+On $E^-$ the problem is nondegenerate: $\widehat D\ge D-\tau^{\mathrm S}>0$. So $\widehat f$ is a unit vector,
+$\widehat r\le2$, and Proposition~\ref{prop:bangbang}(ii) applies, with $\widehat A_n=\{\widehat f<\widehat t\}$; also
+$A^\star=\{f^\star<t^\star\}$.
+
+The lower density bounds keep the empirical cuts of $f^\star$ near the population ones, within $\lambda_X$ or
+$\lambda_Y$, the radius of the Dvoretzky--Kiefer--Wolfowitz event plus one rank, divided by $c_f$ or $c'_f$. By \eqref{eq:qdens}, $F$ is continuous at $t_\alpha$, so $F(t_\alpha)=1-\alpha$, and
+integrating the lower density bound gives $F(t_\alpha+\varepsilon)\ge1-\alpha+c_f\varepsilon$ and
+$F(t_\alpha-\varepsilon)\le1-\alpha-c_f\varepsilon$ for $0\le\varepsilon\le r_Q$. Let $d^\star_{(n_{1-\alpha}+1)}$ be the
+$(n_{1-\alpha}+1)$-th smallest of the $d^\star(X_i)$, so that $F_n(t)\ge(n_{1-\alpha}+1)/n$ exactly when $t\ge
+d^\star_{(n_{1-\alpha}+1)}$. On $E_X$, since $c_f\lambda_X=\varepsilon_n+1/n$ and $\lambda_X\le r_Q$,
+$F_n(t_\alpha+\lambda_X)\ge1-\alpha+1/n\ge(n_{1-\alpha}+1)/n$ and $F_n(t_\alpha-\lambda_X)\le1-\alpha-1/n<(n_{1-\alpha}+1)/n$,
+using $n(1-\alpha)-1<n_{1-\alpha}\le n(1-\alpha)$; so $|d^\star_{(n_{1-\alpha}+1)}-t_\alpha|\le\lambda_X$. On the second sample
+let $d^\star_{[k]}$ be the $k$-th smallest of the $d^\star(Y_j)$, $k=m-m_{1-\alpha}$, which is the $(m_{1-\alpha}+1)$-th largest,
+with $\alpha\le k/m<\alpha+1/m$. In the same way \eqref{eq:qdensY} gives, on $E_Y$, $G_m(u_\alpha+\lambda_Y)\ge
+\alpha+1/m>k/m$ and $G_m(u_\alpha-\lambda_Y)\le\alpha-1/m<k/m$, so $|d^\star_{[k]}-u_\alpha|\le\lambda_Y$. Dividing by
+$D$, the corresponding order statistics of the $f^\star(X_i)$ and $f^\star(Y_j)$ are within $\lambda_1$ of $t^\star$ and
+within $\lambda_2$ of $u^\star$. Order statistics are $1$-Lipschitz in the sup-norm of the values, and
+$|\widehat f(x)-f^\star(x)|\le\kappa\widehat r$ by Cauchy--Schwarz, so
+$|\widehat t-t^\star|\le\kappa\widehat r+\lambda_1$ and $|\widehat u-u^\star|\le\kappa\widehat r+\lambda_2$. The pair of
+functions in Lemma~\ref{lem:basicineq} therefore belongs to $\mathcal H(\widehat r)$, and the lemma gives
+\begin{equation}
+\tfrac D2\,\widehat r^{\,2}\le\beta\,\Gamma(\widehat r) .
+\label{eq:basicZ}
+\end{equation}
+
+A peeling turns \eqref{eq:basicZ} into a rate. We peel the values of $\underline n^{1/2}\widehat r$ into dyadic shells. For
+$j\in\mathbb Z$ let $S_j=\{2^{j-1}<\underline n^{1/2}\widehat r\le2^j\}$. On $S_j\cap E$, \eqref{eq:basicZ} and the monotonicity of
+$\Gamma$ give $\Gamma(2^j\underline n^{-1/2})\ge D4^j/(8\beta\underline n)$, so $S_j\cap E$ lies in the measurable
+event $\{\Gamma(2^j\underline n^{-1/2})\ge D4^j/(8\beta\underline n)\}$. The bound on $\E \Gamma$ in Lemma~\ref{lem:localmod}, with $n_\star^{-1/2}\le(2/\underline n)^{1/2}$ and $e_n,e_m\le\underline n^{-1/2}$, gives
+$\underline n\,\E \Gamma(2^j\underline n^{-1/2})\le a2^j+b$ with $a=2(2+\sqrt2)\kappa$, the linear term, and
+$b=2\underline n^{1/2}(\lambda_1+\lambda_2)$, the cost
+of the cuts, so by Markov's inequality, since
+$\Gamma\ge0$, that event has probability at most $8\beta(a2^j+b)/(D4^j)$. Write $\Xi_{\eta'}=\sqrt{\log(10/\eta')/2}+1$.
+Since $\underline n\le n$, $\underline n^{1/2}\lambda_X\le\Xi_{\eta'}/c_f$, and likewise for $\lambda_Y$, so
+$b\le4\Xi_{\eta'}/(\underline cD)$. Let $j_0$ be the smallest integer with $2^{j_0}\ge\Lambda V_\alpha/D$, for a
+number $\Lambda\ge1$ chosen below. The shells $S_j$ with $j>j_0$ cover $\{\underline n^{1/2}\widehat r>2^{j_0}\}$, so
+$\{\underline n^{1/2}\widehat r>2^{j_0}\}\cap E$ lies in the union $\mathcal B_{j_0}$ of the events above over $j>j_0$, and summing the geometric
+series,
+\[
+\Pp(\mathcal B_{j_0})\le\frac{8\beta a}{D2^{j_0}}+\frac{8\beta b}{3D4^{j_0}}
+\le\frac{8\beta a}{\Lambda V_\alpha}+\frac{32\beta\Xi_{\eta'}}{3\underline c\Lambda^2V_\alpha^2}
+\le\frac{16(2+\sqrt2)}\Lambda+\frac{32\Xi_{\eta'}}{3\Lambda^2},
+\]
+using $V_\alpha\ge\beta\kappa$ and $V_\alpha^2\ge\beta/\underline c$. Choose $\Lambda$, depending only on $\eta$, so
+that the right-hand side is at most $\eta/2$. Since $2^{j_0}<2\Lambda V_\alpha/D$, the event
+$\{\widehat r>2\Lambda V_\alpha/(D\underline n^{1/2})\}$ lies in $E^c\cup\mathcal B_{j_0}$, of probability at most $3\eta/10+\eta/2<
+\eta$ for $n\wedge m$ large, which is the rate of the direction.
+
+The bounds on the witness and the kept set follow from that on the direction. For the witness, Lemma~\ref{lem:sepmargin} gives $\|\widehat d-d^\star\|_\Hh\le|\widehat
+D-D|+\sqrt{\widehat DD}\,\widehat r\le\tau^{\mathrm S}+\sqrt2D\widehat r$ on $E^+\cap E^-$ when $\tau^{\mathrm S}<D$, and \eqref{eq:tauA} gives
+$\tau^{\mathrm S}_{n,m}(\alpha,\eta'/5)\le\beta\kappa\big(2\sqrt2+4+2\sqrt{\log(5/\eta')}\big)\underline n^{-1/2}$, a multiple of $V_\alpha\underline n^{-1/2}$ depending only on $\eta$. For the kept set, on $E$, if $\widehat f(x)<\widehat t$ and $f^\star(x)\ge t^\star$, then
+$f^\star(x)\le\widehat f(x)+\kappa\widehat r<\widehat t+\kappa\widehat r\le t^\star+2\kappa\widehat r+\lambda_1$; if
+$f^\star(x)<t^\star$ and $\widehat f(x)\ge\widehat t$, then $f^\star(x)\ge\widehat t-\kappa\widehat r\ge
+t^\star-2\kappa\widehat r-\lambda_1$. So $\widehat A_n\triangle A^\star$ lies in the band
+$\{|f^\star-t^\star|\le2\kappa\widehat r+\lambda_1\}=\{|d^\star-t_\alpha|\le2\kappa D\widehat r+\lambda_X\}$, and the same computation puts $\{\widehat d=\widehat t_n\}=
+\{\widehat f=\widehat t\}$ in it. If its half-width $\ell=2\kappa D\widehat r+\lambda_X$ is at most $r_Q$, the upper density bound of
+\eqref{eq:qdens} gives the band mass at most $2C_f\ell$. Finally, $\widehat g_n$ and $g^\star$ take values in
+$[0,\beta]$ and agree outside $(\widehat A_n\triangle A^\star)\cup\{\widehat d=\widehat t_n\}\cup\{d^\star=t_\alpha\}$:
+both equal $\beta$ on $\widehat A_n\cap A^\star$ and $0$ where $\widehat d>\widehat t_n$ and $d^\star>t_\alpha$. All three
+sets lie in the band, which gives the bound on $\int|\widehat g_n-g^\star|\,dP$. On $E$ the half-width is at most $r_Q$ with probability tending to one, and
+$\lambda_X\le\Xi_{\eta'}/(c_f\underline n^{1/2})$, while the rate of the direction bounds $2\kappa D\widehat r$ by
+$4\Lambda\kappa V_\alpha\underline n^{-1/2}$
+outside probability $\eta$.
+\end{proof}
+
+\subsection{A sufficient condition for \eqref{eq:qdens}}
+
+The density conditions of Section~\ref{sec:trimming} hold, for instance, under the following condition on the witness.
+
+\begin{remark}[A sufficient condition for \eqref{eq:qdens}]
+\label{rem:qdens}
+Let $\mathcal X=\R^d$ with the Gaussian kernel, so that $d^\star$ is infinitely differentiable and vanishes at
+infinity. If $t_\alpha\neq0$, the level set $\{d^\star=t_\alpha\}$ is nonempty, the gradient of $d^\star$ does not
+vanish on it, and $P$ has a Lebesgue density $p$ that is continuous near the level set and positive on it, then
+\eqref{eq:qdens} holds, by the coarea formula \citep{evans2015measure}. The same conditions at $u_\alpha$ under $Q$
+give \eqref{eq:qdensY} (proof below). For the Laplace kernel on $\R$, by contrast, \eqref{eq:qdens} fails for every
+pair and every level $0<\alpha<\alpha^\star$, as the law of $d^\star(X)$ has an atom of mass at least $\alpha$ at the
+cut (Proposition~\ref{prop:excess}(iii) and the remark after its proof); whether it can hold for the Laplace kernel in
+$\R^d$ is open.
+\end{remark}
+
+\begin{proof}[Proof of Remark~\ref{rem:qdens}]
+For the Gaussian kernel every function in $\Hh$ is infinitely differentiable \citep[Corollary~4.36]{steinwart2008svm}
+and vanishes at infinity \citep[Theorem~4.21 and Lemma~4.23]{steinwart2008svm}, so for $0<\rho<|t_\alpha|/2$ the band
+$B_\rho=\{|d^\star-t_\alpha|\le\rho\}$ is compact, and for $\rho$ small enough $\nabla d^\star$ does not vanish and $p$ is
+continuous and positive on it, by continuity and compactness. On $B_\rho$ the coarea formula \citep{evans2015measure}
+gives $d^\star(X)$ the density $h(t)=\int_{\{d^\star=t\}}p/|\nabla d^\star|\,d\mathcal H^{d-1}$ for $|t-t_\alpha|\le\rho$,
+which is continuous, as the flow of $\nabla d^\star/|\nabla d^\star|^2$ carries the level sets smoothly onto one another,
+and positive. So \eqref{eq:qdens} holds for $r_Q<\rho$ with $c_f$ and $C_f$ the extremes of $h$ on
+$[t_\alpha-r_Q,t_\alpha+r_Q]$, and the same argument for $Q$, $Y$ and $u_\alpha$ gives \eqref{eq:qdensY}.
+\end{proof}
+
+\subsection{The trimming at the estimated level}
+
+The regions touch in a single point at $\alpha^\star$, and concentrate in Hausdorff distance $d_H$. Recall the modulus
+of contact $\Omega(\epsilon)=\sup\{\|a-\mu_{R^\star}\|_\Hh:a\in\mathcal C_{\alpha^\star}(P),\
+\dist(a,\mathcal C_{\alpha^\star}(Q))\le\epsilon\}$.
+
+\begin{lemma}[The contact point]
+\label{lem:contact}
+Let Assumption~\ref{ass:regularity} hold. Then $\mathcal C_\alpha(P)$ is norm-compact for every $\alpha\in[0,1)$. If
+$\alpha^\star<1$, then $R^\star=(P\wedge Q)/(1-\alpha^\star)$ is the only common element of $R_{\alpha^\star}(P)$ and
+$R_{\alpha^\star}(Q)$, $\mathcal C_{\alpha^\star}(P)\cap\mathcal C_{\alpha^\star}(Q)=\{\mu_{R^\star}\}$, and
+$\Omega(\epsilon)\to0$ as $\epsilon\downarrow0$.
+\end{lemma}
+
+\begin{proof}
+Norm-compactness is part of Lemma~\ref{lem:attainment}.
+
+The common trimming is unique by the maximality of $P\wedge Q$, and the common embedding by (A3). If $R\in R_{\alpha^\star}(P)\cap R_{\alpha^\star}(Q)$, then $(1-\alpha^\star)R\le P\wedge Q$
+(Section~\ref{app:regions}), and both have mass $1-\alpha^\star$, so $R=R^\star$; conversely $R^\star$ lies in both. If $a$ lies in both regions, then
+$a=\E_P[g\phi]=\E_Q[h\phi]$ with $g\in\mathcal G_{\alpha^\star}(P)$ and $h\in\mathcal G_{\alpha^\star}(Q)$, the
+probability measures $gP$ and $hQ$ have the same embedding, and they are equal by (A3). So $a$ is the embedding of a
+common trimming, which is $R^\star$.
+
+That the modulus tends to zero is a compactness argument. If $\Omega(\epsilon)\not\to0$, there are $\epsilon_j\to0$, $c>0$ and
+$a_j\in\mathcal C_{\alpha^\star}(P)$ with $\dist(a_j,\mathcal C_{\alpha^\star}(Q))\le\epsilon_j$ and
+$\|a_j-\mu_{R^\star}\|_\Hh\ge c$. By compactness a subsequence converges in norm to some
+$\bar a\in\mathcal C_{\alpha^\star}(P)$, and $\dist(\bar a,\mathcal C_{\alpha^\star}(Q))=0$, so $\bar a$ lies in the
+closed set $\mathcal C_{\alpha^\star}(Q)$ as well. Then $\bar a=\mu_{R^\star}$, which contradicts
+$\|\bar a-\mu_{R^\star}\|_\Hh\ge c$.
+\end{proof}
+
+Let $\mathcal G=\{x\mapsto(f(x)-t)_+:\ f\in B_\Hh,\ t\in[-\kappa,\kappa]\}$, a class of hinge functions, not to be
+confused with the sets $\mathcal G_\alpha(P)$ of trimming densities.
+
+\begin{corollary}[Concentration of the regions, simultaneously in $\alpha$]
+\label{cor:uniform}
+Under Assumption~\ref{ass:regularity}, for every $n\ge1$ and $\delta\in(0,1)$ there is an event of probability at least
+$1-\delta$, namely $\{\sup_{g\in\mathcal G}|(P_n-P)g|\le4\kappa/\sqrt n+\kappa\sqrt{2\log(2/\delta)/n}\}$, which does
+not depend on $\alpha$ and on which, for every $\alpha\in[0,1)$,
+\begin{equation}
+d_H\big(\mathcal C_\alpha(P_n),\mathcal C_\alpha(P)\big)\le r_n(\alpha,\delta)
+:=\frac{\kappa}{1-\alpha}\bigg[\frac4{\sqrt n}+\sqrt{\frac{2\log(2/\delta)}n}\,\bigg].
+\label{eq:radius}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The Hausdorff distance between two convex sets is the largest difference of their support functions, each support
+function is an infimum over cuts of means of hinge functions, and so one supremum over the hinge class controls every
+level. Write $\mathcal A=\mathcal C_\alpha(P)$ and $\mathcal A_n=\mathcal C_\alpha(P_n)$. For $a\in\mathcal A_n$, \eqref{eq:distmax}
+for $\mathcal A$ and $\{a\}$, with $-\langle f,a\rangle_\Hh\le h_{\mathcal A_n}(-f)$, gives
+\[
+\dist(a,\mathcal A)=\max_{f\in B_\Hh}\{-h_{\mathcal A}(-f)-\langle f,a\rangle_\Hh\}
+\le\sup_{f\in B_\Hh}\{h_{\mathcal A_n}(-f)-h_{\mathcal A}(-f)\},
+\]
+and in the same way
+$\dist(a,\mathcal A_n)\le\sup_{f\in B_\Hh}\{h_{\mathcal A}(-f)-h_{\mathcal A_n}(-f)\}$ for $a\in\mathcal A$. As in
+the deterministic reduction in the proof of Theorem~\ref{thm:twosided}, Lemmas~\ref{lem:cvar} and~\ref{lem:tcompact} bound
+$h_{\mathcal A_n}(-f)-h_{\mathcal A}(-f)$ by $\beta(P_n-P)(-f-t)_+$ at the population minimizer $t\in[-\kappa,\kappa]$, and
+$h_{\mathcal A}(-f)-h_{\mathcal A_n}(-f)$ by $\beta(P-P_n)(-f-t_n)_+$ at the empirical one. Since $B_\Hh$ and
+$[-\kappa,\kappa]$ are symmetric, these functions lie in $\mathcal G$, so $d_H(\mathcal A_n,\mathcal A)\le\beta
+\sup_{g\in\mathcal G}|(P_n-P)g|$, in which only $\beta$ depends on $\alpha$.
+Lemma~\ref{lem:hinge} for one sample, with $\varphi=(\cdot)_+$, $r=1$, $\rho_1=\kappa$ and $\Delta_1=2\kappa$ (the functions in
+$\mathcal G$ take values in $[0,2\kappa]$), bounds the means of $\sup_g(P_n-P)g$ and $\sup_g(P-P_n)g$ by $4\kappa/\sqrt n$,
+and at $e^{-\chi}=\delta/2$ each exceeds its mean by more than $\kappa\sqrt{2\log(2/\delta)/n}$ with probability at most
+$\delta/2$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:alphahat}]
+The empirical trimming is nearly in both population regions at $\alpha^\star$, and $\Omega$ says such a
+point is close to $\mu_{R^\star}$. That $\Omega(\epsilon)\to0$ is Lemma~\ref{lem:contact}, and one event serves all
+levels. Let $E$ be the intersection of the events of
+Corollary~\ref{cor:uniform} for the two samples at level $\delta'$, of probability at least $1-2\delta'$, with
+$r_n=r_n(\alpha^\star,\delta')$ and $r_m=r_m(\alpha^\star,\delta')$. Let $\hat a=\sum_iw_i\phi(X_i)\in\mathcal C_{\tilde\alpha}(P_n)$ and $\hat b=\sum_jv_j\phi(Y_j)\in\mathcal C_{\tilde\alpha}(Q_m)$,
+so that $\|\hat a-\hat b\|_\Hh=\widehat D_{\tilde\alpha}$ by Proposition~\ref{prop:bangbang}(i) and
+$\MMD(P_n^w,R^\star)=\|\hat a-\mu_{R^\star}\|_\Hh$.
+
+We pass from the sample regions to the population ones at $\alpha^\star$. On $E$, $\dist(\hat a,\mathcal C_{\tilde\alpha}(P))
+\le r_n(\tilde\alpha,\delta')\le r_n$ for every $\tilde\alpha\le\alpha^\star$ simultaneously, and likewise for $\hat b$.
+The regions increase with the level and are weakly compact, so there are $a\in\mathcal C_{\alpha^\star}(P)$ with
+$\|\hat a-a\|_\Hh\le r_n$ and $b\in\mathcal C_{\alpha^\star}(Q)$ with $\|\hat b-b\|_\Hh\le r_m$. Then $\dist(a,\mathcal C_{\alpha^\star}(Q))\le\|a-b\|_\Hh\le r_n+\widehat D_{\tilde\alpha}+r_m$, by the
+triangle inequality through $\hat a$ and $\hat b$, and by the definition of $\Omega$,
+$\|a-\mu_{R^\star}\|_\Hh\le\Omega(\widehat D_{\tilde\alpha}+r_n+r_m)$, and the triangle inequality gives the bound.
+The second sample is the same argument with $P$ and $Q$ exchanged.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:alphalo}]
+Consistency of $\widehat\alpha$ makes the trimmed distance at $\widehat\alpha$ small, as the path falls to zero at most
+linearly, and Proposition~\ref{prop:alphahat} turns a small trimmed distance into closeness to $R^\star$. Fix
+$\epsilon>0$ and $\delta'\in(0,1)$, and let $E$ be the event of the proof of Proposition~\ref{prop:alphahat} at
+level $\delta'/3$, of probability at least $1-2\delta'/3$, with its radii $r_n,r_m$. On $E$, for every level
+$\alpha\le\alpha^\star$ the empirical regions are within $r_n$ and $r_m$ of the population ones in Hausdorff distance,
+by Corollary~\ref{cor:uniform} and the monotonicity of $r_n(\alpha,\delta')$ in $\alpha$, and the distance between two
+sets moves by at most the sum of these, so $\widehat D_\alpha\le D_\alpha+r_n+r_m$. On $E\cap\{\widehat\alpha\le\alpha^\star\}$,
+Lemma~\ref{lem:pathconvex}(ii) at $\alpha^\star-\widehat\alpha\in[0,\alpha^\star]$ then gives
+\[
+\widehat D_{\widehat\alpha}\le\frac{D_0(P,Q)}{\alpha^\star(1-\alpha^\star)}\,
+\big(\alpha^\star-\widehat\alpha\big)+r_n+r_m ,
+\]
+and Proposition~\ref{prop:alphahat} at $\tilde\alpha=\widehat\alpha$, a level at most $\alpha^\star$,
+gives $\MMD(P_n^w,R^\star)\le r_n+\Omega(\widehat D_{\widehat\alpha}+r_n+r_m)$ for every
+$(w,v)\in\mathcal T_{\widehat\alpha}$, and the same bound for $\MMD(Q_m^v,R^\star)$. Since
+$\Omega(t)\to0$ as $t\downarrow0$ and $\Omega$ is nondecreasing, there is $\varepsilon_1>0$ with $\varepsilon_1+\Omega(3\varepsilon_1)\le\epsilon$. By
+(A3), $D_0(P,Q)=\MMD(P,Q)>0$ as $\alpha^\star>0$. For $n,m$ large enough, $r_n+r_m\le\varepsilon_1$, and by
+Proposition~\ref{prop:loconsistency} the event
+$A=\{|\widehat\alpha-\alpha^\star|\le\varepsilon_1\,\alpha^\star(1-\alpha^\star)/D_0(P,Q)\}$ has probability at least
+$1-\delta'/3$. On $E\cap A\cap\{\widehat\alpha\le\alpha^\star\}$ both distances are at most
+$r_n+\Omega(\varepsilon_1+2(r_n+r_m))\le\varepsilon_1+\Omega(3\varepsilon_1)\le\epsilon$, and by Corollary~\ref{cor:lower} and a union bound this event has
+probability at least $1-\delta-\delta'$.
+\end{proof}

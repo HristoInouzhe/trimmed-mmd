@@ -1,0 +1,655 @@
+{
+ "script": "scripts/v3_rhc_batch0_lower.py",
+ "dataset": "rhc",
+ "standardization": "batch 0 moments",
+ "certificate": "sequential",
+ "witness": "per_level",
+ "edges": [
+  0.0,
+  0.25,
+  0.5,
+  1.0
+ ],
+ "grid": [
+  0.0,
+  0.05,
+  0.1,
+  0.15,
+  0.2,
+  0.25,
+  0.3,
+  0.35,
+  0.4,
+  0.45,
+  0.5,
+  0.55,
+  0.6,
+  0.65,
+  0.7,
+  0.75
+ ],
+ "delta": 0.05,
+ "seeds": [
+  1000,
+  1001,
+  1002,
+  1003,
+  1004,
+  1005,
+  1006,
+  1007
+ ],
+ "min_lower": 0.3,
+ "median_lower": 0.3,
+ "max_lower": 0.3,
+ "lowers": [
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3
+ ],
+ "splits": [
+  {
+   "seed": 1000,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 65.87815182270597,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 53.037505334031586,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 42.30917191281756,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 33.62786651499491,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 24.80403442717845,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 18.147545125588266,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 13.860433314685222,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 259.5
+  },
+  {
+   "seed": 1001,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 66.99045035455462,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 53.44613798671317,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 42.49794490874677,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 33.48601042251872,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 25.313923887256905,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 18.44063631205819,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 12.203784630146972,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1092,
+     "seq_skipped": [
+      1
+     ]
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 231.4
+  },
+  {
+   "seed": 1002,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 68.50272006201766,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 55.85105958417488,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 45.615429713333434,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 35.809298552852006,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 26.573621546202933,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 19.991236794785955,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 9.89003056291177,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1092,
+     "seq_skipped": [
+      1
+     ]
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 127.6
+  },
+  {
+   "seed": 1003,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 65.5937011968227,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 53.127393143372394,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 42.71513965233179,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 33.05530469768079,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 23.61526027843757,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 15.556803810892458,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 9.8074843628145,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 248.3
+  },
+  {
+   "seed": 1004,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 63.96774684112279,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 50.28390269223266,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 39.664780646401034,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 30.112204300241036,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 21.66229341851841,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 14.740543676341426,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 10.491485378888097,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 268.4
+  },
+  {
+   "seed": 1005,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 61.00920942226969,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 49.11643571208178,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 38.83909072745181,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 30.054163375134276,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 21.371802676583496,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 13.761759183595194,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 10.298458843978944,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 215.3
+  },
+  {
+   "seed": 1006,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 64.16177940021329,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 51.95633307684806,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 42.765595036047664,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 34.108894880966176,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 25.71744179150003,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 19.43445061721608,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 10.003169403128336,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1092,
+     "seq_skipped": [
+      1
+     ]
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 272.2
+  },
+  {
+   "seed": 1007,
+   "lower": 0.3,
+   "levels": [
+    {
+     "alpha": 0.0,
+     "sequential": true,
+     "seq_log_final_wealth": 61.832842577499065,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.05,
+     "sequential": true,
+     "seq_log_final_wealth": 51.12021691219609,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.1,
+     "sequential": true,
+     "seq_log_final_wealth": 40.47671766204292,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.15,
+     "sequential": true,
+     "seq_log_final_wealth": 31.196280388574785,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.2,
+     "sequential": true,
+     "seq_log_final_wealth": 22.603236684854636,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.25,
+     "sequential": true,
+     "seq_log_final_wealth": 14.678527158052988,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.3,
+     "sequential": true,
+     "seq_log_final_wealth": 9.424415623382401,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 1638,
+     "seq_skipped": []
+    },
+    {
+     "alpha": 0.35,
+     "sequential": false,
+     "seq_log_final_wealth": -Infinity,
+     "seq_horizon": 1638,
+     "seq_pairs_bet": 0,
+     "seq_skipped": [
+      1,
+      2
+     ]
+    }
+   ],
+   "seconds": 269.6
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+  "dataset": "nhanes_child",
+  "grid_max": 0.95,
+  "splits": 8,
+  "median_lower": 0.75,
+  "min_lower": 0.75,
+  "max_lower": 0.75,
+  "frac_at_grid_max": 0.0,
+  "values": [
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75
+  ],
+  "certificate": "sequential",
+  "source": "r2_lower_bounds.csv (v2, extended child grid)",
+  "values_betting": [
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75
+  ],
+  "values_bootstrap": [
+    0.8,
+    0.75,
+    0.75,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8
+  ]
+}

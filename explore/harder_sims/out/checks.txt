@@ -1,0 +1,7 @@
+alpha=0.0: ref D=0.173624  mine D=0.173624  decisions at 0.9D/1.1D = [1, -1] (want [1, -1]) after 10 its
+alpha=0.05: ref D=0.120939  mine D=0.120939  decisions at 0.9D/1.1D = [1, -1] (want [1, -1]) after 10 its
+alpha=0.1: ref D=0.075167  mine D=0.075167  decisions at 0.9D/1.1D = [1, -1] (want [1, -1]) after 20 its
+alpha=0.2: ref D=0.009462  mine D=0.009462  decisions at 0.9D/1.1D = [1, -1] (want [1, -1]) after 130 its
+alpha=0.3: ref D=0.000307  mine D=0.000306  decisions at 0.9D/1.1D = [1, -1] (want [1, -1]) after 10290 its
+ltm weight check 5.55e-17; bootstrap rows max |diff| 3.33e-16
+seq betting decisions agree with seqcert.seq_ramp_bet: 20/20

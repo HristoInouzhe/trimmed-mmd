@@ -1,0 +1,52 @@
+\documentclass[aos]{imsart}
+\startlocaldefs
+\input{preamble}
+\InputIfFileExists{supp_refs}{}{}
+\endlocaldefs
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Certifying total-variation contamination\\ by betting on trimmed kernel witnesses}
+\runtitle{Betting on trimmed kernel witnesses}
+
+\begin{aug}
+\author[A]{\fnms{Hristo}~\snm{Inouzhe}\ead[label=e1]{hristo.inouze@uam.es}}
+\address[A]{Departamento de Matem\'aticas, Universidad Aut\'onoma de Madrid\printead[presep={,\ }]{e1}}
+\end{aug}
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\begin{keyword}[class=MSC]
+\kwdgroup[type=primary]{\kwd{62G05}\kwd{62G10}}
+\kwdgroup[type=secondary]{\kwd{62G35}\kwd{62C20}\kwd{46E22}}
+\end{keyword}
+
+\begin{keyword}
+\kwd{total variation}
+\kwd{contamination}
+\kwd{trimming}
+\kwd{kernel mean embedding}
+\kwd{finite-sample inference}
+\kwd{testing by betting}
+\kwd{minimax lower bound}
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/01_introduction}
+\input{sections/02_regions}
+\input{sections/03_analytic}
+\input{sections/04_split}
+\input{sections/05_rates}
+\input{sections/06_trimming}
+\input{sections/07_numerical}
+\input{sections/08_final}
+\label{mainend}
+\input{sections/09_backmatter}
+
+\input{refs_main}
+
+\end{document}

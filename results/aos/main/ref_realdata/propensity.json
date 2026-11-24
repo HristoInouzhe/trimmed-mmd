@@ -1,0 +1,87 @@
+{
+ "model": "ridge logistic regression (experiments.realdata_run._logistic_fit, l2 = 1e-2, Newton), covariates standardized by the pooled moments (realdata.load_rhc), as Table S7",
+ "estimands": {
+  "one_minus_ovl": "1 - overlapping coefficient of the 40-bin histograms of e-hat on [0, 1] in the two arms (Table S7's overlap)",
+  "plugin": "1 - (1/N) sum_i min{e_i / pi, (1 - e_i) / (1 - pi)}, pi = n / (n + m)"
+ },
+ "bootstrap": "2000 resamples, stratified by arm, model refitted, seed 20261122; 95% percentile interval and the 5% quantile (one-sided 95% lower limit)",
+ "crossfit": "5-fold, folds stratified by arm, numpy default_rng(20261122)",
+ "sets": {
+  "paper": {
+   "d": 33,
+   "n": 2184,
+   "m": 3551,
+   "pi": 0.380819529206626,
+   "estimate": {
+    "one_minus_ovl": 0.37876396578170735,
+    "plugin": 0.3847051227339021
+   },
+   "crossfit": {
+    "one_minus_ovl": 0.37099594294750593,
+    "plugin": 0.3864390343425659
+   },
+   "e_range_x": [
+    0.04412760282115845,
+    0.9596366624186039
+   ],
+   "e_range_y": [
+    0.0038997403032523807,
+    0.9600341693561528
+   ],
+   "share_e_outside_0.1_0.9": 0.08857890148212728,
+   "seconds": 20.9,
+   "one_minus_ovl_ci95": [
+    0.3674472469706207,
+    0.41616661405805305
+   ],
+   "one_minus_ovl_lcl95": 0.3715666110150058,
+   "one_minus_ovl_boot_mean": 0.3913242574448925,
+   "one_minus_ovl_boot_sd": 0.01208137052968803,
+   "plugin_ci95": [
+    0.36987780304162304,
+    0.40996265736804083
+   ],
+   "plugin_lcl95": 0.37349924057564643,
+   "plugin_boot_mean": 0.3898999570377313,
+   "plugin_boot_sd": 0.01000283555583131
+  },
+  "full": {
+   "d": 45,
+   "n": 2184,
+   "m": 3551,
+   "pi": 0.380819529206626,
+   "estimate": {
+    "one_minus_ovl": 0.4208575616629686,
+    "plugin": 0.4244864070197374
+   },
+   "crossfit": {
+    "one_minus_ovl": 0.40700421797295916,
+    "plugin": 0.42686747716351703
+   },
+   "e_range_x": [
+    0.037094968192671655,
+    0.9776965683129553
+   ],
+   "e_range_y": [
+    0.003714949120377654,
+    0.9715245149208036
+   ],
+   "share_e_outside_0.1_0.9": 0.13391455972101132,
+   "seconds": 24.5,
+   "one_minus_ovl_ci95": [
+    0.4071046030731683,
+    0.4567854022444279
+   ],
+   "one_minus_ovl_lcl95": 0.41148684578352285,
+   "one_minus_ovl_boot_mean": 0.43232881131353396,
+   "one_minus_ovl_boot_sd": 0.012509676403837865,
+   "plugin_ci95": [
+    0.41170325443436384,
+    0.45051402337623914
+   ],
+   "plugin_lcl95": 0.41437970682211644,
+   "plugin_boot_mean": 0.4306148386897897,
+   "plugin_boot_sd": 0.00994341707057981
+  }
+ }
+}

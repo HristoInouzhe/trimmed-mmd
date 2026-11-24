@@ -1,0 +1,109 @@
+{
+ "dataset": "adult",
+ "source": "UCI Adult (Becker & Kohavi 1996), train + test",
+ "group": "sex (0 = male, 1 = female)",
+ "outcome": "income > 50K",
+ "n0": 30527,
+ "n1": 14695,
+ "d": 12,
+ "features": [
+  "age",
+  "education_num",
+  "hours",
+  "log_capital_gain",
+  "log_capital_loss",
+  "married",
+  "never_married",
+  "private",
+  "self_employed",
+  "government",
+  "white",
+  "us_born"
+ ],
+ "sigma": 2.3829599985182854,
+ "n_freq": 1024,
+ "delta": 0.05,
+ "alpha_hat": 0.45,
+ "last_rejected": 0.175,
+ "max_rows": null,
+ "seed": 0,
+ "bw_scale": 0.5,
+ "path": [
+  {
+   "alpha": 0.0,
+   "d_hat": 0.22488644713852027,
+   "d_lower": 0.22488644713852027,
+   "tau": 0.09725588367075078,
+   "rejects": true,
+   "converged": true,
+   "n_iter": 20,
+   "fw_gap": 0.0
+  },
+  {
+   "alpha": 0.15,
+   "d_hat": 0.14292332586402004,
+   "d_lower": 0.14292332128489335,
+   "tau": 0.11441868667147151,
+   "rejects": true,
+   "converged": true,
+   "n_iter": 890,
+   "fw_gap": 1.3089280145872628e-09
+  },
+  {
+   "alpha": 0.175,
+   "d_hat": 0.13029759208458325,
+   "d_lower": 0.13029758515013987,
+   "tau": 0.11788591960091005,
+   "rejects": true,
+   "converged": true,
+   "n_iter": 1130,
+   "fw_gap": 1.8070825044680383e-09
+  },
+  {
+   "alpha": 0.45,
+   "d_hat": 0.005714714489225427,
+   "d_lower": 0.005697418497413357,
+   "tau": 0.17682887940136505,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 1.973841586951552e-07
+  },
+  {
+   "alpha": 0.5,
+   "d_hat": 0.00010662381027384666,
+   "d_lower": 0.0,
+   "tau": 0.19451176734150155,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 1.2087410208700368e-07
+  },
+  {
+   "alpha": 0.6,
+   "d_hat": 6.379901531472584e-05,
+   "d_lower": 0.0,
+   "tau": 0.24313970917687697,
+   "rejects": false,
+   "converged": false,
+   "n_iter": 3000,
+   "fw_gap": 6.20696006144223e-08
+  }
+ ],
+ "seconds": 1425.6763830184937,
+ "orig": {
+  "smd_max": 0.9128855385855282,
+  "tv_lb": 0.49609935829206375,
+  "auc": 0.8143035154497594,
+  "n_eff": 9919.823647782054,
+  "rate_g0": 0.31247747895305794,
+  "rate_g1": 0.11357604627424293,
+  "gap": 0.198901432678815,
+  "clf_dp": {
+   "rate_g0": 0.2537753464146493,
+   "rate_g1": 0.07022796869683566,
+   "dp_gap": 0.18354737771781365,
+   "accuracy": 0.8613285568970855
+  }
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "default_equals_numpy_quantile_and_fold1": {
+  "trials": 2000,
+  "mismatches": 0
+ },
+ "order_rule_is_order_statistic": {
+  "trials": 2000,
+  "mismatches": 0
+ },
+ "eq_cutrank": {
+  "cells": 631,
+  "failures": [],
+  "n_failures": 0
+ },
+ "eq_cutrank_examples": {
+  "n=200,m=200,alpha=0.025": {
+   "k_s": 195,
+   "k_u": 6,
+   "iota_s": [
+    194,
+    197
+   ],
+   "iota_u": [
+    4,
+    7
+   ]
+  },
+  "n=200,m=200,alpha=0.2": {
+   "k_s": 160,
+   "k_u": 41,
+   "iota_s": [
+    159,
+    162
+   ],
+   "iota_u": [
+    39,
+    42
+   ]
+  },
+  "n=400,m=400,alpha=0.05": {
+   "k_s": 380,
+   "k_u": 21,
+   "iota_s": [
+    379,
+    382
+   ],
+   "iota_u": [
+    19,
+    22
+   ]
+  },
+  "n=100,m=500,alpha=0.15": {
+   "k_s": 85,
+   "k_u": 76,
+   "iota_s": [
+    84,
+    87
+   ],
+   "iota_u": [
+    74,
+    77
+   ]
+  },
+  "n=1092,m=1776,alpha=0.3": {
+   "k_s": 765,
+   "k_u": 533,
+   "iota_s": [
+    764,
+    766
+   ],
+   "iota_u": [
+    532,
+    534
+   ]
+  }
+ },
+ "package_default_vs_stored_realdata": [
+  {
+   "cell": [
+    "rhc",
+    1000,
+    0.3
+   ],
+   "certified": true,
+   "stored_certified": true,
+   "log_final": 13.870283837341228,
+   "stored_log_final": 13.858221167883256,
+   "skipped": [],
+   "stored_skipped": [],
+   "agree": true
+  },
+  {
+   "cell": [
+    "rhc",
+    1001,
+    0.35
+   ],
+   "certified": false,
+   "stored_certified": false,
+   "log_final": -Infinity,
+   "stored_log_final": 0.0,
+   "skipped": [
+    1,
+    2
+   ],
+   "stored_skipped": [
+    1,
+    2
+   ],
+   "agree": true
+  },
+  {
+   "cell": [
+    "nhanes_bmi",
+    1000,
+    0.05
+   ],
+   "certified": true,
+   "stored_certified": true,
+   "log_final": 4.640292389973232,
+   "stored_log_final": 4.6403312112231605,
+   "skipped": [],
+   "stored_skipped": [],
+   "agree": true
+  },
+  {
+   "cell": [
+    "nhanes_bmi",
+    1005,
+    0.1
+   ],
+   "certified": true,
+   "stored_certified": true,
+   "log_final": 2.974874892767844,
+   "stored_log_final": 2.9798748088621236,
+   "skipped": [],
+   "stored_skipped": [],
+   "agree": true
+  },
+  {
+   "cell": [
+    "nhanes_age",
+    1002,
+    0.35
+   ],
+   "certified": true,
+   "stored_certified": true,
+   "log_final": 7.752050909530615,
+   "stored_log_final": 7.75205091751874,
+   "skipped": [
+    1
+   ],
+   "stored_skipped": [
+    1
+   ],
+   "agree": true
+  }
+ ],
+ "tau_aos_vs_stored_closed_form": {
+  "cells": 209,
+  "max_rel_diff": 1.6815936565394276e-13,
+  "cells_tauA_below_tauP": 0
+ }
+}

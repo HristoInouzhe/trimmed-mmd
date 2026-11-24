@@ -1,0 +1,19 @@
+{
+  "dataset": "nhanes_child",
+  "grid_max": 0.95,
+  "splits": 8,
+  "median_lower": 0.8,
+  "min_lower": 0.75,
+  "max_lower": 0.8,
+  "frac_at_grid_max": 0.0,
+  "values": [
+    0.8,
+    0.75,
+    0.75,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8
+  ]
+}

@@ -1,0 +1,425 @@
+\section{Proofs for Section~\ref{sec:split}}
+\label{app:split}
+
+As in Section~\ref{app:regions}, $B_\Hh$ is the unit ball of $\Hh$ and $\mathcal G_\alpha(P)$ the set of
+trimming densities; the betting notation is that of Section~\ref{sec:betting}. We begin with two facts about separation in a fixed direction, which the other sections also use.
+
+\subsection{Separation in a fixed direction}
+
+The distance between two convex sets is the largest gap between them along a unit direction.
+
+\begin{lemma}[Directional separation]
+\label{lem:separation}
+Let $A,B\subset\Hh$ be nonempty. For every $f\in B_\Hh$,
+\begin{equation}
+\dist(A,B)\ \ge\ \inf_{a\in A}\langle f,a\rangle_\Hh-\sup_{b\in B}\langle f,b\rangle_\Hh\ =:\ \mathrm{sep}(f;A,B).
+\label{eq:sep}
+\end{equation}
+If $A,B$ are also convex and weakly compact and $\dist(A,B)>0$, the bound is attained: taking
+$f^\star=(a^\star-b^\star)/\|a^\star-b^\star\|_\Hh$ for nearest points $a^\star\in A$, $b^\star\in B$ gives
+$\mathrm{sep}(f^\star;A,B)=\dist(A,B)$.
+\end{lemma}
+
+\begin{proof}
+For $a\in A$ and $b\in B$, the Cauchy--Schwarz inequality gives
+$\mathrm{sep}(f;A,B)\le\langle f,a-b\rangle_\Hh\le\|a-b\|_\Hh$, and the infimum over $a,b$ yields \eqref{eq:sep}. For
+the equality, nearest points exist, as the norm is weakly lower semicontinuous on the weakly compact $A\times B$, and
+we check that $f^\star$ separates the sets exactly at them. First-order optimality of $a^\star$ for
+$\min_{a\in A}\|a-b^\star\|_\Hh^2$ gives $\langle a-a^\star,a^\star-b^\star\rangle_\Hh\ge0$ for all $a\in A$, that is,
+$\inf_{a\in A}\langle f^\star,a\rangle_\Hh=\langle f^\star,a^\star\rangle_\Hh$; symmetrically
+$\sup_{b\in B}\langle f^\star,b\rangle_\Hh=\langle f^\star,b^\star\rangle_\Hh$. Subtracting,
+$\mathrm{sep}(f^\star;A,B)=\langle f^\star,a^\star-b^\star\rangle_\Hh=\|a^\star-b^\star\|_\Hh=\dist(A,B)$.
+\end{proof}
+
+Since $\mathrm{sep}(0;A,B)=0$, for convex weakly compact $A,B$ the lemma gives
+\begin{equation}
+\dist(A,B)=\max_{f\in B_\Hh}\mathrm{sep}(f;A,B),
+\label{eq:distmax}
+\end{equation}
+the maximum being attained at $f^\star$ when $\dist(A,B)>0$ and at $f=0$ otherwise. By Lemma~\ref{lem:attainment} and
+Proposition~\ref{prop:georep} this applies to the population and to the empirical regions, and by Lemma~\ref{lem:cvar},
+$\mathrm{sep}(f;\mathcal C_\alpha(P),\mathcal C_\alpha(Q))=-h_{\mathcal C_\alpha(P)}(-f)-h_{\mathcal C_\alpha(Q)}(f)$. For
+empirical regions both terms are trimmed means of the values of $f$, which gives the structure of the empirical
+trimming (Proposition~\ref{prop:bangbang}, proved in Section~\ref{app:trimming}).
+
+\begin{lemma}[Support functions are extreme trimmed means]
+\label{lem:trimmedmean}
+Let $v_1,\dots,v_n$ be reals with order statistics $v_{(1)}\le\dots\le v_{(n)}$, let $\alpha\in[0,1)$ and
+$c_\alpha=[n(1-\alpha)]^{-1}=\beta/n$. Then
+\begin{gather*}
+\max_{\substack{0\le w_i\le c_\alpha\\ \sum_iw_i=1}}\ \sum_iw_iv_i
+\ =\ \sum_{i>n-n_{1-\alpha}}c_\alpha v_{(i)}+\big(1-n_{1-\alpha} c_\alpha\big)\,v_{(n-n_{1-\alpha})},\\
+n_{1-\alpha}=\lfloor1/c_\alpha\rfloor=\lfloor n(1-\alpha)\rfloor,
+\end{gather*}
+where the final term is $0$ when $n_{1-\alpha}=n$ (at $\alpha=0$); the minimum is the same expression applied to
+the smallest values. Moreover, every maximizer satisfies $w_i=c_\alpha$ when $v_i>v_{(n-n_{1-\alpha})}$ and $w_i=0$ when
+$v_i<v_{(n-n_{1-\alpha})}$, the values equal to $v_{(n-n_{1-\alpha})}$ sharing the remaining mass $1-c_\alpha\#\{i:v_i>v_{(n-n_{1-\alpha})}\}$ in any way. So the maximizer is unique for distinct values.
+\end{lemma}
+
+\begin{proof}
+Moving weight from a smaller value to a larger one below its cap does not decrease the objective, so an optimum loads
+the cap $c_\alpha$ onto the largest values until the mass runs out, which gives the value. For the structure of the
+maximizers, let $n_{1-\alpha}<n$ (otherwise the feasible set is a point) and suppose that a maximizer $w$ has
+$w_i<c_\alpha$ for some $v_i>v_{(n-n_{1-\alpha})}$. At most $n_{1-\alpha}$ values are at least $v_i$, and they carry less than
+$n_{1-\alpha} c_\alpha\le1$, so some $j$ with $v_j<v_i$ has $w_j>0$; moving weight from $j$ to $i$ increases the objective,
+a contradiction. The case $v_i<v_{(n-n_{1-\alpha})}$ with $w_i>0$ is symmetric. The objective depends on the mass at the
+value $v_{(n-n_{1-\alpha})}$ only through its total, and the minimum follows by applying all this to $-v_1,\dots,-v_n$.
+\end{proof}
+
+\subsection{Proof of Lemma~\ref{lem:ramp}}
+
+\begin{proof}
+Part (i) is the variational form of trimmed means of Lemma~\ref{lem:cvar}, part (ii) an exact computation, and
+part (iii) the layer-cake formula. For the inequality in (i), let $P'\in R_\alpha(P)$ and $g=dP'/dP\in[0,\beta]$, so
+that $\E_Pg=1$. Then $\E_{P'}f=t+\E_P[g(f-t)]\ge t-\E_P[g(t-f)_+]\ge t-\beta\E_P(t-f)_+$, and symmetrically $\E_{Q'}f\le u+\beta\E_Q(f-u)_+$ for $Q'\in R_\alpha(Q)$; subtracting and optimizing over $P'$ and $Q'$
+gives the inequality. For the equality, Lemma~\ref{lem:cvar} applied to the bounded function $-f$, with its variable
+written $-t$, gives $\inf_{P'\in R_\alpha(P)}\E_{P'}f=-\sup_{g\in\mathcal G_\alpha(P)}\E_P[-gf]=\sup_{t\in\R}\{t-\beta\E_P(t-f)_+\}$,
+attained at $t=-t'$ for an $\alpha$-quantile $t'$ of $-f(X)$, that is, at a $(1-\alpha)$-quantile of $f(X)$. Applied to
+$f$ under $Q$, the lemma gives $\sup_{Q'\in R_\alpha(Q)}\E_{Q'}f=\inf_{u\in\R}\{u+\beta\E_Q(f-u)_+\}$, attained at an
+$\alpha$-quantile of $f(Y)$. For $f\in B_\Hh$, the reproducing property and Proposition~\ref{prop:georep} turn the two
+extreme trimmed means into $\inf_{a\in\mathcal C_\alpha(P)}\langle f,a\rangle_\Hh$ and
+$\sup_{b\in\mathcal C_\alpha(Q)}\langle f,b\rangle_\Hh$, whose difference is the separation \eqref{eq:sep}.
+
+For (ii), clipping makes both hinges linear in the ramp: since $\tilde f\le t$ and $\tilde f\ge u$,
+\[
+t-\beta(t-\tilde f)_+=t-\beta(t-u)(1-\rp),
+\qquad
+u+\beta(\tilde f-u)_+=u+\beta(t-u)\rp ,
+\]
+and taking expectations and using $1-\beta=-\alpha\beta$ gives the identity. For the inequality, pointwise
+$(t-\tilde f)_+=(t-f)_+-(u-f)_+$ and $(\tilde f-u)_+=(f-u)_+-(f-t)_+$, so
+$\theta(\tilde f;t,u)-\theta(f;t,u)=\beta\E_P(u-f)_++\beta\E_Q(f-t)_+\ge0$.
+
+For (iii), if $\rp$ takes values in $[0,1]$, the layer-cake formula and the definition of total variation give
+$\E_P\rp-\E_Q\rp=\int_0^1\{P(\rp>r)-Q(\rp>r)\}\,dr\le\TV(P,Q)$.
+\end{proof}
+
+\subsection{The betting test in full}
+\label{sec:bettingdetails}
+
+We describe the test of Section~\ref{sec:betting} for any batch fractions $0=\pi_0<\pi_1<\dots<\pi_{B+1}=1$ fixed in advance;
+Section~\ref{sec:betting} uses $\pi=(0,\tfrac14,\tfrac12,1)$, and the single split $(0,\tfrac12,1)$ is the case $B=1$. Each
+sample is put in a random order drawn independently of the data and cut into batches $0,\dots,B$ at these fractions of
+its size, rounded to the nearest integers. Batch $0$ is used
+only for fitting, and batch $b\ge1$ is bet on with a function $\rp_b$ with values in $[0,1]$ fitted on batches
+$0,\dots,b-1$, or not at all.
+
+Before betting on batch $b$ we solve \eqref{eq:qp} on batches $0,\dots,b-1$ and form the direction
+$\widehat f_b$ of the witness \eqref{eq:witness}. Its cut points are $\widehat t_b$, a genuine empirical
+$(1-\alpha)$-quantile of its values at the $X$'s of those batches, and $\widehat u_b$, a genuine empirical
+$\alpha$-quantile of its values at their $Y$'s, each value computed with the point's own term removed from
+\eqref{eq:witness}. If $\widehat
+t_b>\widehat u_b$, $\rp_b$ is the ramp of $\widehat f_b$ between $\widehat u_b$ and $\widehat t_b$ of
+Lemma~\ref{lem:ramp}(ii); otherwise there is no bet on batch $b$.
+
+Pairs are formed within each batch. Let batch $b$ hold $n_{[b]}$ observations $X$ and $m_{[b]}$ observations $Y$. If $n_{[b]}\le m_{[b]}$,
+its $Y$'s are cut, in their fixed order, into $n_{[b]}$ consecutive blocks whose sizes differ by at most one, and the
+$X$'s are paired one to one with the blocks, an $X$ and its block $\mathcal J$ giving
+$Z=\rp_b(X)-|\mathcal J|^{-1}\sum_{j\in\mathcal J}\rp_b(Y_j)$. If $n_{[b]}>m_{[b]}$, the roles are exchanged: each $Y$ is
+paired with a block $\mathcal J$ of $X$'s, giving $Z=|\mathcal J|^{-1}\sum_{i\in\mathcal J}\rp_b(X_i)-\rp_b(Y)$. Batch $b$
+thus gives $N_b=\min(n_{[b]},m_{[b]})$ pairs, and the pairs of all batches are numbered $k=1,\dots,N$ in the order of the
+batches, with $N=\sum_bN_b$ fixed by the sample sizes. Each $Z_k$ takes values in $[-1,1]$.
+
+The wealth after $k$ pairs is $K_k=\prod_{l\le k}\{1+\lambda_l(Z_l-\alpha)\}$, with
+$K_0=1$, and both the function bet on and the fractions must be predictable. A fitting rule is predictable if each $\rp_b$ is a jointly measurable function of batches $0,\dots,b-1$ and of the
+point, with values in $[0,1]$; the ramp above is one, and so are the predicted labels of a classifier trained on batches
+$0,\dots,b-1$. Fractions are predictable if, for pair $k$ in batch $b$, $\lambda_k\in[0,\lambda_{\max}/(1+\alpha)]$ for a
+fixed $\lambda_{\max}\in(0,1]$, $\lambda_k$ is a jointly measurable function of batches $0,\dots,b-1$ and of the earlier
+$Z$'s, and $\lambda_k=0$ on a batch without a ramp. Theorem~\ref{thm:betting} holds, with the same statement, for every
+choice of batch fractions $\pi$; we prove it in this generality.
+
+\begin{proof}[Proof of Theorem~\ref{thm:betting}]
+Under the null every bet has a nonpositive expected gain, so the wealth is a nonnegative supermartingale, and such a
+process rarely reaches $1/\delta$. To set up the filtration, for pair $k$ in batch $b$ let $\mathcal F_{k-1}$ be generated
+by batches $0,\dots,b-1$ and the earlier pairs of batch $b$. These $\sigma$-fields increase with $k$, $\rp_b$ and
+$\lambda_k$ are $\mathcal F_{k-1}$-measurable, and the observations of pair $k$ are independent of $\mathcal F_{k-1}$.
+So, given $\mathcal F_{k-1}$, $Z_k$ takes values in $[-1,1]$ and has mean
+$\Delta_k=\E_P\rp_b-\E_Q\rp_b\le\TV(P,Q)\le\alpha$, by Lemma~\ref{lem:ramp}(iii) and the null. Consequently
+$\E[K_k\mid\mathcal F_{k-1}]=K_{k-1}\{1+\lambda_k(\Delta_k-\alpha)\}\le K_{k-1}$, while
+$\lambda_k(Z_k-\alpha)\ge-\lambda_k(1+\alpha)\ge-\lambda_{\max}$ gives $K_k\ge(1-\lambda_{\max})K_{k-1}\ge0$. So $(K_k)$ is
+a nonnegative supermartingale with $K_0=1$.
+
+Optional stopping at $T=\min\{k\le N:K_k\ge1/\delta\}\wedge N$, a bounded time as $N$ is fixed in advance, gives
+$\E[K_T\mid\text{batch }0]\le1$. As $\{\max_{k\le N}K_k\ge1/\delta\}\subseteq\{K_T\ge1/\delta\}$, Markov's inequality
+gives the bound, which is Ville's maximal inequality \citep{ville1939}. Integrating over batch $0$ ends the proof.
+\end{proof}
+
+The fractions we use are
+\begin{equation}
+\lambda_k=\min\Big\{\frac{\lambda_{\max}}{1+\alpha},\ \sqrt{\frac{2\log(1/\delta)}{N\widehat v^2_{k-1}}}\Big\},
+\qquad \lambda_{\max}=\tfrac12,
+\label{eq:fractions}
+\end{equation}
+adapted from \citet[Remark~1]{waudbysmith2024estimating}, where
+$\widehat v^2_{k-1}=(w_0v_0^2+\sum_{i<k}(Z_i-\alpha-\widehat\mu_{i-1})^2)/(w_0+k-1)$,
+$\widehat\mu_{i-1}=\sum_{l<i}(Z_l-\alpha)/(w_0+i-1)$, $w_0=20$, $v_0^2\le4$ is an estimate of the variance of one
+$Z_k$ from the batches before that of $Z_k$ (Algorithm~\ref{alg:split} gives ours), the sums and the counts $k-1$ and
+$i-1$ run over the pairs actually bet on before $Z_k$, in its batch and in the earlier ones, so that they carry over
+from batch $1$ to batch $2$ while $v_0^2$ is that of the batch of $Z_k$, and $\widehat v^2_{k-1}$ is floored at a constant $v^2_{\min}>0$. Our runs use
+$v^2_{\min}=10^{-8}$, a guard against division by zero, for which the constants of Proposition~\ref{prop:loconsistency}
+and Theorems~\ref{thm:lorate} and~\ref{thm:laplacerate}, of order $1/v^2_{\min}$, are not usable and those results
+describe the trend (Section~\ref{sec:lower} of the main text). Any other predictable choice in
+$[0,\lambda_{\max}/(1+\alpha)]$ is equally valid, and this one comes close to the best constant fraction for large $N$.
+
+\begin{algorithm}[!tb]
+\caption{The split-sample lower bound $\widehat\alpha$, with the defaults of our runs}
+\label{alg:split}
+\begin{algorithmic}[1]
+\Require samples $X_{1:n}$, $Y_{1:m}$; level $\delta$; a grid $\alpha_1<\dots<\alpha_J$, fixed in advance or chosen from
+batch $0$ (Remark~\ref{rem:batch0grid})
+\State Put each sample in a random order drawn independently of the data and cut it into batch $0$ (first quarter),
+batch $1$ (second quarter) and batch $2$ (second half)
+\State Pair within each batch $b$: if $n_{[b]}\le m_{[b]}$, cut its $Y$'s in order into $n_{[b]}$ consecutive blocks of
+sizes differing by at most one and pair the $i$-th $X$ with the $i$-th block, and the reverse otherwise; $N$ is the
+total number of pairs
+\For{$j=1,\dots,J$, with $\alpha=\alpha_j$}
+\For{$b=1,2$, fitting on batches $0,\dots,b-1$, of sizes $n_{<b}$, $m_{<b}$}
+\State Kernel $e^{-\|x-y\|/\sigma}$, with $\sigma$ the median pairwise distance of the fitting points (simulations) or
+of batch $0$ (real data, both batches; RHC standardized by the moments of batch $0$), on at most $2{,}000$ points
+\State Minimizer $(w,v)$ of \eqref{eq:qp} at $\alpha$ by accelerated projected gradient with restarts and an exact
+projection onto the capped simplex, warm-started from the previous level, stopped when the objective changes by at most
+a relative $10^{-9}$ over ten iterations or after $1000$ iterations ($10^{-10}$ and $2000$ on real data)
+\State Witness values at the fitting points without their own term, $\tilde h_i=\widehat f(X_i)-w_ik(X_i,X_i)/\widehat D_\alpha$
+and $\tilde h'_j=\widehat f(Y_j)+v_jk(Y_j,Y_j)/\widehat D_\alpha$
+\State Cut points $\widehat t_b=\tilde h_{(\lceil n_{<b}(1-\alpha)\rceil)}$ and $\widehat u_b=\tilde h'_{(\lfloor m_{<b}\alpha\rfloor+1)}$,
+order statistics
+\If{$\widehat t_b\le\widehat u_b$} skip batch $b$: $\lambda_k=0$ on its pairs
+\Else{} $\rp_b$ is the ramp of $\widehat f_b$ between $\widehat u_b$ and $\widehat t_b$, each pair gives
+$Z=\rp_b(X)-\overline{\rp_b(Y)}$ (or the mirror), and $v_0^2=\max\{s_X^2+s_Y^2n_{[b]}/m_{[b]},10^{-4}\}$ (mirrored
+if $n_{[b]}>m_{[b]}$), with $s_X^2,s_Y^2$ the variances of $\rp_b$ at the fitting $X$'s and $Y$'s
+\EndIf
+\EndFor
+\State Bet: $K_0=1$, $K_k=K_{k-1}\{1+\lambda_k(Z_k-\alpha)\}$, with \eqref{eq:fractions}, $\lambda_{\max}=\tfrac12$,
+$w_0=20$ and $v^2_{\min}=10^{-8}$
+\If{$\max_{k\le N}K_k<1/\delta$} stop: $H_{0,\alpha_j}$ is not rejected \EndIf
+\EndFor
+\State \Return $\widehat\alpha$ of \eqref{eq:downclosed}; whether the reading stopped at a failed bet or with both batches
+skipped; the trimming at $\widehat\alpha$, the minimizer of \eqref{eq:qp} on all the data closest to uniform weights
+(Section~\ref{sec:computationdetails})
+\end{algorithmic}
+\end{algorithm}
+
+Both bandwidth rules are predictable, each witness using a bandwidth computed from the batches before the one bet on,
+but the consistency and rate results, which fix the kernel in advance, cover neither of them, nor random features
+scaled by such a bandwidth. Section~\ref{app:experiments} gives the grids of our experiments; in practice we
+recommend a grid of mesh $0.05$ fixed in advance, or a short grid around a guess at $\alpha^\star$ from batch $0$
+(Remark~\ref{rem:batch0grid}).
+
+The constant $\cstBetRatioEighty$ of Section~\ref{sec:betting} comes from the best constant fraction: $\log
+K_N=\lambda S_1-\tfrac12\lambda^2S_2+O(\lambda^3N)$, with $S_1=\sum_k(Z_k-\alpha)$ and $S_2=\sum_k(Z_k-\alpha)^2$, is at
+most about $S_1^2/(2S_2)$, so the test rejects roughly when $S_1/S_2^{1/2}\ge\sqrt{2\log(1/\delta)}$, an approximately
+$N(h,1)$ ratio if $\E Z_k-\alpha=hsN^{-1/2}$, with $s^2=\operatorname{Var}Z_k$. Power $p$ then needs $h\approx\sqrt{2\log(1/\delta)}+z_p$, against
+$z_{1-\delta}+z_p$ by the central limit theorem, and the squared ratio at $\delta=0.05$, $p=0.8$ is the ratio of sizes.
+
+\subsection{Proof of Corollary~\ref{cor:lower}}
+
+\begin{proof}
+A bound that is too large requires the rejection of one particular true null, the first grid level at or
+above $\TV(P,Q)$, so no union over the levels is needed. Let $E$ be the event that $H_{0,\widehat\alpha}$ is rejected and $\TV(P,Q)\le\widehat\alpha$; it
+contains $\{\widehat\alpha>\TV(P,Q)\}$, since then $\widehat\alpha>0$ is a rejected grid level. On
+$E$, $\widehat\alpha=\alpha_j$ with $\alpha_j\ge\TV(P,Q)$ and $H_{0,\alpha_i}$ rejected for every $i\le j$. The
+smallest index $i_0$ with $\alpha_{i_0}\ge\TV(P,Q)$ is at most $j$ and does not depend on the data, because the grid is
+fixed in advance, so $E$ lies in the event that the true null $H_{0,\alpha_{i_0}}$ is rejected, of probability at most
+$\delta$ by Theorem~\ref{thm:betting}. No multiplicity correction is needed, and if no grid level is at least
+$\TV(P,Q)$, $E$ is empty.
+\end{proof}
+
+\begin{remark}[A grid chosen from batch $0$]
+\label{rem:batch0grid}
+Corollary~\ref{cor:lower} holds, with the same proof, when the grid $\alpha_1<\dots<\alpha_J$ is a measurable function
+of batch $0$ instead of being fixed in advance. Given batch $0$ the grid is fixed, so the smallest index $i_0$ with
+$\alpha_{i_0}\ge\TV(P,Q)$ is a function of batch $0$, and the conditional bound of Theorem~\ref{thm:betting} gives
+$\Pp(H_{0,\alpha_{i_0}}\text{ rejected}\mid\text{batch }0)\le\delta$; integrating over batch $0$ gives the claim. For
+instance, a bisection on batch $0$ alone, with any statistic, may place a short grid around a guess at $\alpha^\star$,
+which the betting batches then read upward.
+\end{remark}
+
+\subsection{Proof of Proposition~\ref{prop:loconsistency}}
+
+We allow any batch fractions fixed in advance. For $b\ge1$ let $n_{<b},m_{<b}$ be the sizes of batches $0,\dots,b-1$,
+$r_b=1/n_{<b}+1/m_{<b}\le r_1$, and $\Gamma_b,\Gamma_b^-$ the suprema $\Gamma,\Gamma^-$ of the proof of
+Theorem~\ref{thm:twosided} on these batches, free of $\alpha$. At a level $\alpha$ the witness fitted on them takes
+values $h_i,h'_j$ there, and $\tilde h_i=h_i-w_ik(X_i,X_i)/\widehat D$ and
+$\tilde h'_j=h'_j+v_jk(Y_j,Y_j)/\widehat D$ with the own term removed. With $\iota^-(n,p)=\max(1,\lceil np\rceil-1)$ and
+$\iota^+(n,p)=\min(n,\lfloor np\rfloor+2)$, the cut points satisfy
+\begin{equation}
+\tilde h_{(\iota^-(n_{<b},1-\alpha))}\le\widehat t_b\le\tilde h_{(\iota^+(n_{<b},1-\alpha))},\qquad
+\tilde h'_{(\iota^-(m_{<b},\alpha))}\le\widehat u_b\le\tilde h'_{(\iota^+(m_{<b},\alpha))},
+\label{eq:cutrank}
+\end{equation}
+as do the empirical quantiles in the range of the values and their linear interpolations.
+
+\begin{lemma}[The population ramp]
+\label{lem:popramp}
+Under (A1) and (A2), if $D_\alpha>0$, the ramp $\rp^\star$ of the normalized difference $f^\star$ of nearest points of
+$\mathcal C_\alpha(P)$ and $\mathcal C_\alpha(Q)$, between the largest $\alpha$-quantile $u^\star$ of $f^\star(Y)$ and the
+smallest $(1-\alpha)$-quantile $t^\star$ of $f^\star(X)$, has $D_\alpha\le t^\star-u^\star\le \Delta_\phi$ and
+$\E_P\rp^\star-\E_Q\rp^\star-\alpha\ge D_\alpha/(\beta \Delta_\phi)$.
+\end{lemma}
+
+\begin{proof}
+The right derivatives $1-\beta P(f^\star\le t)$ and $1-\beta Q(f^\star>u)$ make $t^\star$ maximize
+$t-\beta\E_P(t-f^\star)_+$ and $u^\star$ minimize $u+\beta\E_Q(f^\star-u)_+$. So by Lemmas~\ref{lem:ramp}(i)
+and~\ref{lem:separation} the cut points attain the separation, and since $\theta(f;t,u)\le t-u$,
+$\Delta_\phi\ge\sup f^\star-\inf f^\star\ge t^\star-u^\star\ge\theta(f^\star;t^\star,u^\star)=D_\alpha$, the first
+inequality because $f^\star$ has unit norm. Lemma~\ref{lem:ramp}(ii) then gives
+$\beta(t^\star-u^\star)(\E_P\rp^\star-\E_Q\rp^\star-\alpha)\ge D_\alpha$, and $t^\star-u^\star\le\Delta_\phi$ gives the
+excess.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:loconsistency}]
+Below $\alpha^\star$ the population ramp has a fixed positive excess over $\alpha$ (Lemma~\ref{lem:popramp}). We show
+that the fitted ramp keeps part of this excess on an event that does not depend on the level, that betting turns a fixed excess
+into a rejection, and then apply both to the grid.
+
+We begin with the fitted ramp at a fixed level $\alpha$ and batch $b$, writing $n,m$ for $n_{<b},m_{<b}$, and assume
+$\beta\Gamma_b^-<D_\alpha$. By the deterministic reduction in the proof of Theorem~\ref{thm:twosided},
+$\widehat D\ge D_\alpha-\beta\Gamma_b^->0$. Let $\theta_n$ be the criterion $\theta$ of Section~\ref{sec:ramp} with
+$P_n,Q_m$ in place of $P,Q$. In the fitted direction $\widehat f$ it separates into a concave function of the first cut
+and a convex function of the second,
+\[
+\theta_n(\widehat f;t,u)=T(t)-U(u),\quad T(t)=t-\frac\beta n\sum_i(t-h_i)_+,\quad U(u)=u+\frac\beta m\sum_j(h'_j-u)_+,
+\]
+and $\max T-\min U=\widehat D$ by Lemmas~\ref{lem:separation} and~\ref{lem:ramp}(i) applied to $P_n,Q_m$. We first show
+that the cut points lose little against the best cuts. The concave $T$ has right derivative $1-\beta F_n$, with $F_n(x)=\#\{i:h_i\le x\}/n$, so it
+is $\beta$-Lipschitz and maximal at $h_{(\lceil n(1-\alpha)\rceil)}$. Between $h_{(\iota^-)}$ and $h_{(\iota^+)}$ we have
+$\iota^-/n\le F_n\le(\iota^+-1)/n$, within $1/n$ of $1-\alpha$, so the slope of $T$ there is at most $\beta/n$; as the
+values span at most $\Delta_\phi$, $T\ge\max T-\beta\Delta_\phi/n$ on that interval. The own terms shift the values only
+a little: the caps $\beta/n$ and $k(x,x)\le\kappa^2$ give $0\le h_i-\tilde h_i\le\beta\kappa^2/(n\widehat D)$, the order
+statistics move by at most as much, and concavity, with the $\beta$-Lipschitz bound, gives
+\[
+T(\widehat t_b)\ge\max T-\frac{\beta\Delta_\phi}n-\frac{\beta^2\kappa^2}{n\widehat D} .
+\]
+The convex $U$, minimal at $h'_{(\lfloor m\alpha\rfloor+1)}$, is treated alike, with $m$ in place of $n$. Hence
+$\theta_n(\widehat f;\widehat t_b,\widehat u_b)\ge\widehat D-\beta\Delta_\phi r_b-\beta^2\kappa^2r_b/\widehat D$.
+
+Next we pass from the empirical criterion to the population one. For all $(f,t,u)$,
+$\theta-\theta_n=-\beta[(P-P_n)(t-f)_++(Q-Q_m)(f-u)_+]\ge-\beta\Gamma_b$, the centered terms being constant in $t$
+and $u$ outside $[-\kappa,\kappa]$. As $x\mapsto x-c/x$ increases and $\widehat D\ge D_\alpha-\beta\Gamma_b^-$, we may
+replace $\widehat D$ by $D_\alpha-\beta\Gamma_b^-$. Finally $\theta(f;t,u)\le t-u$, and $\widehat t_b\le\max_ih_i$,
+$\widehat u_b\ge\min_jh'_j$, values of a unit vector, are at most $\Delta_\phi$ apart. Together,
+\begin{equation}
+\Delta_\phi\ge\widehat t_b-\widehat u_b\ge\theta(\widehat f;\widehat t_b,\widehat u_b)\ge\Theta_b=D_\alpha-\beta(\Gamma_b
++\Gamma_b^-)-\beta \Delta_\phi r_b-\frac{\beta^2\kappa^2r_b}{D_\alpha-\beta\Gamma_b^-},
+\label{eq:fittedramp}
+\end{equation}
+and if $\Theta_b>0$, Lemma~\ref{lem:ramp}(ii) under $P,Q$, given batches $0,\dots,b-1$, yields a ramp $\rp_b$ with
+$\E_P\rp_b-\E_Q\rp_b-\alpha\ge\Theta_b/(\beta \Delta_\phi)$. The terms of $\Theta_b$ after $D_\alpha$ are the costs of the
+fluctuation, of the rank tolerance and of the own terms.
+
+The second step concerns the bets: a fixed excess is turned into a rejection, and a strict null is rarely rejected.
+Recall that $\Delta_k$ is the conditional mean of $Z_k$ in the proof of Theorem~\ref{thm:betting}, and put
+$L_\delta=\log(1/\delta)$ and
+\[
+\varepsilon_N(\varrho)=\exp\Big\{-\frac{v^2_{\min}}{4L_\delta}\Big(\varrho\sqrt{NL_\delta/2}-L_\delta
+-\frac{16L_\delta}{v^2_{\min}}\Big)_+^2\Big\}.
+\]
+We show that for $N\ge2L_\delta/\lambda_{\max}^2$,
+\begin{equation}
+\Pp\big(\mathcal E\cap\{\max_{k\le N}K_k<1/\delta\}\big)\le\varepsilon_N(\varrho),\qquad
+\Pp\big(\max_{k\le N}K_k\ge1/\delta\big)\le e^{-\zeta v_{\min}(2NL_\delta)^{1/2}},
+\label{eq:betbounds}
+\end{equation}
+the first for any event $\mathcal E$ on which every batch has a ramp and $\Delta_k\ge\alpha+\varrho>\alpha$ for all $k$,
+the second if $\TV(P,Q)\le\alpha-\zeta<\alpha$.
+
+Two bounds on the fractions are used. Each square in \eqref{eq:fractions} is at most $4$, as $Z_i-\alpha$ and
+$\widehat\mu_{i-1}$ lie in $[-1-\alpha,1-\alpha]$, so for $v^2_{\min}\le4$ the running variance lies in
+$[v^2_{\min},4]$ and
+\[
+\Big(\frac{L_\delta}{2N}\Big)^{1/2}\ \le\ \lambda_k\ \le\ \overline\lambda_N
+=\min\Big\{\frac{\lambda_{\max}}{1+\alpha},\Big(\frac{2L_\delta}{Nv^2_{\min}}\Big)^{1/2}\Big\},
+\]
+the lower bound holding on batches with a ramp, where it uses $N\ge2L_\delta/\lambda_{\max}^2$. The centered gains
+$M_k=\sum_{l\le k}\lambda_l(Z_l-\Delta_l)$ have increments in intervals of length $2\lambda_l$, so by Hoeffding's
+lemma \citep{hoeffding1963}
+\[
+W_k(s)=\exp\Big(sM_k-\frac{s^2}2\sum_{l\le k}\lambda_l^2\Big)
+\]
+is a nonnegative supermartingale for every real $s$.
+
+On $\mathcal E$ the wealth grows. The inequality $\log(1+y)\ge y-2y^2$ for $y\ge-\frac12$, the lower bound on
+$\lambda_k$ and $\Delta_k-\alpha\ge\varrho$ give
+\[
+\log K_N\ \ge\ \varrho\Big(\frac{NL_\delta}2\Big)^{1/2}+M_N-\frac{4L_\delta(1+\alpha)^2}{v^2_{\min}},
+\]
+the last term from $2\sum_k\lambda_k^2(Z_k-\alpha)^2\le2N\overline\lambda_N^{\,2}(1+\alpha)^2$. As $(1+\alpha)^2\le4$,
+failing to reject on $\mathcal E$ forces $M_N\le-x_N$, with
+$x_N=(\varrho\sqrt{NL_\delta/2}-L_\delta-16L_\delta/v^2_{\min})_+$. Put $V=2L_\delta/v^2_{\min}\ge\sum_l\lambda_l^2$.
+Markov's inequality for $W_N(-x_N/V)$, which is at least $e^{x_N^2/(2V)}$ when $M_N\le-x_N$, bounds the probability
+by $e^{-x_N^2/(2V)}=\varepsilon_N(\varrho)$, without conditioning on $\mathcal E$.
+
+Under the strict null the wealth shrinks. Now $\log(1+y)\le y$ and $\Delta_l\le\alpha-\zeta$ give
+$\log K_k\le M_k-\zeta\sum_{l\le k}\lambda_l$. With $s=2\zeta/\overline\lambda_N$ and $\lambda_l\le\overline\lambda_N$,
+the quadratic term of $W_k(s)$ is at most $\frac{s^2}2\overline\lambda_N\sum_{l\le k}\lambda_l=s\zeta\sum_{l\le k}
+\lambda_l$, so $W_k(s)\ge K_k^{\,s}\ge\delta^{-s}$ wherever $K_k\ge1/\delta$. The maximal inequality in the proof of
+Theorem~\ref{thm:betting} bounds the probability of this by $\delta^{2\zeta/\overline\lambda_N}$, which is at most the
+second bound of \eqref{eq:betbounds} by the bound on $\overline\lambda_N$.
+
+We now apply the two steps to the grid, starting with the upper side. If $\widehat\alpha>\alpha_{j^\star}$, then by
+\eqref{eq:downclosed} the true null at the first grid level $\alpha_{i_0}\ge\alpha^\star$ was rejected, with probability
+at most $\delta$ by Theorem~\ref{thm:betting}, and tending to zero if $\alpha^\star$ is off the grid, by
+\eqref{eq:betbounds} with $\zeta=\alpha_{i_0}-\alpha^\star$.
+
+On the lower side every grid level below $\alpha^\star$ must be rejected. Let $\alpha_{j^\star}$ be, as in the
+statement, the largest grid level below $\alpha^\star$, $\underline D=D_{\alpha_{j^\star}}>0$ by \eqref{eq:zeroeq}, $\bar\beta=(1-\alpha_{j^\star})^{-1}$ and
+$\beta_j=(1-\alpha_j)^{-1}$, so that $D_{\alpha_j}\ge \underline D$ and $\beta_j\le\bar\beta$ for $j\le j^\star$. Let $\mathcal E_{\mathrm{fit}}$ be the
+event that $\Gamma_b,\Gamma_b^-\le \underline D/(8\bar\beta)$ for all $b$, and let the samples be large enough
+that $\bar\beta\Delta_\phi r_1\le \underline D/8$ and $\bar\beta^2\kappa^2r_1\le7\underline D^2/64$. On
+$\mathcal E_{\mathrm{fit}}$, at every level $\alpha_j$ with $j\le j^\star$, the four terms of $\Theta_b$ are at least
+$\underline D$, $-\underline D/4$, $-\underline D/8$ and $-\underline D/8$, the last because the denominator is at
+least $7\underline D/8$; so every batch has a ramp with excess at least $\varrho_*=\underline D/(2\bar\beta\Delta_\phi)$.
+By Lemma~\ref{lem:hinge}, as in the proof of Theorem~\ref{thm:twosided},
+$\E\Gamma_b,\E\Gamma_b^-\le\mu_1=2(1+\sqrt2)\kappa\sqrt{r_1}$, and a deviation $y$ above the mean has probability
+at most $e^{-2y^2/(\Delta_\phi^2r_1)}$. So by \eqref{eq:downclosed} and \eqref{eq:betbounds},
+\[
+\Pp(\widehat\alpha<\alpha_{j^\star})\le\Pp(\mathcal E_{\mathrm{fit}}^c)+J\varepsilon_N(\varrho_*)\le
+2Be^{-2(\underline D/(8\bar\beta)-\mu_1)_+^2/(\Delta_\phi^2r_1)}+J\varepsilon_N(\varrho_*)\to0 .
+\]
+
+Finer grids need one more step. For $\epsilon\in(0,\alpha^\star)$, the lower side with
+$\underline D=D_{\alpha^\star-\epsilon/2}$ and $\bar\beta=(1-\alpha^\star+\epsilon/2)^{-1}$ rejects all grid levels in
+$[0,\alpha^\star-\epsilon/2]$ with probability tending to one, as $\log J=o(N)$. Then
+$\widehat\alpha\ge\alpha^\star-\epsilon/2-2h_{\mathcal G}\ge\alpha^\star-\epsilon$ once the mesh
+$h_{\mathcal G}=\sup_{a\in[0,1)}\dist(a,\mathcal G\cup\{0\})$ of the grid $\mathcal G$, a two-sided mesh over $[0,1)$,
+not the $\Delta_{\mathcal G}$ of Theorem~\ref{thm:lorate}, is at most $\epsilon/4$, while
+$\widehat\alpha>\alpha^\star+\epsilon$ needs the rejection of the first grid level above $\alpha^\star+\epsilon/2$, of
+probability at most $e^{-\epsilon v_{\min}(NL_\delta/2)^{1/2}}$ by \eqref{eq:betbounds}.
+\end{proof}
+
+The constants grow like $1/v^2_{\min}$: with a floor that shrinks with $N$, $\overline\lambda_N$ tends to
+$\lambda_{\max}/(1+\alpha)$, and the second bound of \eqref{eq:betbounds} only to
+$\delta^{2\zeta(1+\alpha)/\lambda_{\max}}$. The proof also allows an inexact minimizer of \eqref{eq:qp}: if its
+objective is $d^2$ and its Frank--Wolfe gap is at most $\rho d^2$ with $\rho<1$, the gap equals $2d^2-2ds$ for the
+empirical separation $s$ of its witness, so $s\ge(1-\rho/2)d$, and the argument goes through with
+$(1-\rho/2)\underline D$ in place of $\underline D$.
+
+\subsection{A witness fitted at $\alpha=0$}
+\label{sec:alphazero}
+
+Consistency needs the witness fitted at the level tested. A single witness fitted at $\alpha=0$, with direction
+$f_0=(\mu_P-\mu_Q)/\MMD(P,Q)$ as in a test of $P=Q$, can keep $\widehat\alpha$ away from $\alpha^\star$. We show that
+its ramps certify at most a one-sided Kolmogorov distance of the values of $f_0$, and then give laws for which this
+distance is smaller than $\TV(P,Q)$. A ramp $\rp$ of $f\in B_\Hh$ with cuts $t>u$ has
+$\{\rp>r\}=\{f>u+r(t-u)\}$ for $r\in[0,1)$, so by the layer-cake formula
+\[
+\E_P\rp-\E_Q\rp\ \le\ \mathrm{KS}^+(f)=\sup_x\{P(f(X)>x)-Q(f(Y)>x)\}.
+\]
+Witnesses $\widehat f_{0,b}$ fitted at $\alpha=0$ have uniform weights and tend to $f_0$ uniformly, almost surely.
+Multiplying the fractions by $\mathbf 1\{\mathrm{KS}^+(\widehat f_{0,b})\le\alpha\}$, which is predictable, gives a
+test that has $\Delta_k\le\alpha$ wherever its fraction is positive. By the proof of Theorem~\ref{thm:betting}, this
+test has level $\delta$ even when $H_{0,\alpha}$ is false, and it has the same wealth as the original test when
+$\max_b\mathrm{KS}^+(\widehat f_{0,b})\le\alpha$. Hence the original test rejects $H_{0,\alpha}$ with probability at
+most $\delta+\Pp(\max_b\mathrm{KS}^+(\widehat f_{0,b})>\alpha)$.
+
+For the laws, take the Gaussian kernel with $\sigma=\loExSigma$ on $\R$, let
+$P$ put mass $\loExPzero$ at $0$, $\loExCommon$ at $\loExCommonLoc$ and $\loExSpread$ on
+$\loExSpreadLo,\loExSpreadNext,\dots,\loExSpreadHi$ in proportion to $1,2,\dots,\loExSpreadK$, and $Q$ put $\loExQhalf$
+at $\loExQloc$, $\loExQfar$ at $\loExFar$ and $\loExCommon$ at $\loExCommonLoc$, so $\TV(P,Q)=\loExTV$. Up to
+$O(e^{-\loExTail})$, $\mu_P-\mu_Q$ is $\loExPzero-\loExQhalf e^{-1/8}=\loExFzero$ at $0$, $\loExPzero
+e^{-1/8}-\loExQhalf=\loExFhalf$ at $\loExQloc$, increasing and at most $\loExFspread$ on the spread points, $0$ at
+$\loExCommonLoc$ and $-\loExQfar$ at $\loExFar$. So the $\loExAtoms$ values of $f_0$ are distinct, its up-sets have
+$P-Q$ equal to $\loExPzero$, $\loExCumTwo$, at most $\loExCumSpread$, $\loExCumSpread$ and $0$, and
+$\mathrm{KS}^+(\widehat f_{0,b})=\mathrm{KS}^+(f_0)=\loExKS$ once $\widehat f_{0,b}$ is uniformly within half the smallest
+gap of these values, so every level $\alpha\ge\loExKS$ is rejected with probability at most $\delta+o(1)$, the false
+nulls below $\TV(P,Q)$ included.

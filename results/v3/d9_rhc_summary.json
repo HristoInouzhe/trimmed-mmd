@@ -1,0 +1,91 @@
+{
+ "alpha_star": 0.2,
+ "sizes": [
+  100,
+  200,
+  400,
+  800
+ ],
+ "methods": {
+  "an_new": {
+   "pow0": {
+    "100": 0.0,
+    "200": 0.0,
+    "400": 0.755,
+    "800": 1.0
+   },
+   "n80_text": "450",
+   "n80": 450,
+   "boundary_rejections": {
+    "100": 0,
+    "200": 0,
+    "400": 0,
+    "800": 0
+   },
+   "boundary_max": 0,
+   "boundary_pooled": 0,
+   "boundary_pooled_cp": 0.0037376628261006077,
+   "alo_gt_max": 0.0
+  },
+  "seq_bet": {
+   "pow0": {
+    "100": 0.995,
+    "200": 1.0,
+    "400": 1.0,
+    "800": 1.0
+   },
+   "n80_text": "{\\le}100",
+   "n80": 100,
+   "boundary_rejections": {
+    "100": 1,
+    "200": 2,
+    "400": 7,
+    "800": 7
+   },
+   "boundary_max": 7,
+   "boundary_pooled": 17,
+   "boundary_pooled_cp": 0.03170448794422837,
+   "alo_gt_max": 0.01
+  },
+  "gbm_bet": {
+   "pow0": {
+    "100": 0.32,
+    "200": 0.715,
+    "400": 0.96,
+    "800": 1.0
+   },
+   "n80_text": "250",
+   "n80": 250,
+   "boundary_rejections": {
+    "100": 4,
+    "200": 5,
+    "400": 9,
+    "800": 9
+   },
+   "boundary_max": 9,
+   "boundary_pooled": 27,
+   "boundary_pooled_cp": 0.04624389546343661,
+   "alo_gt_max": 0.015
+  },
+  "logit_bet": {
+   "pow0": {
+    "100": 0.39,
+    "200": 0.765,
+    "400": 0.965,
+    "800": 1.0
+   },
+   "n80_text": "230",
+   "n80": 230,
+   "boundary_rejections": {
+    "100": 5,
+    "200": 4,
+    "400": 5,
+    "800": 7
+   },
+   "boundary_max": 7,
+   "boundary_pooled": 21,
+   "boundary_pooled_cp": 0.03758174647484508,
+   "alo_gt_max": 0.015
+  }
+ }
+}

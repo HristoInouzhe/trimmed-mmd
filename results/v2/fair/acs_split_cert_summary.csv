@@ -1,0 +1,10 @@
+method,alpha,min,median,max
+kernel trimming,0.25,0.1,0.1,0.1
+kernel trimming,0.35,-1.0,-1.0,-1.0
+kernel trimming,0.4,-1.0,-1.0,-1.0
+kernel trimming,0.5,-1.0,-1.0,-1.0
+original,0.0,0.3,0.3,0.3
+"propensity (GBM, cross-fit)",0.25,0.1,0.1,0.1
+"propensity (GBM, cross-fit)",0.35,0.1,0.1,0.1
+"propensity (GBM, cross-fit)",0.4,0.1,0.1,0.1
+"propensity (GBM, cross-fit)",0.5,0.2,0.2,0.2

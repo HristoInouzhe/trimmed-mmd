@@ -1,0 +1,14 @@
+{
+ "U1_shift": {
+  "sigma_fix": 1.1506479201390925,
+  "scale": null,
+  "n_pilot": 1000,
+  "m_pilot": 1000
+ },
+ "U1_t3scale": {
+  "sigma_fix": 1.357845067889214,
+  "scale": null,
+  "n_pilot": 1000,
+  "m_pilot": 1000
+ }
+}

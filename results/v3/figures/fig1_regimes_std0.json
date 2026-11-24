@@ -1,0 +1,147 @@
+{
+  "sizes": [
+    100,
+    200,
+    400,
+    800,
+    1600
+  ],
+  "reps": 5,
+  "alpha_read": 0.3,
+  "delta": 0.05,
+  "n_ref": 600,
+  "rows": [
+    {
+      "n": 100,
+      "rep": 0,
+      "certified": 0.05
+    },
+    {
+      "n": 100,
+      "rep": 1,
+      "certified": 0.1
+    },
+    {
+      "n": 100,
+      "rep": 2,
+      "certified": 0.05
+    },
+    {
+      "n": 100,
+      "rep": 3,
+      "certified": 0.0
+    },
+    {
+      "n": 100,
+      "rep": 4,
+      "certified": 0.0
+    },
+    {
+      "n": 200,
+      "rep": 0,
+      "certified": 0.2
+    },
+    {
+      "n": 200,
+      "rep": 1,
+      "certified": 0.2
+    },
+    {
+      "n": 200,
+      "rep": 2,
+      "certified": 0.1
+    },
+    {
+      "n": 200,
+      "rep": 3,
+      "certified": 0.15
+    },
+    {
+      "n": 200,
+      "rep": 4,
+      "certified": 0.1
+    },
+    {
+      "n": 400,
+      "rep": 0,
+      "certified": 0.25
+    },
+    {
+      "n": 400,
+      "rep": 1,
+      "certified": 0.2
+    },
+    {
+      "n": 400,
+      "rep": 2,
+      "certified": 0.2
+    },
+    {
+      "n": 400,
+      "rep": 3,
+      "certified": 0.25
+    },
+    {
+      "n": 400,
+      "rep": 4,
+      "certified": 0.15
+    },
+    {
+      "n": 800,
+      "rep": 0,
+      "certified": 0.25
+    },
+    {
+      "n": 800,
+      "rep": 1,
+      "certified": 0.3
+    },
+    {
+      "n": 800,
+      "rep": 2,
+      "certified": 0.3
+    },
+    {
+      "n": 800,
+      "rep": 3,
+      "certified": 0.25
+    },
+    {
+      "n": 800,
+      "rep": 4,
+      "certified": 0.25
+    },
+    {
+      "n": 1600,
+      "rep": 0,
+      "certified": 0.3
+    },
+    {
+      "n": 1600,
+      "rep": 1,
+      "certified": 0.25
+    },
+    {
+      "n": 1600,
+      "rep": 2,
+      "certified": 0.3
+    },
+    {
+      "n": 1600,
+      "rep": 3,
+      "certified": 0.3
+    },
+    {
+      "n": 1600,
+      "rep": 4,
+      "certified": 0.3
+    }
+  ],
+  "seconds": 377.0632562637329,
+  "threshold": "plugin",
+  "certificate": "sequential",
+  "certificate_reported": "sequential",
+  "std": "batch0",
+  "skip_analytic": true,
+  "skip_stability": true
+}

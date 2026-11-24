@@ -1,0 +1,614 @@
+{
+ "D1_d2_a10": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 6400)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 0.925 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "logit_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "boot": [
+   "closed",
+   "power 0.940 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 6400)"
+  ]
+ },
+ "D1_d2_a20": {
+  "an_new": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.990 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "an_old": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 1600"
+  ]
+ },
+ "D1_d10_a10": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 1.000)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "logit_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "boot": [
+   "closed",
+   "power 0.835 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ]
+ },
+ "D1_d10_a20": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.875 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 0.925 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D2_d20": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 6400)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.890 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 0.905 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D2_d50": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.850 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ]
+ },
+ "D2_d100": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 1.000)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 0.930 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ]
+ },
+ "D3a_loc": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.900 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 0.975 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ]
+ },
+ "D3b_corr": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "seq_bet": [
+   "closed",
+   "cap 12800 reached (power 0.180)"
+  ],
+  "gbm_bet": [
+   "closed",
+   "cap 12800 reached (power 0.660)"
+  ],
+  "logit_bet": [
+   "closed",
+   "cap 12800 reached (power 0.020)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "cap 12800 reached (power 0.155)"
+  ],
+  "boot": [
+   "closed",
+   "cap 12800 reached (power 0.255)"
+  ],
+  "knn_bet": [
+   "closed",
+   "cap 12800 reached (power 0.975)"
+  ]
+ },
+ "D4_small": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 0.965 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "logit_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 0.920 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "boot": [
+   "closed",
+   "power 0.970 >= 0.8 at the largest pre-registered size 1600"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ]
+ },
+ "D5b_mixed": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 1600)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 400"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.815 >= 0.8 at the largest pre-registered size 400"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 400"
+  ],
+  "an_old": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 400"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 400"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 0.915 >= 0.8 at the largest pre-registered size 400"
+  ]
+ },
+ "D6_t3": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 6400)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "logit_bet": [
+   "closed",
+   "cap 12800 reached (power 0.045)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 0.995 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 0.895 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D7_wide": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.875 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 0.995 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.660)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 0.965 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D7_narrow": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 1.000)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 0.985 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "boot": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ]
+ },
+ "D8_N1": {
+  "an_new": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "an_old": [
+   "closed",
+   "power 0.830 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "boot": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D8_N4": {
+  "an_new": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 6400)"
+  ],
+  "seq_bet": [
+   "closed",
+   "power 0.845 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "cap 12800 reached (power 0.895)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 3200)"
+  ],
+  "boot": [
+   "closed",
+   "power 0.850 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D8_N16": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 0.025)"
+  ],
+  "seq_bet": [
+   "closed",
+   "cap 12800 reached (power 0.810)"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "cap 12800 reached (power 0.195)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "cap 12800 reached (power 0.660)"
+  ],
+  "boot": [
+   "closed",
+   "cap 12800 reached (power 0.805)"
+  ],
+  "knn_bet": [
+   "closed",
+   "power 1.000 >= 0.8 at the largest pre-registered size 800"
+  ]
+ },
+ "D8_N64": {
+  "an_new": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "seq_bet": [
+   "closed",
+   "cap 12800 reached (power 0.090)"
+  ],
+  "gbm_bet": [
+   "closed",
+   "power 0.910 >= 0.8 at the largest pre-registered size 800"
+  ],
+  "logit_bet": [
+   "closed",
+   "cap 12800 reached (power 0.025)"
+  ],
+  "an_old": [
+   "closed",
+   "cap 12800 reached (power 0.000)"
+  ],
+  "ramp_bet": [
+   "closed",
+   "cap 12800 reached (power 0.070)"
+  ],
+  "boot": [
+   "closed",
+   "cap 12800 reached (power 0.110)"
+  ],
+  "knn_bet": [
+   "closed",
+   "power >= 0.8 at two consecutive sizes (to 12800)"
+  ]
+ }
+}

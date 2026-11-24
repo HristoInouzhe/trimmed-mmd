@@ -1,0 +1,183 @@
+{
+  "levels": [
+    0.1,
+    0.2
+  ],
+  "sizes": [
+    500,
+    1000,
+    2000
+  ],
+  "reps": 2,
+  "grid": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4
+  ],
+  "delta": 0.05,
+  "rows": [
+    {
+      "n": 500,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.12048116771950367,
+      "tau_0": 0.6225583877270342,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 9.031559228897095,
+      "sigma": 8.679084013882253,
+      "rep": 0,
+      "rff": false
+    },
+    {
+      "n": 500,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.1253742969501352,
+      "tau_0": 0.6225583877270342,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 8.461074590682983,
+      "sigma": 8.595867380255994,
+      "rep": 1,
+      "rff": false
+    },
+    {
+      "n": 1000,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.11827082348565018,
+      "tau_0": 0.4402152576463498,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 38.136271953582764,
+      "sigma": 8.538638743348578,
+      "rep": 0,
+      "rff": false
+    },
+    {
+      "n": 1000,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.12334935192465107,
+      "tau_0": 0.4402152576463498,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 38.21826672554016,
+      "sigma": 8.616576106402205,
+      "rep": 1,
+      "rff": false
+    },
+    {
+      "n": 2000,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.11153069074945454,
+      "tau_0": 0.3112791938635171,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 33.09996461868286,
+      "sigma": 8.494898928171093,
+      "rep": 0,
+      "rff": true
+    },
+    {
+      "n": 2000,
+      "alpha_star": 0.1,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.12326591088453213,
+      "tau_0": 0.3112791938635171,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 33.51248288154602,
+      "sigma": 8.524170972457036,
+      "rep": 1,
+      "rff": true
+    },
+    {
+      "n": 500,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.2487999343908101,
+      "tau_0": 0.6225583877270342,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 6.142713308334351,
+      "sigma": 9.370624885920932,
+      "rep": 0,
+      "rff": false
+    },
+    {
+      "n": 500,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.2433906008757522,
+      "tau_0": 0.6225583877270342,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 6.628314018249512,
+      "sigma": 9.431225353924729,
+      "rep": 1,
+      "rff": false
+    },
+    {
+      "n": 1000,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.2520490494580903,
+      "tau_0": 0.4402152576463498,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 33.499995470047,
+      "sigma": 9.344852714428118,
+      "rep": 0,
+      "rff": false
+    },
+    {
+      "n": 1000,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.267666837816121,
+      "tau_0": 0.4402152576463498,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 30.85586380958557,
+      "sigma": 9.512084330218384,
+      "rep": 1,
+      "rff": false
+    },
+    {
+      "n": 2000,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.2392013334729619,
+      "tau_0": 0.3112791938635171,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 32.941280364990234,
+      "sigma": 9.2894838850167,
+      "rep": 0,
+      "rff": true
+    },
+    {
+      "n": 2000,
+      "alpha_star": 0.2,
+      "alpha_hat": 0.0,
+      "d_hat_0": 0.22699813180136674,
+      "tau_0": 0.3112791938635171,
+      "fires": false,
+      "covers": true,
+      "path_seconds": 33.40565896034241,
+      "sigma": 9.148955177196397,
+      "rep": 1,
+      "rff": true
+    }
+  ],
+  "seconds": 304.91162610054016
+}

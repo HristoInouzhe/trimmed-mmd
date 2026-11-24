@@ -1,0 +1,19 @@
+{
+ "certificate": "sequential",
+ "methods": [
+  "sequential"
+ ],
+ "witness": "per_level",
+ "splits": 6,
+ "features": 512,
+ "boot": 500,
+ "alphas": [
+  0.35,
+  0.45,
+  0.5,
+  0.6
+ ],
+ "grid_step": 0.05,
+ "delta": 0.05,
+ "seconds": 1282.0489294528961
+}

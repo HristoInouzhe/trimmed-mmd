@@ -1,0 +1,42 @@
+[
+ {
+  "contrast": "nhanes_bmi",
+  "seed": 1000,
+  "alpha": 0.05,
+  "identical": true,
+  "decision_equal": true,
+  "max_abs_log_wealth_diff": 0.0
+ },
+ {
+  "contrast": "nhanes_bmi",
+  "seed": 1003,
+  "alpha": 0.1,
+  "identical": true,
+  "decision_equal": true,
+  "max_abs_log_wealth_diff": 0.0
+ },
+ {
+  "contrast": "nhanes_age",
+  "seed": 1001,
+  "alpha": 0.4,
+  "identical": true,
+  "decision_equal": true,
+  "max_abs_log_wealth_diff": 0.0
+ },
+ {
+  "contrast": "rhc",
+  "seed": 1003,
+  "alpha": 0.35,
+  "identical": true,
+  "decision_equal": true,
+  "max_abs_log_wealth_diff": 0.0
+ },
+ {
+  "contrast": "nhanes_child",
+  "seed": 1002,
+  "alpha": 0.75,
+  "identical": true,
+  "decision_equal": true,
+  "max_abs_log_wealth_diff": 0.0
+ }
+]

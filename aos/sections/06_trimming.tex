@@ -1,0 +1,117 @@
+\section{The trimming}
+\label{sec:trimming}
+
+Once we know that at least a fraction $\widehat\alpha$ of each population has no counterpart in the other, the next
+question is which observations these are. By Proposition~\ref{prop:bangbang} the minimizer of \eqref{eq:qp} answers it
+with a pair of trimmed samples, which keep at full weight the observations on one side of a cut of the witness and split
+weight among those at the cut. They converge, at a fixed level to the best trimming at that level and at the estimated
+level to the common core. The rate we prove at a fixed level assumes a witness with a density at the cut, condition
+\eqref{eq:qdens} below, as for the Gaussian kernel (Remark~\ref{rem:qdens} of the supplement). With the Laplace kernel
+on the line the population witness equals its cut on a set of $P$-mass at least $\alpha$ (Section~\ref{sec:excessproofs}
+of the supplement), so \eqref{eq:qdens} fails at every level, Theorem~\ref{cor:trimrate} does not apply, and the
+trimming is decided among tied observations; Section~\ref{sec:trimest}, in MMD and without a rate, covers every kernel
+of Assumption~\ref{ass:regularity}.
+
+\subsection{A parametric rate at a fixed level}
+
+Fix $\alpha$ with $D=D_\alpha(P,Q)>0$, which under (A3) means $\alpha<\alpha^\star$, let $d^\star$ be the population
+witness of Section~\ref{sec:statistic}, with direction $f^\star=d^\star/D$, and let $t_\alpha$ be a $(1-\alpha)$-quantile
+of $d^\star(X)$ under $P$. The population version of Proposition~\ref{prop:bangbang} holds: every optimal trimming
+density of $P$ has the threshold form (Lemma~\ref{lem:popthreshold} of the supplement)
+\begin{equation}
+g^\star=\beta\,\mathbf 1\{d^\star<t_\alpha\}+\vartheta\,\mathbf 1\{d^\star=t_\alpha\},
+\qquad 0\le\vartheta\le\beta\ \text{a function with}\ \E_P[g^\star]=1 .
+\label{eq:popdensity}
+\end{equation}
+The observations that an optimal trimming keeps at full weight form the \emph{kept sets}
+\[
+A^\star\coloneqq\{x:\ d^\star(x)<t_\alpha\}
+\qquad\text{and}\qquad
+\widehat A_n\coloneqq\{x:\ \widehat d(x)<\widehat t_n\},
+\]
+population and empirical, whose symmetric difference $\widehat A_n\triangle A^\star$ measures the error, and we let
+$\widehat g_n$ be the density \eqref{eq:popdensity} with $(\widehat d,\widehat t_n)$ in place of $(d^\star,t_\alpha)$
+and any tie function $0\le\widehat\vartheta\le\beta$, a rule that need not integrate to one under $P$. Level sets are
+stable where the witness has a density at the cut, which we ask at both cuts:
+\begin{gather}
+\tag{Q}\label{eq:qdens}
+\parbox[t]{0.84\textwidth}{\raggedright the law of $d^\star(X)$ under $P$ has, on $[t_\alpha-r_Q,t_\alpha+r_Q]$ for some
+$r_Q>0$, a density with values in $[c_f,C_f]$, where $0<c_f\le C_f<\infty$;}\\[4pt]
+\tag{Q$'$}\label{eq:qdensY}
+\parbox[t]{0.84\textwidth}{\raggedright the law of $d^\star(Y)$ under $Q$ has, on $[u_\alpha-r_Q,u_\alpha+r_Q]$, a
+density at least $c'_f>0$, where $u_\alpha$ is an $\alpha$-quantile of $d^\star(Y)$.}
+\end{gather}
+Condition \eqref{eq:qdens} is the classical quantile-density condition for the cut of the $X$ sample, and
+\eqref{eq:qdensY} its lower half for the cut of the $Y$ sample. Laws with finite support, such as those of
+Example~\ref{ex:separated} with finitely supported $R$, $P_0$, $Q_0$, violate \eqref{eq:qdens}, so the margin does not imply the density conditions. The rate comes from a localization argument of the kind behind rates for M-estimators
+\citep[Theorem~3.2.5]{vandervaart1996weak}: the separation of Section~\ref{sec:ramp} falls quadratically away from its
+maximizer $f^\star$, while its fluctuation grows linearly in the distance to $f^\star$, times $(n\wedge m)^{-1/2}$.
+
+\begin{theorem}[A parametric rate for the witness and the kept set]
+\label{cor:trimrate}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, fix $\alpha\in(0,1)$ with $D=D_\alpha(P,Q)>0$, and suppose
+\eqref{eq:qdens} and \eqref{eq:qdensY}. Put $V_\alpha=\kappa\beta+[\beta/\min(c_f,c'_f)]^{1/2}$ and
+$W_\alpha=C_f(\kappa V_\alpha+c_f^{-1})$. Then, with $(P,Q,k,\alpha)$ fixed and $n\wedge m\to\infty$,
+\begin{gather*}
+\big\|\widehat f-f^\star\big\|_\Hh=O_\Pp\Big(\frac{V_\alpha}{D\sqrt{n\wedge m}}\Big),
+\qquad
+\|\widehat d-d^\star\|_\Hh=O_\Pp\Big(\frac{V_\alpha}{\sqrt{n\wedge m}}\Big),\\
+P(\widehat A_n\triangle A^\star)=O_\Pp\Big(\frac{W_\alpha}{\sqrt{n\wedge m}}\Big),
+\qquad
+\frac1\beta\int|\widehat g_n-g^\star|\,dP=O_\Pp\Big(\frac{W_\alpha}{\sqrt{n\wedge m}}\Big),
+\end{gather*}
+with constants in the $O_\Pp$ that depend only on the probability level.
+\end{theorem}
+
+The rate is that of a sample quantile, free of the dimension of $\mathcal X$, because the witness converges in $\Hh$,
+as a mean of feature vectors, and the kept set inherits its rate through the density at the cut. As
+$\alpha\uparrow\alpha^\star$ the bound on the direction grows like $1/D$, and the sample size from which the bounds hold,
+not explicit (Section~\ref{app:trimming} of the supplement states what it depends on), grows as $D$ vanishes. The kept set then has in general no limit, because the common
+core keeps only a fraction of $P$ on the set $\{0<q<p\}$, and an indicator of a set cannot converge to such a
+fractional weight. With the Wasserstein distance, optimal trimmings are consistent and computable
+\citep{alvarez2011incomplete,agullo2018trimming}, and rates are known only toward a known target
+\citep{delbarrio2013rates}.
+
+\subsection{The trimming at the estimated level}
+\label{sec:trimest}
+
+In practice the trimming is read at a data-driven level, the lower bound $\widehat\alpha$, where
+Theorem~\ref{cor:trimrate} does not apply: its level is fixed in advance, and its bounds degrade as $D_\alpha(P,Q)$
+vanishes near $\alpha^\star$. There the trimmed sample still converges as a measure. The common core $R^\star$ is the unique common
+trimming at $\alpha^\star$, and
+\[
+\Omega(\epsilon)=\sup\big\{\|a-\mu_{R^\star}\|_\Hh:\ a\in\mathcal C_{\alpha^\star}(P),\
+\dist\big(a,\mathcal C_{\alpha^\star}(Q)\big)\le\epsilon\big\}
+\]
+is a modulus of the contact of the two regions at $\alpha^\star$.
+
+\begin{proposition}[The trimmed sample at the data-driven level]
+\label{prop:alphahat}
+Let Assumption~\ref{ass:regularity} hold and let $0<\alpha^\star<1$. Then $\Omega(\epsilon)\to0$ as
+$\epsilon\downarrow0$. Fix $\delta'\in(0,1)$ and put $r_n=\kappa(1-\alpha^\star)^{-1}[4n^{-1/2}+(2\log(2/\delta')/n)^{1/2}]$,
+and $r_m$ likewise. There is an event $E$ of probability at least $1-2\delta'$, not depending on the level, on which for
+every level $\tilde\alpha\le\alpha^\star$, possibly chosen from the data, and every $(w,v)\in\mathcal T_{\tilde\alpha}$,
+\[
+\MMD\big(P_n^w,R^\star\big)\le r_n+\Omega\big(\widehat D_{\tilde\alpha}+r_n+r_m\big).
+\]
+The same holds for the second sample, with $P$ and $Q$ exchanged.
+\end{proposition}
+
+On $E$ each empirical region is within $r_n$, respectively $r_m$, of its population counterpart, at all levels up to
+$\alpha^\star$ at once, by \eqref{eq:hausdorff}. The bound covers the trimming read at $\widehat\alpha$ or at any other
+valid lower bound. It carries no rate unless $\Omega$ is known, and it places the reweighted sample near the common core
+without saying which observations are kept.
+
+\begin{corollary}[The trimmed sample at the lower bound]
+\label{cor:alphalo}
+Let Assumption~\ref{ass:regularity} hold, let $0<\alpha^\star<1$, and compute $\widehat\alpha$ at level
+$\delta$ as in Proposition~\ref{prop:loconsistency}, on grids fixed in advance whose mesh tends to zero, with
+$\log J=o(n\wedge m)$. Then for every $\epsilon>0$ and $\delta'\in(0,1)$, for all $n,m$ large enough, with probability
+at least $1-\delta-\delta'$ every $(w,v)\in\mathcal T_{\widehat\alpha}$ has
+$\MMD(P_n^w,R^\star)\le\epsilon$ and $\MMD(Q_m^v,R^\star)\le\epsilon$.
+\end{corollary}
+
+By Lemma~\ref{lem:pathconvex}(ii) of the supplement the path falls to zero at most linearly, so a consistent
+$\widehat\alpha$ has a small trimmed distance whatever the laws and no margin is needed. The proof uses
+$\widehat\alpha$ only through its validity and its consistency, so the level may come from a bound computed with
+another kernel than the one that trims, as in Section~\ref{sec:appcohort}.

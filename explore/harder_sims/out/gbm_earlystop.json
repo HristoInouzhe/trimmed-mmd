@@ -1,0 +1,30 @@
+{
+ "6400": {
+  "replicates": 60,
+  "default_reproduces_stored": 60,
+  "early_stopping_auto": {
+   "power": 0.9166666666666666,
+   "mean_diff": 0.05888541666666667,
+   "mean_iters": 100.0
+  },
+  "early_stopping_False": {
+   "power": 0.9166666666666666,
+   "mean_diff": 0.05888541666666667,
+   "mean_iters": 100.0
+  }
+ },
+ "12800": {
+  "replicates": 60,
+  "default_reproduces_stored": 60,
+  "early_stopping_auto": {
+   "power": 0.7166666666666667,
+   "mean_diff": 0.051429687500000015,
+   "mean_iters": 20.666666666666668
+  },
+  "early_stopping_False": {
+   "power": 1.0,
+   "mean_diff": 0.07545052083333334,
+   "mean_iters": 100.0
+  }
+ }
+}

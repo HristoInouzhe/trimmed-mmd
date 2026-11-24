@@ -1,0 +1,116 @@
+\section{Testing a trimmed null, and an analytic baseline}
+\label{sec:analytic}
+
+For each level $\alpha\in[0,1)$ we test
+\begin{equation}
+H_{0,\alpha}:\ \TV(P,Q)\le\alpha
+\qquad\text{against}\qquad
+H_{1,\alpha}:\ \TV(P,Q)>\alpha ,
+\label{eq:null}
+\end{equation}
+and by \eqref{eq:zeroeq} the null holds exactly when $D_\alpha(P,Q)=0$. The null is a total-variation neighborhood of
+$P=Q$, a relevant hypothesis in the sense of \citet{dettekokotaue2020}, as in the trimming-based tests of
+\citet{alvarez2012similarity} and \citet{delbarrio2020ks} and in robust tests between neighborhoods of laws
+\citep{huber1965robust,huber1973minimax,schrab2025robust,liubriol2025robust}, which fix its size in advance, whereas
+here it is the quantity to be estimated. Kernel tests of composite nulls \citep{key2025composite} calibrate over a
+parametric family, and equivalence tests \citep{wellek2010equivalence} put such a neighborhood in the alternative
+(Section~\ref{app:analytic} of the supplement). This section gives a threshold $\tau(\alpha)$, computed before the
+data, that $\widehat D_\alpha$ exceeds with probability at most $\delta$ under every pair in the null. Inverted over
+$\alpha$, it gives a baseline that needs no split but far more observations than our method.
+
+\subsection{A threshold for the whole null}
+
+Limit laws are of little help in calibrating $\widehat D_\alpha$, because at the boundary of the null the two regions
+touch, and a minimum over trimmings is then only directionally differentiable in the laws, with a limit law that
+depends on the unknown geometry of the contact \citep{fang2019inference}, and permutation is exact only under $P=Q$. We
+bound $\widehat D_\alpha$ instead by a difference of sample means. Under $H_{0,\alpha}$ the laws share an
+$\alpha$-trimming $R$ by \eqref{eq:tvintersect}, with densities $g_P=dR/dP$ and $g_Q=dR/dQ$ bounded by $\beta$, so the
+weights $w_i=g_P(X_i)/n$ and $v_j=g_Q(Y_j)/m$ respect the caps of \eqref{eq:qp}, and the embeddings they give are
+averages of independent vectors with the same mean $\mu_R$. Their totals fluctuate around one, and rescaling the weights,
+or adding mass under the caps, gives a feasible pair at the price of a term proportional to the shortfalls
+(Lemma~\ref{lem:plugin} of the supplement). So $\widehat D_\alpha$ is at most the norm of a centered difference of two
+averages of vectors bounded by $\beta\kappa$, plus two shortfalls, and bounded-difference and Bernstein inequalities
+give a threshold in closed form. Let $n_\star=nm/(n+m)$, so that $1/n_\star=1/n+1/m$, $c=\max(1/n,1/m)$, $L=\log(6/\delta)$ and $\bar\kappa^2=\min(\kappa^2,\Delta_\phi^2/2)$.
+
+\begin{theorem}[Plug-in threshold]
+\label{thm:plugin}
+Let (A1) and (A2) of Assumption~\ref{ass:regularity} hold, and let
+\begin{gather*}
+\tau^{\mathrm P}(0)=\bar\kappa/\sqrt{n_\star}+\Delta_\phi\sqrt{\log(1/\delta)/(2n_\star)},\\
+\tau^{\mathrm P}(\alpha)=\sqrt{\beta \bar\kappa^2/n_\star}+\beta \Delta_\phi\sqrt{L/(2n_\star)}+\Delta_\phi\Big[\sqrt{2(\beta-1)L/n_\star}+\frac{cL}3\Big]
+\qquad(0<\alpha<1).
+\end{gather*}
+Then for every $\alpha\in[0,1)$, $n,m\ge1$, $\delta\in(0,1)$ and every pair with $\TV(P,Q)\le\alpha$,
+$\Pp\big(\widehat D_\alpha>\tau^{\mathrm P}(\alpha)\big)\le\delta$. Moreover, $\alpha\mapsto\tau^{\mathrm P}(\alpha)$
+is nondecreasing on $[0,1)$.
+\end{theorem}
+
+The threshold depends on $\kappa$, $\Delta_\phi$, $\alpha$, $n$, $m$ and $\delta$ alone and is, up to a term of order
+$\Delta_\phi\log(1/\delta)/(n\wedge m)$, of order $\beta \Delta_\phi\{(1+\log(1/\delta))/(n\wedge m)\}^{1/2}$. It
+jumps up at $0+$, where $L>\log(1/\delta)$ replaces $\log(1/\delta)$. The pair enters only through the existence of $R$. At
+$\alpha=0$ the common trimming is $R=P=Q$, and Theorem~\ref{thm:plugin} is a finite-sample bound on the MMD of the
+kind given by \citet[Corollary~9]{gretton2012kernel}. For the Gaussian kernel and $n=m$ it reads
+$\tau^{\mathrm P}(0)=[1+\sqrt{\log(1/\delta)}\,]\sqrt{2/n}$.
+
+We write $\tau=\tau^{\mathrm P}$ for the threshold of the test. A second valid threshold $\tau^{\mathrm S}(\alpha,\delta)$
+comes from the two-sided bound of Theorem~\ref{thm:twosided} of the supplement, by the same reduction to means as
+\eqref{eq:hausdorff}, but it is larger than $\tau^{\mathrm P}$ at the sample sizes we use. Since $\tau$ is
+nondecreasing and the empirical path is nonincreasing, one event serves every level.
+
+\begin{lemma}[One event for all levels]
+\label{lem:oneevent}
+Let $\tau:[0,1)\to[0,\infty)$ be nondecreasing, and suppose that $\Pp(\widehat D_\alpha>\tau(\alpha))\le\delta$ for
+every $\alpha$ and every pair with $\TV(P,Q)\le\alpha$. Then for every pair with $\alpha^\star<1$, the event
+$\{\widehat D_{\alpha^\star}\le\tau(\alpha^\star)\}$ has probability at least $1-\delta$, and on it
+$\widehat D_\alpha\le\tau(\alpha)$ for every $\alpha\in[\alpha^\star,1)$.
+\end{lemma}
+
+The analytic test rejects $H_{0,\alpha}$ when
+\begin{equation}
+\widehat D_\alpha>\tau(\alpha) .
+\label{eq:test}
+\end{equation}
+It has level $\delta$ for all $n,m\ge1$, uniformly over the null, by Lemma~\ref{lem:oneevent} one event carries the
+guarantee for all levels at once, and its level does not use (A3). Its validity at every sample size, uniformly over the null, answers
+the question of \citet{alvarez2012similarity} recalled in the introduction, as does, more simply, the betting test of
+Section~\ref{sec:split}. The kernel must be fixed before the data are seen, for instance on a held-out pilot sample
+(Section~\ref{sec:data}). One threshold for every pair in the null is a worst case: at the boundary of a
+two-dimensional design, at $n=m=300$ and $\alpha=\alpha^\star$, $\tau(\alpha)$ is $\stCalibRatioTauP$ times the
+empirical $1-\delta$ quantile of $\widehat D_\alpha$ (Section~\ref{app:experiments} of the supplement).
+
+\subsection{The estimator}
+\label{sec:alpha}
+
+Inverting the test over $\alpha$, we define the analytic estimator, with a subscript that sets it apart from the
+split-sample bound $\widehat\alpha$ of Section~\ref{sec:lower},
+\begin{equation}
+\widehat\alpha_{\mathrm{an}}\coloneqq\inf\big\{\alpha\in[0,1):\ \widehat D_\alpha\le\tau(\alpha)\big\} ,
+\label{eq:alphaest}
+\end{equation}
+the first level at which the empirical path falls below the threshold. Since $\alpha\mapsto\widehat D_\alpha$ is
+nonincreasing and $\tau$ nondecreasing, every level above $\widehat\alpha_{\mathrm{an}}$ is accepted and every level below it rejected,
+so bisection brackets $\widehat\alpha_{\mathrm{an}}$. It is well defined, because
+$\widehat D_\alpha\le \Delta_\phi$ while $\tau(\alpha)\to\infty$ as $\alpha\to1$ when $\Delta_\phi>0$. On the event of
+Lemma~\ref{lem:oneevent}, of probability at least $1-\delta$ whenever $\alpha^\star<1$, every level from $\alpha^\star$
+on is accepted, so $\widehat\alpha_{\mathrm{an}}\le\alpha^\star$ and every rejected level lies below $\alpha^\star$, at every sample
+size, for every pair and however the levels tested were chosen. A grid of levels read upward, as in
+Section~\ref{sec:data}, therefore gives a lower confidence bound too. It is consistent from below,
+$\Pp(\widehat\alpha_{\mathrm{an}}<\alpha)\to0$ for $\alpha<\alpha^\star$, as $\widehat D_\alpha\ge
+D_\alpha-\tau^{\mathrm S}(\alpha,\delta')$ with probability $1-\delta'$ (Theorem~\ref{thm:twosided} of the supplement)
+and both thresholds tend to zero.
+
+\subsection{How many observations}
+\label{sec:samplesize}
+
+Because $\tau$ does not depend on the data, the sample size at which the test fires can be computed before any data
+are collected, given a guess at the effect. For the Gaussian kernel and $n=m$, Theorem~\ref{thm:plugin} gives
+$\tau(0)\le C_0\sqrt{2/n}$, so the test rejects $H_{0,0}$ as soon as
+\begin{equation}
+n>2\Big(\frac{C_0}{\widehat D_0}\Big)^2,
+\qquad
+C_0=\bar\kappa+\Delta_\phi\sqrt{\log(1/\delta)/2}=1+\sqrt{\log(1/\delta)}\approx\cstCzero
+\ \text{ at }\delta=0.05 .
+\label{eq:samplesize}
+\end{equation}
+With a guess at $D_0=\MMD(P,Q)$ in place of $\widehat D_0$, \eqref{eq:samplesize} is a design rule, which scales like
+$D_0^{-2}$.

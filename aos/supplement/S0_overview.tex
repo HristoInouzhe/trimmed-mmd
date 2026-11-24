@@ -1,0 +1,43 @@
+Sections~\ref{app:regions} to~\ref{app:trimming} prove the results of Sections~\ref{sec:regions} to~\ref{sec:trimming}
+of the main text in their order, with three exceptions: Proposition~\ref{prop:bangbang} and the uniform bound
+\eqref{eq:hausdorff} are proved with the trimming in Section~\ref{app:trimming}; the lemma on extreme trimmed means,
+Lemma~\ref{lem:trimmedmean}, which Sections~\ref{app:regions}, \ref{app:analytic} and~\ref{app:trimming} also use, is
+proved with the betting test in Section~\ref{app:split}; and Section~\ref{app:rates} proves the rate of
+Theorem~\ref{thm:loratemain} first, Proposition~\ref{prop:newsobolev} after Proposition~\ref{prop:newgauss}, and Proposition~\ref{prop:lower2pt} and Corollary~\ref{cor:minimax} last.
+Section~\ref{app:regions} establishes the geometry of the trimmed regions and the concentration inequality,
+Lemma~\ref{lem:hinge}, behind most deviation bounds, and ends with the proof of Theorem~\ref{thm:impossible} on upper
+bounds. Section~\ref{app:analytic} turns the inequality into a two-sided bound on the statistic before proving
+Theorem~\ref{thm:plugin}. Section~\ref{app:split} gives the betting test in full, with Algorithm~\ref{alg:split}, its
+validity and consistency, and an example in which a witness fitted at $\alpha=0$ is not consistent; validity rests on
+Lemma~\ref{lem:ramp} and Theorem~\ref{thm:betting} alone. Section~\ref{app:rates}, the longest, proves the rates and
+their limits, with the constants of Theorem~\ref{thm:loratemain} in Theorem~\ref{thm:lorate} and the proof of
+Theorem~\ref{thm:laplacerate} in Section~\ref{sec:laplaceproof}, and Section~\ref{app:experiments} describes the
+experiments.
+
+A few ideas carry most of the proofs. The trimmed regions are convex, weakly compact sets of kernel mean embeddings, so
+the trimmed distance is the largest gap between them along a unit direction, attained in the direction of the
+difference of their closest points, the witness; each closest point minimizes, or maximizes, the integral of the
+witness over the trimmings of its law. Optimizing the integral of a fixed function over trimmings is a bathtub problem,
+solved by putting the largest weight allowed on the largest values until the mass runs out, that is, by a cut at a
+quantile. This turns choices among trimmings into level sets of the witness and writes the extreme trimmed means as
+$t+\beta\,\E(f-t)_+$ and $t-\beta\,\E(t-f)_+$ at the cut $t$, means of hinge functions. In the deviation bounds,
+sample fluctuations therefore enter through means of bounded functions, which concentrate at the rate
+$(n\wedge m)^{-1/2}$ by symmetrization and McDiarmid's inequality, with constants that depend on the kernel through
+$\kappa$ and $\Delta_\phi$ and on the level only through $\beta$, so that one event serves all levels. The bets are
+valid because under the null each has conditional mean at most $\alpha$ given the past, whatever the fitted ramp, so
+the wealth is a nonnegative supermartingale, which by Ville's inequality reaches $1/\delta$ with probability at most
+$\delta$. The rate of the trimming at a fixed level, Theorem~\ref{cor:trimrate}, rests on a quadratic margin of the
+separation on the unit sphere around the direction of the witness (Lemma~\ref{lem:sepmargin}), which a peeling over
+shells around that direction turns into a rate.
+
+The rates of the bound rest on the path. A mixture of the parts of mass $1-\alpha_0$ and $1-\alpha_1$ kept by two
+trimmings is a part kept at the level in between, so the rescaled path $\bar D_\alpha=(1-\alpha)D_\alpha(P,Q)$ is
+convex; as it vanishes at $\alpha^\star$, it leaves zero at most linearly, and the gap between the cut points of the
+population witness is the slope of a line supporting it from below. Margins come from approximating the indicator of
+$\{p>q\}$ by functions of the RKHS, whose norms Fourier analysis bounds for Sobolev and Gaussian kernels. On the line
+the Laplace kernel is the Green function of $1-\sigma^2\partial_x^2$, so its witness cannot overshoot its cut points.
+The fitted ramp then maximizes a ratio of excess to norm, and comparing this ratio with the population path at two
+levels shows that the fitted ramp keeps a fixed fraction of the excess of the population ramp, which gives
+Theorem~\ref{thm:laplacerate}; its empirical-process steps use their own bounds on intervals of the line
+(Lemmas~\ref{lem:lapintervals} to~\ref{lem:lapdev}). The acknowledgments of the main text say where the Lean~4
+formalization of the results is.

@@ -1,0 +1,134 @@
+\section{Introduction}
+\label{sec:intro}
+
+A two-sample test answers whether two populations are identical. In many applications they are known not to be: the
+two arms of an observational study, a training sample and the population on which a model will be deployed, a
+reference cohort and a new batch. The useful question is then how different they are, and the contamination model
+\citep{huber1964robust} gives it a precise answer. The total-variation distance
+\[
+\TV(P,Q)=\sup_A\,|P(A)-Q(A)|
+\]
+is the largest difference between the probabilities that two laws $P$ and $Q$ give to one event. The two laws can be
+written as mixtures $P=(1-\alpha)R+\alpha P_0$ and $Q=(1-\alpha)R+\alpha Q_0$ that share a component $R$ of weight
+$1-\alpha$ exactly when $\TV(P,Q)\le\alpha$. The smallest such $\alpha$, $\alpha^\star=\TV(P,Q)$, which we call the
+contamination level, is therefore the fraction of each population with no counterpart in the other. In an
+observational study it is the smallest fraction whose removal from each arm lets the covariate distributions
+coincide. We certify lower bounds on $\alpha^\star$ from two samples, of sizes $n$ and $m$, on any sample
+space that carries a bounded characteristic kernel, with finite-sample guarantees and without a model for how the
+populations differ, and we also return the trimming of each sample at that level.
+
+Discarding part of a population is a trimming. An $\alpha$-trimming of $P$ is a law obtained from $P$ by removing at
+most a fraction $\alpha$ of its mass, possibly only partially at each point, and renormalizing, that is, a law with
+density at most $(1-\alpha)^{-1}$ relative to $P$ \citep{gordaliza1991best,alvarez2008trimmed}.
+\citet{alvarez2012similarity} observed that two laws have a common $\alpha$-trimming exactly when
+$\TV(P,Q)\le\alpha$, so $\alpha^\star$ is the smallest level at which $P$ and $Q$ can be trimmed into the same law.
+Their test of $\TV(P,Q)\le\alpha$ trims both samples to minimize a Wasserstein distance, with a bootstrap guarantee
+that is asymptotic, pointwise and univariate, and they ask whether ``a different choice of metric could lead to some
+type of uniform bound'' \citep[p.~617]{alvarez2012similarity}. With a
+kernel discrepancy the answer is positive at every sample size, which gives a lower confidence bound on $\alpha^\star$.
+An upper bound needs assumptions: data can show that $\TV(P,Q)$ is large, not that it is small
+(Theorem~\ref{thm:impossible}).
+
+A bounded kernel $k$ on the sample space maps each point $x$ to a feature vector $\phi(x)$ in a Hilbert space $\Hh$,
+the reproducing kernel Hilbert space (RKHS) of $k$, and each law $P$ to the mean of its feature vectors, the kernel
+mean embedding $\mu_P=\E_P[\phi(X)]$. The distance $\|\mu_P-\mu_Q\|_\Hh$ is the maximum mean discrepancy (MMD) of
+\citet{gretton2012kernel}, and for a characteristic kernel, such as the Gaussian or the Laplace kernel, the embedding
+determines the law. Our approach is geometric: instead of an optimal trimming, we follow the set of everything the
+trimmings can produce. The trimmed region $\mathcal C_\alpha(P)$, the set of the embeddings of all $\alpha$-trimmings
+of $P$, is a convex compact subset of $\Hh$ that grows with $\alpha$ from the single point $\mu_P$, and the regions of
+$P$ and $Q$ first meet exactly at $\alpha^\star$, since a point common to both is the embedding of a trimming of $P$
+and of a trimming of $Q$, which must then be the same law (Figure~\ref{fig:regions}). The distance $D_\alpha(P,Q)$
+between the regions is thus positive below $\alpha^\star$ and zero from $\alpha^\star$ on. For the empirical laws the
+regions are polytopes, whose distance is one convex quadratic program, and to show that $\TV(P,Q)>\alpha$ is to show
+that two compact convex sets are apart, which the direction that joins their closest points shows.
+
+The difference of the two closest points is the witness, a function on the sample space that is large where the first
+trimmed law has more mass than the second. Once the witness is fixed, choosing the trimming is a linear problem of
+bathtub type, so the optimal trimmings keep at full weight the observations on one side of a cut of the witness and
+discard those beyond it, only the observations at the cut sharing weight. The quadratic program that gives the
+distance, solved on all the data at the certified level, therefore also gives the trimmed samples. They converge to
+the best trimming at a fixed level, at the rate $(n\wedge m)^{-1/2}$ when the witness has a density at the cuts, and to
+the common component of $P$ and $Q$ at the estimated level, the target of a cohort of comparable patients.
+
+Any function $\rp$ with values in $[0,1]$ has $\E_P\rp-\E_Q\rp\le\TV(P,Q)$, so a test that shows
+$\E_P\rp-\E_Q\rp>\alpha$ shows that $\TV(P,Q)>\alpha$, and the geometry says which $\rp$ to use. In a direction
+$f\in\Hh$ a region reaches as far as a trimmed mean, the mean of $f(X)$ over the upper $(1-\alpha)$-fraction of its
+values, so the separation of the two regions in that direction is a difference of two trimmed means. A trimmed mean is
+an infimum of ordinary means, $\inf_t\{t+(1-\alpha)^{-1}\E_P[(f(X)-t)_+]\}$, one for each cut $t$
+\citep{rockafellaruryasev2000}. At the two cuts at which the trimmings at the tested level cut, the separation in the
+direction of the witness is at most a positive multiple of the excess $\E_P\rp-\E_Q\rp-\alpha$ of a ramp $\rp$ over the
+level, where $\rp$ is $0$ below the lower cut, $1$ above the upper one and linear in between, so a positive separation
+gives a positive excess. We fit the witness and its cuts on one part of the sample. As the ramp is bounded and fixed
+before the rest of the data are seen, betting on it gives a test valid at every sample size with no assumption on the
+laws, which rejects the faster the larger the excess. Our
+lower confidence bound $\widehat\alpha$ runs this test on a grid of levels fixed in advance, read upward to the first
+level not rejected, and its error is measured against the mesh of the grid, the largest gap between its levels.
+
+Betting, like classification, is a problem of estimating a set. For every $[0,1]$-valued $\rp$,
+$\E_P\rp-\E_Q\rp=\alpha^\star-\mathrm{err}(\rp)$, with $\mathrm{err}(\rp)$ the distance under $|P-Q|$ from $\rp$ to the
+indicator of the set where $P$ has the larger density (Section~\ref{sec:linearmargin}), so betting on $\rp$ certifies
+levels near $\alpha^\star$ only if $\rp$ is close to that indicator. The trimming enters this estimate twice. The cut
+points of the tested level carry most of the finite-sample gain over a ramp of the untrimmed witness in our simulations
+(Section~\ref{sec:numharder}), while refitting the witness at that level makes the bound consistent where a ramp of the
+untrimmed witness need not be (Proposition~\ref{prop:loconsistency}, Section~\ref{sec:alphazero}), gives the rates
+below and returns the trimming. Any such $\rp$ fitted on earlier data, a classifier for instance, can replace the
+ramp, and tuned classifiers certify more where a half-space or a tree is close to that set. A threshold valid under
+every pair in the null also turns the empirical distance $\widehat D_\alpha$ into an analytic estimator, which needs no
+split but many more observations, our baseline.
+
+The geometry also governs the rates. No valid lower bound has a rate uniform over all pairs
+(Section~\ref{sec:upper}), and the rate of ours depends on how fast $D_\alpha$ grows as $\alpha$ decreases below
+$\alpha^\star$. A margin $D_{\alpha^\star-\epsilon}(P,Q)\ge c_0\epsilon^\gamma$ guarantees an error of order
+$(n\wedge m)^{-1/(2\gamma)}$ up to the mesh. The margin is linear, $\gamma=1$, when a function of the RKHS separates
+the two contaminations, the parts of $P$ and $Q$ beyond their common component, and the bound computed on a grid of
+mesh $(n\wedge m)^{-1/2}$ is then within order $(n\wedge m)^{-1/2}$ of $\alpha^\star$, which is minimax over such
+pairs. When the contaminations touch, as for continuous densities that coincide on no open set, the path
+$\alpha\mapsto D_\alpha$ leaves zero tangentially for every continuous kernel, and the margin guarantees only
+$(n\wedge m)^{-2/(2s+3)}$ for a Sobolev kernel of order $s$ on the line and a logarithmic rate for the Gaussian kernel,
+with no lower bound proved to match.
+
+The margin is pessimistic: it bounds the excess of the population ramp, the ramp of the population witness between
+its population cuts, through the gap between these cuts, which it replaces by its largest value. When
+$D_\alpha$ is of exact order $(\alpha^\star-\alpha)^\gamma$, the population ramp keeps an excess of at least a fixed
+fraction of $\alpha^\star-\alpha$ whatever $\gamma$ (Proposition~\ref{prop:excess}), where the margin sees an excess of
+order $(\alpha^\star-\alpha)^\gamma$ only. For the Laplace kernel on the line we show
+that the fitted ramp keeps it too: for densities that cross once, under a condition \eqref{eq:condR} on the likelihood
+ratio that excludes contaminations local to a common core, the error on a grid of mesh $(n\wedge m)^{-1/2}$ is of order
+$(n\wedge m)^{-1/2}$ up to logarithmic factors. A one-sided Kolmogorov--Smirnov bound attains this rate there, and a
+bound that does not sort the data, and also returns the set, matches it. The Laplace witness hurts the trimming: it stays
+between its cut points, so the observations at the cut tie, while our rate for the trimming at a fixed level assumes a
+witness with a density at the cut, as with the Gaussian kernel. So the two kernels divide the work, the Laplace kernel
+for the bound and the Gaussian kernel where the trimming needs a rate. In $\R^d$ we keep the Laplace kernel as the
+default, because its witness still sees differences of high frequency that the Gaussian witness at the same bandwidth
+misses, as on our one-dimensional oscillating densities, although it trails the Gaussian kernel slightly in our
+multivariate designs; Section~\ref{sec:discussion} conjectures the rate attainable in $\R^d$.
+
+On the Right Heart Catheterization study of \citet{connors1996rhc}, comparing $\rrRhcNcovFull$ baseline covariates of
+the patients who received a catheter and of those who did not, our bound shows that $\TV(P,Q)>\mnRdRhcMin$.
+Before the covariate distributions can coincide, one arm, or each if both lose the same fraction, must lose more than
+that fraction. This is not what the rules that discard patients by their estimated propensity score control
+\citep{crump2009overlap,lei2021overlap,damour2021overlap}: they aim at positivity for a weighted comparison, and a total
+variation of this size is compatible with propensity scores bounded well away from $0$ and $1$. On accelerometer curves from the National Health and Nutrition Examination Survey the bound measures how
+far apart age and body-mass groups are.
+
+Our bound is an instance of the lower bounds on $\TV$ of \citet{naf2022hplb}, which evaluate a function fitted on
+other data, calibrated by the betting test of \citet{shekhar2024nonparametric} with a trimmed null. Such bounds and the
+classifier tests \citep{lopezpaz2017revisiting,kim2021classification} apply on any sample space. What the geometry adds
+is a canonical function to bet on, fitted at the level tested, for which the bound is consistent and has rates, and
+the trimmed samples that come with it. As the Bayes risk of telling $P$ from $Q$ with equal priors is
+$\{1-\TV(P,Q)\}/2$, the bound is also an upper confidence bound on a Bayes error, usually estimated
+\citep{berisha2016empirically,noshad2019learning,theisen2021evaluating}. \citet{horebarber2026blurred} bound a blurred
+relaxation of $\TV$. Mixture proportion estimation \citep{blanchard2010semi,scott2015rate,ramaswamy2016mixture} targets a
+one-sided relative, $1-\TV(P,Q)$ being the largest weight of a component common to $P$ and $Q$, with the same dichotomy
+of rates (Section~\ref{sec:optimality}), and finite-sample lower bounds on a mixing proportion go back to the
+proportion of true null hypotheses in multiple testing
+\citep{genovese2004stochastic,meinshausen2006estimating,patra2016estimation}. None of them trims both samples, and
+\citet{nafshi2024partial}, when a known fraction of one sample has been assigned to the other, trim the receiving sample
+alone. In one sample, the mixture index of fit of \citet{rudas1994index} \citep[see also][]{liu2009tolerance} is the
+smallest fraction of the data that must be trimmed for the rest to follow a model, and \citet{delbarrio2020ks} bound it
+on the line with the Kolmogorov--Smirnov distance. Other related work is cited where it is used.
+
+Sections~\ref{sec:regions} to~\ref{sec:trimming} treat the regions, the test and the analytic baseline, the
+split-sample bound, its rates and the trimming, Section~\ref{sec:numerical} the simulations and the data, and the
+supplement gives the proofs and the experimental details. All computations use \texttt{trimmedmmd}, a Python package
+released at \url{https://github.com/HristoInouzhe/trimmed-mmd}.

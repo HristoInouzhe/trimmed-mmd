@@ -1,0 +1,45 @@
+\documentclass[aos]{imsart}
+\startlocaldefs
+\input{preamble}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thealgorithm}{S\arabic{algorithm}}
+\RequirePackage{placeins}
+\setcounter{topnumber}{4}
+\setcounter{totalnumber}{6}
+\renewcommand{\floatpagefraction}{0.5}
+\renewcommand{\topfraction}{0.85}
+\InputIfFileExists{main_refs}{}{}
+\endlocaldefs
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Supplement to ``Certifying total-variation contamination by betting on trimmed kernel witnesses''}
+\runtitle{Supplement: betting on trimmed kernel witnesses}
+
+\begin{aug}
+\author[A]{\fnms{Hristo}~\snm{Inouzhe}\ead[label=e1]{hristo.inouze@uam.es}}
+\address[A]{Departamento de Matem\'aticas, Universidad Aut\'onoma de Madrid\printead[presep={,\ }]{e1}}
+\end{aug}
+
+\begin{abstract}
+\input{supplement/00_abstract}
+\end{abstract}
+
+\end{frontmatter}
+
+\input{supplement/S0_overview}
+
+\input{supplement/S1_regions}
+\input{supplement/S2_analytic}
+\input{supplement/S3_split}
+\input{supplement/S4_rates}
+\input{supplement/S5_trimming}
+\input{supplement/S6_experiments}
+
+\FloatBarrier
+\input{refs_supp}
+
+\end{document}

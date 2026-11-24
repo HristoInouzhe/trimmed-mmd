@@ -1,0 +1,29 @@
+{
+ "dir": "/home/hristouam/pCloudDrive/research-lines/trimmed-mmd/results/aos/realdata/cohort",
+ "labels": [
+  "batch0_seed1000",
+  "batch0_seed1001",
+  "batch0_seed1002",
+  "batch0_seed1003",
+  "batch0_seed1004",
+  "batch0_seed1005",
+  "batch0_seed1006",
+  "batch0_seed1007",
+  "old",
+  "pooled"
+ ],
+ "cohort_macros": 147,
+ "equal": 147,
+ "differ": {},
+ "stored_cohort_macros_not_generated": [],
+ "balance_table_equal": true,
+ "balance_rows_equal": [
+  11,
+  11
+ ],
+ "balance_table_diff": [],
+ "estimand_table_equal_to_aos_estimand_aos_tex": true,
+ "estimand_table_diff": [],
+ "estimand_macros_differ_from_aos_estimand_macros": {},
+ "comparison_rows_recomputed_max_abs_diff": 8.326672684688674e-17
+}
